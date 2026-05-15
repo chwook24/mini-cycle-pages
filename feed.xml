@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MiniCycle Blog</title>
+    <link>https://chwook24.github.io/mini-cycle-pages/blog/</link>
+    <description>Period calendar guides from MiniCycle.</description>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 16 May 2026 00:00:00 +0900</lastBuildDate>
+    <atom:link href="https://chwook24.github.io/mini-cycle-pages/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How MiniCycle Estimates Periods, Ovulation, and the Fertile Window</title>
+      <link>https://chwook24.github.io/mini-cycle-pages/blog/how-minicycle-estimates-periods-ovulation-fertile-window/</link>
+      <guid>https://chwook24.github.io/mini-cycle-pages/blog/how-minicycle-estimates-periods-ovulation-fertile-window/</guid>
+      <pubDate>Sat, 16 May 2026 00:00:00 +0900</pubDate>
+      <description>Learn how MiniCycle estimates period dates, ovulation, and the fertile window using recent cycle records, median-based calculations, and published menstrual cycle research.</description>
+    </item>
+  </channel>
+</rss>

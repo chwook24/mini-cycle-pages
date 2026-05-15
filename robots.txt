@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://chwook24.github.io/mini-cycle-pages/sitemap.xml
