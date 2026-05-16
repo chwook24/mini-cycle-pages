@@ -1,18 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>MiniCycle Blog</title>
-    <link>https://chwook24.github.io/mini-cycle-pages/blog/</link>
-    <description>Period calendar guides from MiniCycle.</description>
-    <language>en-us</language>
-    <lastBuildDate>Sat, 16 May 2026 00:00:00 +0900</lastBuildDate>
-    <atom:link href="https://chwook24.github.io/mini-cycle-pages/feed.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>How MiniCycle Estimates Periods, Ovulation, and the Fertile Window</title>
-      <link>https://chwook24.github.io/mini-cycle-pages/blog/how-minicycle-estimates-periods-ovulation-fertile-window/</link>
-      <guid>https://chwook24.github.io/mini-cycle-pages/blog/how-minicycle-estimates-periods-ovulation-fertile-window/</guid>
-      <pubDate>Sat, 16 May 2026 00:00:00 +0900</pubDate>
-      <description>Learn how MiniCycle estimates period dates, ovulation, and the fertile window using recent cycle records, median-based calculations, and published menstrual cycle research.</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>MiniCycle Blog</title><link>https://chwook24.github.io/mini-cycle-pages/blog/</link><description>Period calendar guides from MiniCycle.</description><item><title>How MiniCycle estimates periods, ovulation, and the fertile window</title><link>https://chwook24.github.io/mini-cycle-pages/blog/how-minicycle-estimates-periods-ovulation-fertile-window/</link><guid>https://chwook24.github.io/mini-cycle-pages/blog/how-minicycle-estimates-periods-ovulation-fertile-window/</guid><pubDate>Sat, 16 May 2026 00:00:00 +0900</pubDate></item><item><title>What a period calendar widget should show on the iPhone home screen</title><link>https://chwook24.github.io/mini-cycle-pages/blog/period-calendar-widget-iphone-home-screen/</link><guid>https://chwook24.github.io/mini-cycle-pages/blog/period-calendar-widget-iphone-home-screen/</guid><pubDate>Sat, 16 May 2026 00:00:00 +0900</pubDate></item><item><title>Private period tracking without an account</title><link>https://chwook24.github.io/mini-cycle-pages/blog/private-period-tracking-without-account/</link><guid>https://chwook24.github.io/mini-cycle-pages/blog/private-period-tracking-without-account/</guid><pubDate>Sat, 16 May 2026 00:00:00 +0900</pubDate></item><item><title>Cycle length and period length statistics</title><link>https://chwook24.github.io/mini-cycle-pages/blog/cycle-length-period-length-statistics/</link><guid>https://chwook24.github.io/mini-cycle-pages/blog/cycle-length-period-length-statistics/</guid><pubDate>Sat, 16 May 2026 00:00:00 +0900</pubDate></item><item><title>When period tracker predictions are useful, and when they are not</title><link>https://chwook24.github.io/mini-cycle-pages/blog/period-tracker-prediction-limits/</link><guid>https://chwook24.github.io/mini-cycle-pages/blog/period-tracker-prediction-limits/</guid><pubDate>Sat, 16 May 2026 00:00:00 +0900</pubDate></item></channel></rss>
