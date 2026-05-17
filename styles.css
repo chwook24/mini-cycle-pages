@@ -93,7 +93,7 @@ nav a {
 h1 {
   max-width: 720px;
   margin: 0;
-  font-size: clamp(32px, 4.2vw, 48px);
+  font-size: clamp(30px, 3.6vw, 44px);
   line-height: 1.12;
   letter-spacing: 0;
 }
