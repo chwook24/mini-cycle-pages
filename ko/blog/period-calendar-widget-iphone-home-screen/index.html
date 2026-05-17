@@ -14,7 +14,7 @@
           <meta property="og:title" content="아이폰 홈 화면 생리 캘린더 위젯에는 무엇이 보여야 할까요">
           <meta property="og:description" content="생리 캘린더 위젯이 현재 주기 상태, 예정일, 가임기 정보를 어떻게 빠르게 보여줘야 하는지와 MiniCycle 위젯 설계 이유를 설명합니다.">
           <meta property="og:url" content="https://minicycle.net/ko/blog/period-calendar-widget-iphone-home-screen/">
-          <meta property="og:image" content="https://minicycle.net/assets/home-capture-20260517.jpg">
+          <meta property="og:image" content="https://minicycle.net/assets/home-capture-iphone17-1118-20260517.jpg">
           <meta name="twitter:card" content="summary_large_image">
           <link rel="stylesheet" href="../../../styles.css">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
@@ -24,7 +24,7 @@
   gtag('js', new Date());
   gtag('config', 'G-339Q79533S');
 </script>
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"아이폰 홈 화면 생리 캘린더 위젯에는 무엇이 보여야 할까요","description":"생리 캘린더 위젯이 현재 주기 상태, 예정일, 가임기 정보를 어떻게 빠르게 보여줘야 하는지와 MiniCycle 위젯 설계 이유를 설명합니다.","image":"https://minicycle.net/assets/home-capture-20260517.jpg","datePublished":"2026-05-16","dateModified":"2026-05-16","inLanguage":"ko","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/ko/blog/period-calendar-widget-iphone-home-screen/"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"아이폰 홈 화면 생리 캘린더 위젯에는 무엇이 보여야 할까요","description":"생리 캘린더 위젯이 현재 주기 상태, 예정일, 가임기 정보를 어떻게 빠르게 보여줘야 하는지와 MiniCycle 위젯 설계 이유를 설명합니다.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-20260517.jpg","datePublished":"2026-05-16","dateModified":"2026-05-17","inLanguage":"ko","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/ko/blog/period-calendar-widget-iphone-home-screen/"}}</script>
         </head>
           <body>
         <header class="site-header">
@@ -40,9 +40,9 @@
               <article class="article">
                 <p class="eyebrow">위젯</p>
                 <h1>아이폰 홈 화면 생리 캘린더 위젯에는 무엇이 보여야 할까요</h1>
-                <p class="article-meta">2026년 5월 16일 MiniCycle 작성 · <a href="https://minicycle.net/blog/period-calendar-widget-iphone-home-screen/">Read in English</a></p>
+                <p class="article-meta">2026년 5월 16일 MiniCycle 작성</p>
                 <p class="lead">홈 화면 위젯은 앱 전체를 작게 줄인 화면이 아닙니다. 오늘 내가 주기의 어디쯤 있는지 빠르게 답해주는 화면이어야 합니다.</p>
-                <img class="article-hero" src="../../../assets/home-capture-20260517.jpg" alt="MiniCycle 아이폰 실제 캡처 화면: 생리 캘린더와 위젯 경험" width="552" height="1200" loading="eager">
+                <img class="article-hero" src="../../../assets/home-capture-iphone17-1118-20260517.jpg" alt="MiniCycle 아이폰 실제 캡처 화면: 생리 캘린더와 위젯 경험" width="552" height="1200" loading="eager">
         <h2>주기 위젯의 역할</h2>
 <p>좋은 생리 캘린더 위젯은 한눈에 읽혀야 합니다. Apple은 위젯을 시기적절한 정보를 보여주는 집중된 표면으로 설명합니다. MiniCycle도 홈 화면을 기록 입력 화면이 아니라 현재 주기 상태를 빠르게 확인하는 공간으로 다룹니다.</p>
 <h2>MiniCycle 위젯이 보여주는 것</h2>
@@ -53,6 +53,19 @@
 <p>위젯은 앱과 같은 주기 예측 규칙을 사용합니다. 앱 캘린더와 홈 화면 위젯의 날짜가 서로 다르면 신뢰가 빠르게 떨어지기 때문입니다. MiniCycle은 두 화면을 같은 계산 로직에 연결합니다.</p>
 <h2>앱을 열어야 하는 순간</h2>
 <p>생리 시작일을 추가하거나 종료일을 조정하거나, 짧은 메모를 남기거나, 통계를 보거나, 개인정보 설정을 바꿀 때는 앱을 여는 것이 좋습니다. 위젯은 확인용이고, 앱은 기록과 검토용입니다.</p>
+<h2>위젯에 들어갈 정보와 빼야 할 정보</h2>
+<p>생리 캘린더 위젯은 현재 상태, 다음 일정, 한두 가지 핵심 표시를 빠르게 보여줄 때 가장 잘 작동합니다. MiniCycle은 현재 주기 상태, 다음 생리 예정일, 간단한 캘린더 표시를 우선합니다. 모든 메모, 설정, 설명을 위젯에 넣으려고 하지 않는 이유는 정보가 많을수록 한눈에 읽기 어려워지기 때문입니다.</p>
+<p>민감한 정보도 일부러 줄였습니다. 홈 화면은 함께 있는 공간, 화면 공유, 다른 사람이 잠깐 휴대폰을 보는 상황에서 노출될 수 있습니다. MiniCycle은 위젯을 유용하게 유지하되 민감한 기록 요약처럼 보이지 않게 설계했습니다.</p>
+<h2>앱과 위젯의 일치가 신뢰에 미치는 영향</h2>
+<p>앱과 위젯의 날짜가 다르면 사용자는 바로 알아차립니다. 캘린더, 현재 상태, 위젯 사이에 하루만 차이가 나도 제품 전체가 불안정하게 느껴질 수 있습니다. MiniCycle은 앱과 위젯이 별도 규칙을 갖지 않고 같은 예측 로직을 쓰도록 만들었습니다.</p>
+<p>이 방식은 지원 대응에도 도움이 됩니다. 사용자가 어떤 날짜가 왜 보이는지 물어보면, 앱에서 봤든 홈 화면에서 봤든 같은 저장 기록과 설정을 기준으로 설명할 수 있습니다.</p>
+<h2>알맞은 위젯 크기 고르기</h2>
+<p>작은 위젯은 현재 상태와 날짜 하나를 보여주는 데 적합합니다. 중간 크기 위젯은 작은 캘린더를 넣을 수 있습니다. 큰 위젯은 더 많은 맥락을 담을 수 있지만, 공간이 크다고 항상 더 좋은 위젯은 아닙니다. 좋은 위젯은 1초 안에 읽히고, 앱 안에 남겨두고 싶은 세부 정보는 밖으로 꺼내지 않는 위젯입니다.</p>
+<h2>생리 앱 위젯에서 흔한 실수</h2>
+<p>흔한 실수 중 하나는 위젯을 작은 대시보드처럼 만드는 것입니다. 여러 차트, 메모, 설정이 가득한 위젯은 스크린샷에서는 기능이 많아 보일 수 있지만, 휴대폰을 잠깐 확인하는 순간에는 오히려 덜 유용합니다. 홈 화면은 자주 노출되는 공간이므로 주의 집중과 개인정보를 모두 고려해야 합니다.</p>
+<p>또 다른 실수는 불확실성을 숨기는 것입니다. 위젯이 예상 가임기나 다음 생리 예정일을 보여준다면 그 날짜가 예측이라는 사실도 드러나야 합니다. MiniCycle은 실제 기록과 예측 상태를 시각적으로 구분해 단순하지만 오해를 줄이는 위젯을 목표로 합니다.</p>
+<h2>일상 사용에서 중요한 이유</h2>
+<p>대부분의 사용자는 매일 대시보드를 공부하고 싶어서 생리 앱을 여는 것이 아닙니다. 마지막 생리가 언제 시작됐는지, 다음에 무엇이 예상되는지, 지금 주기에서 어디쯤인지 같은 작은 답이 필요해서 엽니다. 좋은 위젯은 이런 반복 확인 때문에 전체 앱을 여는 횟수를 줄여줍니다.</p>
                 <div class="callout">MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다. <a href="../../../ko/">MiniCycle 홈</a>으로 돌아가거나 <a href="mailto:chwookqwe@gmail.com">chwookqwe@gmail.com</a>으로 문의해 주세요.</div>
                 <h2>참고 자료</h2>
                 <ul class="references">
