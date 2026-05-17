@@ -1,1 +1,39 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>MiniCycle Blog</title><link>https://chwook24.github.io/mini-cycle-pages/blog/</link><description>Period calendar guides from MiniCycle.</description><item><title>How MiniCycle estimates periods, ovulation, and the fertile window</title><link>https://chwook24.github.io/mini-cycle-pages/blog/how-minicycle-estimates-periods-ovulation-fertile-window/</link><guid>https://chwook24.github.io/mini-cycle-pages/blog/how-minicycle-estimates-periods-ovulation-fertile-window/</guid><pubDate>Sat, 16 May 2026 00:00:00 +0900</pubDate></item><item><title>What a period calendar widget should show on the iPhone home screen</title><link>https://chwook24.github.io/mini-cycle-pages/blog/period-calendar-widget-iphone-home-screen/</link><guid>https://chwook24.github.io/mini-cycle-pages/blog/period-calendar-widget-iphone-home-screen/</guid><pubDate>Sat, 16 May 2026 00:00:00 +0900</pubDate></item><item><title>Private period tracking without an account</title><link>https://chwook24.github.io/mini-cycle-pages/blog/private-period-tracking-without-account/</link><guid>https://chwook24.github.io/mini-cycle-pages/blog/private-period-tracking-without-account/</guid><pubDate>Sat, 16 May 2026 00:00:00 +0900</pubDate></item><item><title>Cycle length and period length statistics</title><link>https://chwook24.github.io/mini-cycle-pages/blog/cycle-length-period-length-statistics/</link><guid>https://chwook24.github.io/mini-cycle-pages/blog/cycle-length-period-length-statistics/</guid><pubDate>Sat, 16 May 2026 00:00:00 +0900</pubDate></item><item><title>When period tracker predictions are useful, and when they are not</title><link>https://chwook24.github.io/mini-cycle-pages/blog/period-tracker-prediction-limits/</link><guid>https://chwook24.github.io/mini-cycle-pages/blog/period-tracker-prediction-limits/</guid><pubDate>Sat, 16 May 2026 00:00:00 +0900</pubDate></item></channel></rss>
+<?xml version="1.0" encoding="UTF-8"?>
+        <rss version="2.0">
+          <channel>
+            <title>MiniCycle Blog</title>
+            <link>https://minicycle.net/blog/</link>
+            <description>Period calendar guides from MiniCycle.</description>
+        <item>
+  <title>How MiniCycle estimates periods, ovulation, and the fertile window</title>
+  <link>https://minicycle.net/blog/how-minicycle-estimates-periods-ovulation-fertile-window/</link>
+  <guid>https://minicycle.net/blog/how-minicycle-estimates-periods-ovulation-fertile-window/</guid>
+  <pubDate>Sat, 16 May 2026 00:00:00 +0900</pubDate>
+  <description>Learn how MiniCycle estimates period dates, ovulation, and the fertile window using recent cycle records, median-based calculations, and published menstrual cycle research.</description>
+</item><item>
+  <title>What a period calendar widget should show on the iPhone home screen</title>
+  <link>https://minicycle.net/blog/period-calendar-widget-iphone-home-screen/</link>
+  <guid>https://minicycle.net/blog/period-calendar-widget-iphone-home-screen/</guid>
+  <pubDate>Sat, 16 May 2026 00:00:00 +0900</pubDate>
+  <description>A practical guide to period calendar widgets, including glanceable cycle status, prediction labels, and why MiniCycle keeps its iPhone widget simple.</description>
+</item><item>
+  <title>Private period tracking without an account: why MiniCycle stores records locally</title>
+  <link>https://minicycle.net/blog/private-period-tracking-without-account/</link>
+  <guid>https://minicycle.net/blog/private-period-tracking-without-account/</guid>
+  <pubDate>Sat, 16 May 2026 00:00:00 +0900</pubDate>
+  <description>MiniCycle keeps period records on your device and avoids account-based syncing. Learn why local storage matters for a simple menstrual tracking app.</description>
+</item><item>
+  <title>Cycle length and period length: how to read simple period statistics</title>
+  <link>https://minicycle.net/blog/cycle-length-period-length-statistics/</link>
+  <guid>https://minicycle.net/blog/cycle-length-period-length-statistics/</guid>
+  <pubDate>Sat, 16 May 2026 00:00:00 +0900</pubDate>
+  <description>Understand cycle length, period length, recent averages, and why MiniCycle shows simple statistics instead of turning every cycle into a score.</description>
+</item><item>
+  <title>When period tracker predictions are useful, and when they are not</title>
+  <link>https://minicycle.net/blog/period-tracker-prediction-limits/</link>
+  <guid>https://minicycle.net/blog/period-tracker-prediction-limits/</guid>
+  <pubDate>Sat, 16 May 2026 00:00:00 +0900</pubDate>
+  <description>Period tracker predictions can help with planning, but they are not medical advice, contraception, or a pregnancy test. Learn the limits MiniCycle makes explicit.</description>
+</item>
+          </channel>
+        </rss>
