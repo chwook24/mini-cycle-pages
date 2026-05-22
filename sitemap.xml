@@ -5,28 +5,28 @@
   <xhtml:link rel="alternate" hreflang="en" href="https://minicycle.net/"/>
   <xhtml:link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/"/>
   <xhtml:link rel="alternate" hreflang="x-default" href="https://minicycle.net/"/>
-  <lastmod>2026-05-18</lastmod>
+  <lastmod>2026-05-23</lastmod>
 </url>
 <url>
   <loc>https://minicycle.net/ko/</loc>
   <xhtml:link rel="alternate" hreflang="en" href="https://minicycle.net/"/>
   <xhtml:link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/"/>
   <xhtml:link rel="alternate" hreflang="x-default" href="https://minicycle.net/"/>
-  <lastmod>2026-05-18</lastmod>
+  <lastmod>2026-05-23</lastmod>
 </url>
 <url>
   <loc>https://minicycle.net/blog/</loc>
   <xhtml:link rel="alternate" hreflang="en" href="https://minicycle.net/blog/"/>
   <xhtml:link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/"/>
   <xhtml:link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/"/>
-  <lastmod>2026-05-18</lastmod>
+  <lastmod>2026-05-23</lastmod>
 </url>
 <url>
   <loc>https://minicycle.net/ko/blog/</loc>
   <xhtml:link rel="alternate" hreflang="en" href="https://minicycle.net/blog/"/>
   <xhtml:link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/"/>
   <xhtml:link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/"/>
-  <lastmod>2026-05-18</lastmod>
+  <lastmod>2026-05-23</lastmod>
 </url>
 <url>
   <loc>https://minicycle.net/support/</loc>
@@ -55,6 +55,20 @@
   <xhtml:link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/privacy/"/>
   <xhtml:link rel="alternate" hreflang="x-default" href="https://minicycle.net/privacy/"/>
   <lastmod>2026-05-18</lastmod>
+</url>
+<url>
+  <loc>https://minicycle.net/blog/move-period-tracker-records-to-new-iphone/</loc>
+  <xhtml:link rel="alternate" hreflang="en" href="https://minicycle.net/blog/move-period-tracker-records-to-new-iphone/"/>
+  <xhtml:link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/move-period-tracker-records-to-new-iphone/"/>
+  <xhtml:link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/move-period-tracker-records-to-new-iphone/"/>
+  <lastmod>2026-05-23</lastmod>
+</url>
+<url>
+  <loc>https://minicycle.net/ko/blog/move-period-tracker-records-to-new-iphone/</loc>
+  <xhtml:link rel="alternate" hreflang="en" href="https://minicycle.net/blog/move-period-tracker-records-to-new-iphone/"/>
+  <xhtml:link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/move-period-tracker-records-to-new-iphone/"/>
+  <xhtml:link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/move-period-tracker-records-to-new-iphone/"/>
+  <lastmod>2026-05-23</lastmod>
 </url>
 <url>
   <loc>https://minicycle.net/blog/how-minicycle-estimates-periods-ovulation-fertile-window/</loc>
