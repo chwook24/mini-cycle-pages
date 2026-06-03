@@ -23,6 +23,18 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"MiniCycle","applicationCategory":"HealthApplication","operatingSystem":"iOS","description":"MiniCycle은 생리 예정일, 배란일, 가임기, 로컬 기록, 홈 화면 위젯을 제공하는 간단한 아이폰 생리 캘린더 앱입니다.","url":"https://minicycle.net/ko/","image":"https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg","installUrl":"https://apps.apple.com/us/app/mini-cycle/id6760011450","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
         </head>
@@ -43,7 +55,7 @@
                   <h1>아이폰 홈 화면에서 바로 확인하는 간단한 생리 캘린더.</h1>
                   <p class="lead">생리 날짜를 기록하고, 배란일과 가임기 추정을 확인하고, 깔끔한 홈 화면 위젯으로 현재 주기 상태를 빠르게 봅니다.</p>
                   <div class="actions">
-                    <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450">App Store에서 받기</a>
+                    <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="ko" data-placement="home_hero" data-content-group="" onclick="trackAppStoreClick(this)">App Store에서 받기</a>
                     <a class="button secondary" href="blog/">블로그 읽기</a>
                     <a class="button secondary" href="support/">지원 받기</a>
                   </div>

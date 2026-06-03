@@ -23,6 +23,18 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"생리 앱 예측이 유용한 순간과 그렇지 않은 순간","description":"생리 앱의 예정일 예측은 계획에는 도움이 되지만 의료 조언, 피임, 임신 판단을 대체할 수 없습니다. MiniCycle이 명확히 드러내는 한계를 설명합니다.","image":"https://minicycle.net/assets/stats-capture-iphone17-1118-ko-20260518.jpg","datePublished":"2026-05-16","dateModified":"2026-05-18","inLanguage":"ko","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/ko/blog/period-tracker-prediction-limits/"}}</script>
         </head>
@@ -66,7 +78,10 @@
 <p>배란일과 가임기 추정도 마찬가지입니다. 앱이 예측한 주기 구조를 이해하는 달력 라벨로는 유용할 수 있습니다. 하지만 실제 배란의 증거처럼 보거나, 전문적인 가임 인지 교육을 대체하는 도구처럼 사용해서는 안 됩니다.</p>
 <h2>더 단순한 앱이 더 안전할 수 있는 이유</h2>
 <p>주장이 적은 제품은 책임감 있게 사용하기 더 쉬울 수 있습니다. MiniCycle은 가능한 모든 생식 건강 기능을 한 화면에 합치려고 하지 않습니다. 생리 날짜, 예측, 로컬 기록, 위젯, 간단한 통계에 집중하면 과신해서 해석할 여지도 줄어듭니다.</p>
-                <div class="callout">MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다. <a href="../../../ko/">MiniCycle 홈</a>으로 돌아가거나 <a href="mailto:chwookqwe@gmail.com">chwookqwe@gmail.com</a>으로 문의해 주세요.</div>
+                <div class="callout">
+                  <p>MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="ko" data-placement="blog_article_callout" data-content-group="period-tracker-prediction-limits" onclick="trackAppStoreClick(this)">App Store에서 받기</a>
+                </div>
                 <h2>참고 자료</h2>
                 <ul class="references">
         <li><a href="https://www.acog.org/womens-health/faqs/fertility-awareness-based-methods-of-family-planning">ACOG. Fertility Awareness-Based Methods of Family Planning.</a></li>

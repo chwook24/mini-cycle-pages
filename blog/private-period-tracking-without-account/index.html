@@ -23,6 +23,18 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Private period tracking without an account: why MiniCycle stores records locally","description":"MiniCycle keeps period records on your device and avoids account-based syncing. Learn why local storage matters for a simple menstrual tracking app.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-05-16","dateModified":"2026-05-18","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/private-period-tracking-without-account/"}}</script>
         </head>
@@ -66,7 +78,10 @@
 <p>The tradeoff is that accountless local storage is not the same as cross-device sync. If a user needs the same cycle history across several devices, a cloud-based product may fit that need better. MiniCycle chooses the simpler side of that tradeoff for people who value a lightweight local calendar.</p>
 <h2>Privacy wording should match product behavior</h2>
 <p>A privacy page is more useful when it describes actual product behavior instead of relying on broad promises. MiniCycle&#x27;s website explains the difference between app records and website analytics because those are different systems. That distinction helps users understand what is and is not connected.</p>
-                <div class="callout">MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget. Return to the <a href="../../">MiniCycle homepage</a> or email <a href="mailto:chwookqwe@gmail.com">chwookqwe@gmail.com</a> for support.</div>
+                <div class="callout">
+                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="private-period-tracking-without-account" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                </div>
                 <h2>References</h2>
                 <ul class="references">
         <li><a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content">Google Search Central. Creating helpful, reliable, people-first content.</a></li>

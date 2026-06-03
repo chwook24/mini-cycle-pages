@@ -23,6 +23,18 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"MiniCycle Support","description":"Get support for MiniCycle, a simple iPhone period calendar app with local records and a home screen widget.","url":"https://minicycle.net/support/","inLanguage":"en"}</script>
         </head>

@@ -23,6 +23,18 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"How MiniCycle estimates periods, ovulation, and the fertile window","description":"Learn how MiniCycle estimates period dates, ovulation, and the fertile window using recent cycle records, median-based calculations, and published menstrual cycle research.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-05-16","dateModified":"2026-05-18","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/how-minicycle-estimates-periods-ovulation-fertile-window/"}}</script>
         </head>
@@ -68,7 +80,10 @@
 <h2>How to use this guide with the app</h2>
 <p>If you are setting up MiniCycle for the first time, start by entering the period starts you know with reasonable confidence. Exact historical end dates are useful, but the start dates matter most for cycle length. After that, use the calendar as a review surface: compare predicted period days with what actually happens and keep the record updated.</p>
 <p>This guide is meant to explain the product logic behind those calendar marks. It is not a replacement for medical education, and it does not ask you to enter symptoms, sexual activity, or other sensitive context to make the app usable. The product is intentionally focused on dates, labels, and simple cycle rhythm.</p>
-                <div class="callout">MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget. Return to the <a href="../../">MiniCycle homepage</a> or email <a href="mailto:chwookqwe@gmail.com">chwookqwe@gmail.com</a> for support.</div>
+                <div class="callout">
+                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="how-minicycle-estimates-periods-ovulation-fertile-window" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                </div>
                 <h2>References</h2>
                 <ul class="references">
         <li><a href="https://www.nature.com/articles/s41746-019-0152-7">Bull JR, Rowland SP, Scherwitzl EB, et al. Real-world menstrual cycle characteristics of more than 600,000 menstrual cycles. npj Digital Medicine. 2019.</a></li>

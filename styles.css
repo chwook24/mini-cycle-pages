@@ -237,6 +237,10 @@ h3 {
   background: var(--surface-muted);
 }
 
+.callout p {
+  margin: 0 0 14px;
+}
+
 .references li {
   margin-bottom: 10px;
   overflow-wrap: anywhere;

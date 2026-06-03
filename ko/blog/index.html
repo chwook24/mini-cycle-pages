@@ -23,6 +23,18 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","name":"MiniCycle 블로그 | 생리 캘린더 가이드","description":"MiniCycle 블로그는 생리 캘린더 설계, 주기 예측, 배란일 추정, 가임기, 개인정보, 로컬 기록을 다룹니다.","url":"https://minicycle.net/ko/blog/","inLanguage":"ko"}</script>
         </head>

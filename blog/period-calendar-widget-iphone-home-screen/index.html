@@ -23,6 +23,18 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"What a period calendar widget should show on the iPhone home screen","description":"A practical guide to period calendar widgets, including glanceable cycle status, prediction labels, and why MiniCycle keeps its iPhone widget simple.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-05-16","dateModified":"2026-05-18","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/period-calendar-widget-iphone-home-screen/"}}</script>
         </head>
@@ -66,7 +78,10 @@
 <p>Another mistake is hiding uncertainty. If a widget shows an estimated fertile window or next period date, the product should make clear that the date is a forecast. MiniCycle keeps recorded and predicted states visually distinct so the widget can stay simple without becoming misleading.</p>
 <h2>Why this matters for everyday use</h2>
 <p>Most people do not open a period tracker because they want to study a dashboard every day. They open it because they need one small answer: when did the last period start, what is expected next, or where am I in the current cycle? A good widget reduces the number of times the full app has to be opened for those routine checks.</p>
-                <div class="callout">MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget. Return to the <a href="../../">MiniCycle homepage</a> or email <a href="mailto:chwookqwe@gmail.com">chwookqwe@gmail.com</a> for support.</div>
+                <div class="callout">
+                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="period-calendar-widget-iphone-home-screen" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                </div>
                 <h2>References</h2>
                 <ul class="references">
         <li><a href="https://developer.apple.com/design/human-interface-guidelines/widgets">Apple Human Interface Guidelines. Widgets.</a></li>

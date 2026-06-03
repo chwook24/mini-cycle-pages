@@ -23,6 +23,18 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"When period tracker predictions are useful, and when they are not","description":"Period tracker predictions can help with planning, but they are not medical advice, contraception, or a pregnancy test. Learn the limits MiniCycle makes explicit.","image":"https://minicycle.net/assets/stats-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-05-16","dateModified":"2026-05-18","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/period-tracker-prediction-limits/"}}</script>
         </head>
@@ -66,7 +78,10 @@
 <p>The same applies to ovulation and fertile window estimates. They can be useful labels on a calendar, especially for understanding the app&#x27;s predicted cycle structure. They should not be treated as proof of ovulation or as a substitute for clinically appropriate fertility awareness instruction.</p>
 <h2>Why a simpler app can be safer</h2>
 <p>A product with fewer claims can be easier to use responsibly. MiniCycle does not try to combine every possible reproductive health feature into one screen. By focusing on period dates, estimates, local records, widgets, and simple statistics, the app leaves less room for overconfident interpretation.</p>
-                <div class="callout">MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget. Return to the <a href="../../">MiniCycle homepage</a> or email <a href="mailto:chwookqwe@gmail.com">chwookqwe@gmail.com</a> for support.</div>
+                <div class="callout">
+                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="period-tracker-prediction-limits" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                </div>
                 <h2>References</h2>
                 <ul class="references">
         <li><a href="https://www.acog.org/womens-health/faqs/fertility-awareness-based-methods-of-family-planning">ACOG. Fertility Awareness-Based Methods of Family Planning.</a></li>

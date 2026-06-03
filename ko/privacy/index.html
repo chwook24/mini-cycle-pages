@@ -23,6 +23,18 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"MiniCycle 개인정보 처리방침","description":"MiniCycle은 생리 기록을 기기 안에 저장하고, 웹사이트 페이지 분석에만 Google Analytics를 사용합니다.","url":"https://minicycle.net/ko/privacy/","inLanguage":"ko"}</script>
         </head>

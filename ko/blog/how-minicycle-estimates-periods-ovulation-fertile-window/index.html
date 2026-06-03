@@ -23,6 +23,18 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"MiniCycle은 생리 예정일, 배란일, 가임기를 어떻게 예측하나요","description":"MiniCycle이 최근 생리 기록, 중앙값 기반 계산, 공개 월경 주기 연구를 바탕으로 생리 예정일과 배란일, 가임기를 표시하는 방식을 설명합니다.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg","datePublished":"2026-05-16","dateModified":"2026-05-18","inLanguage":"ko","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/ko/blog/how-minicycle-estimates-periods-ovulation-fertile-window/"}}</script>
         </head>
@@ -68,7 +80,10 @@
 <h2>앱에서 이 글을 활용하는 방법</h2>
 <p>MiniCycle을 처음 설정한다면 비교적 확실하게 기억하는 생리 시작일부터 입력하는 것이 좋습니다. 과거 종료일도 도움이 되지만, 주기 길이를 계산할 때 가장 중요한 값은 시작일입니다. 그 다음에는 캘린더를 검토 화면처럼 사용하세요. 예상 생리일과 실제 시작일을 비교하고 기록을 계속 갱신하면 됩니다.</p>
 <p>이 글은 캘린더 표시가 어떤 제품 로직으로 만들어지는지 설명하기 위한 글입니다. 의료 교육을 대신하지 않으며, 앱을 쓰기 위해 증상, 성생활, 민감한 맥락을 반드시 입력하라고 요구하지도 않습니다. MiniCycle은 날짜, 라벨, 간단한 주기 리듬에 집중하도록 의도적으로 좁게 만들었습니다.</p>
-                <div class="callout">MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다. <a href="../../../ko/">MiniCycle 홈</a>으로 돌아가거나 <a href="mailto:chwookqwe@gmail.com">chwookqwe@gmail.com</a>으로 문의해 주세요.</div>
+                <div class="callout">
+                  <p>MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="ko" data-placement="blog_article_callout" data-content-group="how-minicycle-estimates-periods-ovulation-fertile-window" onclick="trackAppStoreClick(this)">App Store에서 받기</a>
+                </div>
                 <h2>참고 자료</h2>
                 <ul class="references">
         <li><a href="https://www.nature.com/articles/s41746-019-0152-7">Bull JR, Rowland SP, Scherwitzl EB, et al. Real-world menstrual cycle characteristics of more than 600,000 menstrual cycles. npj Digital Medicine. 2019.</a></li>

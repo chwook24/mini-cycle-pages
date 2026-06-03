@@ -23,6 +23,18 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"How to keep your period tracker records when moving to a new iPhone","description":"MiniCycle stores period records locally. Learn what to check before moving to a new iPhone, using Apple backup or Quick Start transfer, without creating a MiniCycle account.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-05-23","dateModified":"2026-05-23","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/move-period-tracker-records-to-new-iphone/"}}</script>
         </head>
@@ -54,7 +66,10 @@
 <p>MiniCycle currently focuses on a lightweight calendar experience rather than account-based importing from other period trackers. If your previous app offers an export, keep that file or screenshot for your own records, then manually enter the period starts you trust most. Recent start dates are the most important inputs for MiniCycle&#x27;s cycle estimates.</p>
 <h2>A practical migration checklist</h2>
 <p>Before changing phones: make a current backup or start a direct transfer, keep the old iPhone nearby, install or open MiniCycle on the new phone, verify the calendar, and only then erase or trade in the old device. The checklist is simple because the risk is simple: local records are easiest to protect before the old device is gone.</p>
-                <div class="callout">MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget. Return to the <a href="../../">MiniCycle homepage</a> or email <a href="mailto:chwookqwe@gmail.com">chwookqwe@gmail.com</a> for support.</div>
+                <div class="callout">
+                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="move-period-tracker-records-to-new-iphone" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                </div>
                 <h2>References</h2>
                 <ul class="references">
         <li><a href="https://support.apple.com/en-us/102659">Apple Support. Use Quick Start to transfer data to a new iPhone or iPad.</a></li>

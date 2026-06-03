@@ -23,6 +23,18 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"MiniCycle","applicationCategory":"HealthApplication","operatingSystem":"iOS","description":"MiniCycle is a simple period calendar app for iPhone with cycle estimates, ovulation and fertile window highlights, private local records, and a home screen widget.","url":"https://minicycle.net/","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","installUrl":"https://apps.apple.com/us/app/mini-cycle/id6760011450","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
         </head>
@@ -43,7 +55,7 @@
                   <h1>Simple period calendar for your iPhone home screen.</h1>
                   <p class="lead">Track period dates, see estimated ovulation and fertile window highlights, and check your current cycle from a clean home screen widget.</p>
                   <div class="actions">
-                    <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450">View on the App Store</a>
+                    <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="home_hero" data-content-group="" onclick="trackAppStoreClick(this)">View on the App Store</a>
                     <a class="button secondary" href="blog/">Read the blog</a>
                     <a class="button secondary" href="support/">Get support</a>
                   </div>

@@ -23,6 +23,18 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Cycle length and period length: how to read simple period statistics","description":"Understand cycle length, period length, recent averages, and why MiniCycle shows simple statistics instead of turning every cycle into a score.","image":"https://minicycle.net/assets/stats-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-05-16","dateModified":"2026-05-18","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/cycle-length-period-length-statistics/"}}</script>
         </head>
@@ -66,7 +78,10 @@
 <p>MiniCycle&#x27;s statistics view is built around that kind of review. The cards summarize recent averages, while the line charts show whether the saved records are mostly stable or starting to drift. The app does not try to explain why the pattern changed, because that explanation depends on context outside the calendar.</p>
 <h2>How many data points to show</h2>
 <p>More data is not always clearer on a small phone screen. Showing too many points can make labels overlap and reduce the chart to decoration. MiniCycle caps the visible statistics so the current pattern remains readable, while still using the saved records behind the scenes for calendar estimates where appropriate.</p>
-                <div class="callout">MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget. Return to the <a href="../../">MiniCycle homepage</a> or email <a href="mailto:chwookqwe@gmail.com">chwookqwe@gmail.com</a> for support.</div>
+                <div class="callout">
+                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="cycle-length-period-length-statistics" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                </div>
                 <h2>References</h2>
                 <ul class="references">
         <li><a href="https://www.acog.org/womens-health/faqs/your-first-period">ACOG. Your First Period.</a></li>

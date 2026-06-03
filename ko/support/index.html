@@ -23,6 +23,18 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"MiniCycle 지원","description":"로컬 기록과 홈 화면 위젯을 제공하는 아이폰 생리 캘린더 MiniCycle 지원 페이지입니다.","url":"https://minicycle.net/ko/support/","inLanguage":"ko"}</script>
         </head>
