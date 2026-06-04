@@ -35,6 +35,74 @@
     });
     return true;
   }
+  function trackBlogArticleEngagement() {
+    const article = document.querySelector('article.article[data-content-group]');
+    if (!article || typeof gtag !== 'function') return;
+
+    const progressThresholds = [50, 75, 90];
+    const sentProgress = new Set();
+    const minReadMs = Number(article.dataset.minReadMs || 30000);
+    let maxPercent = 0;
+    let readCompleteSent = false;
+    let activeMs = 0;
+    let lastTick = Date.now();
+    let wasActive = !document.hidden && document.hasFocus();
+
+    function recordActiveTime() {
+      const now = Date.now();
+      if (wasActive) activeMs += now - lastTick;
+      lastTick = now;
+      wasActive = !document.hidden && document.hasFocus();
+    }
+
+    function articlePercent() {
+      const articleTop = article.getBoundingClientRect().top + window.scrollY;
+      const articleHeight = Math.max(article.offsetHeight, 1);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      return Math.max(0, Math.min(100, Math.floor(((viewportBottom - articleTop) / articleHeight) * 100)));
+    }
+
+    function send(eventName, params) {
+      gtag('event', eventName, Object.assign({
+        language: article.dataset.language,
+        content_group: article.dataset.contentGroup,
+        article_path: window.location.pathname,
+        transport_type: 'beacon'
+      }, params));
+    }
+
+    function evaluate() {
+      recordActiveTime();
+      maxPercent = Math.max(maxPercent, articlePercent());
+
+      progressThresholds.forEach((threshold) => {
+        if (maxPercent >= threshold && !sentProgress.has(threshold)) {
+          sentProgress.add(threshold);
+          send('blog_article_progress', {
+            scroll_percent: threshold,
+            active_seconds: Math.round(activeMs / 1000)
+          });
+        }
+      });
+
+      if (!readCompleteSent && maxPercent >= 90 && activeMs >= minReadMs) {
+        readCompleteSent = true;
+        send('blog_article_read_complete', {
+          max_percent: maxPercent,
+          active_seconds: Math.round(activeMs / 1000),
+          min_read_seconds: Math.round(minReadMs / 1000)
+        });
+      }
+    }
+
+    window.addEventListener('scroll', evaluate, { passive: true });
+    window.addEventListener('resize', evaluate);
+    document.addEventListener('visibilitychange', evaluate);
+    window.addEventListener('pagehide', evaluate);
+    window.setInterval(evaluate, 5000);
+    evaluate();
+  }
+  window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"MiniCycle","applicationCategory":"HealthApplication","operatingSystem":"iOS","description":"MiniCycle은 생리 예정일, 배란일, 가임기, 로컬 기록, 홈 화면 위젯을 제공하는 간단한 아이폰 생리 캘린더 앱입니다.","url":"https://minicycle.net/ko/","image":"https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg","installUrl":"https://apps.apple.com/us/app/mini-cycle/id6760011450","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
         </head>
@@ -76,7 +144,7 @@
               <section class="content">
                 <h2>블로그 글</h2>
                 <div class="post-grid compact-grid">
-        <article class="post-card"><p class="eyebrow">백업</p><h3><a href="blog/move-period-tracker-records-to-new-iphone/">새 아이폰으로 옮길 때 MiniCycle 생리 기록을 지키는 방법</a></h3><p>MiniCycle은 생리 기록을 기기 안에 저장합니다. 새 아이폰으로 옮기기 전 백업, Quick Start 전송, 기록 확인 순서를 설명합니다.</p></article><article class="post-card"><p class="eyebrow">주기 예측</p><h3><a href="blog/how-minicycle-estimates-periods-ovulation-fertile-window/">MiniCycle은 생리 예정일, 배란일, 가임기를 어떻게 예측하나요</a></h3><p>MiniCycle이 최근 생리 기록, 중앙값 기반 계산, 공개 월경 주기 연구를 바탕으로 생리 예정일과 배란일, 가임기를 표시하는 방식을 설명합니다.</p></article><article class="post-card"><p class="eyebrow">위젯</p><h3><a href="blog/period-calendar-widget-iphone-home-screen/">아이폰 홈 화면 생리 캘린더 위젯에는 무엇이 보여야 할까요</a></h3><p>생리 캘린더 위젯이 현재 주기 상태, 예정일, 가임기 정보를 어떻게 빠르게 보여줘야 하는지와 MiniCycle 위젯 설계 이유를 설명합니다.</p></article>
+        <article class="post-card"><p class="eyebrow">주기 건강</p><h3><a href="blog/why-is-my-period-late-common-reasons/">임신도 아닌데 생리가 늦어지는 이유</a></h3><p>생리가 늦어지면 임신부터 떠올리기 쉽지만, 실제로는 스트레스나 다이어트, 수면 부족처럼 일상적인 이유가 더 많습니다. 흔한 원인과 병원에 가봐야 할 때를 정리했습니다.</p></article><article class="post-card"><p class="eyebrow">백업</p><h3><a href="blog/move-period-tracker-records-to-new-iphone/">새 아이폰으로 옮길 때 MiniCycle 생리 기록을 지키는 방법</a></h3><p>MiniCycle은 생리 기록을 기기 안에 저장합니다. 새 아이폰으로 옮기기 전 백업, Quick Start 전송, 기록 확인 순서를 설명합니다.</p></article><article class="post-card"><p class="eyebrow">주기 예측</p><h3><a href="blog/how-minicycle-estimates-periods-ovulation-fertile-window/">MiniCycle은 생리 예정일, 배란일, 가임기를 어떻게 예측하나요</a></h3><p>MiniCycle이 최근 생리 기록, 중앙값 기반 계산, 공개 월경 주기 연구를 바탕으로 생리 예정일과 배란일, 가임기를 표시하는 방식을 설명합니다.</p></article>
                 </div>
               </section>
               <section class="content">

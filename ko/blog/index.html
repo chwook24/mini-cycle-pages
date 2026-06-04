@@ -35,6 +35,74 @@
     });
     return true;
   }
+  function trackBlogArticleEngagement() {
+    const article = document.querySelector('article.article[data-content-group]');
+    if (!article || typeof gtag !== 'function') return;
+
+    const progressThresholds = [50, 75, 90];
+    const sentProgress = new Set();
+    const minReadMs = Number(article.dataset.minReadMs || 30000);
+    let maxPercent = 0;
+    let readCompleteSent = false;
+    let activeMs = 0;
+    let lastTick = Date.now();
+    let wasActive = !document.hidden && document.hasFocus();
+
+    function recordActiveTime() {
+      const now = Date.now();
+      if (wasActive) activeMs += now - lastTick;
+      lastTick = now;
+      wasActive = !document.hidden && document.hasFocus();
+    }
+
+    function articlePercent() {
+      const articleTop = article.getBoundingClientRect().top + window.scrollY;
+      const articleHeight = Math.max(article.offsetHeight, 1);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      return Math.max(0, Math.min(100, Math.floor(((viewportBottom - articleTop) / articleHeight) * 100)));
+    }
+
+    function send(eventName, params) {
+      gtag('event', eventName, Object.assign({
+        language: article.dataset.language,
+        content_group: article.dataset.contentGroup,
+        article_path: window.location.pathname,
+        transport_type: 'beacon'
+      }, params));
+    }
+
+    function evaluate() {
+      recordActiveTime();
+      maxPercent = Math.max(maxPercent, articlePercent());
+
+      progressThresholds.forEach((threshold) => {
+        if (maxPercent >= threshold && !sentProgress.has(threshold)) {
+          sentProgress.add(threshold);
+          send('blog_article_progress', {
+            scroll_percent: threshold,
+            active_seconds: Math.round(activeMs / 1000)
+          });
+        }
+      });
+
+      if (!readCompleteSent && maxPercent >= 90 && activeMs >= minReadMs) {
+        readCompleteSent = true;
+        send('blog_article_read_complete', {
+          max_percent: maxPercent,
+          active_seconds: Math.round(activeMs / 1000),
+          min_read_seconds: Math.round(minReadMs / 1000)
+        });
+      }
+    }
+
+    window.addEventListener('scroll', evaluate, { passive: true });
+    window.addEventListener('resize', evaluate);
+    document.addEventListener('visibilitychange', evaluate);
+    window.addEventListener('pagehide', evaluate);
+    window.setInterval(evaluate, 5000);
+    evaluate();
+  }
+  window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","name":"MiniCycle 블로그 | 생리 캘린더 가이드","description":"MiniCycle 블로그는 생리 캘린더 설계, 주기 예측, 배란일 추정, 가임기, 개인정보, 로컬 기록을 다룹니다.","url":"https://minicycle.net/ko/blog/","inLanguage":"ko"}</script>
         </head>
@@ -56,6 +124,11 @@
               </section>
               <section class="post-grid">
         <article class="post-card">
+  <p class="eyebrow">주기 건강</p>
+  <h2><a href="why-is-my-period-late-common-reasons/">임신도 아닌데 생리가 늦어지는 이유</a></h2>
+  <p>생리가 늦어지면 임신부터 떠올리기 쉽지만, 실제로는 스트레스나 다이어트, 수면 부족처럼 일상적인 이유가 더 많습니다. 흔한 원인과 병원에 가봐야 할 때를 정리했습니다.</p>
+  <a class="text-link" href="why-is-my-period-late-common-reasons/">글 읽기</a>
+</article><article class="post-card">
   <p class="eyebrow">백업</p>
   <h2><a href="move-period-tracker-records-to-new-iphone/">새 아이폰으로 옮길 때 MiniCycle 생리 기록을 지키는 방법</a></h2>
   <p>MiniCycle은 생리 기록을 기기 안에 저장합니다. 새 아이폰으로 옮기기 전 백업, Quick Start 전송, 기록 확인 순서를 설명합니다.</p>
@@ -72,8 +145,8 @@
   <a class="text-link" href="period-calendar-widget-iphone-home-screen/">글 읽기</a>
 </article><article class="post-card">
   <p class="eyebrow">개인정보</p>
-  <h2><a href="private-period-tracking-without-account/">계정 없이 생리 기록하기: MiniCycle이 로컬 저장을 선택한 이유</a></h2>
-  <p>MiniCycle은 계정 기반 동기화 없이 기기 안에 생리 기록을 저장합니다. 간단한 생리 캘린더에서 로컬 저장이 왜 중요한지 설명합니다.</p>
+  <h2><a href="private-period-tracking-without-account/">생리 기록, 꼭 계정을 만들어야 할까요</a></h2>
+  <p>MiniCycle은 회원가입 없이 쓰는 아이폰 생리 캘린더입니다. 생리 기록이 휴대폰 안에만 남는 이유와 로컬 저장의 한계, 휴대폰을 바꿀 때 주의할 점까지 그대로 설명합니다.</p>
   <a class="text-link" href="private-period-tracking-without-account/">글 읽기</a>
 </article><article class="post-card">
   <p class="eyebrow">주기 통계</p>

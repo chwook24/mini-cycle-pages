@@ -3,16 +3,16 @@
                 <head>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1">
-          <title>계정 없이 생리 기록하기: MiniCycle이 로컬 저장을 선택한 이유</title>
-          <meta name="description" content="MiniCycle은 계정 기반 동기화 없이 기기 안에 생리 기록을 저장합니다. 간단한 생리 캘린더에서 로컬 저장이 왜 중요한지 설명합니다.">
+          <title>생리 기록, 꼭 계정을 만들어야 할까요</title>
+          <meta name="description" content="MiniCycle은 회원가입 없이 쓰는 아이폰 생리 캘린더입니다. 생리 기록이 휴대폰 안에만 남는 이유와 로컬 저장의 한계, 휴대폰을 바꿀 때 주의할 점까지 그대로 설명합니다.">
           <link rel="canonical" href="https://minicycle.net/ko/blog/private-period-tracking-without-account/">
             <link rel="alternate" hreflang="en" href="https://minicycle.net/blog/private-period-tracking-without-account/">
     <link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/private-period-tracking-without-account/">
     <link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/private-period-tracking-without-account/">
           <link rel="alternate" type="application/rss+xml" title="MiniCycle Blog" href="https://minicycle.net/feed.xml">
           <meta property="og:type" content="article">
-          <meta property="og:title" content="계정 없이 생리 기록하기: MiniCycle이 로컬 저장을 선택한 이유">
-          <meta property="og:description" content="MiniCycle은 계정 기반 동기화 없이 기기 안에 생리 기록을 저장합니다. 간단한 생리 캘린더에서 로컬 저장이 왜 중요한지 설명합니다.">
+          <meta property="og:title" content="생리 기록, 꼭 계정을 만들어야 할까요">
+          <meta property="og:description" content="MiniCycle은 회원가입 없이 쓰는 아이폰 생리 캘린더입니다. 생리 기록이 휴대폰 안에만 남는 이유와 로컬 저장의 한계, 휴대폰을 바꿀 때 주의할 점까지 그대로 설명합니다.">
           <meta property="og:url" content="https://minicycle.net/ko/blog/private-period-tracking-without-account/">
           <meta property="og:image" content="https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg">
           <meta name="twitter:card" content="summary_large_image">
@@ -35,8 +35,76 @@
     });
     return true;
   }
+  function trackBlogArticleEngagement() {
+    const article = document.querySelector('article.article[data-content-group]');
+    if (!article || typeof gtag !== 'function') return;
+
+    const progressThresholds = [50, 75, 90];
+    const sentProgress = new Set();
+    const minReadMs = Number(article.dataset.minReadMs || 30000);
+    let maxPercent = 0;
+    let readCompleteSent = false;
+    let activeMs = 0;
+    let lastTick = Date.now();
+    let wasActive = !document.hidden && document.hasFocus();
+
+    function recordActiveTime() {
+      const now = Date.now();
+      if (wasActive) activeMs += now - lastTick;
+      lastTick = now;
+      wasActive = !document.hidden && document.hasFocus();
+    }
+
+    function articlePercent() {
+      const articleTop = article.getBoundingClientRect().top + window.scrollY;
+      const articleHeight = Math.max(article.offsetHeight, 1);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      return Math.max(0, Math.min(100, Math.floor(((viewportBottom - articleTop) / articleHeight) * 100)));
+    }
+
+    function send(eventName, params) {
+      gtag('event', eventName, Object.assign({
+        language: article.dataset.language,
+        content_group: article.dataset.contentGroup,
+        article_path: window.location.pathname,
+        transport_type: 'beacon'
+      }, params));
+    }
+
+    function evaluate() {
+      recordActiveTime();
+      maxPercent = Math.max(maxPercent, articlePercent());
+
+      progressThresholds.forEach((threshold) => {
+        if (maxPercent >= threshold && !sentProgress.has(threshold)) {
+          sentProgress.add(threshold);
+          send('blog_article_progress', {
+            scroll_percent: threshold,
+            active_seconds: Math.round(activeMs / 1000)
+          });
+        }
+      });
+
+      if (!readCompleteSent && maxPercent >= 90 && activeMs >= minReadMs) {
+        readCompleteSent = true;
+        send('blog_article_read_complete', {
+          max_percent: maxPercent,
+          active_seconds: Math.round(activeMs / 1000),
+          min_read_seconds: Math.round(minReadMs / 1000)
+        });
+      }
+    }
+
+    window.addEventListener('scroll', evaluate, { passive: true });
+    window.addEventListener('resize', evaluate);
+    document.addEventListener('visibilitychange', evaluate);
+    window.addEventListener('pagehide', evaluate);
+    window.setInterval(evaluate, 5000);
+    evaluate();
+  }
+  window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
 </script>
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"계정 없이 생리 기록하기: MiniCycle이 로컬 저장을 선택한 이유","description":"MiniCycle은 계정 기반 동기화 없이 기기 안에 생리 기록을 저장합니다. 간단한 생리 캘린더에서 로컬 저장이 왜 중요한지 설명합니다.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg","datePublished":"2026-05-16","dateModified":"2026-05-18","inLanguage":"ko","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/ko/blog/private-period-tracking-without-account/"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"생리 기록, 꼭 계정을 만들어야 할까요","description":"MiniCycle은 회원가입 없이 쓰는 아이폰 생리 캘린더입니다. 생리 기록이 휴대폰 안에만 남는 이유와 로컬 저장의 한계, 휴대폰을 바꿀 때 주의할 점까지 그대로 설명합니다.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg","datePublished":"2026-05-16","dateModified":"2026-06-04","inLanguage":"ko","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/ko/blog/private-period-tracking-without-account/"}}</script>
         </head>
           <body>
         <header class="site-header">
@@ -49,43 +117,42 @@
   </nav>
 </header>
             <main class="page">
-              <article class="article">
+              <article class="article" data-language="ko" data-content-group="private-period-tracking-without-account" data-min-read-ms="68000">
                 <p class="eyebrow">개인정보</p>
-                <h1>계정 없이 생리 기록하기: MiniCycle이 로컬 저장을 선택한 이유</h1>
+                <h1>생리 기록, 꼭 계정을 만들어야 할까요</h1>
                 <p class="article-meta">2026년 5월 16일 MiniCycle 작성</p>
-                <p class="lead">생리 기록은 달력 위의 평범한 날짜처럼 보여도 사용자에게는 민감할 수 있습니다. MiniCycle은 제품에 꼭 필요하지 않다면 계정을 요구하지 않는다는 원칙으로 설계했습니다.</p>
+                <p class="lead">생리 앱을 처음 깔면 으레 이메일 주소부터 묻습니다. MiniCycle에는 그 화면이 아예 없습니다. 회원가입 없이 쓰고, 기록은 휴대폰 안에만 남습니다. 왜 이렇게 만들었는지, 이 방식의 좋은 점과 한계를 그대로 적어 보겠습니다.</p>
                 <img class="article-hero" src="../../../assets/home-capture-iphone17-1118-ko-20260518.jpg" alt="MiniCycle 아이폰 실제 캡처 화면: 생리 캘린더와 위젯 경험" width="552" height="1200" loading="eager">
-        <h2>계정 없는 기록의 의미</h2>
-<p>많은 앱은 가치를 보여주기도 전에 계정 생성을 요구합니다. 하지만 간단한 생리 캘린더라면 항상 필요한 절차는 아닙니다. MiniCycle은 로그인 없이 주기를 기록하고 확인할 수 있게 합니다.</p>
-<h2>로컬 저장이 바꾸는 것</h2>
-<p>로컬 저장은 기록이 MiniCycle 서버로 올라가지 않고 기기 안에 남는다는 뜻입니다. 주기 기록에 접근할 수 있는 인프라를 줄이고, 앱을 캘린더 경험에 집중하게 합니다.</p>
-<h2>로컬 저장이 해결하지 않는 것</h2>
-<p>로컬 저장이 모든 개인정보 문제를 해결하는 것은 아닙니다. 기기 백업, 스크린샷, 공유 기기, 운영체제 설정도 중요합니다. MiniCycle의 접근은 명확합니다. 덜 수집하고, 불필요한 서버 계정을 만들지 않습니다.</p>
-<h2>웹사이트 분석과 앱 기록의 분리</h2>
-<p>MiniCycle 웹사이트는 블로그 조회와 페이지 흐름을 보기 위해 Google Analytics를 사용합니다. 이 웹사이트 분석은 앱 안의 생리 기록과 별개입니다. 블로그 조회 데이터에는 생리 날짜, 메모, 주기 기록이 포함되지 않습니다.</p>
-<h2>실용적인 개인정보 원칙</h2>
-<p>가장 좋은 개인정보 보호 기능은 애초에 수집하지 않는 데이터일 때가 많습니다. MiniCycle은 제품을 작게 유지해서 계정 정보, 소셜 기능, 원격 주기 저장을 피합니다.</p>
-<h2>덜 수집하는 것은 제품 결정입니다</h2>
-<p>개인정보 보호는 처리방침 문서에서만 시작되지 않습니다. 제품 설계 단계에서 이미 결정됩니다. 간단한 생리 캘린더가 계정, 소셜 관계, 클라우드 프로필, 원격 주기 데이터베이스 없이 작동할 수 있다면 그런 시스템을 만들 필요가 없습니다. MiniCycle은 이를 나중에 붙이는 설명이 아니라 제품 제약으로 봅니다.</p>
-<p>이 선택은 첫 사용 경험도 가볍게 만듭니다. 사용자는 또 하나의 건강 관련 계정을 만들지 고민하지 않고 앱을 열어 생리 시작일을 추가하고 캘린더를 볼 수 있습니다. 개인적이고 반복적인 기록 도구에서는 이 단순함이 중요합니다.</p>
-<h2>백업, 기기, 현실적인 기대</h2>
-<p>로컬 저장은 서버 측 노출을 줄이지만 데이터를 완전히 보이지 않게 만드는 것은 아닙니다. 기기 백업, iCloud 설정, 스크린샷, 공유 기기, 기기에 접근할 수 있는 사람은 여전히 중요할 수 있습니다. 실용적인 개인정보 설명은 로컬 저장이 모든 위험을 해결한다고 말하기보다 이런 한계를 분명히 알려야 합니다.</p>
-<p>MiniCycle의 약속은 더 좁고 확인하기 쉽습니다. 앱 사용에 MiniCycle 계정이 필요하지 않으며, 이 웹사이트에서 설명하는 웹 분석은 앱 안의 생리 기록과 분리되어 있습니다.</p>
-<h2>생리 앱을 고를 때 물어볼 질문</h2>
-<p>핵심 캘린더를 쓰기 전에 계정이 꼭 필요한가요? 생리 기록이 어디에 저장되는지 설명하나요? 웹사이트 분석과 건강 기록을 구분하나요? 기능에 꼭 필요해서 데이터를 모으는 것인지, 계정 중심 제품 구조 때문에 기본적으로 모으는 것인지 확인해 볼 필요가 있습니다.</p>
-<h2>계정 없는 설계가 실제로 바꾸는 것</h2>
-<p>계정 없는 설계는 로그인 화면 하나만 없애는 것이 아닙니다. 비밀번호 복구 흐름이 필요 없고, 첫 기록 전에 프로필을 만들 필요가 없으며, 개인 캘린더에 소셜 계정이나 클라우드 신원이 꼭 필요하다는 가정도 사라집니다. 제품은 작아지지만, 사용자가 이해해야 할 경계도 더 명확해집니다.</p>
-<p>대신 계정 없는 로컬 저장은 여러 기기 동기화와는 다릅니다. 여러 기기에서 같은 주기 기록을 꼭 봐야 한다면 클라우드 기반 제품이 더 맞을 수 있습니다. MiniCycle은 가벼운 로컬 캘린더를 원하는 사람을 위해 그 절충에서 단순한 쪽을 선택했습니다.</p>
-<h2>개인정보 문구는 실제 동작과 맞아야 합니다</h2>
-<p>개인정보 페이지는 넓은 약속보다 실제 제품 동작을 설명할 때 더 유용합니다. MiniCycle 웹사이트는 앱 기록과 웹사이트 분석이 서로 다른 시스템이라는 점을 설명합니다. 이 구분이 있어야 사용자가 무엇이 연결되어 있고 무엇이 연결되어 있지 않은지 이해할 수 있습니다.</p>
+        <h2>회원가입 화면이 없는 이유</h2>
+<p>MiniCycle을 처음 열면 바로 캘린더가 나옵니다. 이메일도, 비밀번호도, 생년월일 입력도 없습니다. 날짜를 누르고 생리 시작을 기록하면 그걸로 끝입니다. 많은 앱이 가치를 보여 주기도 전에 가입부터 요구하지만, 간단한 생리 캘린더에 그 절차가 꼭 필요한지부터 되묻고 싶었습니다.</p>
+<p>계정을 만들지 않으면 같이 사라지는 것들이 있습니다. 비밀번호를 잊었을 때의 복구 절차, 인증 메일, 탈퇴할 때 서버에 남을 데이터 걱정, 그리고 건강 관련 계정을 하나 더 만들어야 하나 하는 망설임까지요. 매일 잠깐씩 열어 보는 기록 도구라면 이 가벼움 자체가 기능이라고 생각합니다.</p>
+<p>이건 나중에 붙인 마케팅 문구가 아니라 처음부터 정해 둔 설계 제약입니다. 간단한 생리 캘린더가 계정, 소셜 기능, 클라우드 프로필 없이 돌아갈 수 있다면 그런 시스템은 애초에 만들지 않는 편이 낫습니다. 수집하지 않은 데이터는 유출될 일도 없으니까요.</p>
+<h2>그럼 기록은 어디에 남나요</h2>
+<p>전부 휴대폰 안입니다. 생리 시작일과 종료일, 일별 메모, 알림 설정 같은 것들이 기기 저장 공간에 기록됩니다. MiniCycle에는 애초에 생리 기록을 받는 서버가 없어서, 기록이 올라갈 곳 자체가 없습니다. 개발자도 사용자가 언제 생리를 시작했는지 알 수 없습니다.</p>
+<p>홈 화면 위젯도 마찬가지입니다. 위젯에 다음 예정일이 뜨는 건 앱과 위젯이 같은 휴대폰 안에서 저장 공간을 함께 쓰기 때문이지, 데이터가 밖으로 나갔다가 돌아오는 게 아닙니다.</p>
+<p>뒤집어 말하면 기록의 주인이 온전히 사용자라는 뜻이기도 합니다. 앱을 지우면 기록도 함께 사라지고, 백업이 없다면 되살리기 어렵습니다. 이 점은 아래에서 다시 다루겠습니다.</p>
+<h2>로컬 저장이 만능은 아닙니다</h2>
+<p>기록이 서버에 없다고 해서 아무도 볼 수 없는 건 아닙니다. 잠금을 걸지 않은 휴대폰을 누군가 집어 들 수도 있고, 가족과 함께 쓰는 기기일 수도 있고, 화면을 그대로 찍은 스크린샷이 사진첩에 남아 있을 수도 있습니다. iCloud나 컴퓨터 백업에도 앱 데이터가 포함됩니다. 이런 부분은 기기 암호와 Face ID 같은 iOS 설정이 지켜 줍니다.</p>
+<p>앱에서 도와줄 수 있는 부분은 따로 마련해 두었습니다. 성생활 기록은 설정에서 숨길 수 있고, 숨김을 해제하려면 Face ID 인증을 거치게 했습니다. 누군가 옆에서 화면을 보더라도 드러나는 정보를 한 겹 줄이는 장치입니다.</p>
+<p>휴대폰을 바꿀 때도 신경 쓸 점이 있습니다. 계정이 없으니 새 휴대폰에 앱만 다시 깔아서는 기록이 따라오지 않습니다. Quick Start 전송이나 iCloud·컴퓨터 백업 복원으로 기기째 옮긴 뒤, 이전 휴대폰을 지우기 전에 새 휴대폰에서 캘린더가 제대로 보이는지 확인하세요. 자세한 순서는 <a href="../move-period-tracker-records-to-new-iphone/">새 아이폰으로 옮기는 방법</a> 글에 정리해 두었습니다.</p>
+<h2>여러 기기에서 봐야 한다면</h2>
+<p>솔직히 말해 MiniCycle이 맞지 않는 경우도 있습니다. 아이폰과 아이패드에서 같은 기록을 봐야 하거나 파트너와 캘린더를 공유하고 싶다면, 계정 기반 동기화가 있는 제품이 더 편할 겁니다. MiniCycle은 기기 간 동기화를 지원하지 않습니다.</p>
+<p>동기화를 하려면 결국 기록이 어딘가의 서버를 거쳐야 하고, 그 순간 지켜야 할 것들이 늘어납니다. 가벼운 로컬 캘린더와 어디서나 열리는 클라우드 캘린더 사이에서 MiniCycle은 가벼운 쪽을 골랐습니다. 어느 쪽이 옳다기보다 자기에게 맞는 쪽을 고르면 되는 문제입니다.</p>
+<h2>생리 앱을 고를 때 확인해 볼 것들</h2>
+<p>꼭 MiniCycle이 아니더라도, 생리 앱을 고를 때 몇 가지는 확인해 볼 만합니다. 첫 기록을 남기기 전에 회원가입부터 요구하는지, 기록이 어디에 저장되는지 설명하는지, 웹사이트 분석과 건강 기록을 구분해서 말하는지 같은 것들입니다.</p>
+<p>특히 데이터를 모으는 이유를 살펴보면 제품의 구조가 보입니다. 기능에 꼭 필요해서 모으는 데이터인지, 계정 중심으로 만들어진 제품이라 기본으로 모으는 데이터인지는 다릅니다. 개인정보 처리방침이 실제 앱 동작과 맞아떨어지는지도 좋은 신호입니다. 넓고 두루뭉술한 약속보다 좁고 구체적인 설명이 믿을 만합니다.</p>
+<h2>자주 묻는 질문</h2>
+<p><strong>앱을 지우면 기록도 사라지나요?</strong> 네. 기록이 휴대폰 안에만 있기 때문에 백업 없이 앱을 삭제하면 기록도 함께 사라집니다. 휴대폰을 정리하거나 바꾸기 전에는 백업을 먼저 확인하세요.</p>
+<p><strong>개발자는 제 기록을 볼 수 있나요?</strong> 아니요. 생리 기록을 받는 서버가 없어서 개발자에게 전송되는 생리 데이터 자체가 없습니다. 웹사이트 방문 통계는 보지만 거기에 생리 날짜나 메모는 들어 있지 않습니다.</p>
                 <div class="callout">
                   <p>MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다.</p>
                   <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="ko" data-placement="blog_article_callout" data-content-group="private-period-tracking-without-account" onclick="trackAppStoreClick(this)">App Store에서 받기</a>
                 </div>
                 <h2>참고 자료</h2>
                 <ul class="references">
-        <li><a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content">Google Search Central. Creating helpful, reliable, people-first content.</a></li>
-<li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
+        <li><a href="https://minicycle.net/ko/privacy/">MiniCycle 개인정보 처리방침.</a></li>
+<li><a href="https://minicycle.net/ko/blog/move-period-tracker-records-to-new-iphone/">MiniCycle 블로그. 새 아이폰으로 옮길 때 MiniCycle 생리 기록을 지키는 방법.</a></li>
+<li><a href="https://support.apple.com/en-us/108366">Apple Support. How to back up your iPhone or iPad with iCloud.</a></li>
                 </ul>
               </article>
             </main>

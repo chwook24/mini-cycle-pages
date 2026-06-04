@@ -35,6 +35,74 @@
     });
     return true;
   }
+  function trackBlogArticleEngagement() {
+    const article = document.querySelector('article.article[data-content-group]');
+    if (!article || typeof gtag !== 'function') return;
+
+    const progressThresholds = [50, 75, 90];
+    const sentProgress = new Set();
+    const minReadMs = Number(article.dataset.minReadMs || 30000);
+    let maxPercent = 0;
+    let readCompleteSent = false;
+    let activeMs = 0;
+    let lastTick = Date.now();
+    let wasActive = !document.hidden && document.hasFocus();
+
+    function recordActiveTime() {
+      const now = Date.now();
+      if (wasActive) activeMs += now - lastTick;
+      lastTick = now;
+      wasActive = !document.hidden && document.hasFocus();
+    }
+
+    function articlePercent() {
+      const articleTop = article.getBoundingClientRect().top + window.scrollY;
+      const articleHeight = Math.max(article.offsetHeight, 1);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      return Math.max(0, Math.min(100, Math.floor(((viewportBottom - articleTop) / articleHeight) * 100)));
+    }
+
+    function send(eventName, params) {
+      gtag('event', eventName, Object.assign({
+        language: article.dataset.language,
+        content_group: article.dataset.contentGroup,
+        article_path: window.location.pathname,
+        transport_type: 'beacon'
+      }, params));
+    }
+
+    function evaluate() {
+      recordActiveTime();
+      maxPercent = Math.max(maxPercent, articlePercent());
+
+      progressThresholds.forEach((threshold) => {
+        if (maxPercent >= threshold && !sentProgress.has(threshold)) {
+          sentProgress.add(threshold);
+          send('blog_article_progress', {
+            scroll_percent: threshold,
+            active_seconds: Math.round(activeMs / 1000)
+          });
+        }
+      });
+
+      if (!readCompleteSent && maxPercent >= 90 && activeMs >= minReadMs) {
+        readCompleteSent = true;
+        send('blog_article_read_complete', {
+          max_percent: maxPercent,
+          active_seconds: Math.round(activeMs / 1000),
+          min_read_seconds: Math.round(minReadMs / 1000)
+        });
+      }
+    }
+
+    window.addEventListener('scroll', evaluate, { passive: true });
+    window.addEventListener('resize', evaluate);
+    document.addEventListener('visibilitychange', evaluate);
+    window.addEventListener('pagehide', evaluate);
+    window.setInterval(evaluate, 5000);
+    evaluate();
+  }
+  window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"MiniCycle","applicationCategory":"HealthApplication","operatingSystem":"iOS","description":"MiniCycle is a simple period calendar app for iPhone with cycle estimates, ovulation and fertile window highlights, private local records, and a home screen widget.","url":"https://minicycle.net/","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","installUrl":"https://apps.apple.com/us/app/mini-cycle/id6760011450","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
         </head>
@@ -76,7 +144,7 @@
               <section class="content">
                 <h2>From the blog</h2>
                 <div class="post-grid compact-grid">
-        <article class="post-card"><p class="eyebrow">Backup</p><h3><a href="blog/move-period-tracker-records-to-new-iphone/">How to keep your period tracker records when moving to a new iPhone</a></h3><p>MiniCycle stores period records locally. Learn what to check before moving to a new iPhone, using Apple backup or Quick Start transfer, without creating a MiniCycle account.</p></article><article class="post-card"><p class="eyebrow">Cycle prediction</p><h3><a href="blog/how-minicycle-estimates-periods-ovulation-fertile-window/">How MiniCycle estimates periods, ovulation, and the fertile window</a></h3><p>Learn how MiniCycle estimates period dates, ovulation, and the fertile window using recent cycle records, median-based calculations, and published menstrual cycle research.</p></article><article class="post-card"><p class="eyebrow">Widget</p><h3><a href="blog/period-calendar-widget-iphone-home-screen/">What a period calendar widget should show on the iPhone home screen</a></h3><p>A practical guide to period calendar widgets, including glanceable cycle status, prediction labels, and why MiniCycle keeps its iPhone widget simple.</p></article>
+        <article class="post-card"><p class="eyebrow">Cycle health</p><h3><a href="blog/why-is-my-period-late-common-reasons/">Why is my period late? Common non-pregnancy reasons</a></h3><p>A late period has many non-pregnancy explanations, from stress to travel and illness. Learn common reasons a period can be late and when to ask a clinician.</p></article><article class="post-card"><p class="eyebrow">Backup</p><h3><a href="blog/move-period-tracker-records-to-new-iphone/">How to keep your period tracker records when moving to a new iPhone</a></h3><p>MiniCycle stores period records locally. Learn what to check before moving to a new iPhone, using Apple backup or Quick Start transfer, without creating a MiniCycle account.</p></article><article class="post-card"><p class="eyebrow">Cycle prediction</p><h3><a href="blog/how-minicycle-estimates-periods-ovulation-fertile-window/">How MiniCycle estimates periods, ovulation, and the fertile window</a></h3><p>Learn how MiniCycle estimates period dates, ovulation, and the fertile window using recent cycle records, median-based calculations, and published menstrual cycle research.</p></article>
                 </div>
               </section>
               <section class="content">
