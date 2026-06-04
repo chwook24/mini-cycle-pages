@@ -15,7 +15,7 @@
   <link>https://minicycle.net/blog/move-period-tracker-records-to-new-iphone/</link>
   <guid>https://minicycle.net/blog/move-period-tracker-records-to-new-iphone/</guid>
   <pubDate>Sat, 23 May 2026 00:00:00 +0900</pubDate>
-  <description>MiniCycle stores period records locally. Learn what to check before moving to a new iPhone, using Apple backup or Quick Start transfer, without creating a MiniCycle account.</description>
+  <description>MiniCycle stores records locally by default and offers optional iCloud Sync. Learn what to check before moving to a new iPhone.</description>
 </item><item>
   <title>How MiniCycle estimates periods, ovulation, and the fertile window</title>
   <link>https://minicycle.net/blog/how-minicycle-estimates-periods-ovulation-fertile-window/</link>
@@ -33,7 +33,7 @@
   <link>https://minicycle.net/blog/private-period-tracking-without-account/</link>
   <guid>https://minicycle.net/blog/private-period-tracking-without-account/</guid>
   <pubDate>Sat, 16 May 2026 00:00:00 +0900</pubDate>
-  <description>MiniCycle keeps period records on your device and avoids account-based syncing. Learn why local storage matters for a simple menstrual tracking app.</description>
+  <description>MiniCycle keeps records local by default, offers optional iCloud Sync, and does not require a MiniCycle account.</description>
 </item><item>
   <title>Cycle length and period length: how to read simple period statistics</title>
   <link>https://minicycle.net/blog/cycle-length-period-length-statistics/</link>
