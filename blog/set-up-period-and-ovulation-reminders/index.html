@@ -1,0 +1,170 @@
+        <!doctype html>
+        <html lang="en">
+                <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>How to set up period and ovulation reminders in MiniCycle</title>
+          <meta name="description" content="MiniCycle can remind you 0–3 days before an expected period, the fertile window, or ovulation day. Learn how to set up period reminders and pick a time.">
+          <link rel="canonical" href="https://minicycle.net/blog/set-up-period-and-ovulation-reminders/">
+            <link rel="alternate" hreflang="en" href="https://minicycle.net/blog/set-up-period-and-ovulation-reminders/">
+    <link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/set-up-period-and-ovulation-reminders/">
+    <link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/set-up-period-and-ovulation-reminders/">
+          <link rel="alternate" type="application/rss+xml" title="MiniCycle Blog" href="https://minicycle.net/feed.xml">
+          <meta property="og:type" content="article">
+          <meta property="og:title" content="How to set up period and ovulation reminders in MiniCycle">
+          <meta property="og:description" content="MiniCycle can remind you 0–3 days before an expected period, the fertile window, or ovulation day. Learn how to set up period reminders and pick a time.">
+          <meta property="og:url" content="https://minicycle.net/blog/set-up-period-and-ovulation-reminders/">
+          <meta property="og:image" content="https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg">
+          <meta name="twitter:card" content="summary_large_image">
+            <link rel="icon" href="../../favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+          <link rel="stylesheet" href="../../styles.css">
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
+  function trackBlogArticleEngagement() {
+    const article = document.querySelector('article.article[data-content-group]');
+    if (!article || typeof gtag !== 'function') return;
+
+    const progressThresholds = [50, 75, 90];
+    const sentProgress = new Set();
+    const minReadMs = Number(article.dataset.minReadMs || 30000);
+    let maxPercent = 0;
+    let readCompleteSent = false;
+    let activeMs = 0;
+    let lastTick = Date.now();
+    let wasActive = !document.hidden && document.hasFocus();
+
+    function recordActiveTime() {
+      const now = Date.now();
+      if (wasActive) activeMs += now - lastTick;
+      lastTick = now;
+      wasActive = !document.hidden && document.hasFocus();
+    }
+
+    function articlePercent() {
+      const articleTop = article.getBoundingClientRect().top + window.scrollY;
+      const articleHeight = Math.max(article.offsetHeight, 1);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      return Math.max(0, Math.min(100, Math.floor(((viewportBottom - articleTop) / articleHeight) * 100)));
+    }
+
+    function send(eventName, params) {
+      gtag('event', eventName, Object.assign({
+        language: article.dataset.language,
+        content_group: article.dataset.contentGroup,
+        article_path: window.location.pathname,
+        transport_type: 'beacon'
+      }, params));
+    }
+
+    function evaluate() {
+      recordActiveTime();
+      maxPercent = Math.max(maxPercent, articlePercent());
+
+      progressThresholds.forEach((threshold) => {
+        if (maxPercent >= threshold && !sentProgress.has(threshold)) {
+          sentProgress.add(threshold);
+          send('blog_article_progress', {
+            scroll_percent: threshold,
+            active_seconds: Math.round(activeMs / 1000)
+          });
+        }
+      });
+
+      if (!readCompleteSent && maxPercent >= 90 && activeMs >= minReadMs) {
+        readCompleteSent = true;
+        send('blog_article_read_complete', {
+          max_percent: maxPercent,
+          active_seconds: Math.round(activeMs / 1000),
+          min_read_seconds: Math.round(minReadMs / 1000)
+        });
+      }
+    }
+
+    window.addEventListener('scroll', evaluate, { passive: true });
+    window.addEventListener('resize', evaluate);
+    document.addEventListener('visibilitychange', evaluate);
+    window.addEventListener('pagehide', evaluate);
+    window.setInterval(evaluate, 5000);
+    evaluate();
+  }
+  window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
+</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"How to set up period and ovulation reminders in MiniCycle","description":"MiniCycle can remind you 0–3 days before an expected period, the fertile window, or ovulation day. Learn how to set up period reminders and pick a time.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-06-05","dateModified":"2026-06-05","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/set-up-period-and-ovulation-reminders/"}}</script>
+        </head>
+          <body>
+        <header class="site-header">
+  <a class="brand" href="../../">MiniCycle</a>
+  <nav aria-label="Primary navigation">
+    <a href="../../blog/">Blog</a>
+    <a href="../../support/">Support</a>
+    <a href="../../privacy/">Privacy</a>
+    <a href="../../ko/blog/set-up-period-and-ovulation-reminders/">한국어</a>
+  </nav>
+</header>
+            <main class="page">
+              <article class="article" data-language="en" data-content-group="set-up-period-and-ovulation-reminders" data-min-read-ms="90000">
+                <p class="eyebrow">Reminders</p>
+                <h1>How to set up period and ovulation reminders in MiniCycle</h1>
+                <p class="article-meta">Published June 5, 2026 by MiniCycle</p>
+                <p class="lead">A good reminder removes the need to keep opening the app to check a date. MiniCycle supports four reminders: the expected period, the start of the fertile window, the end of the fertile window, and the estimated ovulation day. Each one can be turned off or set to arrive 0–3 days ahead, at a time you choose. Here is how to set them up, and where the dates come from.</p>
+                <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
+        <h2>What you can be reminded about</h2>
+<p>MiniCycle has four separate reminders: the expected period day, the start of the fertile window, the end of the fertile window, and the estimated ovulation day. They are independent. You can keep just the period reminder and turn the rest off, or use all four.</p>
+<p>Each reminder can arrive on the day itself or 1–3 days before it, and reminders share a delivery time that you pick. If a reminder turns out to be more noise than help, switch it off. The calendar keeps showing the same dates either way.</p>
+<h2>Setting reminders up for the first time</h2>
+<p>Open Settings inside MiniCycle and go to the notification options. The first time you enable a reminder, iOS asks for notification permission. MiniCycle uses that permission to schedule its own reminders and nothing else.</p>
+<p>After permission is granted, choose how many days ahead each reminder should arrive, from 0 to 3, and set the delivery time. A time you actually look at your phone, such as late morning or early evening, works better than a midnight default.</p>
+<h2>How many days ahead should a period reminder be?</h2>
+<p>There is no single right answer, but the options are small enough to reason about. A reminder on the day itself works as a same-day check. One day ahead leaves time to buy supplies. Two or three days ahead suit people who plan around the date, for example before a trip.</p>
+<p>Fertile window and ovulation reminders follow the same 0–3 day rule. If you track mostly to know when the next period is coming, the period reminder alone may be enough.</p>
+<h2>Where the reminder dates come from</h2>
+<p>A reminder is only as good as the date behind it. MiniCycle estimates the next period from your saved start dates, using up to the latest 12 records. Once there are at least 10 measured intervals, it drops one shortest and one longest and takes the median. With little history it starts from a 29-day default.</p>
+<p>Ovulation is counted backward from that expected period using a luteal phase estimate clamped to 9–14 days, and the fertile window runs from 5 days before estimated ovulation through 1 day after it. When you log a new period start, the predictions move, and the scheduled reminders move with them.</p>
+<h2>Reminders are scheduled on your phone</h2>
+<p>MiniCycle reminders are local notifications. Apple&#x27;s notification framework lets an app generate notifications locally on the device instead of pushing them from a server, and that is the mechanism MiniCycle uses. There is no MiniCycle account, and your reminder schedule is not uploaded to a MiniCycle server.</p>
+<p>This matches how the rest of the app handles data. Period records stay on the device by default, and turning reminders on does not change that.</p>
+<h2>If a reminder does not arrive</h2>
+<p>Check three things in order. First, that the reminder is enabled inside MiniCycle and the app has notification permission in iOS Settings. Second, that a Focus mode or scheduled notification summary is not holding the alert back. Third, that there is a predicted date for the reminder to attach to. With no saved period records, there is nothing to schedule.</p>
+<p>Apple&#x27;s support page on iPhone notifications covers the system-side settings, including alert styles, Focus, and per-app notification options.</p>
+<h2>Do reminders update when my cycle changes?</h2>
+<p>Yes. Reminders are rebuilt from the current predictions, so logging the real period start is the most direct way to correct them. If a cycle ran long and the reminder fired early, nothing needs a manual fix. Record the actual start, and the next set of dates and reminders re-anchors on it.</p>
+<p>This is also why reminders tend to get steadier over time. Large cycle datasets show that cycle length varies from month to month for most people, which is exactly why MiniCycle keeps re-estimating from recent records instead of locking in one number. More saved start dates give the median-based estimate more to work with, and one unusual month moves the schedule less.</p>
+<h2>Frequently asked questions</h2>
+<p>Will reminders keep working if I stop logging? They will keep firing, but the dates drift. Predictions anchor on your last saved period start, so a long gap in records pulls the reminder dates away from reality. The fix is simply to log the next period when it starts.</p>
+<p>Are the fertile window and ovulation reminders a contraception tool? No. They mark calendar estimates, and an estimate can differ from your body&#x27;s actual timing in any given cycle. Treat them as planning cues, not as a method for avoiding or achieving pregnancy.</p>
+<h2>A short setup checklist</h2>
+<p>Allow notifications when iOS asks. Keep the reminders you actually want and switch the rest off. Set a delivery time you will notice. Choose 0–3 days of lead time per reminder. Then keep logging period starts, because every saved start date is what keeps the reminder dates honest.</p>
+<p>One last expectation to set: a reminder is a calendar estimate arriving on schedule, not a measurement of your body. If a reminder and your body disagree, the body is right, and the record you keep is how the app catches up.</p>
+                <div class="callout">
+                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="set-up-period-and-ovulation-reminders" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                </div>
+                <h2>References</h2>
+                <ul class="references">
+        <li><a href="https://support.apple.com/en-us/108781">Apple Support. Use notifications on your iPhone or iPad.</a></li>
+<li><a href="https://developer.apple.com/documentation/usernotifications">Apple Developer Documentation. User Notifications.</a></li>
+<li><a href="https://www.nature.com/articles/s41746-019-0152-7">Bull JR, Rowland SP, Scherwitzl EB, et al. Real-world menstrual cycle characteristics of more than 600,000 menstrual cycles. npj Digital Medicine. 2019.</a></li>
+<li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
+                </ul>
+              </article>
+            </main>
+          </body>
+        </html>
