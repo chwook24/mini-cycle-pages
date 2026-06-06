@@ -1,0 +1,169 @@
+        <!doctype html>
+        <html lang="ko">
+                <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>생리 주기 단계별로 몸에서 일어나는 일</title>
+          <meta name="description" content="생리 주기는 월경기, 난포기, 배란, 황체기로 이어집니다. 각 단계에서 몸이 하는 일과 단계 길이가 사람마다 다른 이유, MiniCycle이 이 구조를 달력에 옮기는 방식을 정리했습니다.">
+          <link rel="canonical" href="https://minicycle.net/ko/blog/menstrual-cycle-phases-explained/">
+            <link rel="alternate" hreflang="en" href="https://minicycle.net/blog/menstrual-cycle-phases-explained/">
+    <link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/menstrual-cycle-phases-explained/">
+    <link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/menstrual-cycle-phases-explained/">
+          <link rel="alternate" type="application/rss+xml" title="MiniCycle Blog" href="https://minicycle.net/feed.xml">
+          <meta property="og:type" content="article">
+          <meta property="og:title" content="생리 주기 단계별로 몸에서 일어나는 일">
+          <meta property="og:description" content="생리 주기는 월경기, 난포기, 배란, 황체기로 이어집니다. 각 단계에서 몸이 하는 일과 단계 길이가 사람마다 다른 이유, MiniCycle이 이 구조를 달력에 옮기는 방식을 정리했습니다.">
+          <meta property="og:url" content="https://minicycle.net/ko/blog/menstrual-cycle-phases-explained/">
+          <meta property="og:image" content="https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg">
+          <meta name="twitter:card" content="summary_large_image">
+            <link rel="icon" href="../../../favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../../../apple-touch-icon.png">
+          <link rel="stylesheet" href="../../../styles.css">
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
+  function trackBlogArticleEngagement() {
+    const article = document.querySelector('article.article[data-content-group]');
+    if (!article || typeof gtag !== 'function') return;
+
+    const progressThresholds = [50, 75, 90];
+    const sentProgress = new Set();
+    const minReadMs = Number(article.dataset.minReadMs || 30000);
+    let maxPercent = 0;
+    let readCompleteSent = false;
+    let activeMs = 0;
+    let lastTick = Date.now();
+    let wasActive = !document.hidden && document.hasFocus();
+
+    function recordActiveTime() {
+      const now = Date.now();
+      if (wasActive) activeMs += now - lastTick;
+      lastTick = now;
+      wasActive = !document.hidden && document.hasFocus();
+    }
+
+    function articlePercent() {
+      const articleTop = article.getBoundingClientRect().top + window.scrollY;
+      const articleHeight = Math.max(article.offsetHeight, 1);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      return Math.max(0, Math.min(100, Math.floor(((viewportBottom - articleTop) / articleHeight) * 100)));
+    }
+
+    function send(eventName, params) {
+      gtag('event', eventName, Object.assign({
+        language: article.dataset.language,
+        content_group: article.dataset.contentGroup,
+        article_path: window.location.pathname,
+        transport_type: 'beacon'
+      }, params));
+    }
+
+    function evaluate() {
+      recordActiveTime();
+      maxPercent = Math.max(maxPercent, articlePercent());
+
+      progressThresholds.forEach((threshold) => {
+        if (maxPercent >= threshold && !sentProgress.has(threshold)) {
+          sentProgress.add(threshold);
+          send('blog_article_progress', {
+            scroll_percent: threshold,
+            active_seconds: Math.round(activeMs / 1000)
+          });
+        }
+      });
+
+      if (!readCompleteSent && maxPercent >= 90 && activeMs >= minReadMs) {
+        readCompleteSent = true;
+        send('blog_article_read_complete', {
+          max_percent: maxPercent,
+          active_seconds: Math.round(activeMs / 1000),
+          min_read_seconds: Math.round(minReadMs / 1000)
+        });
+      }
+    }
+
+    window.addEventListener('scroll', evaluate, { passive: true });
+    window.addEventListener('resize', evaluate);
+    document.addEventListener('visibilitychange', evaluate);
+    window.addEventListener('pagehide', evaluate);
+    window.setInterval(evaluate, 5000);
+    evaluate();
+  }
+  window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
+</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"생리 주기 단계별로 몸에서 일어나는 일","description":"생리 주기는 월경기, 난포기, 배란, 황체기로 이어집니다. 각 단계에서 몸이 하는 일과 단계 길이가 사람마다 다른 이유, MiniCycle이 이 구조를 달력에 옮기는 방식을 정리했습니다.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg","datePublished":"2026-06-06","dateModified":"2026-06-06","inLanguage":"ko","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/ko/blog/menstrual-cycle-phases-explained/"}}</script>
+        </head>
+          <body>
+        <header class="site-header">
+  <a class="brand" href="../../">MiniCycle</a>
+  <nav aria-label="Primary navigation">
+    <a href="../../blog/">블로그</a>
+    <a href="../../support/">지원</a>
+    <a href="../../privacy/">개인정보</a>
+    <a href="../../../blog/menstrual-cycle-phases-explained/">English</a>
+  </nav>
+</header>
+            <main class="page">
+              <article class="article" data-language="ko" data-content-group="menstrual-cycle-phases-explained" data-min-read-ms="79000">
+                <p class="eyebrow">주기 기초</p>
+                <h1>생리 주기 단계별로 몸에서 일어나는 일</h1>
+                <p class="article-meta">2026년 6월 6일 MiniCycle 작성</p>
+                <p class="lead">생리 주기는 하나의 사건이 아니라 흐름입니다. 월경기에서 난포기로, 배란을 지나 황체기로 이어지고, 그 끝에서 다음 생리가 시작됩니다. 각 단계에서 몸이 무엇을 하는지 알면 캘린더 앱이 보여주는 날짜들이 훨씬 잘 읽힙니다. 단계마다 무슨 일이 일어나는지, 그리고 MiniCycle이 이 구조를 어떻게 달력에 옮기는지 정리했습니다.</p>
+                <img class="article-hero" src="../../../assets/home-capture-iphone17-1118-ko-20260518.jpg" alt="MiniCycle 아이폰 실제 캡처 화면: 생리 캘린더와 위젯 경험" width="552" height="1200" loading="eager">
+        <h2>한 주기는 네 단계로 이어집니다</h2>
+<p>주기는 한 생리의 첫날부터 다음 생리의 첫날까지로 셉니다. 미국 여성건강국은 24–38일마다 생리가 오면 규칙적인 주기로 봅니다. 그 기간 동안 몸은 월경기, 난포기, 배란, 황체기 네 단계를 차례로 지나갑니다.</p>
+<p>단계를 움직이는 건 에스트로겐과 프로게스테론 같은 호르몬입니다. 오르내리는 순서는 누구나 같지만 속도는 사람마다 다릅니다. 건강한 두 사람의 단계 길이가 서로 다를 수 있고, 같은 사람도 달마다 달라집니다.</p>
+<h2>월경기: 모든 계산의 기준점</h2>
+<p>주기의 1일째는 출혈이 시작된 날입니다. 지난 주기 동안 두꺼워진 자궁내막이 떨어져 나오는 기간으로, 보통 며칠이면 끝납니다. 네 단계 중 직접 관찰할 수 있는 유일한 단계라서, 생리 앱들이 모든 계산을 여기에 맞춥니다.</p>
+<p>MiniCycle도 주기 길이를 기록된 시작일에서 다음 시작일까지로 잽니다. 그래서 가장 중요한 기록은 시작일 하나입니다. 생리 기간은 최근에 종료된 생리 범위로 추정하되 데이터가 모일 때까지는 5일을 기본값으로 쓰고, 직접 설정한 값이 있으면 항상 그 값을 우선합니다.</p>
+<h2>난포기: 주기가 늘었다 줄었다 하는 구간</h2>
+<p>난포기는 1일째부터 배란까지입니다. 뇌가 보낸 신호로 난소에서 난포가 자라고, 에스트로겐이 올라가면서 자궁내막이 다시 만들어집니다. 이 과정에 정해진 날짜는 없습니다. 난포가 빨리 자라는 달도 있고 더디게 자라는 달도 있습니다.</p>
+<p>주기의 변동은 대부분 이 구간에서 생깁니다. 스트레스나 몸살, 여행으로 주기가 밀릴 때 실제로 밀리는 건 배란이고, 그만큼 난포기가 길어집니다. 뒤따르는 황체기는 변동 폭이 훨씬 작습니다. 주기 예측이 어려운 이유가 바로 이 비대칭에 있습니다.</p>
+<h2>배란: 기간이 아니라 하루입니다</h2>
+<p>배란일에는 난소에서 난자가 나옵니다. 난자가 수정될 수 있는 시간은 12–24시간 정도로 짧습니다. 반면 정자는 몸 안에서 며칠을 살 수 있어서, 배란은 하루의 일인데도 그 앞쪽 며칠이 임신 가능성에서 중요해집니다.</p>
+<p>Wilcox 연구진은 가임기를 배란 전 5일과 배란 당일로 정의했습니다. MiniCycle은 추정 배란일 5일 전부터 다음 날까지를 가임기로 표시하는데, 하루 단위의 정확성을 주장하는 게 아니라 달력에서 참고하라고 넉넉하게 잡은 범위입니다.</p>
+<h2>황체기: 14일 고정이 아닙니다</h2>
+<p>배란 후 난포는 황체로 바뀌어 프로게스테론을 만듭니다. 임신이 시작되지 않으면 호르몬이 떨어지고 다음 생리가 시작됩니다. 교과서에는 이 구간이 14일로 자주 나오지만 실측 데이터는 다릅니다. Wilcox 연구에서 배란부터 다음 생리까지는 7–19일까지 퍼져 있었고, 28일 주기인 사람들조차 정확히 14일 전에 배란한 경우는 10%뿐이었습니다.</p>
+<p>그래서 MiniCycle은 14일 고정 가정을 쓰지 않습니다. 주기 길이에 따라 9–14일 범위 안에서 황체기를 추정하고, 다음 생리 예정일에서 그만큼 거꾸로 빼서 배란일을 잡습니다.</p>
+<h2>MiniCycle은 이 구조를 어떻게 달력에 옮기나요</h2>
+<p>앱은 호르몬을 측정하지 않습니다. 저장된 생리 시작일을 최대 12개까지 보고, 측정된 간격이 10개 이상 모이면 가장 짧은 값과 가장 긴 값을 하나씩 뺀 중앙값을 씁니다. 기록이 적을 때는 29일을 기본값으로 시작합니다. 다음 예정일, 배란일 추정, 가임기 표시가 모두 이 숫자 하나에 매달려 있습니다.</p>
+<p>달력이 보여주는 단계 정보는 결국 날짜에서 끌어낸 추론입니다. 그래서 계획에 참고하는 정보일 뿐 의료 조언이나 피임, 진단을 대체하지 않습니다. 어떤 달에 배란이 실제로 일어났는지는 단계 추정으로 알 수 없습니다.</p>
+<h2>단계 길이는 사람마다 얼마나 다른가요</h2>
+<p>교과서의 28일 그림이 보여주는 것보다 훨씬 많이 다릅니다. npj Digital Medicine에 실린 60만 건 이상의 실제 주기 분석에서 난포기는 평균 16.9일, 황체기는 평균 12.4일이었고, 두 값 모두 범위가 넓었습니다. 이 연구는 주기 길이 변동의 대부분을 배란 시점의 차이로 설명하는데, 가장 많이 움직이는 단계가 난포기라는 뜻이기도 합니다.</p>
+<p>MiniCycle이 숫자 하나를 고정해 두지 않고 최근 기록으로 계속 다시 계산하는 이유가 여기에 있습니다. 인구 평균보다는 내 최근 주기 간격의 중앙값이 내 리듬에 가깝습니다.</p>
+<h2>자주 묻는 질문</h2>
+<p>앱이 오늘 내가 어느 단계인지 알려줄 수 있나요? 추정으로만 가능합니다. 달력의 단계 경계는 호르몬 측정이 아니라 시작일 기록과 배란일 추정에서 나온 값이라서, 실제와 며칠씩 어긋날 수 있습니다.</p>
+<p>황체기가 짧으면 문제가 있는 건가요? 그 자체로는 아닙니다. 실측된 황체기는 생각보다 넓은 범위에 퍼져 있습니다. 주기가 갑자기 달라졌거나 임신 계획과 관련해 신경 쓰인다면, 앱이 추정만 할 수 있는 것을 병원에서는 실제로 측정할 수 있습니다.</p>
+<h2>MiniCycle 달력에서 단계 읽기</h2>
+<p>달력에서는 기록된 생리일, 예상 생리일, 가임기, 배란일 추정이 서로 다른 색으로 표시됩니다. 연분홍이 생리, 스카이블루가 가임기, 더 진한 하늘색이 추정 배란일입니다. 그 사이의 빈 구간이 곧 단계입니다. 생리가 끝난 뒤부터는 난포기, 배란 표시 뒤부터는 황체기입니다.</p>
+<p>추정을 좋게 만드는 방법은 앱의 다른 기능과 같습니다. 생리가 시작된 날 바로 기록하는 것입니다. 시작일이 하나 저장될 때마다 다음 달들의 단계 구조가 그 날짜에 맞춰 다시 잡힙니다.</p>
+                <div class="callout">
+                  <p>MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="ko" data-placement="blog_article_callout" data-content-group="menstrual-cycle-phases-explained" onclick="trackAppStoreClick(this)">App Store에서 받기</a>
+                </div>
+                <h2>참고 자료</h2>
+                <ul class="references">
+        <li><a href="https://womenshealth.gov/menstrual-cycle/your-menstrual-cycle">Office on Women&#x27;s Health. Your menstrual cycle.</a></li>
+<li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC27529/">Wilcox AJ, Dunson D, Baird DD. The timing of the fertile window in the menstrual cycle. BMJ. 2000.</a></li>
+<li><a href="https://www.nature.com/articles/s41746-019-0152-7">Bull JR, Rowland SP, Scherwitzl EB, et al. Real-world menstrual cycle characteristics of more than 600,000 menstrual cycles. npj Digital Medicine. 2019.</a></li>
+                </ul>
+              </article>
+            </main>
+          </body>
+        </html>

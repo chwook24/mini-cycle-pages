@@ -1,0 +1,169 @@
+        <!doctype html>
+        <html lang="en">
+                <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>The menstrual cycle phases: follicular, ovulation, luteal</title>
+          <meta name="description" content="Learn the menstrual cycle phases: menstruation, the follicular phase, ovulation, and the luteal phase, what each one does, and why their lengths vary.">
+          <link rel="canonical" href="https://minicycle.net/blog/menstrual-cycle-phases-explained/">
+            <link rel="alternate" hreflang="en" href="https://minicycle.net/blog/menstrual-cycle-phases-explained/">
+    <link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/menstrual-cycle-phases-explained/">
+    <link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/menstrual-cycle-phases-explained/">
+          <link rel="alternate" type="application/rss+xml" title="MiniCycle Blog" href="https://minicycle.net/feed.xml">
+          <meta property="og:type" content="article">
+          <meta property="og:title" content="The menstrual cycle phases: follicular, ovulation, luteal">
+          <meta property="og:description" content="Learn the menstrual cycle phases: menstruation, the follicular phase, ovulation, and the luteal phase, what each one does, and why their lengths vary.">
+          <meta property="og:url" content="https://minicycle.net/blog/menstrual-cycle-phases-explained/">
+          <meta property="og:image" content="https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg">
+          <meta name="twitter:card" content="summary_large_image">
+            <link rel="icon" href="../../favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+          <link rel="stylesheet" href="../../styles.css">
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
+  function trackBlogArticleEngagement() {
+    const article = document.querySelector('article.article[data-content-group]');
+    if (!article || typeof gtag !== 'function') return;
+
+    const progressThresholds = [50, 75, 90];
+    const sentProgress = new Set();
+    const minReadMs = Number(article.dataset.minReadMs || 30000);
+    let maxPercent = 0;
+    let readCompleteSent = false;
+    let activeMs = 0;
+    let lastTick = Date.now();
+    let wasActive = !document.hidden && document.hasFocus();
+
+    function recordActiveTime() {
+      const now = Date.now();
+      if (wasActive) activeMs += now - lastTick;
+      lastTick = now;
+      wasActive = !document.hidden && document.hasFocus();
+    }
+
+    function articlePercent() {
+      const articleTop = article.getBoundingClientRect().top + window.scrollY;
+      const articleHeight = Math.max(article.offsetHeight, 1);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      return Math.max(0, Math.min(100, Math.floor(((viewportBottom - articleTop) / articleHeight) * 100)));
+    }
+
+    function send(eventName, params) {
+      gtag('event', eventName, Object.assign({
+        language: article.dataset.language,
+        content_group: article.dataset.contentGroup,
+        article_path: window.location.pathname,
+        transport_type: 'beacon'
+      }, params));
+    }
+
+    function evaluate() {
+      recordActiveTime();
+      maxPercent = Math.max(maxPercent, articlePercent());
+
+      progressThresholds.forEach((threshold) => {
+        if (maxPercent >= threshold && !sentProgress.has(threshold)) {
+          sentProgress.add(threshold);
+          send('blog_article_progress', {
+            scroll_percent: threshold,
+            active_seconds: Math.round(activeMs / 1000)
+          });
+        }
+      });
+
+      if (!readCompleteSent && maxPercent >= 90 && activeMs >= minReadMs) {
+        readCompleteSent = true;
+        send('blog_article_read_complete', {
+          max_percent: maxPercent,
+          active_seconds: Math.round(activeMs / 1000),
+          min_read_seconds: Math.round(minReadMs / 1000)
+        });
+      }
+    }
+
+    window.addEventListener('scroll', evaluate, { passive: true });
+    window.addEventListener('resize', evaluate);
+    document.addEventListener('visibilitychange', evaluate);
+    window.addEventListener('pagehide', evaluate);
+    window.setInterval(evaluate, 5000);
+    evaluate();
+  }
+  window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
+</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"The menstrual cycle phases: follicular, ovulation, luteal","description":"Learn the menstrual cycle phases: menstruation, the follicular phase, ovulation, and the luteal phase, what each one does, and why their lengths vary.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-06-06","dateModified":"2026-06-06","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/menstrual-cycle-phases-explained/"}}</script>
+        </head>
+          <body>
+        <header class="site-header">
+  <a class="brand" href="../../">MiniCycle</a>
+  <nav aria-label="Primary navigation">
+    <a href="../../blog/">Blog</a>
+    <a href="../../support/">Support</a>
+    <a href="../../privacy/">Privacy</a>
+    <a href="../../ko/blog/menstrual-cycle-phases-explained/">한국어</a>
+  </nav>
+</header>
+            <main class="page">
+              <article class="article" data-language="en" data-content-group="menstrual-cycle-phases-explained" data-min-read-ms="90000">
+                <p class="eyebrow">Cycle basics</p>
+                <h1>The menstrual cycle phases: follicular, ovulation, luteal</h1>
+                <p class="article-meta">Published June 6, 2026 by MiniCycle</p>
+                <p class="lead">A menstrual cycle is not one event. It is a sequence: a period, a follicular phase, ovulation, and a luteal phase, each driven by changing hormone levels. Knowing roughly what each phase does makes a cycle calendar much easier to read, because most of the dates an app shows are tied to one of these phases. Here is the structure, and how MiniCycle maps it onto your calendar.</p>
+                <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
+        <h2>One cycle, four phases</h2>
+<p>A cycle is counted from the first day of one period to the first day of the next. The U.S. Office on Women&#x27;s Health describes a regular cycle as one that arrives every 24 to 38 days. Inside that span, the body moves through four phases: menstruation, the follicular phase, ovulation, and the luteal phase.</p>
+<p>The phases are driven by hormones, mainly estrogen and progesterone, that rise and fall in a set order. The order is the same for everyone. The timing is not. Two people with healthy cycles can have different phase lengths, and the same person can shift from month to month.</p>
+<h2>Menstruation: day 1 is the anchor</h2>
+<p>Day 1 of a cycle is the first day of bleeding. The uterus sheds the lining it built up over the previous cycle, which typically takes a few days. This is the only phase you can observe directly, and that is exactly why period apps anchor everything to it.</p>
+<p>MiniCycle measures cycle length from one recorded start date to the next, so the start date is the single most useful thing to log. Period length is estimated from your recent closed period ranges, with a 5-day default until there is enough data, and a manual setting always takes priority.</p>
+<h2>The follicular phase does most of the varying</h2>
+<p>The follicular phase runs from day 1 until ovulation. The brain signals the ovaries, a follicle matures, and rising estrogen rebuilds the uterine lining. None of this is fixed to a date. A follicle can mature quickly one month and slowly the next.</p>
+<p>This phase absorbs most of a cycle&#x27;s variation. When stress, illness, or travel delays a cycle, what usually gets delayed is ovulation, and the follicular phase stretches to match. The luteal phase that follows varies much less. That asymmetry is the main reason predicting a cycle from its start date is hard.</p>
+<h2>Ovulation is a day, not a window</h2>
+<p>At ovulation, the ovary releases an egg. The egg itself can be fertilized for roughly 12 to 24 hours. Sperm can survive in the body for several days, which is why the days before ovulation matter for conception even though ovulation is a single event.</p>
+<p>Research by Wilcox and colleagues defined the fertile window as the five days before ovulation plus the day itself. MiniCycle marks the window from 5 days before the estimated ovulation day through 1 day after it, a deliberately generous calendar cue rather than a claim of day-level accuracy.</p>
+<h2>The luteal phase: steadier, but not a fixed 14 days</h2>
+<p>After ovulation, the follicle that released the egg becomes the corpus luteum and produces progesterone. If no pregnancy begins, progesterone falls and the next period starts. Textbooks often quote this phase as 14 days, but measured data disagrees. In the Wilcox study, the time from ovulation to the next period ranged from 7 to 19 days, and even among 28-day cycles, only about 10% ovulated exactly 14 days before the next period.</p>
+<p>MiniCycle therefore avoids the fixed 14-day assumption. It estimates the luteal phase from your cycle length, clamped between 9 and 14 days, and counts backward from the next expected period to place the ovulation estimate.</p>
+<h2>How MiniCycle maps the phases onto a calendar</h2>
+<p>The app never measures hormones. It works from saved period start dates, using up to your latest 12 records. Once there are at least 10 measured intervals, it drops one shortest and one longest interval and takes the median. With little history, it starts from a 29-day default. The next period, the ovulation estimate, and the fertile window all hang off that one number.</p>
+<p>Everything the calendar shows about phases is an inference from dates. That is why the dates are reference information for planning, not medical advice, contraception, or diagnosis. A phase estimate cannot tell you whether ovulation actually happened in a given month.</p>
+<h2>How much do the phases vary between people?</h2>
+<p>More than the textbook 28-day picture suggests. An analysis of more than 600,000 real-world cycles published in npj Digital Medicine found a mean follicular phase of 16.9 days and a mean luteal phase of 12.4 days, with wide ranges around both. The same study attributes most cycle length variation to the timing of ovulation, which is another way of saying the follicular phase moves the most.</p>
+<p>That variation is one reason MiniCycle re-estimates from recent records instead of locking onto one number. A median of your own recent intervals tracks your actual rhythm more closely than a population average can.</p>
+<h2>Frequently asked questions</h2>
+<p>Can an app tell me which phase I am in today? Only as an estimate. The phase boundaries on the calendar are inferred from your start dates and an estimated ovulation day, not from hormone measurements, so they can be off by days in either direction.</p>
+<p>Does a short luteal phase mean something is wrong? Not by itself. Measured luteal phases vary across a wide range. If your cycles change suddenly, or the question matters for pregnancy plans, a clinician can measure what an app can only estimate.</p>
+<h2>Reading the phases in MiniCycle</h2>
+<p>On the calendar, recorded period days, predicted period days, the fertile window, and the ovulation estimate each have their own visual treatment. Pink marks the period, sky blue the fertile window, and a deeper blue the estimated ovulation day. The phases in between are the unmarked stretches: follicular after the period ends, luteal after the ovulation mark.</p>
+<p>The estimates improve the same way everything in the app does: by logging period starts when they happen. Each saved start date re-anchors the phase structure for the months ahead.</p>
+                <div class="callout">
+                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="menstrual-cycle-phases-explained" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                </div>
+                <h2>References</h2>
+                <ul class="references">
+        <li><a href="https://womenshealth.gov/menstrual-cycle/your-menstrual-cycle">Office on Women&#x27;s Health. Your menstrual cycle.</a></li>
+<li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC27529/">Wilcox AJ, Dunson D, Baird DD. The timing of the fertile window in the menstrual cycle. BMJ. 2000.</a></li>
+<li><a href="https://www.nature.com/articles/s41746-019-0152-7">Bull JR, Rowland SP, Scherwitzl EB, et al. Real-world menstrual cycle characteristics of more than 600,000 menstrual cycles. npj Digital Medicine. 2019.</a></li>
+                </ul>
+              </article>
+            </main>
+          </body>
+        </html>
