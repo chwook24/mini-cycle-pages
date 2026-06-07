@@ -1,0 +1,169 @@
+        <!doctype html>
+        <html lang="ko">
+                <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>생리 주기는 며칠이 정상일까요</title>
+          <meta name="description" content="생리 주기는 정확히 28일이 아니어도 괜찮습니다. 기관들이 정상으로 안내하는 24–38일 범위와 달마다 생기는 변동, 병원에 가볼 만한 신호를 정리했습니다.">
+          <link rel="canonical" href="https://minicycle.net/ko/blog/normal-menstrual-cycle-length-variation/">
+            <link rel="alternate" hreflang="en" href="https://minicycle.net/blog/normal-menstrual-cycle-length-variation/">
+    <link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/normal-menstrual-cycle-length-variation/">
+    <link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/normal-menstrual-cycle-length-variation/">
+          <link rel="alternate" type="application/rss+xml" title="MiniCycle Blog" href="https://minicycle.net/feed.xml">
+          <meta property="og:type" content="article">
+          <meta property="og:title" content="생리 주기는 며칠이 정상일까요">
+          <meta property="og:description" content="생리 주기는 정확히 28일이 아니어도 괜찮습니다. 기관들이 정상으로 안내하는 24–38일 범위와 달마다 생기는 변동, 병원에 가볼 만한 신호를 정리했습니다.">
+          <meta property="og:url" content="https://minicycle.net/ko/blog/normal-menstrual-cycle-length-variation/">
+          <meta property="og:image" content="https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg">
+          <meta name="twitter:card" content="summary_large_image">
+            <link rel="icon" href="../../../favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../../../apple-touch-icon.png">
+          <link rel="stylesheet" href="../../../styles.css">
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
+  function trackBlogArticleEngagement() {
+    const article = document.querySelector('article.article[data-content-group]');
+    if (!article || typeof gtag !== 'function') return;
+
+    const progressThresholds = [50, 75, 90];
+    const sentProgress = new Set();
+    const minReadMs = Number(article.dataset.minReadMs || 30000);
+    let maxPercent = 0;
+    let readCompleteSent = false;
+    let activeMs = 0;
+    let lastTick = Date.now();
+    let wasActive = !document.hidden && document.hasFocus();
+
+    function recordActiveTime() {
+      const now = Date.now();
+      if (wasActive) activeMs += now - lastTick;
+      lastTick = now;
+      wasActive = !document.hidden && document.hasFocus();
+    }
+
+    function articlePercent() {
+      const articleTop = article.getBoundingClientRect().top + window.scrollY;
+      const articleHeight = Math.max(article.offsetHeight, 1);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      return Math.max(0, Math.min(100, Math.floor(((viewportBottom - articleTop) / articleHeight) * 100)));
+    }
+
+    function send(eventName, params) {
+      gtag('event', eventName, Object.assign({
+        language: article.dataset.language,
+        content_group: article.dataset.contentGroup,
+        article_path: window.location.pathname,
+        transport_type: 'beacon'
+      }, params));
+    }
+
+    function evaluate() {
+      recordActiveTime();
+      maxPercent = Math.max(maxPercent, articlePercent());
+
+      progressThresholds.forEach((threshold) => {
+        if (maxPercent >= threshold && !sentProgress.has(threshold)) {
+          sentProgress.add(threshold);
+          send('blog_article_progress', {
+            scroll_percent: threshold,
+            active_seconds: Math.round(activeMs / 1000)
+          });
+        }
+      });
+
+      if (!readCompleteSent && maxPercent >= 90 && activeMs >= minReadMs) {
+        readCompleteSent = true;
+        send('blog_article_read_complete', {
+          max_percent: maxPercent,
+          active_seconds: Math.round(activeMs / 1000),
+          min_read_seconds: Math.round(minReadMs / 1000)
+        });
+      }
+    }
+
+    window.addEventListener('scroll', evaluate, { passive: true });
+    window.addEventListener('resize', evaluate);
+    document.addEventListener('visibilitychange', evaluate);
+    window.addEventListener('pagehide', evaluate);
+    window.setInterval(evaluate, 5000);
+    evaluate();
+  }
+  window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
+</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"생리 주기는 며칠이 정상일까요","description":"생리 주기는 정확히 28일이 아니어도 괜찮습니다. 기관들이 정상으로 안내하는 24–38일 범위와 달마다 생기는 변동, 병원에 가볼 만한 신호를 정리했습니다.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg","datePublished":"2026-06-07","dateModified":"2026-06-07","inLanguage":"ko","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/ko/blog/normal-menstrual-cycle-length-variation/"}}</script>
+        </head>
+          <body>
+        <header class="site-header">
+  <a class="brand" href="../../">MiniCycle</a>
+  <nav aria-label="Primary navigation">
+    <a href="../../blog/">블로그</a>
+    <a href="../../support/">지원</a>
+    <a href="../../privacy/">개인정보</a>
+    <a href="../../../blog/normal-menstrual-cycle-length-variation/">English</a>
+  </nav>
+</header>
+            <main class="page">
+              <article class="article" data-language="ko" data-content-group="normal-menstrual-cycle-length-variation" data-min-read-ms="83000">
+                <p class="eyebrow">주기 기초</p>
+                <h1>생리 주기는 며칠이 정상일까요</h1>
+                <p class="article-meta">2026년 6월 7일 MiniCycle 작성</p>
+                <p class="lead">정상 생리 주기를 검색하면 대개 28일이라는 답이 나옵니다. 그런데 실제 주기는 그렇게 깔끔하지 않습니다. 60만 건이 넘는 주기를 분석한 연구에서 평균은 29.3일이었고, 정확히 28일인 주기는 13%뿐이었습니다. 정상은 하나의 숫자가 아니라 범위이고, 그 범위는 생각보다 넓습니다. 기관들이 안내하는 기준과 달마다 생기는 변동, 병원에 물어볼 만한 신호를 정리했습니다.</p>
+                <img class="article-hero" src="../../../assets/home-capture-iphone17-1118-ko-20260518.jpg" alt="MiniCycle 아이폰 실제 캡처 화면: 생리 캘린더와 위젯 경험" width="552" height="1200" loading="eager">
+        <h2>28일이라는 숫자는 어디서 왔을까요</h2>
+<p>교과서와 검색 결과가 보여주는 28일은 평균에 가까운 값이지 합격선이 아닙니다. 미국 여성건강국도 전형적인 주기를 28일로 소개하면서, 사람마다 다르고 같은 사람도 달마다 달라질 수 있다는 설명을 바로 옆에 붙여 둡니다.</p>
+<p>실측 데이터를 보면 더 분명해집니다. npj Digital Medicine에 실린 분석에서 124,648명이 남긴 주기 612,613건의 평균 길이는 29.3일이었고, 정확히 28일인 주기는 전체의 13%에 그쳤습니다. MiniCycle이 기록이 부족할 때 28일이 아니라 29일을 기본값으로 쓰는 것도 이런 데이터와 같은 방향입니다.</p>
+<h2>정상 범위는 며칠부터 며칠까지인가요</h2>
+<p>주기 길이는 한 생리의 첫날부터 다음 생리의 첫날까지로 셉니다. 이 기준으로 미국 여성건강국은 24–38일마다 생리가 오면 규칙적인 주기로 보고, Mayo Clinic은 21–35일 간격으로 와서 2–7일 이어지는 출혈을 일반적인 모습으로 안내합니다.</p>
+<p>두 기관의 숫자가 조금 다르다는 사실 자체가 말해주는 것이 있습니다. 정상과 비정상을 하루 단위로 가르는 선은 없다는 점입니다. 어느 기준을 보더라도 정상은 꽤 넓은 띠이고, 26일 주기도 35일 주기도 그 사람에게는 평소의 주기일 수 있습니다.</p>
+<h2>달마다 며칠씩 다른 건 괜찮은가요</h2>
+<p>괜찮은 정도가 아니라 그쪽이 보통입니다. 미국 여성건강국은 주기 길이가 달마다 달라질 수 있다고 안내하고, Mayo Clinic은 넓은 범위 안에서는 나에게 일반적인 것이 곧 일반적인 것이라고 설명합니다. 며칠씩 움직이는 주기는 고장이 아니라 대부분의 주기가 움직이는 방식입니다.</p>
+<p>변동이 생기는 자리는 주로 배란 전입니다. 스트레스나 몸살, 여행이 배란을 며칠 미루면 그 주기는 그만큼 길어집니다. 그래서 한 달의 변화보다는 몇 달에 걸쳐 같은 방향으로 이어지는 변화가 더 들여다볼 만한 신호입니다.</p>
+<h2>나이에 따라서도 주기는 달라집니다</h2>
+<p>정상 범위는 인생의 시기에 따라서도 움직입니다. 초경 후 몇 년 동안은 38일보다 긴 주기가 흔하고, 대개 3년 안에 규칙적인 리듬을 찾습니다. 20–30대에는 보통 24–38일 범위에서 규칙적으로 돌고, 폐경으로 가는 길목인 40대에는 다시 들쭉날쭉해지는 경우가 많습니다.</p>
+<p>그 사이에도 주기는 조금씩 짧아집니다. 위의 대규모 분석에서 평균 주기 길이는 25–45세 구간에서 나이 한 살마다 약 0.18일씩 줄었습니다. 5년 전의 내 주기와 지금의 내 주기가 조금 다른 것은 설명이 필요한 변화가 아닐 수 있습니다.</p>
+<h2>내 평소 주기를 찾는 방법</h2>
+<p>방법은 단순합니다. 생리가 시작된 날을 몇 달 동안 적어 두고, 시작일에서 다음 시작일까지를 세면 됩니다. Mayo Clinic도 규칙성을 보려면 몇 달 연속으로 시작일을 기록하라고 안내합니다. 내 평소 주기는 교과서가 아니라 그 기록이 알려줍니다.</p>
+<p>MiniCycle은 이 계산을 대신합니다. 저장된 생리 시작일을 최대 12개까지 보고, 측정된 간격이 10개 이상 모이면 가장 짧은 값과 가장 긴 값을 하나씩 뺀 중앙값을 평소 주기로 잡습니다. 유난히 길거나 짧았던 한 달이 추정 전체를 끌고 가지 못하게 하는 방식이고, 기록이 모이기 전에는 29일에서 시작합니다.</p>
+<h2>이럴 때는 병원에 물어보세요</h2>
+<p>Mayo Clinic이 안내하는 기준은 이렇습니다. 임신이 아닌데 생리가 90일 넘게 없을 때, 규칙적이던 주기가 갑자기 불규칙해졌을 때, 간격이 계속 21일보다 짧거나 35일보다 길 때, 출혈이 7일을 넘길 때, 생리 사이에 출혈이 있을 때, 통증이 심할 때입니다.</p>
+<p>이 목록은 진단이 아니라 상담을 시작할 기준입니다. 달력 앱도 마찬가지입니다. MiniCycle이 보여주는 날짜는 계획에 참고하는 추정치이지 의료 조언이나 피임이 아니고, 임신 여부를 판단하는 수단도 아닙니다. 다만 몇 달치 시작일 기록은 진료실에서 기억에 의존한 어떤 설명보다 상황을 빨리 전달합니다.</p>
+<h2>26일이나 33일 주기도 정상인가요</h2>
+<p>대개 그렇습니다. 26일도 33일도 기관들이 안내하는 범위 안에 있습니다. 더 중요한 질문은 그 길이가 나에게 평소와 같은가입니다. 늘 33일이던 주기가 계속 33일인 것과, 몇 년간 26일이던 주기가 최근 33일로 늘어난 것은 숫자만 보면 비슷해도 의미가 다릅니다.</p>
+<p>피임 방법도 변수입니다. Mayo Clinic은 일부 경구 피임약이나 자궁 내 장치가 주기와 출혈 양상을 바꾼다고 안내합니다. 길이 변화가 피임을 시작하거나 바꾼 시점과 겹친다면 그 맥락까지 같이 봐야 하고, 가장 정확한 답은 처방한 의료진에게 있습니다.</p>
+<h2>자주 묻는 질문</h2>
+<p>MiniCycle은 모든 사람의 주기를 28일로 가정하나요? 아닙니다. 기록이 부족할 때의 기본값부터 실측 평균에 가까운 29일이고, 시작일이 쌓이면 곧 사용자 본인의 최근 간격에서 나온 중앙값으로 넘어갑니다.</p>
+<p>주기가 정상 범위인데도 예정일이 하루이틀 어긋나는 건 왜 그런가요? 그 정도가 보통의 변동이기 때문입니다. 규칙적인 주기도 달마다 며칠씩 움직여서, 어떤 달력 계산도 몸의 일을 하루 단위로 맞히지는 못합니다. 실제 시작일을 기록하면 다음 예측이 그 날짜에 맞춰 다시 잡힙니다.</p>
+<h2>MiniCycle에서 내 주기 길이 확인하기</h2>
+<p>통계 탭에는 최근 기록에서 계산한 주기 길이와 생리 기간이 정리됩니다. 표시는 최근 24개 데이터까지라서 오래된 기록이 지금의 패턴을 흐리지 않습니다. 시작일이 몇 달치만 쌓이면 교과서 평균이 아니라 내 범위가 보이기 시작합니다.</p>
+<p>필요한 습관은 하나입니다. 시작한 날 바로 기록하는 것입니다. 예측과 통계의 재료도, 정상 범위인지 궁금할 때 들여다볼 자료도, 진료실에 가져갈 기록도 결국 그 시작일들입니다.</p>
+                <div class="callout">
+                  <p>MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="ko" data-placement="blog_article_callout" data-content-group="normal-menstrual-cycle-length-variation" onclick="trackAppStoreClick(this)">App Store에서 받기</a>
+                </div>
+                <h2>참고 자료</h2>
+                <ul class="references">
+        <li><a href="https://womenshealth.gov/menstrual-cycle/your-menstrual-cycle">Office on Women&#x27;s Health. Your menstrual cycle.</a></li>
+<li><a href="https://www.mayoclinic.org/healthy-lifestyle/womens-health/in-depth/menstrual-cycle/art-20047186">Mayo Clinic. Menstrual cycle: What&#x27;s normal, what&#x27;s not.</a></li>
+<li><a href="https://www.nature.com/articles/s41746-019-0152-7">Bull JR, Rowland SP, Scherwitzl EB, et al. Real-world menstrual cycle characteristics of more than 600,000 menstrual cycles. npj Digital Medicine. 2019.</a></li>
+                </ul>
+              </article>
+            </main>
+          </body>
+        </html>

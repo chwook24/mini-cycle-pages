@@ -1,0 +1,169 @@
+        <!doctype html>
+        <html lang="en">
+                <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>What is a normal menstrual cycle length? It&#x27;s a range</title>
+          <meta name="description" content="A normal menstrual cycle length is a range, not a single number. See the 24–38 day guideline, how much variation is common, and when to ask a clinician.">
+          <link rel="canonical" href="https://minicycle.net/blog/normal-menstrual-cycle-length-variation/">
+            <link rel="alternate" hreflang="en" href="https://minicycle.net/blog/normal-menstrual-cycle-length-variation/">
+    <link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/normal-menstrual-cycle-length-variation/">
+    <link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/normal-menstrual-cycle-length-variation/">
+          <link rel="alternate" type="application/rss+xml" title="MiniCycle Blog" href="https://minicycle.net/feed.xml">
+          <meta property="og:type" content="article">
+          <meta property="og:title" content="What is a normal menstrual cycle length? It&#x27;s a range">
+          <meta property="og:description" content="A normal menstrual cycle length is a range, not a single number. See the 24–38 day guideline, how much variation is common, and when to ask a clinician.">
+          <meta property="og:url" content="https://minicycle.net/blog/normal-menstrual-cycle-length-variation/">
+          <meta property="og:image" content="https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg">
+          <meta name="twitter:card" content="summary_large_image">
+            <link rel="icon" href="../../favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+          <link rel="stylesheet" href="../../styles.css">
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
+  function trackBlogArticleEngagement() {
+    const article = document.querySelector('article.article[data-content-group]');
+    if (!article || typeof gtag !== 'function') return;
+
+    const progressThresholds = [50, 75, 90];
+    const sentProgress = new Set();
+    const minReadMs = Number(article.dataset.minReadMs || 30000);
+    let maxPercent = 0;
+    let readCompleteSent = false;
+    let activeMs = 0;
+    let lastTick = Date.now();
+    let wasActive = !document.hidden && document.hasFocus();
+
+    function recordActiveTime() {
+      const now = Date.now();
+      if (wasActive) activeMs += now - lastTick;
+      lastTick = now;
+      wasActive = !document.hidden && document.hasFocus();
+    }
+
+    function articlePercent() {
+      const articleTop = article.getBoundingClientRect().top + window.scrollY;
+      const articleHeight = Math.max(article.offsetHeight, 1);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      return Math.max(0, Math.min(100, Math.floor(((viewportBottom - articleTop) / articleHeight) * 100)));
+    }
+
+    function send(eventName, params) {
+      gtag('event', eventName, Object.assign({
+        language: article.dataset.language,
+        content_group: article.dataset.contentGroup,
+        article_path: window.location.pathname,
+        transport_type: 'beacon'
+      }, params));
+    }
+
+    function evaluate() {
+      recordActiveTime();
+      maxPercent = Math.max(maxPercent, articlePercent());
+
+      progressThresholds.forEach((threshold) => {
+        if (maxPercent >= threshold && !sentProgress.has(threshold)) {
+          sentProgress.add(threshold);
+          send('blog_article_progress', {
+            scroll_percent: threshold,
+            active_seconds: Math.round(activeMs / 1000)
+          });
+        }
+      });
+
+      if (!readCompleteSent && maxPercent >= 90 && activeMs >= minReadMs) {
+        readCompleteSent = true;
+        send('blog_article_read_complete', {
+          max_percent: maxPercent,
+          active_seconds: Math.round(activeMs / 1000),
+          min_read_seconds: Math.round(minReadMs / 1000)
+        });
+      }
+    }
+
+    window.addEventListener('scroll', evaluate, { passive: true });
+    window.addEventListener('resize', evaluate);
+    document.addEventListener('visibilitychange', evaluate);
+    window.addEventListener('pagehide', evaluate);
+    window.setInterval(evaluate, 5000);
+    evaluate();
+  }
+  window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
+</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"What is a normal menstrual cycle length? It's a range","description":"A normal menstrual cycle length is a range, not a single number. See the 24–38 day guideline, how much variation is common, and when to ask a clinician.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-06-07","dateModified":"2026-06-07","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/normal-menstrual-cycle-length-variation/"}}</script>
+        </head>
+          <body>
+        <header class="site-header">
+  <a class="brand" href="../../">MiniCycle</a>
+  <nav aria-label="Primary navigation">
+    <a href="../../blog/">Blog</a>
+    <a href="../../support/">Support</a>
+    <a href="../../privacy/">Privacy</a>
+    <a href="../../ko/blog/normal-menstrual-cycle-length-variation/">한국어</a>
+  </nav>
+</header>
+            <main class="page">
+              <article class="article" data-language="en" data-content-group="normal-menstrual-cycle-length-variation" data-min-read-ms="90000">
+                <p class="eyebrow">Cycle basics</p>
+                <h1>What is a normal menstrual cycle length? It&#x27;s a range</h1>
+                <p class="article-meta">Published June 7, 2026 by MiniCycle</p>
+                <p class="lead">Search for a normal cycle length and the answer that comes back is 28 days. Real cycles are less tidy. In an analysis of more than 600,000 cycles, the average was 29.3 days, and only 13% of cycles were exactly 28 days long. Normal is a range, not a number, and the range is wider than most people expect. Here is what the guidelines actually say, how much month-to-month variation is ordinary, and when a cycle length is worth a closer look.</p>
+                <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
+        <h2>Where the 28-day cycle idea comes from</h2>
+<p>The 28-day figure is an average that hardened into a rule. The U.S. Office on Women&#x27;s Health calls 28 days typical and adds, in the same breath, that each woman is different and that cycle length can change from month to month. The average was never meant to be a pass-fail line.</p>
+<p>Measured data makes the point clearly. An analysis of 612,613 cycles from 124,648 app users, published in npj Digital Medicine, found a mean cycle length of 29.3 days. Only 13% of those cycles were exactly 28 days long. This is also why MiniCycle starts new users from a 29-day default rather than 28 when there is not enough history to estimate from.</p>
+<h2>What do the guidelines count as normal?</h2>
+<p>A cycle is counted from the first day of one period to the first day of the next. By that count, the Office on Women&#x27;s Health treats periods as regular when they arrive every 24 to 38 days. Mayo Clinic describes typical menstrual bleeding as coming every 21 to 35 days and lasting 2 to 7 days.</p>
+<p>The two ranges do not match exactly, and that mismatch is informative. There is no single day where normal ends. Both organizations draw a wide band, and a 26-day cycle and a 35-day cycle can each be perfectly usual for the person having them.</p>
+<h2>How much variation between cycles is normal?</h2>
+<p>Some variation is the rule, not the exception. The Office on Women&#x27;s Health notes that cycle length can differ from month to month, and Mayo Clinic puts it plainly: within a broad range, typical is what is typical for you. A cycle that moves by a few days is behaving like most cycles do.</p>
+<p>Most of that movement happens before ovulation. Stress, illness, or travel can delay ovulation by a few days, and the cycle stretches by the same amount. One long month is ordinary variation. A change in the same direction that holds across several cycles is the more useful signal to watch.</p>
+<h2>Cycle length changes with age</h2>
+<p>The normal range also shifts across a life. For the first few years after a first period, cycles longer than 38 days are common, and most settle into a regular rhythm within about three years. Through the 20s and 30s, cycles usually run regular in the 24 to 38 day band. In the 40s, as perimenopause approaches, they often become irregular again.</p>
+<p>In between, there is a slow drift. The same large analysis found that mean cycle length decreases by about 0.18 days per year of age between 25 and 45. A cycle that is a touch shorter than it was five years ago is not necessarily a change that needs explaining.</p>
+<h2>How to find your own typical length</h2>
+<p>The method is short: write down the day each period starts for a few months, then count the days from one start to the next. Mayo Clinic recommends tracking the start date for several months in a row to see the pattern. Your typical length is whatever that record shows, not what a textbook assumes.</p>
+<p>MiniCycle does the arithmetic for you. It looks at up to your latest 12 period records, and once there are at least 10 measured intervals it drops one shortest and one longest, then takes the median. A single odd month cannot drag that estimate far. Until enough records exist, the app works from its 29-day default.</p>
+<h2>When is a cycle length worth asking about?</h2>
+<p>Mayo Clinic&#x27;s list is a practical reference: periods that stop for more than 90 days when pregnancy is not the reason, cycles that turn irregular after years of regularity, cycles consistently shorter than 21 days or longer than 35, bleeding that lasts more than 7 days, bleeding between periods, or severe pain.</p>
+<p>None of these are diagnoses, and a calendar app cannot make one either. MiniCycle&#x27;s dates are reference information for planning, not medical advice, contraception, or a way to judge pregnancy. What the record can do is make the conversation faster: a few months of accurate start dates says more in a clinic than any description from memory.</p>
+<h2>Is a 26-day or a 33-day cycle normal?</h2>
+<p>Usually, yes. Both sit inside the guideline ranges. The better question is whether that length is usual for you. A cycle that has always run 33 days and still does is a different situation from a cycle that ran 26 days for years and recently stretched to 33, even though the numbers alone look similar.</p>
+<p>Contraception is part of the picture too. Mayo Clinic notes that some kinds of birth control, such as extended-cycle pills and IUDs, change the cycle and the bleeding pattern. If a change in length lines up with starting or switching a method, that context belongs in the comparison, and the prescriber is the right person to ask.</p>
+<h2>Frequently asked questions</h2>
+<p>Does MiniCycle assume a 28-day cycle? No. With too little history the app starts from a 29-day default, which sits closer to the measured average, and as start dates accumulate it switches to a median of your own recent intervals.</p>
+<p>My cycles are in the normal range, so why is the predicted date still off by a day or two? Because ordinary variation exists even in regular cycles. No calendar arithmetic can pin a biological process to the exact day. Log the real start when it comes, and the next round of estimates re-anchors on it.</p>
+<h2>Checking your own cycle length in MiniCycle</h2>
+<p>The statistics tab summarizes cycle length and period length from your recent records, showing up to 24 recent data points so old history does not blur the current picture. After a few months of consistent start dates, the number worth knowing is no longer the textbook average. It is your own typical length and how much it moves.</p>
+<p>The habit that makes all of this work is small: log the start on the day it happens. That is the input behind the estimates, the statistics, and the record a clinician can actually use.</p>
+                <div class="callout">
+                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="normal-menstrual-cycle-length-variation" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                </div>
+                <h2>References</h2>
+                <ul class="references">
+        <li><a href="https://womenshealth.gov/menstrual-cycle/your-menstrual-cycle">Office on Women&#x27;s Health. Your menstrual cycle.</a></li>
+<li><a href="https://www.mayoclinic.org/healthy-lifestyle/womens-health/in-depth/menstrual-cycle/art-20047186">Mayo Clinic. Menstrual cycle: What&#x27;s normal, what&#x27;s not.</a></li>
+<li><a href="https://www.nature.com/articles/s41746-019-0152-7">Bull JR, Rowland SP, Scherwitzl EB, et al. Real-world menstrual cycle characteristics of more than 600,000 menstrual cycles. npj Digital Medicine. 2019.</a></li>
+                </ul>
+              </article>
+            </main>
+          </body>
+        </html>
