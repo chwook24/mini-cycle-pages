@@ -1,0 +1,170 @@
+        <!doctype html>
+        <html lang="en">
+                <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>How to edit or fix a wrong period date in MiniCycle</title>
+          <meta name="description" content="Logged a period on the wrong day? Learn how to edit period dates in MiniCycle: move a start, adjust an end, delete a record, and what happens to predictions.">
+          <link rel="canonical" href="https://minicycle.net/blog/fix-wrong-period-date-in-minicycle/">
+            <link rel="alternate" hreflang="en" href="https://minicycle.net/blog/fix-wrong-period-date-in-minicycle/">
+    <link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/fix-wrong-period-date-in-minicycle/">
+    <link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/fix-wrong-period-date-in-minicycle/">
+          <link rel="alternate" type="application/rss+xml" title="MiniCycle Blog" href="https://minicycle.net/feed.xml">
+          <meta property="og:type" content="article">
+          <meta property="og:title" content="How to edit or fix a wrong period date in MiniCycle">
+          <meta property="og:description" content="Logged a period on the wrong day? Learn how to edit period dates in MiniCycle: move a start, adjust an end, delete a record, and what happens to predictions.">
+          <meta property="og:url" content="https://minicycle.net/blog/fix-wrong-period-date-in-minicycle/">
+          <meta property="og:image" content="https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg">
+          <meta name="twitter:card" content="summary_large_image">
+            <link rel="icon" href="../../favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+          <link rel="stylesheet" href="../../styles.css">
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
+  function trackBlogArticleEngagement() {
+    const article = document.querySelector('article.article[data-content-group]');
+    if (!article || typeof gtag !== 'function') return;
+
+    const progressThresholds = [50, 75, 90];
+    const sentProgress = new Set();
+    const minReadMs = Number(article.dataset.minReadMs || 30000);
+    let maxPercent = 0;
+    let readCompleteSent = false;
+    let activeMs = 0;
+    let lastTick = Date.now();
+    let wasActive = !document.hidden && document.hasFocus();
+
+    function recordActiveTime() {
+      const now = Date.now();
+      if (wasActive) activeMs += now - lastTick;
+      lastTick = now;
+      wasActive = !document.hidden && document.hasFocus();
+    }
+
+    function articlePercent() {
+      const articleTop = article.getBoundingClientRect().top + window.scrollY;
+      const articleHeight = Math.max(article.offsetHeight, 1);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      return Math.max(0, Math.min(100, Math.floor(((viewportBottom - articleTop) / articleHeight) * 100)));
+    }
+
+    function send(eventName, params) {
+      gtag('event', eventName, Object.assign({
+        language: article.dataset.language,
+        content_group: article.dataset.contentGroup,
+        article_path: window.location.pathname,
+        transport_type: 'beacon'
+      }, params));
+    }
+
+    function evaluate() {
+      recordActiveTime();
+      maxPercent = Math.max(maxPercent, articlePercent());
+
+      progressThresholds.forEach((threshold) => {
+        if (maxPercent >= threshold && !sentProgress.has(threshold)) {
+          sentProgress.add(threshold);
+          send('blog_article_progress', {
+            scroll_percent: threshold,
+            active_seconds: Math.round(activeMs / 1000)
+          });
+        }
+      });
+
+      if (!readCompleteSent && maxPercent >= 90 && activeMs >= minReadMs) {
+        readCompleteSent = true;
+        send('blog_article_read_complete', {
+          max_percent: maxPercent,
+          active_seconds: Math.round(activeMs / 1000),
+          min_read_seconds: Math.round(minReadMs / 1000)
+        });
+      }
+    }
+
+    window.addEventListener('scroll', evaluate, { passive: true });
+    window.addEventListener('resize', evaluate);
+    document.addEventListener('visibilitychange', evaluate);
+    window.addEventListener('pagehide', evaluate);
+    window.setInterval(evaluate, 5000);
+    evaluate();
+  }
+  window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
+</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"How to edit or fix a wrong period date in MiniCycle","description":"Logged a period on the wrong day? Learn how to edit period dates in MiniCycle: move a start, adjust an end, delete a record, and what happens to predictions.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-06-07","dateModified":"2026-06-07","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/fix-wrong-period-date-in-minicycle/"}}</script>
+        </head>
+          <body>
+        <header class="site-header">
+  <a class="brand" href="../../">MiniCycle</a>
+  <nav aria-label="Primary navigation">
+    <a href="../../blog/">Blog</a>
+    <a href="../../support/">Support</a>
+    <a href="../../privacy/">Privacy</a>
+    <a href="../../ko/blog/fix-wrong-period-date-in-minicycle/">한국어</a>
+  </nav>
+</header>
+            <main class="page">
+              <article class="article" data-language="en" data-content-group="fix-wrong-period-date-in-minicycle" data-min-read-ms="90000">
+                <p class="eyebrow">Recording</p>
+                <h1>How to edit or fix a wrong period date in MiniCycle</h1>
+                <p class="article-meta">Published June 7, 2026 by MiniCycle</p>
+                <p class="lead">A wrong tap happens. A period gets logged a day early, an end date never gets set, or a date from two months ago turns out to be off. In MiniCycle every prediction is built from the dates you saved, so a correction is worth two minutes of your time. The app has specific rules for replacing, adjusting, and deleting records. Here is how each one works.</p>
+                <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
+        <h2>Why a wrong date is worth fixing</h2>
+<p>MiniCycle estimates your cycle from saved period start dates, using up to the latest 12 records. Once there are at least 10 measured intervals, it drops one shortest and one longest and takes the median. With little history it starts from a 29-day default. A median resists a single odd value, so one wrong date deep in your history usually moves the cycle estimate only a little.</p>
+<p>The most recent start date is different. All future predictions anchor on it. The next period is placed one cycle length after it, ovulation is counted backward from that expected period using a 9–14 day luteal phase estimate, and the fertile window runs from 5 days before estimated ovulation through 1 day after it. If the last recorded start is off by two days, every predicted date is off by two days.</p>
+<h2>Moving a period start to the right day</h2>
+<p>Tap the correct day on the calendar and mark a period start. If the day you picked is within 7 days of an already recorded start, MiniCycle replaces that record instead of adding a second one. This is the correction path: log the day you meant, and the wrong entry goes away in the same step.</p>
+<p>The end date of the new record fills in automatically. A manual period length setting takes priority; otherwise the app estimates from your recent closed period records, with a 5-day default until there is enough data. If the automatic end does not match what happened, adjust it next.</p>
+<h2>Adjusting an end date</h2>
+<p>Tap the actual last day of the period and mark a period end. Two rules apply. The end cannot fall before the start, and a single record can span at most 14 days, counting the start day itself. Outside those bounds the app shows a short message instead of saving.</p>
+<p>You do not pick a record from a list; you pick a day. The end attaches to the record that contains that day, or to one whose start falls within the previous 14 days. If more than one record qualifies, the one with the most recent start date wins.</p>
+<h2>Deleting a record that should not exist</h2>
+<p>Sometimes the fix is removal: a day of spotting logged as a full period, a duplicate entry, or a test record from when you first tried the app. Select a day inside that period on the calendar, then press and hold the period start button. The app asks for confirmation before deleting the record.</p>
+<p>Settings also has a full data reset, which permanently deletes every period record and note. That is for starting over, not for fixing one date. For a single wrong record, the press-and-hold deletion is the right size of tool.</p>
+<h2>What happens after you fix a date</h2>
+<p>Estimates recalculate from the corrected records right away. The predicted period days, the ovulation estimate, and the fertile window all move to match, the home-screen widget follows the app&#x27;s saved state, and reminders are rebuilt around the new dates. There is nothing to refresh by hand.</p>
+<p>There is also no sync conflict to think about by default, because records are stored on your device. If you turned on iCloud Sync, the corrected records are what gets stored. Either way, the record to keep is the one that matches what actually happened, not what the app predicted.</p>
+<h2>What corrections can and cannot do</h2>
+<p>A correction makes your record match your body. It cannot make predictions exact. An analysis of more than 600,000 real-world cycles found that cycle length varies from month to month for most people, which is why MiniCycle keeps re-estimating from recent records instead of trusting any single month. Corrected data gives the estimate better inputs, not certainty.</p>
+<p>The dates on the calendar remain reference information for planning. They are not medical advice, contraception, or a way to confirm or rule out pregnancy. If the bleeding pattern itself is what concerns you, that is a conversation for a clinician, and an accurate record of dates is a useful thing to bring along.</p>
+<h2>Does fixing an old date change the predictions much?</h2>
+<p>Usually less than people expect. A start date moved by one day changes the interval before it and the interval after it by one day each, in opposite directions, and the median of your recent intervals often does not move at all. Once there are at least 10 measured intervals, the trimming of one shortest and one longest value absorbs outliers on top of that.</p>
+<p>The closer the wrong date is to today, the more the fix matters. The last saved start is the anchor for every predicted date, so correcting it has an immediate, visible effect on next month. Correcting a date from half a year ago mostly improves the statistics.</p>
+<h2>Frequently asked questions</h2>
+<p>Can I log a period that started weeks ago? Yes. Tap the past date on the calendar and mark the start. The replacement rule only applies when another recorded start sits within 7 days of the day you tap; otherwise the app simply adds the record.</p>
+<p>My period ran longer than 14 days and the app will not save the end date. MiniCycle caps a single record at 14 days, which already sits well above typical period lengths. Mayo Clinic lists bleeding for more than 8 days among the changes worth discussing with a clinician, so a span the app cannot record is a reasonable prompt for that conversation.</p>
+<p>Do I need to fix a predicted date that turned out wrong? No. Predictions are not records. Log the period on the day it actually starts, and the calendar re-anchors on the real date by itself.</p>
+<h2>A two-minute correction checklist</h2>
+<p>Find the wrong record on the calendar. If the start day is wrong, tap the right day and mark the start; within 7 days, the old record is replaced for you. If only the end is wrong, tap the real last day and mark the end. If the record should not exist at all, select a day inside it, press and hold the period start button, and confirm the deletion.</p>
+<p>Then glance at next month once. If the predicted dates look reasonable against your history, the fix landed, and the estimates take it from there. The habit that keeps corrections rare is the same one that keeps predictions useful: log the start on the day it happens.</p>
+                <div class="callout">
+                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="fix-wrong-period-date-in-minicycle" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                </div>
+                <h2>References</h2>
+                <ul class="references">
+        <li><a href="https://www.mayoclinic.org/healthy-lifestyle/womens-health/in-depth/menstrual-cycle/art-20047186">Mayo Clinic. Menstrual cycle: What&#x27;s normal, what&#x27;s not.</a></li>
+<li><a href="https://www.nature.com/articles/s41746-019-0152-7">Bull JR, Rowland SP, Scherwitzl EB, et al. Real-world menstrual cycle characteristics of more than 600,000 menstrual cycles. npj Digital Medicine. 2019.</a></li>
+<li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
+                </ul>
+              </article>
+            </main>
+          </body>
+        </html>
