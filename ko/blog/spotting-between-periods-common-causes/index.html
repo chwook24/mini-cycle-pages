@@ -1,0 +1,171 @@
+        <!doctype html>
+        <html lang="ko">
+                <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>생리 사이에 피가 비칠 때: 부정출혈의 흔한 원인</title>
+          <meta name="description" content="생리 사이에 비치는 부정출혈은 배란혈이나 피임약처럼 흔한 이유가 많습니다. 대개 괜찮은 경우와 병원에 가야 할 때, MiniCycle에 기록으로 남기는 방법을 정리했습니다.">
+          <link rel="canonical" href="https://minicycle.net/ko/blog/spotting-between-periods-common-causes/">
+            <link rel="alternate" hreflang="en" href="https://minicycle.net/blog/spotting-between-periods-common-causes/">
+    <link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/spotting-between-periods-common-causes/">
+    <link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/spotting-between-periods-common-causes/">
+          <link rel="alternate" type="application/rss+xml" title="MiniCycle Blog" href="https://minicycle.net/feed.xml">
+          <meta property="og:type" content="article">
+          <meta property="og:title" content="생리 사이에 피가 비칠 때: 부정출혈의 흔한 원인">
+          <meta property="og:description" content="생리 사이에 비치는 부정출혈은 배란혈이나 피임약처럼 흔한 이유가 많습니다. 대개 괜찮은 경우와 병원에 가야 할 때, MiniCycle에 기록으로 남기는 방법을 정리했습니다.">
+          <meta property="og:url" content="https://minicycle.net/ko/blog/spotting-between-periods-common-causes/">
+          <meta property="og:image" content="https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg">
+          <meta name="twitter:card" content="summary_large_image">
+            <link rel="icon" href="../../../favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../../../apple-touch-icon.png">
+          <link rel="stylesheet" href="../../../styles.css">
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
+  function trackBlogArticleEngagement() {
+    const article = document.querySelector('article.article[data-content-group]');
+    if (!article || typeof gtag !== 'function') return;
+
+    const progressThresholds = [50, 75, 90];
+    const sentProgress = new Set();
+    const minReadMs = Number(article.dataset.minReadMs || 30000);
+    let maxPercent = 0;
+    let readCompleteSent = false;
+    let activeMs = 0;
+    let lastTick = Date.now();
+    let wasActive = !document.hidden && document.hasFocus();
+
+    function recordActiveTime() {
+      const now = Date.now();
+      if (wasActive) activeMs += now - lastTick;
+      lastTick = now;
+      wasActive = !document.hidden && document.hasFocus();
+    }
+
+    function articlePercent() {
+      const articleTop = article.getBoundingClientRect().top + window.scrollY;
+      const articleHeight = Math.max(article.offsetHeight, 1);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      return Math.max(0, Math.min(100, Math.floor(((viewportBottom - articleTop) / articleHeight) * 100)));
+    }
+
+    function send(eventName, params) {
+      gtag('event', eventName, Object.assign({
+        language: article.dataset.language,
+        content_group: article.dataset.contentGroup,
+        article_path: window.location.pathname,
+        transport_type: 'beacon'
+      }, params));
+    }
+
+    function evaluate() {
+      recordActiveTime();
+      maxPercent = Math.max(maxPercent, articlePercent());
+
+      progressThresholds.forEach((threshold) => {
+        if (maxPercent >= threshold && !sentProgress.has(threshold)) {
+          sentProgress.add(threshold);
+          send('blog_article_progress', {
+            scroll_percent: threshold,
+            active_seconds: Math.round(activeMs / 1000)
+          });
+        }
+      });
+
+      if (!readCompleteSent && maxPercent >= 90 && activeMs >= minReadMs) {
+        readCompleteSent = true;
+        send('blog_article_read_complete', {
+          max_percent: maxPercent,
+          active_seconds: Math.round(activeMs / 1000),
+          min_read_seconds: Math.round(minReadMs / 1000)
+        });
+      }
+    }
+
+    window.addEventListener('scroll', evaluate, { passive: true });
+    window.addEventListener('resize', evaluate);
+    document.addEventListener('visibilitychange', evaluate);
+    window.addEventListener('pagehide', evaluate);
+    window.setInterval(evaluate, 5000);
+    evaluate();
+  }
+  window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
+</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"생리 사이에 피가 비칠 때: 부정출혈의 흔한 원인","description":"생리 사이에 비치는 부정출혈은 배란혈이나 피임약처럼 흔한 이유가 많습니다. 대개 괜찮은 경우와 병원에 가야 할 때, MiniCycle에 기록으로 남기는 방법을 정리했습니다.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg","datePublished":"2026-06-09","dateModified":"2026-06-09","inLanguage":"ko","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/ko/blog/spotting-between-periods-common-causes/"}}</script>
+        </head>
+          <body>
+        <header class="site-header">
+  <a class="brand" href="../../">MiniCycle</a>
+  <nav aria-label="Primary navigation">
+    <a href="../../blog/">블로그</a>
+    <a href="../../support/">지원</a>
+    <a href="../../privacy/">개인정보</a>
+    <a href="../../../blog/spotting-between-periods-common-causes/">English</a>
+  </nav>
+</header>
+            <main class="page">
+              <article class="article" data-language="ko" data-content-group="spotting-between-periods-common-causes" data-min-read-ms="90000">
+                <p class="eyebrow">주기 건강</p>
+                <h1>생리 사이에 피가 비칠 때: 부정출혈의 흔한 원인</h1>
+                <p class="article-meta">2026년 6월 9일 MiniCycle 작성</p>
+                <p class="lead">생리가 끝난 지 한참 됐는데 속옷에 갈색 자국이 비칠 때가 있습니다. 양은 적고 하루 이틀이면 멎습니다. 생리 사이에 비치는 이런 출혈을 부정출혈이라고 하는데, 느껴지는 것만큼 위급한 경우는 많지 않습니다. 규칙적으로 생리하는 여성을 살핀 한 연구에서도 주기 중간에 출혈이 있었던 사람은 20명 중 1명이 채 안 됐습니다. 흔한 일은 아니지만 분명히 있는 일이라는 뜻입니다. 대개 어떤 의미인지, 언제 병원을 찾는 게 좋은지, 그리고 기록 앱에서 한 가지만은 하지 말아야 하는 이유를 정리했습니다.</p>
+                <img class="article-hero" src="../../../assets/home-capture-iphone17-1118-ko-20260518.jpg" alt="MiniCycle 아이폰 실제 캡처 화면: 생리 캘린더와 위젯 경험" width="552" height="1200" loading="eager">
+        <h2>부정출혈은 생리가 아닙니다</h2>
+<p>부정출혈은 생리 기간이 아닐 때 비치는 소량의 출혈입니다. 보통 몇 방울 정도이고, 빨갛기보다 갈색이나 분홍빛인 경우가 많으며, 패드가 필요할 만큼은 아닙니다. Mayo Clinic도 규칙적인 월경 기간 밖에서 나오는 출혈을 부정출혈로 설명하면서, 생리 사이에 소량의 피가 비치는 경우를 여기에 포함합니다. 참고로 규칙적인 생리는 보통 21–35일 간격으로 7일 이하 이어지고, 달마다 며칠씩 달라지는 정도는 정상입니다.</p>
+<p>이 구분은 기록할 때 특히 중요합니다. 생리는 새 주기를 여는 더 묵직한 출혈이고, 부정출혈은 주기의 시작이 아닙니다. 부정출혈이 있던 날을 생리 시작으로 찍으면 앱은 새 주기가 시작됐다고 받아들이고, 일어나지 않은 일에 맞춰 주기 길이 추정이 흔들립니다. MiniCycle은 저장된 시작일로 이 추정을 만들기 때문에, 잘못 찍힌 시작일 하나가 가장 신경 써서 막아야 할 입력입니다.</p>
+<h2>생리 사이 출혈, 얼마나 흔한가요</h2>
+<p>검색 결과가 풍기는 인상보다는 드물고, 혼자만 겪는다고 느낄 만큼 희귀하지도 않습니다. BioCycle 연구는 규칙적으로 생리하는 여성 201명을 각각 두 주기씩 살폈는데, 주기 중간에 출혈이 있었던 사람은 4.8%였습니다. 규칙적인 주기의 대부분은 부정출혈이 없고, 겪는 사람은 분명히 있지만 소수라는 뜻입니다.</p>
+<p>이 숫자는 양쪽으로 새겨둘 만합니다. 한 번 비친 것만으로 몸에 문제가 있다는 신호는 아닙니다. 동시에 누구나 겪는 일도 아니라서, 자꾸 반복되는 출혈은 그냥 넘기기보다 눈여겨볼 만합니다.</p>
+<h2>대개 걱정하지 않아도 되는 이유들</h2>
+<p>가장 익숙한 건 배란혈입니다. 주기 중간, 배란 무렵에 잠깐 비치는 출혈로 그 시기의 호르몬 변화와 관련이 있습니다. 다만 배란 시점 자체가 사람마다 달마다 달라서, 늘 그 달의 한가운데 딱 맞춰 나타나는 건 아닙니다.</p>
+<p>호르몬 피임도 흔한 이유입니다. Mayo Clinic은 피임약을 막 시작한 사람을 출혈이 흔한 경우로 꼽습니다. 새로 시작하거나 종류를 바꾸거나 복용을 거른 날, 또는 호르몬 IUD나 이식형 피임을 쓸 때 비치는 출혈은 보통 몇 달 안에 가라앉습니다. 폐경이 가까운 시기도 같은 목록에 있습니다. 이 무렵에는 주기도 출혈도 들쭉날쭉해집니다. 임신 초기에도 소량 출혈이 있을 수 있으니, 임신 가능성이 있다면 추측보다 임신테스트가 더 분명한 답을 줍니다.</p>
+<h2>이럴 때는 병원에 가보세요</h2>
+<p>몇 가지 양상은 기다리기보다 상담할 거리입니다. ACOG는 임신이 아닌데 양, 간격, 횟수, 기간이 평소와 다른 출혈을 비정상 자궁출혈로 보고, 6개월 이상 이어지면 만성으로 분류합니다. Mayo Clinic은 더 짧게 잡아, 부정출혈이 몇 달 넘게 계속되면 원인을 살펴봐야 한다고 안내합니다.</p>
+<p>더 빨리 봐야 하는 경우도 있습니다. 임신 중이거나 폐경이 지난 뒤에는 출혈이 일반적이지 않으므로, 이때 비치는 피는 기록할 일이 아니라 바로 진료받을 일입니다. 성관계 후 출혈도 말해두는 게 좋습니다. ACOG는 분명한 응급도 짚습니다. 한 시간마다 패드나 탐폰을 두 시간 넘게 갈아야 하고 가슴 통증이나 호흡 곤란, 어지럼이 함께 온다면 즉시 응급 진료를 받아야 합니다. 이 목록은 진단이 아니라, 질문을 앱에서 사람에게로 옮길 기준입니다.</p>
+<h2>기록으로 남기는 법</h2>
+<p>MiniCycle에서 할 일은 단순합니다. 부정출혈이 있던 날을 생리 시작으로 찍지 말고, 그날 메모에 남기세요. 달력에 작은 회색 표시로 나타나는 그 메모입니다. 무엇을 봤는지, 양이 얼마나 적었는지, 색은 어땠는지 적어 둡니다. 몇 달 모이면 배란 무렵에 몰리는지, 새 약과 겹치는지, 별 규칙 없이 흩어지는지가 보입니다.</p>
+<p>이 기록은 진료실에 가져가기에도 가장 빠른 자료입니다. 날짜 목록과 짧은 메모는 기억에 의존한 설명보다 많은 것을 말해주고, 의사가 실제로 활용할 수 있는 종류의 정보입니다. MiniCycle은 이 메모를 기본적으로 기기 안에 저장하므로, 개인정보 처리방침에 적힌 대로 기록은 사용자 것으로 남습니다.</p>
+<h2>기록이 알려주지 않는 것</h2>
+<p>메모는 출혈이 있었다는 사실만 남깁니다. 왜 그런지는 말해주지 못합니다. 앱은 조직을 들여다보지도, 호르몬을 재지도, 배란혈을 다른 출혈과 구별하지도 못합니다. 그저 입력한 날짜를 담아둘 뿐입니다. 달력의 모든 표시는 계획에 참고하는 정보이지 의료 조언이나 피임, 진단, 임신 판단이 아닙니다.</p>
+<p>그래서 역할은 이렇게 나뉩니다. 기록은 흐릿한 기억을 또렷한 패턴으로 바꿔 줍니다. 임신 여부는 테스트가 가립니다. 신경 쓰이는 패턴은 의사가 설명해 줍니다. 오늘 내가 잘할 수 있는 몫은 그 기록을 남겨 두는 일입니다.</p>
+<h2>배란혈일까, 이른 생리일까</h2>
+<p>둘은 첫날 모습이 비슷한데 다루는 법은 반대라, 잠깐 구분해 둘 만합니다. 주기 중간에 몇 방울 비치다 하루 이틀 안에 멎으면 부정출혈이니 메모로 남깁니다. 점점 양이 늘어 패드가 필요할 만큼 되고 그 뒤 평소 간격쯤 지나 다음 생리가 온다면, 그건 이른 생리였을 가능성이 큽니다. 이때는 출혈이 묵직해진 첫날을 생리 시작으로 기록합니다.</p>
+<p>헷갈릴 때는 하루만 지켜보면 대개 답이 나옵니다. 부정출혈은 잦아들고 생리는 늘어납니다. 어느 쪽으로 흘러갔는지를 보고 기록하면 되지, 첫 방울만으로 정할 일이 아닙니다.</p>
+<h2>자주 묻는 질문</h2>
+<p>부정출혈도 생리로 기록하나요? 아닙니다. 메모로 남기세요. 생리 시작은 새 주기가 시작됐다는 신호라 중앙값 기반 주기 길이 추정을 움직이는데, 주기 시작이 아닌 부정출혈을 시작으로 찍으면 추정이 어긋납니다.</p>
+<p>부정출혈이 배란 신호인가요? 아닙니다. 규칙적으로 생리하는 여성 중 주기 중간 출혈이 있는 사람은 20명에 1명꼴이고 배란 시점도 주기마다 달라서, 없다고 배란을 안 한 것도 아니고 있다고 정확한 표지도 아닙니다.</p>
+<p>부정출혈이 임신 신호일 수 있나요? 임신 초기에 비칠 수 있지만 소량 출혈의 원인은 다양합니다. 임신 가능성이 있다면 달력을 읽는 것보다 임신테스트가 분명한 답을 줍니다.</p>
+<h2>한눈에 정리</h2>
+<p>메모로 남기고 생리 시작으로 찍지 않습니다. 한 번 비치고 저절로 멎으면 지켜보되 놀라지 않아도 됩니다. 새 피임약과 시기가 겹치면 몇 달은 흔한 일이니, 더 오래 가면 말합니다. 몇 달 넘게 이어지거나 성관계 후, 또는 임신 중이거나 폐경 후에 비치면 진료받을 거리입니다.</p>
+<p>어느 경우든 다음 걸음을 빠르게 만드는 건 기록입니다. 그 걸음이 아무것도 안 하는 것이든 진료 예약이든 마찬가지입니다. 날짜를 적고, 본 것을 메모하고, 패턴이 말하게 두세요.</p>
+                <div class="callout">
+                  <p>MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="ko" data-placement="blog_article_callout" data-content-group="spotting-between-periods-common-causes" onclick="trackAppStoreClick(this)">App Store에서 받기</a>
+                </div>
+                <h2>참고 자료</h2>
+                <ul class="references">
+        <li><a href="https://www.acog.org/womens-health/faqs/abnormal-uterine-bleeding">ACOG. Abnormal Uterine Bleeding.</a></li>
+<li><a href="https://www.mayoclinichealthsystem.org/hometown-health/speaking-of-health/dont-let-irregular-vaginal-bleeding-affect-your-quality-of-life">Mayo Clinic Health System. Don&#x27;t let irregular vaginal bleeding affect your quality of life.</a></li>
+<li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3299419/">Dasharathy SS, Mumford SL, Pollack AZ, et al. Menstrual bleeding patterns among regularly menstruating women. Am J Epidemiol. 2012.</a></li>
+<li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
+                </ul>
+              </article>
+            </main>
+          </body>
+        </html>
