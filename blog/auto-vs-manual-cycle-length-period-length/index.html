@@ -1,0 +1,170 @@
+        <!doctype html>
+        <html lang="en">
+                <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>Auto vs manual cycle and period length in MiniCycle</title>
+          <meta name="description" content="MiniCycle can estimate your cycle and period length, or let you set them by hand (21–42 and 1–10 days). When auto fits, when manual fits, and why the estimate uses a median.">
+          <link rel="canonical" href="https://minicycle.net/blog/auto-vs-manual-cycle-length-period-length/">
+            <link rel="alternate" hreflang="en" href="https://minicycle.net/blog/auto-vs-manual-cycle-length-period-length/">
+    <link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/auto-vs-manual-cycle-length-period-length/">
+    <link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/auto-vs-manual-cycle-length-period-length/">
+          <link rel="alternate" type="application/rss+xml" title="MiniCycle Blog" href="https://minicycle.net/feed.xml">
+          <meta property="og:type" content="article">
+          <meta property="og:title" content="Auto vs manual cycle and period length in MiniCycle">
+          <meta property="og:description" content="MiniCycle can estimate your cycle and period length, or let you set them by hand (21–42 and 1–10 days). When auto fits, when manual fits, and why the estimate uses a median.">
+          <meta property="og:url" content="https://minicycle.net/blog/auto-vs-manual-cycle-length-period-length/">
+          <meta property="og:image" content="https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg">
+          <meta name="twitter:card" content="summary_large_image">
+            <link rel="icon" href="../../favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+          <link rel="stylesheet" href="../../styles.css">
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
+  function trackBlogArticleEngagement() {
+    const article = document.querySelector('article.article[data-content-group]');
+    if (!article || typeof gtag !== 'function') return;
+
+    const progressThresholds = [50, 75, 90];
+    const sentProgress = new Set();
+    const minReadMs = Number(article.dataset.minReadMs || 30000);
+    let maxPercent = 0;
+    let readCompleteSent = false;
+    let activeMs = 0;
+    let lastTick = Date.now();
+    let wasActive = !document.hidden && document.hasFocus();
+
+    function recordActiveTime() {
+      const now = Date.now();
+      if (wasActive) activeMs += now - lastTick;
+      lastTick = now;
+      wasActive = !document.hidden && document.hasFocus();
+    }
+
+    function articlePercent() {
+      const articleTop = article.getBoundingClientRect().top + window.scrollY;
+      const articleHeight = Math.max(article.offsetHeight, 1);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      return Math.max(0, Math.min(100, Math.floor(((viewportBottom - articleTop) / articleHeight) * 100)));
+    }
+
+    function send(eventName, params) {
+      gtag('event', eventName, Object.assign({
+        language: article.dataset.language,
+        content_group: article.dataset.contentGroup,
+        article_path: window.location.pathname,
+        transport_type: 'beacon'
+      }, params));
+    }
+
+    function evaluate() {
+      recordActiveTime();
+      maxPercent = Math.max(maxPercent, articlePercent());
+
+      progressThresholds.forEach((threshold) => {
+        if (maxPercent >= threshold && !sentProgress.has(threshold)) {
+          sentProgress.add(threshold);
+          send('blog_article_progress', {
+            scroll_percent: threshold,
+            active_seconds: Math.round(activeMs / 1000)
+          });
+        }
+      });
+
+      if (!readCompleteSent && maxPercent >= 90 && activeMs >= minReadMs) {
+        readCompleteSent = true;
+        send('blog_article_read_complete', {
+          max_percent: maxPercent,
+          active_seconds: Math.round(activeMs / 1000),
+          min_read_seconds: Math.round(minReadMs / 1000)
+        });
+      }
+    }
+
+    window.addEventListener('scroll', evaluate, { passive: true });
+    window.addEventListener('resize', evaluate);
+    document.addEventListener('visibilitychange', evaluate);
+    window.addEventListener('pagehide', evaluate);
+    window.setInterval(evaluate, 5000);
+    evaluate();
+  }
+  window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
+</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Auto vs manual cycle and period length in MiniCycle","description":"MiniCycle can estimate your cycle and period length, or let you set them by hand (21–42 and 1–10 days). When auto fits, when manual fits, and why the estimate uses a median.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-06-10","dateModified":"2026-06-10","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/auto-vs-manual-cycle-length-period-length/"}}</script>
+        </head>
+          <body>
+        <header class="site-header">
+  <a class="brand" href="../../">MiniCycle</a>
+  <nav aria-label="Primary navigation">
+    <a href="../../blog/">Blog</a>
+    <a href="../../support/">Support</a>
+    <a href="../../privacy/">Privacy</a>
+    <a href="../../ko/blog/auto-vs-manual-cycle-length-period-length/">한국어</a>
+  </nav>
+</header>
+            <main class="page">
+              <article class="article" data-language="en" data-content-group="auto-vs-manual-cycle-length-period-length" data-min-read-ms="90000">
+                <p class="eyebrow">Settings</p>
+                <h1>Auto vs manual cycle and period length in MiniCycle</h1>
+                <p class="article-meta">Published June 10, 2026 by MiniCycle</p>
+                <p class="lead">Open MiniCycle&#x27;s settings and you will find two numbers you can leave alone or take over: cycle length and period length. Left alone, the app works them out from your records. Set them by hand and your value wins instead. The defaults are 29 days for a cycle and 5 days for a period, and most people never touch either. The question worth answering is when taking over actually helps, and when it quietly makes the predictions worse.</p>
+                <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
+        <h2>Two settings, and what they start at</h2>
+<p>Both settings live in Settings, and both offer the same choice: let MiniCycle estimate, or fix a value yourself. Cycle length is the gap from one period start to the next, and by hand you can set it anywhere from 21 to 42 days. Period length is how many days the bleeding lasts, with a manual range of 1 to 10 days.</p>
+<p>Left on automatic, the app fills in its own estimate and falls back to a default only when it has too little to go on. That default is 29 days for the cycle and 5 days for the period. The 29 is deliberate. The textbook figure is 28, but large real-world datasets put the typical cycle a little higher, so a fresh install starts closer to what the data shows than to the number on the poster.</p>
+<h2>How does the automatic estimate work?</h2>
+<p>The cycle estimate reads your saved period start dates, up to the latest 12. It measures the gap between each pair of consecutive starts, then takes a median rather than a plain average. A median is the middle value, so one unusual month moves it far less than it would move a mean.</p>
+<p>There is one more step once history builds up. When at least 10 measured intervals exist, the app drops the single shortest and the single longest before taking the median. A cycle thrown off by illness, travel, or a missed log stops dragging the estimate around. Period length runs on the same idea: it reads your recent closed period ranges and estimates a typical length, using 5 days only when there is not enough to measure.</p>
+<h2>When automatic is the right setting</h2>
+<p>For most people, leave both on automatic. If your cycles land in a familiar range and you log starts as they happen, the estimate keeps pace with your real pattern better than a number you picked once and forgot. It updates quietly as the months accumulate.</p>
+<p>This is also the honest answer to a common assumption: that setting the numbers by hand is somehow more accurate. It usually is not. A manual value is frozen. The automatic estimate is built from your last dozen cycles and trims its own outliers, so for a body whose rhythm shifts even a little, the moving estimate tends to track reality more closely than a fixed guess.</p>
+<h2>When setting it by hand makes sense</h2>
+<p>A few situations are the exception. If you have just installed the app and have no history yet but already know your cycle runs, say, 31 days, entering that beats waiting for the default 29 to be corrected. If a clinician has given you a specific figure, use it.</p>
+<p>Manual also helps when the automatic estimate is being misled. After a recent change such as a new birth control method or the months following a pregnancy, your last dozen cycles may not describe the next one, and a hand-set value you trust stays steadier until fresh records build up. Period length is the same. If yours is reliably 3 days, setting it spares you waiting for the estimate to settle and keeps one unusually long-recorded period from stretching the prediction.</p>
+<h2>What the number changes, and what it leaves alone</h2>
+<p>Whichever way you set it, the cycle length feeds the forward predictions. Your next expected period is counted from your most recent start using that length. Ovulation is then counted backward from that predicted period using a luteal phase of 9 to 14 days, scaled to your cycle rather than fixed at 14. The fertile window is drawn from 5 days before the estimated ovulation through the day after. Change the cycle length and all of those shift together.</p>
+<p>What it does not touch is anything you actually recorded. A period you logged stays on its dates. Period length only shapes how far a new period start is filled in and how the estimate reads your history. It never edits a range you have already closed by hand.</p>
+<h2>What neither setting can promise</h2>
+<p>Both numbers produce estimates, and an estimate is not a measurement. ACOG describes a normal adult cycle as roughly 21 to 45 days with an average near 28, and a normal period as about 2 to 7 days, wider than any single setting suggests. Your own number can sit anywhere in that span and still be ordinary, and it can drift from month to month.</p>
+<p>So treat the prediction as reference for planning, not as medical advice, contraception, or a way to judge pregnancy. If your cycles run shorter than 21 days or longer than 45, or turn suddenly irregular, that is a conversation for a clinician rather than a setting to adjust. MiniCycle keeps your records on your device by default, as the privacy policy describes, so the number you choose stays yours to change.</p>
+<h2>Choosing in one minute</h2>
+<p>Default to automatic. Leave both settings alone unless you have a specific reason to override, and let a few months of logged starts do the work. The estimate trims its own outliers, so it handles the occasional odd cycle without help.</p>
+<p>Reach for manual in three cases: you are brand new with no history but know your usual length, a clinician gave you a number, or a recent change has made your recent cycles a poor guide to the next one. Outside those, a hand-set value tends to age worse than the moving estimate.</p>
+<h2>Frequently asked questions</h2>
+<p>Does setting cycle length by hand make predictions more accurate? Not usually. A manual value stays fixed, while the automatic estimate updates from your latest cycles and drops the shortest and longest once at least 10 intervals exist. For most people the moving estimate tracks reality better than a number set once.</p>
+<p>What can I set, and what are the defaults? Cycle length is 21 to 42 days by hand, period length 1 to 10. Left on automatic with too little history, the app uses 29 days for the cycle and 5 for the period.</p>
+<p>If I change cycle length, do my recorded periods move? No. Recorded dates stay put. The cycle length only changes the forward estimates: the next expected period, the ovulation day, and the fertile window.</p>
+<h2>The one-line version</h2>
+<p>Automatic for almost everyone, manual for the few cases where you know something the last twelve cycles do not. The defaults, 29 days and 5 days, are starting points, not targets to match.</p>
+<p>The habit that makes either setting work is the same one everything in the app runs on: log the period start on the day it happens.</p>
+                <div class="callout">
+                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="auto-vs-manual-cycle-length-period-length" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                </div>
+                <h2>References</h2>
+                <ul class="references">
+        <li><a href="https://www.acog.org/womens-health/faqs/your-first-period">ACOG. Your First Period.</a></li>
+<li><a href="https://www.nature.com/articles/s41746-019-0152-7">Bull JR, Rowland SP, Scherwitzl EB, et al. Real-world menstrual cycle characteristics of more than 600,000 menstrual cycles. npj Digital Medicine. 2019.</a></li>
+<li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
+                </ul>
+              </article>
+            </main>
+          </body>
+        </html>
