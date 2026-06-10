@@ -1,0 +1,170 @@
+        <!doctype html>
+        <html lang="en">
+                <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>What counts as an irregular period, and when to see a doctor</title>
+          <meta name="description" content="Irregular periods usually have ordinary causes, but some patterns deserve a clinician. What counts as irregular, when to see a doctor, and how tracking actually helps.">
+          <link rel="canonical" href="https://minicycle.net/blog/irregular-periods-what-counts-when-to-see-doctor/">
+            <link rel="alternate" hreflang="en" href="https://minicycle.net/blog/irregular-periods-what-counts-when-to-see-doctor/">
+    <link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/irregular-periods-what-counts-when-to-see-doctor/">
+    <link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/irregular-periods-what-counts-when-to-see-doctor/">
+          <link rel="alternate" type="application/rss+xml" title="MiniCycle Blog" href="https://minicycle.net/feed.xml">
+          <meta property="og:type" content="article">
+          <meta property="og:title" content="What counts as an irregular period, and when to see a doctor">
+          <meta property="og:description" content="Irregular periods usually have ordinary causes, but some patterns deserve a clinician. What counts as irregular, when to see a doctor, and how tracking actually helps.">
+          <meta property="og:url" content="https://minicycle.net/blog/irregular-periods-what-counts-when-to-see-doctor/">
+          <meta property="og:image" content="https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg">
+          <meta name="twitter:card" content="summary_large_image">
+            <link rel="icon" href="../../favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+          <link rel="stylesheet" href="../../styles.css">
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
+  function trackBlogArticleEngagement() {
+    const article = document.querySelector('article.article[data-content-group]');
+    if (!article || typeof gtag !== 'function') return;
+
+    const progressThresholds = [50, 75, 90];
+    const sentProgress = new Set();
+    const minReadMs = Number(article.dataset.minReadMs || 30000);
+    let maxPercent = 0;
+    let readCompleteSent = false;
+    let activeMs = 0;
+    let lastTick = Date.now();
+    let wasActive = !document.hidden && document.hasFocus();
+
+    function recordActiveTime() {
+      const now = Date.now();
+      if (wasActive) activeMs += now - lastTick;
+      lastTick = now;
+      wasActive = !document.hidden && document.hasFocus();
+    }
+
+    function articlePercent() {
+      const articleTop = article.getBoundingClientRect().top + window.scrollY;
+      const articleHeight = Math.max(article.offsetHeight, 1);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      return Math.max(0, Math.min(100, Math.floor(((viewportBottom - articleTop) / articleHeight) * 100)));
+    }
+
+    function send(eventName, params) {
+      gtag('event', eventName, Object.assign({
+        language: article.dataset.language,
+        content_group: article.dataset.contentGroup,
+        article_path: window.location.pathname,
+        transport_type: 'beacon'
+      }, params));
+    }
+
+    function evaluate() {
+      recordActiveTime();
+      maxPercent = Math.max(maxPercent, articlePercent());
+
+      progressThresholds.forEach((threshold) => {
+        if (maxPercent >= threshold && !sentProgress.has(threshold)) {
+          sentProgress.add(threshold);
+          send('blog_article_progress', {
+            scroll_percent: threshold,
+            active_seconds: Math.round(activeMs / 1000)
+          });
+        }
+      });
+
+      if (!readCompleteSent && maxPercent >= 90 && activeMs >= minReadMs) {
+        readCompleteSent = true;
+        send('blog_article_read_complete', {
+          max_percent: maxPercent,
+          active_seconds: Math.round(activeMs / 1000),
+          min_read_seconds: Math.round(minReadMs / 1000)
+        });
+      }
+    }
+
+    window.addEventListener('scroll', evaluate, { passive: true });
+    window.addEventListener('resize', evaluate);
+    document.addEventListener('visibilitychange', evaluate);
+    window.addEventListener('pagehide', evaluate);
+    window.setInterval(evaluate, 5000);
+    evaluate();
+  }
+  window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
+</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"What counts as an irregular period, and when to see a doctor","description":"Irregular periods usually have ordinary causes, but some patterns deserve a clinician. What counts as irregular, when to see a doctor, and how tracking actually helps.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-06-10","dateModified":"2026-06-10","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/irregular-periods-what-counts-when-to-see-doctor/"}}</script>
+        </head>
+          <body>
+        <header class="site-header">
+  <a class="brand" href="../../">MiniCycle</a>
+  <nav aria-label="Primary navigation">
+    <a href="../../blog/">Blog</a>
+    <a href="../../support/">Support</a>
+    <a href="../../privacy/">Privacy</a>
+    <a href="../../ko/blog/irregular-periods-what-counts-when-to-see-doctor/">한국어</a>
+  </nav>
+</header>
+            <main class="page">
+              <article class="article" data-language="en" data-content-group="irregular-periods-what-counts-when-to-see-doctor" data-min-read-ms="90000">
+                <p class="eyebrow">Cycle health</p>
+                <h1>What counts as an irregular period, and when to see a doctor</h1>
+                <p class="article-meta">Published June 10, 2026 by MiniCycle</p>
+                <p class="lead">Three cycles in a row: 26 days, then 41, then 28. Is that irregular, or normal variation? It is a common question to open a cycle app with, and it has a more precise answer than most people expect. Irregular is not just a feeling. Clinicians define it with numbers, and one of those three cycles crosses the line. Most uneven stretches have an ordinary cause and settle on their own. A few patterns are worth a clinician&#x27;s time. Telling them apart starts with knowing where the line actually is.</p>
+                <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
+        <h2>What &#x27;regular&#x27; actually means</h2>
+<p>Start with the measurement, because it is easy to get wrong. A cycle is counted from the first day of one period to the first day of the next, not from the day bleeding stops. Mayo Clinic puts the typical range at 21 to 35 days, with bleeding that lasts 2 to 7 days. The textbook number everyone remembers, 28 days, sits inside that range rather than defining it.</p>
+<p>Regular does not mean identical. Mayo&#x27;s own framing is that a period can be light or heavy, long or short, and still be typical, and that within a broad range, typical is what is typical for you. A cycle that runs 27 days one month and 30 the next is not irregular. It is a cycle. The real question is how far the month-to-month drift can go before it counts as something.</p>
+<h2>So what counts as irregular?</h2>
+<p>Here the definitions get specific. The U.S. Office on Women&#x27;s Health calls periods irregular when the cycle runs shorter than 24 days or longer than 38 days, measured start to start. It adds a second test that catches the cycles a single number misses: variation of more than 20 days from one month to the next. Its example is a cycle jumping from 25 days to 46 and back to 25.</p>
+<p>One thing worth being honest about: the exact cutoffs differ between sources. Mayo Clinic draws its typical band a little differently, at 21 to 35 days, so it flags cycles shorter than 21 or longer than 35. The two ranges do not line up perfectly, and that is the honest state of it. The shared point underneath is sturdier than the disagreement. A cycle holding roughly steady inside the mid-20s to upper-30s is regular. One that sits well outside it, or swings by weeks from month to month, is the kind of irregular worth noticing.</p>
+<h2>When irregular is expected</h2>
+<p>Two stretches of life come with uneven cycles built in, and neither is a problem to solve. In the first few years after periods begin, long and irregular cycles are common; Mayo notes they tend to shorten and settle with age. The Office on Women&#x27;s Health says the same for the other end. During perimenopause, the years approaching menopause, cycles drift and turn less predictable again.</p>
+<p>Menopause carries one caveat worth stating plainly. Once periods have stopped for good, bleeding is not expected, and any bleeding after menopause is a reason to call a clinician rather than log and wait. The risk of uterine cancer rises with age, which is why that particular pattern gets handled differently from a teenager&#x27;s uneven first year.</p>
+<h2>Common reasons cycles turn irregular</h2>
+<p>Between those life stages, a long list of ordinary things can nudge a cycle off its usual length. Stress is a documented one. So are large weight changes, an eating disorder, or a sharp jump in hard exercise. Thyroid problems, high prolactin, uncontrolled diabetes, and some medications for conditions like epilepsy or anxiety can all show up as irregular bleeding. None of these is a self-diagnosis from a calendar. They are reasons a clinician might investigate.</p>
+<p>Polycystic ovary syndrome deserves a specific mention because it is common: the Office on Women&#x27;s Health notes that about 1 in 10 women with irregular cycles has PCOS. Pregnancy and breastfeeding belong on the list too, since both pause or shift periods. The takeaway is not to match yourself to a cause. It is that &#x27;irregular&#x27; is a symptom with many possible explanations, which is exactly why a pattern, not a single odd month, is what a clinician wants to see.</p>
+<h2>When is it worth a doctor&#x27;s time?</h2>
+<p>A handful of patterns move the question from an app to a person. The Office on Women&#x27;s Health lists two plainly: cycles that turn irregular after having been regular, and cycles that come more often than every 24 days or less often than every 38. Mayo adds the ones around bleeding itself, including periods that stop for more than 90 days when you are not pregnant, bleeding that lasts longer than seven days, bleeding heavier than usual, bleeding between periods, and severe pain.</p>
+<p>A few signals call for prompter attention than a tracked note. Soaking through a pad or tampon every hour or two, or feeling dizzy, short of breath, or chest pain during or after a period, can point to heavy blood loss and anemia. Bleeding after sex, or any bleeding after menopause, is worth a call on its own. None of these is a diagnosis. Each is a line that, once crossed, is better answered by an exam than by a calendar.</p>
+<h2>What tracking can and cannot do</h2>
+<p>This is where a record earns its place. A clinician evaluating irregular cycles wants dates: when periods started, how long they lasted, how much they varied. A list beats a memory every time, and it is the first thing most visits ask for. MiniCycle&#x27;s statistics tab summarizes your recent cycle length and period length from up to 24 recent records, which turns a vague sense that things have been all over the place into an actual range.</p>
+<p>What the app cannot do is judge what the pattern means. Its predictions assume a reasonably steady cycle, so for genuinely irregular ones they get looser, and they are reference information for planning, never medical advice, contraception, or a diagnosis. MiniCycle keeps these records on your device by default, as the privacy policy describes. The honest division holds: the app keeps the record clear, and a clinician reads what it means.</p>
+<h2>A quick read on your own cycle</h2>
+<p>If you want a single check, line up your last several start dates and look at two things: the shortest-to-longest spread, and whether any single cycle fell under 24 days or over 38. A spread within a couple of weeks that stays inside that band is regular, even if no two months match. A spread of more than 20 days, or cycles outside the band, is the pattern worth tracking and, if it persists, mentioning.</p>
+<p>One uneven month is not a verdict. Stress, a bad cold, travel, or a rough stretch of sleep can move a single cycle, and the next one returns to form. It is the repeating pattern, not the one-off, that earns a clinician&#x27;s attention.</p>
+<h2>Frequently asked questions</h2>
+<p>Is an irregular period the same as a late one? Not quite. A late period is one cycle running long; irregular describes the pattern across several cycles. A single late month with an obvious cause is usually nothing, while cycles that keep varying by more than 20 days are the definition of irregular.</p>
+<p>Can stress alone make my periods irregular? Yes. High, sustained stress is a recognized cause, and the Office on Women&#x27;s Health lists it among the reasons cycles turn irregular. Managing the stress often lets the pattern settle, though a stretch that does not is worth a clinician&#x27;s look.</p>
+<p>Will tracking make my cycles more regular? No. Tracking does not change your body; it changes what you can see. Its value is turning a vague sense of chaos into specific dates and a real range, which is what makes the next conversation, with a clinician or with yourself, a useful one.</p>
+<h2>The one-line version</h2>
+<p>Regular means roughly steady and inside the mid-20s to upper-30s in days, not identical month to month. Irregular means cycles under 24 or over 38 days, or swinging by more than 20 days, and it is worth a clinician when it is new, persistent, or paired with heavy or painful bleeding.</p>
+<p>Either way, the move is the same: log each start on the day it happens, so the pattern is there to read when you need it.</p>
+                <div class="callout">
+                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="irregular-periods-what-counts-when-to-see-doctor" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                </div>
+                <h2>References</h2>
+                <ul class="references">
+        <li><a href="https://www.mayoclinic.org/healthy-lifestyle/womens-health/in-depth/menstrual-cycle/art-20047186">Mayo Clinic. Menstrual cycle: What&#x27;s normal, what&#x27;s not.</a></li>
+<li><a href="https://www.womenshealth.gov/menstrual-cycle/period-problems">Office on Women&#x27;s Health, U.S. Department of Health and Human Services. Period problems.</a></li>
+<li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
+                </ul>
+              </article>
+            </main>
+          </body>
+        </html>
