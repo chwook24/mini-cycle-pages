@@ -1,0 +1,170 @@
+        <!doctype html>
+        <html lang="ko">
+                <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>성생활 기록, 생리 앱에 남겨도 될까요? Face ID 숨기기</title>
+          <meta name="description" content="MiniCycle은 성생활을 달력의 보라색 점으로 기록합니다. 스위치 하나로 모든 표시를 숨기고, 다시 보려면 Face ID가 필요합니다. 숨기기가 하는 일과 못 하는 일, 미리 알아 둘 한계를 정리했습니다.">
+          <link rel="canonical" href="https://minicycle.net/ko/blog/hide-sexual-activity-period-tracker-face-id/">
+            <link rel="alternate" hreflang="en" href="https://minicycle.net/blog/hide-sexual-activity-period-tracker-face-id/">
+    <link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/hide-sexual-activity-period-tracker-face-id/">
+    <link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/hide-sexual-activity-period-tracker-face-id/">
+          <link rel="alternate" type="application/rss+xml" title="MiniCycle Blog" href="https://minicycle.net/feed.xml">
+          <meta property="og:type" content="article">
+          <meta property="og:title" content="성생활 기록, 생리 앱에 남겨도 될까요? Face ID 숨기기">
+          <meta property="og:description" content="MiniCycle은 성생활을 달력의 보라색 점으로 기록합니다. 스위치 하나로 모든 표시를 숨기고, 다시 보려면 Face ID가 필요합니다. 숨기기가 하는 일과 못 하는 일, 미리 알아 둘 한계를 정리했습니다.">
+          <meta property="og:url" content="https://minicycle.net/ko/blog/hide-sexual-activity-period-tracker-face-id/">
+          <meta property="og:image" content="https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg">
+          <meta name="twitter:card" content="summary_large_image">
+            <link rel="icon" href="../../../favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../../../apple-touch-icon.png">
+          <link rel="stylesheet" href="../../../styles.css">
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
+  function trackBlogArticleEngagement() {
+    const article = document.querySelector('article.article[data-content-group]');
+    if (!article || typeof gtag !== 'function') return;
+
+    const progressThresholds = [50, 75, 90];
+    const sentProgress = new Set();
+    const minReadMs = Number(article.dataset.minReadMs || 30000);
+    let maxPercent = 0;
+    let readCompleteSent = false;
+    let activeMs = 0;
+    let lastTick = Date.now();
+    let wasActive = !document.hidden && document.hasFocus();
+
+    function recordActiveTime() {
+      const now = Date.now();
+      if (wasActive) activeMs += now - lastTick;
+      lastTick = now;
+      wasActive = !document.hidden && document.hasFocus();
+    }
+
+    function articlePercent() {
+      const articleTop = article.getBoundingClientRect().top + window.scrollY;
+      const articleHeight = Math.max(article.offsetHeight, 1);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      return Math.max(0, Math.min(100, Math.floor(((viewportBottom - articleTop) / articleHeight) * 100)));
+    }
+
+    function send(eventName, params) {
+      gtag('event', eventName, Object.assign({
+        language: article.dataset.language,
+        content_group: article.dataset.contentGroup,
+        article_path: window.location.pathname,
+        transport_type: 'beacon'
+      }, params));
+    }
+
+    function evaluate() {
+      recordActiveTime();
+      maxPercent = Math.max(maxPercent, articlePercent());
+
+      progressThresholds.forEach((threshold) => {
+        if (maxPercent >= threshold && !sentProgress.has(threshold)) {
+          sentProgress.add(threshold);
+          send('blog_article_progress', {
+            scroll_percent: threshold,
+            active_seconds: Math.round(activeMs / 1000)
+          });
+        }
+      });
+
+      if (!readCompleteSent && maxPercent >= 90 && activeMs >= minReadMs) {
+        readCompleteSent = true;
+        send('blog_article_read_complete', {
+          max_percent: maxPercent,
+          active_seconds: Math.round(activeMs / 1000),
+          min_read_seconds: Math.round(minReadMs / 1000)
+        });
+      }
+    }
+
+    window.addEventListener('scroll', evaluate, { passive: true });
+    window.addEventListener('resize', evaluate);
+    document.addEventListener('visibilitychange', evaluate);
+    window.addEventListener('pagehide', evaluate);
+    window.setInterval(evaluate, 5000);
+    evaluate();
+  }
+  window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
+</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"성생활 기록, 생리 앱에 남겨도 될까요? Face ID 숨기기","description":"MiniCycle은 성생활을 달력의 보라색 점으로 기록합니다. 스위치 하나로 모든 표시를 숨기고, 다시 보려면 Face ID가 필요합니다. 숨기기가 하는 일과 못 하는 일, 미리 알아 둘 한계를 정리했습니다.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg","datePublished":"2026-06-11","dateModified":"2026-06-11","inLanguage":"ko","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/ko/blog/hide-sexual-activity-period-tracker-face-id/"}}</script>
+        </head>
+          <body>
+        <header class="site-header">
+  <a class="brand" href="../../">MiniCycle</a>
+  <nav aria-label="Primary navigation">
+    <a href="../../blog/">블로그</a>
+    <a href="../../support/">지원</a>
+    <a href="../../privacy/">개인정보</a>
+    <a href="../../../blog/hide-sexual-activity-period-tracker-face-id/">English</a>
+  </nav>
+</header>
+            <main class="page">
+              <article class="article" data-language="ko" data-content-group="hide-sexual-activity-period-tracker-face-id" data-min-read-ms="86000">
+                <p class="eyebrow">개인정보</p>
+                <h1>성생활 기록, 생리 앱에 남겨도 될까요? Face ID 숨기기</h1>
+                <p class="article-meta">2026년 6월 11일 MiniCycle 작성</p>
+                <p class="lead">사진 한 장 보여주려고 휴대폰을 건넸는데 화면에 생리 달력이 떠 있던 적, 한 번쯤 있을 겁니다. 달력에 성생활 기록까지 있다면 마음이 조금 더 복잡해집니다. MiniCycle은 이 문제를 두 방향으로 나눠 풀었습니다. 숨기는 건 스위치 하나로 즉시 되고, 다시 보는 건 Face ID를 통과해야 합니다. 이 비대칭이 설계의 핵심입니다.</p>
+                <img class="article-hero" src="../../../assets/home-capture-iphone17-1118-ko-20260518.jpg" alt="MiniCycle 아이폰 실제 캡처 화면: 생리 캘린더와 위젯 경험" width="552" height="1200" loading="eager">
+        <h2>하루에 점 하나, 기록은 이렇게 남습니다</h2>
+<p>기록 방법은 일부러 단순하게 두었습니다. 달력에서 날짜를 누르면 아래 패널에 하트 모양의 성생활 버튼이 나타납니다. 한 번 누르면 그 날짜 아래에 작은 보라색 점이 생기고, 다시 누르면 사라집니다. 일기장도 상세 입력란도 없습니다. 하루에 표시 하나, 켜거나 끄거나입니다.</p>
+<p>이 점이 달력에 있는 이유는 맥락입니다. 생리 날짜, 예상 가임기와 같은 화면에서 성생활 기록을 함께 보면, 임신을 준비하든 피하든 계획에 참고할 정보가 한눈에 모입니다. 범례에는 분홍색 생리, 하늘색 가임기 옆에 보라색으로 올라갑니다.</p>
+<h2>스위치 하나로 흔적 없이 사라집니다</h2>
+<p>설정에서 성생활 숨기기를 켜면 효과는 즉시, 그리고 전부입니다. 달력의 보라색 점이 모두 사라지고, 범례에서 항목이 빠지고, 날짜 패널의 기록 버튼 자체가 없어집니다. 다른 사람이 몇 달치를 넘겨 봐도 이 기능이 있다는 사실조차 알기 어렵습니다.</p>
+<p>숨길 때는 인증을 묻지 않습니다. 일부러 그렇게 만들었습니다. 지금 당장 가려야 하는 순간에 상대 앞에서 얼굴 인식을 하고 있을 수는 없기 때문입니다. 휴대폰을 건네기 전 2초면 충분합니다.</p>
+<h2>다시 볼 때만 Face ID를 묻는 이유</h2>
+<p>민감한 방향은 숨기는 쪽이 아니라 푸는 쪽입니다. 내 휴대폰에서 그 스위치를 풀어 볼 사람은 대개 내가 아니니까요. 그래서 MiniCycle은 해제할 때 iPhone에 얼굴 확인을 요청합니다. Apple은 다른 사람의 얼굴로 Face ID가 우연히 풀릴 확률을 100만분의 1 미만으로 안내합니다.</p>
+<p>앱이 얼굴을 보는 건 아닙니다. Apple 문서가 분명히 밝히는 부분입니다. Face ID 데이터는 암호화되어 기기의 Secure Enclave에만 머물고 어디로도 전송되지 않으며, 앱에는 인증의 성공 여부만 전달됩니다. MiniCycle이 받는 건 &#x27;예&#x27; 또는 &#x27;아니오&#x27; 하나입니다. 인증에 실패하면 기록은 그대로 숨겨져 있습니다.</p>
+<h2>숨기기는 삭제가 아닙니다</h2>
+<p>걱정부터 풀고 가겠습니다. 이 스위치는 아무것도 지우지 않습니다. 기록은 기기 안에 그대로 있고, Face ID를 통과하면 모든 점이 원래 날짜로 돌아옵니다. 한 달을 숨겨 두었다 풀어도 빠지는 건 없습니다.</p>
+<p>반대도 사실입니다. 숨겨 둔 동안에는 기록 버튼도 함께 사라지므로 새로 남기거나 지울 수 없습니다. 기록을 정말 없애고 싶다면 그건 다른 동작입니다. 날짜를 누르고 하트 버튼을 꺼서 하루씩 지우거나, 설정의 데이터 초기화로 앱의 모든 기록을 한꺼번에 지울 수 있습니다. 초기화는 되돌릴 수 없습니다.</p>
+<h2>미리 알아 둘 한계</h2>
+<p>해제에는 Face ID만 받습니다. Touch ID도, 잠금 비밀번호도 대신할 수 없습니다. 그래서 홈 버튼이 있는 SE 계열처럼 Face ID가 없는 기기에서는 해제할 수 없다는 안내만 나옵니다. Face ID를 설정해 두지 않은 경우도 마찬가지입니다. 내 기기에서 Face ID가 안 된다면, 되돌릴 생각으로 숨기기를 켜지 않는 편이 안전합니다.</p>
+<p>이 기능이 막아 주는 범위도 분명히 해 두겠습니다. 열려 있는 달력을 향한 시선, 그러니까 빌려준 휴대폰이나 책상 위 화면 같은 노출을 막는 장치입니다. 기기 자체의 보안은 잠금 비밀번호의 몫입니다. 하나 더하자면, 홈 화면 위젯에는 성생활 기록이 애초에 표시되지 않습니다. 숨기기 설정과 무관하게, 가장 공개적인 화면은 처음부터 비워 두었습니다.</p>
+<h2>기록은 어디에 저장되나요</h2>
+<p>성생활 기록도 생리 기록이나 메모와 같은 방식으로 저장됩니다. 계정도 로그인도 없이 기본적으로 기기 안에 머물고, 자세한 내용은 개인정보 처리방침에 적혀 있습니다. 선택 기능인 iCloud 백업을 켠 경우에도 기록은 MiniCycle 서버가 아니라 본인의 iCloud 계정으로 갑니다.</p>
+<p>달력의 다른 표시처럼 이 기록도 계획에 참고하는 정보입니다. 옆에 보이는 가임기와 배란일 표시는 추정값이지 의료 조언이나 피임 수단, 임신 판단이 아닙니다. 숨기기 스위치가 바꾸는 건 화면에서 누가 볼 수 있느냐까지입니다. 기록이 누구 것인지는 바뀌지 않습니다. 사용자 것입니다.</p>
+<h2>휴대폰을 건네기 전에</h2>
+<p>현실의 노출은 대개 사소한 순간입니다. 날짜를 확인하는데 옆자리에서 화면을 같이 보게 될 때, 사진을 넘기던 친구가 다른 앱을 열었을 때, 가족이 전화를 빌려 쓸 때 같은 경우입니다. 숨기기가 인증 없이 즉시 걸리는 건 딱 이 정도 크기의 노출에 맞춘 설계입니다.</p>
+<p>기록을 평소에 숨겨 두는 편이라면, 해제를 의식적인 단계로 두면 됩니다. Face ID 한 번이면 끝나는 일이니, 보는 사람이 없을 때 천천히 풀면 됩니다.</p>
+<h2>자주 묻는 질문</h2>
+<p>숨기면 기록이 지워지나요? 아닙니다. 화면에서 점과 범례 항목, 기록 버튼이 사라질 뿐입니다. 기록은 기기에 그대로 있고, Face ID로 해제하면 모든 점이 제 날짜로 돌아옵니다.</p>
+<p>Face ID 없이 해제할 방법이 있나요? 없습니다. 앱 안에서는 비밀번호 같은 대체 수단을 두지 않았고, Touch ID 기기나 Face ID 미설정 기기에서는 해제할 수 없다는 안내가 나옵니다.</p>
+<p>위젯에 성생활 기록이 보이나요? 아닙니다. 위젯은 숨기기 설정과 무관하게 생리와 주기 정보만 보여줍니다. 홈 화면에 올라가는 정보에 성생활 기록은 처음부터 없습니다.</p>
+<h2>한 줄로</h2>
+<p>기록은 하트 버튼 한 번, 숨기기는 스위치 하나로 즉시, 되돌리기는 Face ID로만 됩니다. 숨겨도 기록은 지워지지 않고 기기 안에 그대로 있습니다.</p>
+<p>Face ID가 없는 기기라면 숨기기를 켜지 않는 편이 안전합니다. 홈 화면 위젯에는 어차피 성생활 기록이 표시되지 않으니, 따로 신경 쓸 화면은 달력 하나입니다.</p>
+                <div class="callout">
+                  <p>MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="ko" data-placement="blog_article_callout" data-content-group="hide-sexual-activity-period-tracker-face-id" onclick="trackAppStoreClick(this)">App Store에서 받기</a>
+                </div>
+                <h2>참고 자료</h2>
+                <ul class="references">
+        <li><a href="https://support.apple.com/en-us/102381">Apple Support. About Face ID advanced technology.</a></li>
+<li><a href="https://developer.apple.com/documentation/localauthentication">Apple Developer Documentation. Local Authentication.</a></li>
+<li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
+                </ul>
+              </article>
+            </main>
+          </body>
+        </html>
