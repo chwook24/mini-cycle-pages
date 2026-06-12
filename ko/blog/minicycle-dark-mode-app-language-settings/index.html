@@ -1,0 +1,170 @@
+        <!doctype html>
+        <html lang="ko">
+                <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>MiniCycle 다크 모드와 영어 화면, 설정에서 바꾸는 법</title>
+          <meta name="description" content="MiniCycle 화면 모드는 시스템·라이트·다크 세 가지이고 기본은 시스템입니다. 밤마다 알아서 어두워지게 두는 법, 한국어·영어 전환, 위젯과 알림이 어느 설정을 따르는지 정리했습니다.">
+          <link rel="canonical" href="https://minicycle.net/ko/blog/minicycle-dark-mode-app-language-settings/">
+            <link rel="alternate" hreflang="en" href="https://minicycle.net/blog/minicycle-dark-mode-app-language-settings/">
+    <link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/minicycle-dark-mode-app-language-settings/">
+    <link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/minicycle-dark-mode-app-language-settings/">
+          <link rel="alternate" type="application/rss+xml" title="MiniCycle Blog" href="https://minicycle.net/feed.xml">
+          <meta property="og:type" content="article">
+          <meta property="og:title" content="MiniCycle 다크 모드와 영어 화면, 설정에서 바꾸는 법">
+          <meta property="og:description" content="MiniCycle 화면 모드는 시스템·라이트·다크 세 가지이고 기본은 시스템입니다. 밤마다 알아서 어두워지게 두는 법, 한국어·영어 전환, 위젯과 알림이 어느 설정을 따르는지 정리했습니다.">
+          <meta property="og:url" content="https://minicycle.net/ko/blog/minicycle-dark-mode-app-language-settings/">
+          <meta property="og:image" content="https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg">
+          <meta name="twitter:card" content="summary_large_image">
+            <link rel="icon" href="../../../favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../../../apple-touch-icon.png">
+          <link rel="stylesheet" href="../../../styles.css">
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
+  function trackBlogArticleEngagement() {
+    const article = document.querySelector('article.article[data-content-group]');
+    if (!article || typeof gtag !== 'function') return;
+
+    const progressThresholds = [50, 75, 90];
+    const sentProgress = new Set();
+    const minReadMs = Number(article.dataset.minReadMs || 30000);
+    let maxPercent = 0;
+    let readCompleteSent = false;
+    let activeMs = 0;
+    let lastTick = Date.now();
+    let wasActive = !document.hidden && document.hasFocus();
+
+    function recordActiveTime() {
+      const now = Date.now();
+      if (wasActive) activeMs += now - lastTick;
+      lastTick = now;
+      wasActive = !document.hidden && document.hasFocus();
+    }
+
+    function articlePercent() {
+      const articleTop = article.getBoundingClientRect().top + window.scrollY;
+      const articleHeight = Math.max(article.offsetHeight, 1);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      return Math.max(0, Math.min(100, Math.floor(((viewportBottom - articleTop) / articleHeight) * 100)));
+    }
+
+    function send(eventName, params) {
+      gtag('event', eventName, Object.assign({
+        language: article.dataset.language,
+        content_group: article.dataset.contentGroup,
+        article_path: window.location.pathname,
+        transport_type: 'beacon'
+      }, params));
+    }
+
+    function evaluate() {
+      recordActiveTime();
+      maxPercent = Math.max(maxPercent, articlePercent());
+
+      progressThresholds.forEach((threshold) => {
+        if (maxPercent >= threshold && !sentProgress.has(threshold)) {
+          sentProgress.add(threshold);
+          send('blog_article_progress', {
+            scroll_percent: threshold,
+            active_seconds: Math.round(activeMs / 1000)
+          });
+        }
+      });
+
+      if (!readCompleteSent && maxPercent >= 90 && activeMs >= minReadMs) {
+        readCompleteSent = true;
+        send('blog_article_read_complete', {
+          max_percent: maxPercent,
+          active_seconds: Math.round(activeMs / 1000),
+          min_read_seconds: Math.round(minReadMs / 1000)
+        });
+      }
+    }
+
+    window.addEventListener('scroll', evaluate, { passive: true });
+    window.addEventListener('resize', evaluate);
+    document.addEventListener('visibilitychange', evaluate);
+    window.addEventListener('pagehide', evaluate);
+    window.setInterval(evaluate, 5000);
+    evaluate();
+  }
+  window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
+</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"MiniCycle 다크 모드와 영어 화면, 설정에서 바꾸는 법","description":"MiniCycle 화면 모드는 시스템·라이트·다크 세 가지이고 기본은 시스템입니다. 밤마다 알아서 어두워지게 두는 법, 한국어·영어 전환, 위젯과 알림이 어느 설정을 따르는지 정리했습니다.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg","datePublished":"2026-06-12","dateModified":"2026-06-12","inLanguage":"ko","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/ko/blog/minicycle-dark-mode-app-language-settings/"}}</script>
+        </head>
+          <body>
+        <header class="site-header">
+  <a class="brand" href="../../">MiniCycle</a>
+  <nav aria-label="Primary navigation">
+    <a href="../../blog/">블로그</a>
+    <a href="../../support/">지원</a>
+    <a href="../../privacy/">개인정보</a>
+    <a href="../../../blog/minicycle-dark-mode-app-language-settings/">English</a>
+  </nav>
+</header>
+            <main class="page">
+              <article class="article" data-language="ko" data-content-group="minicycle-dark-mode-app-language-settings" data-min-read-ms="81000">
+                <p class="eyebrow">설정</p>
+                <h1>MiniCycle 다크 모드와 영어 화면, 설정에서 바꾸는 법</h1>
+                <p class="article-meta">2026년 6월 12일 MiniCycle 작성</p>
+                <p class="lead">새벽에 생리가 시작돼 불 꺼진 방에서 앱을 열면, 기록보다 흰 화면이 먼저 눈에 들어옵니다. 기록은 3초면 끝나는데 눈은 한참 시립니다. MiniCycle 설정의 맨 위 두 묶음이 바로 이 문제를 다룹니다. 화면 모드 하나, 앱 언어 하나. 둘 다 누르는 즉시 적용되고, 어느 쪽도 기록에는 손대지 않습니다.</p>
+                <img class="article-hero" src="../../../assets/home-capture-iphone17-1118-ko-20260518.jpg" alt="MiniCycle 아이폰 실제 캡처 화면: 생리 캘린더와 위젯 경험" width="552" height="1200" loading="eager">
+        <h2>화면 모드는 세 가지, 기본은 시스템입니다</h2>
+<p>홈 화면 오른쪽 위 톱니바퀴를 누르면 설정이 열립니다. 맨 위 &#x27;화면&#x27; 묶음에 달 모양 아이콘과 함께 화면 모드가 있고, 시스템·라이트·다크 세 칸 중 하나를 고르면 그 자리에서 바뀝니다. 기본값은 시스템입니다.</p>
+<p>시스템은 결정을 아이폰에 맡기는 선택입니다. 아이폰이 다크 모드로 바뀌면 앱도 따라 어두워집니다. 아이폰 설정의 디스플레이 및 밝기에서 자동 전환을 켜 두면 일몰부터 일출까지, 또는 직접 정한 시각에 맞춰 바뀌는데, 그 일정이 MiniCycle에도 그대로 적용됩니다. 매일 밤 달력이 알아서 어두워지길 바란다면 손댈 것 없이 시스템으로 두면 됩니다.</p>
+<h2>다크 모드에서 달력은 이렇게 바뀝니다</h2>
+<p>배경은 순검정이 아니라 검정에 가까운 회색으로 깔리고, 날짜 카드와 패널은 그보다 한 단계 밝게 떠서 구분이 유지됩니다. 라이트 모드에서 카드 아래 깔리던 옅은 그림자는 다크 모드에서 빠집니다. 어두운 배경에서는 그림자가 구분에 보탬이 되지 않기 때문입니다.</p>
+<p>달력 표시 색은 그대로입니다. 분홍 생리일, 하늘색 가임기, 더 진한 하늘색 배란일, 보라색 성생활 기록, 회색 메모 점까지 같은 색으로 남고, 어두운 배경에서도 또렷하도록 칠해지는 농도만 조금 진해집니다. 라이트에서 익힌 범례를 다크에서 다시 외울 일은 없습니다.</p>
+<h2>위젯은 앱이 아니라 아이폰을 따라갑니다</h2>
+<p>한 가지는 미리 알아 두는 편이 좋습니다. 앱에서 다크를 골라 고정해도 홈 화면 위젯은 어두워지지 않습니다. 위젯은 iOS가 그리는 화면이라 아이폰 자체의 모드를 따르기 때문입니다. Apple 문서도 다크 모드를 시스템 전체의 화면 설정으로 설명합니다.</p>
+<p>그래서 낮에는 밝은 홈 화면 위에 위젯도 밝게 뜨고, 열어 본 앱만 어두운 조합이 생길 수 있습니다. 앱과 위젯이 하루 종일 같은 얼굴이길 바란다면 화면 모드를 시스템으로 두는 것이 답입니다.</p>
+<h2>영어 화면이 필요한 순간</h2>
+<p>화면 묶음 바로 아래가 언어입니다. 지구본 아이콘 옆 앱 언어에서 한국어와 English 중 하나를 고릅니다. 두 선택지는 항상 각자의 언어로 적혀 있어서, 화면이 어느 언어로 바뀌어 있든 돌아오는 길을 잃지 않습니다.</p>
+<p>전환은 그 자리에서 끝납니다. 재시작도 확인 창도 없이 달력, 통계, 설정의 모든 글자가 바뀌고 날짜 표기도 따라 바뀝니다. 2026년 6월이 Jun 2026으로, 6월 12일이 Jun 12로 표시되는 식입니다. 영어가 편한 사용자뿐 아니라, 한국어를 읽지 못하는 파트너와 화면을 같이 볼 때도 쓸 만한 스위치입니다.</p>
+<h2>언어를 바꾸면 알림과 위젯도 따라옵니다</h2>
+<p>예약된 알림은 언어를 바꾸는 순간 새 언어로 다시 잡힙니다. &#x27;예상 생리일 2일 전&#x27;으로 올 알림이 Expected period in 2 days로 오게 되는 식이고, 알림 시각과 며칠 전 설정은 그대로 유지됩니다.</p>
+<p>홈 화면 위젯도 앱과 같은 언어 설정을 공유 저장소에서 읽기 때문에 앱을 따라 바뀝니다. 화면 모드와 달리 언어만큼은 앱과 위젯이 항상 같이 움직입니다.</p>
+<h2>바뀌는 것과 그대로인 것</h2>
+<p>두 설정이 바꾸는 건 보이는 방식뿐입니다. 생리 기록, 메모, 주기 길이 설정, 예측 날짜 어느 것도 달라지지 않습니다. 라이트에서 다크로, 한국어에서 영어로 몇 번을 오가도 데이터는 같은 자리에 그대로 있습니다.</p>
+<p>달력 표시의 뜻도 어느 모드, 어느 언어에서나 같습니다. 예정일과 배란일, 가임기 표시는 기록에서 계산한 추정값이고, 참고 정보일 뿐 의료 조언이나 피임 수단은 아닙니다. 화면이 어두워져도 예측이 더 정확해지지는 않습니다. 다만 새벽 눈은 덜 부십니다.</p>
+<h2>어느 모드가 맞을까요</h2>
+<p>낮이든 밤이든 한결같은 화면이 편하다면 라이트나 다크로 고정하면 됩니다. 침대에서 달력을 여는 일이 잦다면 시스템으로 두고, 아이폰의 디스플레이 및 밝기에서 자동 전환을 켜 두는 조합이 가장 손이 덜 갑니다. 해가 지면 폰과 함께 앱도 어두워지고, 아침이면 함께 밝아집니다.</p>
+<p>위젯까지 생각하면 답은 더 분명해집니다. 위젯은 어차피 아이폰의 모드를 따르므로, 앱만 다크로 고정하면 홈 화면과 앱 사이에 밝기가 갈립니다. 둘을 맞추는 설정은 시스템 하나뿐입니다.</p>
+<h2>자주 묻는 질문</h2>
+<p>다크 모드로 바꾸면 위젯도 어두워지나요? 앱에서 다크로 고정한 경우에는 아닙니다. 위젯은 아이폰의 모드를 따르므로, 아이폰 자체가 다크일 때만 위젯도 어둡습니다. 화면 모드를 시스템으로 두면 앱과 위젯이 늘 같이 움직입니다.</p>
+<p>언어를 바꾸면 기록이 사라지거나 초기화되나요? 아닙니다. 언어는 글자와 날짜 표기만 바꿉니다. 기록, 메모, 설정값, 알림 예약은 그대로이고 알림 문구만 새 언어로 다시 잡힙니다.</p>
+<p>아이폰 언어를 영어로 바꾸면 MiniCycle도 영어가 되나요? 아닙니다. MiniCycle은 자체 언어 설정만 따릅니다. 앱 안의 스위치가 유일한 길이고, 반대로 앱 언어를 바꿔도 아이폰 쪽에는 아무 영향이 없습니다.</p>
+<h2>한 줄로</h2>
+<p>화면 모드는 설정 맨 위에서 시스템·라이트·다크 중 하나, 기본은 아이폰을 따라가는 시스템입니다. 언어는 그 아래에서 한국어와 English 중 하나이고, 바꾸는 즉시 알림 문구와 위젯까지 따라옵니다.</p>
+<p>위젯의 밝고 어두움만은 앱이 아니라 아이폰을 따릅니다. 그리고 어느 설정도 기록과 예측에는 손대지 않습니다. 바뀌는 건 보이는 방식뿐입니다.</p>
+                <div class="callout">
+                  <p>MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="ko" data-placement="blog_article_callout" data-content-group="minicycle-dark-mode-app-language-settings" onclick="trackAppStoreClick(this)">App Store에서 받기</a>
+                </div>
+                <h2>참고 자료</h2>
+                <ul class="references">
+        <li><a href="https://support.apple.com/en-us/108350">Apple Support. Use Dark Mode on your iPhone and iPad.</a></li>
+<li><a href="https://developer.apple.com/design/human-interface-guidelines/dark-mode">Apple Human Interface Guidelines. Dark Mode.</a></li>
+<li><a href="https://support.apple.com/en-us/109358">Apple Support. Change the language on your iPhone or iPad.</a></li>
+                </ul>
+              </article>
+            </main>
+          </body>
+        </html>

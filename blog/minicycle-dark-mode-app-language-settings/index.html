@@ -1,0 +1,170 @@
+        <!doctype html>
+        <html lang="en">
+                <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>MiniCycle in English: change the app language and dark mode</title>
+          <meta name="description" content="MiniCycle defaults to Korean. How to switch the app to English in two taps, choose System, Light, or Dark appearance, and what the home-screen widget follows.">
+          <link rel="canonical" href="https://minicycle.net/blog/minicycle-dark-mode-app-language-settings/">
+            <link rel="alternate" hreflang="en" href="https://minicycle.net/blog/minicycle-dark-mode-app-language-settings/">
+    <link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/minicycle-dark-mode-app-language-settings/">
+    <link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/minicycle-dark-mode-app-language-settings/">
+          <link rel="alternate" type="application/rss+xml" title="MiniCycle Blog" href="https://minicycle.net/feed.xml">
+          <meta property="og:type" content="article">
+          <meta property="og:title" content="MiniCycle in English: change the app language and dark mode">
+          <meta property="og:description" content="MiniCycle defaults to Korean. How to switch the app to English in two taps, choose System, Light, or Dark appearance, and what the home-screen widget follows.">
+          <meta property="og:url" content="https://minicycle.net/blog/minicycle-dark-mode-app-language-settings/">
+          <meta property="og:image" content="https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg">
+          <meta name="twitter:card" content="summary_large_image">
+            <link rel="icon" href="../../favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+          <link rel="stylesheet" href="../../styles.css">
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
+  function trackBlogArticleEngagement() {
+    const article = document.querySelector('article.article[data-content-group]');
+    if (!article || typeof gtag !== 'function') return;
+
+    const progressThresholds = [50, 75, 90];
+    const sentProgress = new Set();
+    const minReadMs = Number(article.dataset.minReadMs || 30000);
+    let maxPercent = 0;
+    let readCompleteSent = false;
+    let activeMs = 0;
+    let lastTick = Date.now();
+    let wasActive = !document.hidden && document.hasFocus();
+
+    function recordActiveTime() {
+      const now = Date.now();
+      if (wasActive) activeMs += now - lastTick;
+      lastTick = now;
+      wasActive = !document.hidden && document.hasFocus();
+    }
+
+    function articlePercent() {
+      const articleTop = article.getBoundingClientRect().top + window.scrollY;
+      const articleHeight = Math.max(article.offsetHeight, 1);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      return Math.max(0, Math.min(100, Math.floor(((viewportBottom - articleTop) / articleHeight) * 100)));
+    }
+
+    function send(eventName, params) {
+      gtag('event', eventName, Object.assign({
+        language: article.dataset.language,
+        content_group: article.dataset.contentGroup,
+        article_path: window.location.pathname,
+        transport_type: 'beacon'
+      }, params));
+    }
+
+    function evaluate() {
+      recordActiveTime();
+      maxPercent = Math.max(maxPercent, articlePercent());
+
+      progressThresholds.forEach((threshold) => {
+        if (maxPercent >= threshold && !sentProgress.has(threshold)) {
+          sentProgress.add(threshold);
+          send('blog_article_progress', {
+            scroll_percent: threshold,
+            active_seconds: Math.round(activeMs / 1000)
+          });
+        }
+      });
+
+      if (!readCompleteSent && maxPercent >= 90 && activeMs >= minReadMs) {
+        readCompleteSent = true;
+        send('blog_article_read_complete', {
+          max_percent: maxPercent,
+          active_seconds: Math.round(activeMs / 1000),
+          min_read_seconds: Math.round(minReadMs / 1000)
+        });
+      }
+    }
+
+    window.addEventListener('scroll', evaluate, { passive: true });
+    window.addEventListener('resize', evaluate);
+    document.addEventListener('visibilitychange', evaluate);
+    window.addEventListener('pagehide', evaluate);
+    window.setInterval(evaluate, 5000);
+    evaluate();
+  }
+  window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
+</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"MiniCycle in English: change the app language and dark mode","description":"MiniCycle defaults to Korean. How to switch the app to English in two taps, choose System, Light, or Dark appearance, and what the home-screen widget follows.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-06-12","dateModified":"2026-06-12","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/minicycle-dark-mode-app-language-settings/"}}</script>
+        </head>
+          <body>
+        <header class="site-header">
+  <a class="brand" href="../../">MiniCycle</a>
+  <nav aria-label="Primary navigation">
+    <a href="../../blog/">Blog</a>
+    <a href="../../support/">Support</a>
+    <a href="../../privacy/">Privacy</a>
+    <a href="../../ko/blog/minicycle-dark-mode-app-language-settings/">한국어</a>
+  </nav>
+</header>
+            <main class="page">
+              <article class="article" data-language="en" data-content-group="minicycle-dark-mode-app-language-settings" data-min-read-ms="90000">
+                <p class="eyebrow">Settings</p>
+                <h1>MiniCycle in English: change the app language and dark mode</h1>
+                <p class="article-meta">Published June 12, 2026 by MiniCycle</p>
+                <p class="lead">MiniCycle was built in Korea, and a fresh install greets you in Korean. If you have just downloaded it and hit a wall of Hangul, the fix is two taps away, and you can make them without reading a single Korean word. While you are in Settings, the appearance control sits one group above the language one, with the same three-way simplicity. Both settings apply instantly, and neither touches a day of your records.</p>
+                <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
+        <h2>Why the app starts in Korean</h2>
+<p>MiniCycle started as a Korean app, and Korean is still its first language: a new install opens in Korean regardless of what language your iPhone runs. That is an unusual choice on the App Store, where most apps follow the system language, so it deserves a plain explanation rather than a shrug. The app keeps its own language setting, separate from iOS, and it ships with exactly two options, Korean and English.</p>
+<p>An in-app setting has one real advantage: you choose, once, and the app stays put. There is also a small courtesy built into the picker. The two choices are always written in their own scripts, 한국어 and English, whichever language the app currently shows. The word English never disappears into a language you cannot read, so you cannot get stranded.</p>
+<h2>Switching to English, without reading Korean</h2>
+<p>Open the app and tap the circled gear at the top right of the calendar screen. That is Settings. In the second group of rows, look for the globe icon: next to it is a two-option switch, and one option reads English. Tap it. The change is immediate, with no restart and no confirmation step.</p>
+<p>Every label in the calendar, statistics, and settings flips at once, and dates reformat to English conventions along with them. The month header turns from 2026년 6월 into Jun 2026, a selected day from 6월 12일 into Jun 12, and the weekday letters across the top of the calendar switch too. The same switch works in reverse at any time, and 한국어 will be legible right where you left it.</p>
+<h2>Your iPhone&#x27;s language has nothing to do with it</h2>
+<p>A reasonable first instinct is to change the phone&#x27;s system language and expect the app to follow. With MiniCycle that does nothing. The app reads only its own setting, so an iPhone switched to English still opens a Korean MiniCycle, and vice versa. The reverse direction also holds: setting the app to English leaves your iPhone exactly as it was.</p>
+<p>If you actually want the entire phone in another language, that lives in iOS Settings under General, then Language &amp; Region, and Apple documents the steps. But you never need to go there for this app. The in-app switch is the whole job.</p>
+<h2>Reminders and the widget follow the language</h2>
+<p>If you use the reminders for period, fertile-window start and end, or ovulation day, their texts are written in the app language at the moment they are scheduled, and changing the language reschedules them on the spot. A notification that would have arrived as 예상 생리일 2일 전 arrives as Expected period in 2 days instead. The timing settings, which day and what hour, carry over untouched.</p>
+<p>The home-screen widget reads the same language setting from storage shared between the app and the widget, so it follows the switch as well. Language is one of the settings where the app and the widget always move together.</p>
+<h2>System, Light, or Dark: the appearance setting</h2>
+<p>The first group in Settings, marked with a moon icon, holds the appearance control with three choices: System, Light, and Dark. The default is System, which hands the decision to iOS. When the phone enters dark mode, the app follows. If you keep your iPhone on a dark-mode schedule, Apple&#x27;s automatic option runs sunset to sunrise or any custom hours you set, and MiniCycle changes over on that schedule without further attention.</p>
+<p>Dark mode in MiniCycle is a near-black gray rather than pure black, with date cards and panels a step lighter so the structure stays readable, and the soft shadows of light mode removed, since they add nothing against a dark background. The calendar marks keep their hues: pink for period days, sky blue for the fertile window, a deeper blue for ovulation day, purple for activity. Their fills are painted slightly stronger in the dark so they hold up. A legend you learned in light mode needs no relearning.</p>
+<h2>One honest limit, and what never changes</h2>
+<p>Forcing Light or Dark inside the app changes the app alone. The home-screen widget is drawn by iOS in whatever appearance the phone itself is in, because dark mode is a systemwide setting, so an app forced to Dark can sit behind a light widget all afternoon. If you want the app and the widget to match around the clock, leave the appearance on System.</p>
+<p>Neither setting reaches your data. Period records, notes, cycle and period length settings, and every predicted date are identical before and after any combination of switches. And the marks mean what they always meant: predicted period, ovulation, and fertile-window dates are estimates calculated from your records, reference information rather than medical advice or contraception, in either language and either mode.</p>
+<h2>If the screen is in Korean right now</h2>
+<p>Here is the no-reading-required route. Open the app and tap the circled gear at the top right of the calendar screen. On the settings screen, find the globe icon in the second group of rows. The switch beside it has two options, and the right-hand one reads English, in English. Tap it, and the whole app becomes readable.</p>
+<p>Should you ever want Korean back, perhaps for someone you share the calendar with, the same switch sits in the same place, and 한국어 is written in Korean. The option you need is always printed in the language you need it in.</p>
+<h2>Frequently asked questions</h2>
+<p>Will switching the language delete or change my records? No. The language setting changes labels and date formats, nothing else. Periods, notes, settings values, and scheduled reminders all stay; only the reminder texts are reissued in the new language.</p>
+<p>Why is the widget still light when I set the app to Dark? The widget is drawn by iOS in the phone&#x27;s current appearance, so the in-app choice does not reach it. Set the appearance to System and the app and widget will match at every hour.</p>
+<p>Are there languages besides Korean and English? Not currently. The app ships with exactly those two, and the in-app switch is the only place the choice lives. Your iPhone&#x27;s system language does not affect it in either direction.</p>
+<h2>The one-line version</h2>
+<p>Gear, globe, English: the language switch is two taps, applies instantly, and carries the reminders and the widget along with it. Your iPhone&#x27;s own language plays no part in either direction.</p>
+<p>Appearance offers System, Light, and Dark, and System follows your phone&#x27;s dark-mode schedule. The widget always follows the phone rather than the app, and neither setting touches a single record.</p>
+                <div class="callout">
+                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="minicycle-dark-mode-app-language-settings" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                </div>
+                <h2>References</h2>
+                <ul class="references">
+        <li><a href="https://support.apple.com/en-us/108350">Apple Support. Use Dark Mode on your iPhone and iPad.</a></li>
+<li><a href="https://developer.apple.com/design/human-interface-guidelines/dark-mode">Apple Human Interface Guidelines. Dark Mode.</a></li>
+<li><a href="https://support.apple.com/en-us/109358">Apple Support. Change the language on your iPhone or iPad.</a></li>
+                </ul>
+              </article>
+            </main>
+          </body>
+        </html>
