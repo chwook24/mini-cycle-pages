@@ -1,0 +1,171 @@
+        <!doctype html>
+        <html lang="en">
+                <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>Daily notes in MiniCycle: jot symptoms on any calendar day</title>
+          <meta name="description" content="Tap any date in MiniCycle to add a daily note: symptoms, flow, pain, mood, up to 999 characters. Notes stay on your device by default and never appear on the widget.">
+          <link rel="canonical" href="https://minicycle.net/blog/minicycle-daily-notes-track-symptoms/">
+            <link rel="alternate" hreflang="en" href="https://minicycle.net/blog/minicycle-daily-notes-track-symptoms/">
+    <link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/minicycle-daily-notes-track-symptoms/">
+    <link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/minicycle-daily-notes-track-symptoms/">
+          <link rel="alternate" type="application/rss+xml" title="MiniCycle Blog" href="https://minicycle.net/feed.xml">
+          <meta property="og:type" content="article">
+          <meta property="og:title" content="Daily notes in MiniCycle: jot symptoms on any calendar day">
+          <meta property="og:description" content="Tap any date in MiniCycle to add a daily note: symptoms, flow, pain, mood, up to 999 characters. Notes stay on your device by default and never appear on the widget.">
+          <meta property="og:url" content="https://minicycle.net/blog/minicycle-daily-notes-track-symptoms/">
+          <meta property="og:image" content="https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg">
+          <meta name="twitter:card" content="summary_large_image">
+            <link rel="icon" href="../../favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+          <link rel="stylesheet" href="../../styles.css">
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
+  function trackBlogArticleEngagement() {
+    const article = document.querySelector('article.article[data-content-group]');
+    if (!article || typeof gtag !== 'function') return;
+
+    const progressThresholds = [50, 75, 90];
+    const sentProgress = new Set();
+    const minReadMs = Number(article.dataset.minReadMs || 30000);
+    let maxPercent = 0;
+    let readCompleteSent = false;
+    let activeMs = 0;
+    let lastTick = Date.now();
+    let wasActive = !document.hidden && document.hasFocus();
+
+    function recordActiveTime() {
+      const now = Date.now();
+      if (wasActive) activeMs += now - lastTick;
+      lastTick = now;
+      wasActive = !document.hidden && document.hasFocus();
+    }
+
+    function articlePercent() {
+      const articleTop = article.getBoundingClientRect().top + window.scrollY;
+      const articleHeight = Math.max(article.offsetHeight, 1);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      return Math.max(0, Math.min(100, Math.floor(((viewportBottom - articleTop) / articleHeight) * 100)));
+    }
+
+    function send(eventName, params) {
+      gtag('event', eventName, Object.assign({
+        language: article.dataset.language,
+        content_group: article.dataset.contentGroup,
+        article_path: window.location.pathname,
+        transport_type: 'beacon'
+      }, params));
+    }
+
+    function evaluate() {
+      recordActiveTime();
+      maxPercent = Math.max(maxPercent, articlePercent());
+
+      progressThresholds.forEach((threshold) => {
+        if (maxPercent >= threshold && !sentProgress.has(threshold)) {
+          sentProgress.add(threshold);
+          send('blog_article_progress', {
+            scroll_percent: threshold,
+            active_seconds: Math.round(activeMs / 1000)
+          });
+        }
+      });
+
+      if (!readCompleteSent && maxPercent >= 90 && activeMs >= minReadMs) {
+        readCompleteSent = true;
+        send('blog_article_read_complete', {
+          max_percent: maxPercent,
+          active_seconds: Math.round(activeMs / 1000),
+          min_read_seconds: Math.round(minReadMs / 1000)
+        });
+      }
+    }
+
+    window.addEventListener('scroll', evaluate, { passive: true });
+    window.addEventListener('resize', evaluate);
+    document.addEventListener('visibilitychange', evaluate);
+    window.addEventListener('pagehide', evaluate);
+    window.setInterval(evaluate, 5000);
+    evaluate();
+  }
+  window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
+</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Daily notes in MiniCycle: jot symptoms on any calendar day","description":"Tap any date in MiniCycle to add a daily note: symptoms, flow, pain, mood, up to 999 characters. Notes stay on your device by default and never appear on the widget.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-06-13","dateModified":"2026-06-13","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/minicycle-daily-notes-track-symptoms/"}}</script>
+        </head>
+          <body>
+        <header class="site-header">
+  <a class="brand" href="../../">MiniCycle</a>
+  <nav aria-label="Primary navigation">
+    <a href="../../blog/">Blog</a>
+    <a href="../../support/">Support</a>
+    <a href="../../privacy/">Privacy</a>
+    <a href="../../ko/blog/minicycle-daily-notes-track-symptoms/">한국어</a>
+  </nav>
+</header>
+            <main class="page">
+              <article class="article" data-language="en" data-content-group="minicycle-daily-notes-track-symptoms" data-min-read-ms="90000">
+                <p class="eyebrow">Notes</p>
+                <h1>Daily notes in MiniCycle: jot symptoms on any calendar day</h1>
+                <p class="article-meta">Published June 13, 2026 by MiniCycle</p>
+                <p class="lead">Six weeks later, &#x27;my last period was rough&#x27; tells a doctor almost nothing, and tells you not much more. Was the cramping worse on day one or day two? Did the headache come before the bleeding or after? Memory rounds the edges off all of it. A line written the day it happened does not. MiniCycle lets you attach a short note to any date on the calendar, and the point is to catch a detail while it is still specific.</p>
+                <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
+        <h2>What a daily note is for</h2>
+<p>The note is a blank box, not a checklist. You decide what belongs there. When Mayo Clinic explains how to track a cycle, it lists what is worth recording beyond the dates: how heavy the flow was, whether the pain felt worse than usual, any bleeding between periods, shifts in mood or behavior, and anything new that happened around that time. A note is where those land.</p>
+<p>In practice that looks like short, plain entries. &#x27;Cramps bad until noon, ibuprofen at 9.&#x27; &#x27;Light brown spotting.&#x27; &#x27;Migraine, second day.&#x27; &#x27;Started a new pill today.&#x27; None of it feels useful the day you write it. The use arrives later, when a run of notes across several months shows a pattern you could not have seen inside any single one.</p>
+<h2>How to add one</h2>
+<p>Tap a date on the calendar and its day panel opens. Near the bottom is the note row, marked with a pencil and the words Add a note. Tap it and a small editor slides up, headed Memo, with the prompt Write a short memo, a text box, and a Cancel and a Done button. Type, tap Done, and the note is saved to that date.</p>
+<p>A note can run to 999 characters and wrap across several lines, so three quick words and a full paragraph both fit. Tap Done on an empty box and nothing is saved. Clear the text from a note you already wrote, tap Done, and that note is removed.</p>
+<h2>The gray mark on the calendar</h2>
+<p>Once a note is saved, the day carries a small gray bar under its number. It sits apart from the other calendar colors: the pink of a period day, the sky-blue fertile band, the deeper blue of ovulation day, the purple activity dot. Gray means there is something written here.</p>
+<p>Scan a month and the gray marks tell you which days hold a note without your opening each one. Tap a marked date and the note&#x27;s first line shows in the day panel; tap that line and the full text opens. Today&#x27;s cell is the one exception. It stays clean even with a note saved, so to check today&#x27;s note you open the panel rather than look for the bar.</p>
+<h2>Where the note lives</h2>
+<p>Notes are stored on your device by default, alongside your period dates and settings, as the privacy policy describes. The app&#x27;s analytics are built not to include memo text, so the words you type are not sent out as an analytics event. What you write about a given day stays with that day.</p>
+<p>Turn on iCloud Sync and a copy of your records, notes included, goes to your own private iCloud through Apple CloudKit, so a new iPhone can restore them. One place a note never appears is the home-screen widget, which shows period and cycle information only. A note you would not want visible at a glance does not land on your home screen.</p>
+<h2>What a note can&#x27;t do</h2>
+<p>A note is a record, not an input to the math. Writing &#x27;feels like my period is coming&#x27; does not move any predicted date. Only logging an actual period start changes the forecast. The note sits beside the prediction and leaves it alone.</p>
+<p>Those predicted marks, period, ovulation, and the fertile window, are estimates drawn from your start dates: a median cycle length over up to your latest 12 records, and a luteal phase kept between 9 and 14 days rather than fixed at 14. They are reference information, not medical advice. A note is for what you noticed, not for what the app should guess. And if your notes keep recording something that worries you, bleeding between periods, pain worse than usual, periods that stop or swing widely, Mayo Clinic&#x27;s list is the prompt to bring them to a clinician.</p>
+<h2>Making it a habit</h2>
+<p>The feature is not the hard part. Remembering to write is. The easiest fix is to attach the note to something you already do: when you log a period start in that same day panel, spend a few more seconds on a note while the day is fresh.</p>
+<p>The first month, a daily note can feel like effort with no return. The third month is different. When you can answer &#x27;was the headache always on the second day?&#x27; by scrolling back instead of guessing, the few seconds a day have already paid for themselves.</p>
+<h2>What&#x27;s worth writing down</h2>
+<p>Beyond dates, the entries that tend to matter later are the ones about change: flow heavier or lighter than your normal, pain that broke from the usual pattern, spotting between periods, a noticeable shift in mood or sleep. Mayo Clinic groups these as the things to track when something about a cycle seems off.</p>
+<p>Context outside the cycle is worth a line too. A bad cold, a week of short sleep, travel across time zones, a stretch of stress, a missed pill, a new medication. These are the things that can move a cycle, and a note from the month it happened is what lets you connect the two later instead of guessing.</p>
+<h2>Frequently asked questions</h2>
+<p>How long can a single note be? Up to 999 characters, across as many lines as you like. The editor stops accepting text at the limit, which is long enough for a sentence or a short paragraph per day.</p>
+<p>Do notes show on the home-screen widget? No. The widget shows period and cycle information only, so nothing you write in a note appears there, whatever it says.</p>
+<p>Are my notes backed up anywhere? By default they stay on the device with your other records. If you turn on iCloud Sync, a copy goes to your private iCloud through Apple CloudKit. The app&#x27;s analytics are designed not to include note text either way.</p>
+<p>Does writing a note change my predictions? No. Predictions move only when you log an actual period start. A note records what happened; it does not feed the forecast.</p>
+<h2>The one-line version</h2>
+<p>Tap a date, tap Add a note, write up to 999 characters in the box headed Memo, and tap Done. A small gray bar on the day marks that a note is there, and the day panel previews its first line.</p>
+<p>Notes stay on your device by default, never appear on the widget, and do not change your predictions. They are for recording what you saw on a given day, not for forecasting the next one.</p>
+                <div class="callout">
+                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="minicycle-daily-notes-track-symptoms" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                </div>
+                <h2>References</h2>
+                <ul class="references">
+        <li><a href="https://www.mayoclinic.org/healthy-lifestyle/womens-health/in-depth/menstrual-cycle/art-20047186">Mayo Clinic. Menstrual cycle: What&#x27;s normal, what&#x27;s not.</a></li>
+<li><a href="https://www.nature.com/articles/s41746-019-0152-7">Bull, J. R. et al. Real-world menstrual cycle characteristics of more than 600,000 menstrual cycles. npj Digital Medicine (2019).</a></li>
+<li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
+                </ul>
+              </article>
+            </main>
+          </body>
+        </html>
