@@ -1,0 +1,172 @@
+        <!doctype html>
+        <html lang="en">
+                <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>Menstrual cramps: what&#x27;s normal period pain, and what&#x27;s not</title>
+          <meta name="description" content="More than half of people who menstruate get period pain. What normal menstrual cramps feel like, what eases them, and when cramps are worth a doctor&#x27;s visit.">
+          <link rel="canonical" href="https://minicycle.net/blog/menstrual-cramps-whats-normal-period-pain/">
+            <link rel="alternate" hreflang="en" href="https://minicycle.net/blog/menstrual-cramps-whats-normal-period-pain/">
+    <link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/menstrual-cramps-whats-normal-period-pain/">
+    <link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/menstrual-cramps-whats-normal-period-pain/">
+          <link rel="alternate" type="application/rss+xml" title="MiniCycle Blog" href="https://minicycle.net/feed.xml">
+          <meta property="og:type" content="article">
+          <meta property="og:title" content="Menstrual cramps: what&#x27;s normal period pain, and what&#x27;s not">
+          <meta property="og:description" content="More than half of people who menstruate get period pain. What normal menstrual cramps feel like, what eases them, and when cramps are worth a doctor&#x27;s visit.">
+          <meta property="og:url" content="https://minicycle.net/blog/menstrual-cramps-whats-normal-period-pain/">
+          <meta property="og:image" content="https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg">
+          <meta name="twitter:card" content="summary_large_image">
+            <link rel="icon" href="../../favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+          <link rel="stylesheet" href="../../styles.css">
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
+  function trackBlogArticleEngagement() {
+    const article = document.querySelector('article.article[data-content-group]');
+    if (!article || typeof gtag !== 'function') return;
+
+    const progressThresholds = [50, 75, 90];
+    const sentProgress = new Set();
+    const minReadMs = Number(article.dataset.minReadMs || 30000);
+    let maxPercent = 0;
+    let readCompleteSent = false;
+    let activeMs = 0;
+    let lastTick = Date.now();
+    let wasActive = !document.hidden && document.hasFocus();
+
+    function recordActiveTime() {
+      const now = Date.now();
+      if (wasActive) activeMs += now - lastTick;
+      lastTick = now;
+      wasActive = !document.hidden && document.hasFocus();
+    }
+
+    function articlePercent() {
+      const articleTop = article.getBoundingClientRect().top + window.scrollY;
+      const articleHeight = Math.max(article.offsetHeight, 1);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      return Math.max(0, Math.min(100, Math.floor(((viewportBottom - articleTop) / articleHeight) * 100)));
+    }
+
+    function send(eventName, params) {
+      gtag('event', eventName, Object.assign({
+        language: article.dataset.language,
+        content_group: article.dataset.contentGroup,
+        article_path: window.location.pathname,
+        transport_type: 'beacon'
+      }, params));
+    }
+
+    function evaluate() {
+      recordActiveTime();
+      maxPercent = Math.max(maxPercent, articlePercent());
+
+      progressThresholds.forEach((threshold) => {
+        if (maxPercent >= threshold && !sentProgress.has(threshold)) {
+          sentProgress.add(threshold);
+          send('blog_article_progress', {
+            scroll_percent: threshold,
+            active_seconds: Math.round(activeMs / 1000)
+          });
+        }
+      });
+
+      if (!readCompleteSent && maxPercent >= 90 && activeMs >= minReadMs) {
+        readCompleteSent = true;
+        send('blog_article_read_complete', {
+          max_percent: maxPercent,
+          active_seconds: Math.round(activeMs / 1000),
+          min_read_seconds: Math.round(minReadMs / 1000)
+        });
+      }
+    }
+
+    window.addEventListener('scroll', evaluate, { passive: true });
+    window.addEventListener('resize', evaluate);
+    document.addEventListener('visibilitychange', evaluate);
+    window.addEventListener('pagehide', evaluate);
+    window.setInterval(evaluate, 5000);
+    evaluate();
+  }
+  window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
+</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Menstrual cramps: what's normal period pain, and what's not","description":"More than half of people who menstruate get period pain. What normal menstrual cramps feel like, what eases them, and when cramps are worth a doctor's visit.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-06-14","dateModified":"2026-06-14","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/menstrual-cramps-whats-normal-period-pain/"}}</script>
+        </head>
+          <body>
+        <header class="site-header">
+  <a class="brand" href="../../">MiniCycle</a>
+  <nav aria-label="Primary navigation">
+    <a href="../../blog/">Blog</a>
+    <a href="../../support/">Support</a>
+    <a href="../../privacy/">Privacy</a>
+    <a href="../../ko/blog/menstrual-cramps-whats-normal-period-pain/">한국어</a>
+  </nav>
+</header>
+            <main class="page">
+              <article class="article" data-language="en" data-content-group="menstrual-cramps-whats-normal-period-pain" data-min-read-ms="90000">
+                <p class="eyebrow">Cycle health</p>
+                <h1>Menstrual cramps: what&#x27;s normal period pain, and what&#x27;s not</h1>
+                <p class="article-meta">Published June 14, 2026 by MiniCycle</p>
+                <p class="lead">Somewhere on the second day, the cramp arrives that makes you cancel a plan. You take something, put a heat pad on your stomach, and wait it out, half wondering whether this much pain is normal and whether everyone else just handles it better. Period pain is common enough that more than half of people who menstruate get some of it. That does not make every version of it something to grit through in silence. The useful thing is telling the two apart: the ache that comes with the territory, and the pain that is asking you to get it looked at.</p>
+                <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
+        <h2>What menstrual cramps actually are</h2>
+<p>The medical name is dysmenorrhea, and the mechanism is plainer than the word. During a period the uterus tightens to help shed its lining. Those contractions are driven by prostaglandins, hormone-like substances made in the uterine lining and tied to pain and inflammation. Higher prostaglandin levels go with stronger cramps, which is part of why the first day or two, when levels are highest, tend to hurt the most.</p>
+<p>What it feels like is familiar: a throbbing or cramping pain low in the abdomen, sometimes a dull continuous ache, often spreading to the lower back and thighs. Some people also get nausea, loose stools, a headache, or a lightheaded feeling alongside it. Mayo Clinic groups these together as the ordinary picture of menstrual cramps, and going by the Office on Women&#x27;s Health, more than half of people who have periods get some version of it.</p>
+<h2>When the pain comes, and how long it lasts</h2>
+<p>Typical cramps run on a rough timetable. Mayo Clinic describes pain that starts one to three days before the period, peaks about 24 hours after bleeding begins, and eases over the next two to three days. The NHS puts the usual span at up to three days. None of these are exact for any one person. They are the shape most cramps follow, not a rule yours has to match.</p>
+<p>Knowing the pattern is its own small relief, because it tells you roughly when the worst is likely behind you. It also makes the exceptions easier to spot. Pain that shows up at odd points in the cycle, or drags on well past those few days, is the kind worth noticing rather than waiting out.</p>
+<h2>The idea worth dropping: that you just put up with it</h2>
+<p>Common and severe are not the same word. Because period pain is so widespread, it is easy to file all of it under normal and assume the only answer is to grit your teeth once a month. More than half of people who menstruate get some pain, true. But cramps bad enough to cancel work, school, or plans every single month are not the price of admission, and they are usually treatable.</p>
+<p>Mayo Clinic lists cramps that disrupt your life every month, pain that gets steadily worse, and severe cramps that start for the first time after age 25 as reasons to see a clinician rather than reasons to take more painkillers. Pain at that level can also point to a separate cause, like endometriosis or fibroids, that has its own treatment. Suffering through it quietly is the one response that does not help.</p>
+<h2>What can ease the pain?</h2>
+<p>For everyday cramps, medication is the usual first step. The Office on Women&#x27;s Health notes that most period pain responds to over-the-counter NSAIDs such as ibuprofen, naproxen, or aspirin, and that starting one as the period begins, rather than after the pain has peaked, tends to control it better. The same drugs can lessen heavy bleeding as well.</p>
+<p>Beyond pills, the NHS points to simple measures that help a lot of people: a heat pad or hot water bottle on the abdomen, a warm bath, gentle massage of the stomach and back, and light movement like walking, swimming, or yoga. Cutting back on alcohol and not smoking are on its list too. None of this is a cure, and what works varies from person to person, but it is worth trying before deciding nothing will.</p>
+<h2>When cramps are worth a doctor&#x27;s visit</h2>
+<p>A few patterns deserve a clinician&#x27;s eye, less out of alarm than because they have answers. The NHS suggests seeing a GP if periods become more painful, heavier, or irregular, if the pain stops you doing everyday things, if there is pain during sex or when peeing or pooing, or if you bleed between periods. The Office on Women&#x27;s Health adds menstrual clots larger than a quarter and pain that turns up at times other than around your period.</p>
+<p>Behind some of these is what doctors call secondary dysmenorrhea: period pain driven by another condition rather than by the contractions themselves. Endometriosis, uterine fibroids, adenomyosis, and pelvic inflammatory disease are the usual names, and unlike ordinary cramps, this kind of pain often gets worse with age instead of better. Seek urgent help, the NHS says, if pelvic or period pain is severe or worse than usual and painkillers have not touched it.</p>
+<h2>What tracking can and can&#x27;t tell you</h2>
+<p>This is where a written record earns its keep. The Office on Women&#x27;s Health says plainly that keeping track of your symptoms and periods in a diary or calendar helps a doctor diagnose what is going on. Walking in able to say the pain starts the day before bleeding, peaks on day one, and has been getting worse over the last four cycles beats a vague sense that it has been bad lately. In MiniCycle that is what the daily note on each calendar date is for: a few words on when the pain came and how hard, saved on your device next to the dates.</p>
+<p>What tracking does not do is diagnose anything. A logged pattern is reference information drawn from your own cycles, not a medical verdict, and an app cannot tell endometriosis from an ordinary rough month. It can only show you the pattern clearly enough to describe it. When that pattern crosses one of the lines above, the record is the thing to bring to the appointment, not a substitute for it.</p>
+<h2>Primary and secondary: two kinds of period pain</h2>
+<p>Most period pain is what clinicians call primary dysmenorrhea: cramps caused by the normal contractions of the uterus, with no underlying disease behind them. The Office on Women&#x27;s Health notes this is the common kind, that it can begin within a year or two of a first period, and that for many people it eases over the years.</p>
+<p>Secondary dysmenorrhea is pain that comes from another condition, such as endometriosis or fibroids. The tells are different. It often starts later in life, lasts longer than the usual few days, and tends to worsen with age rather than settle. The distinction matters because the second kind has a cause that can be treated once it is found.</p>
+<h2>Frequently asked questions</h2>
+<p>Is it normal for cramps to make me feel sick? Nausea, loose stools, a headache, and dizziness can come with cramps, and Mayo Clinic lists them among the usual accompanying symptoms. If they are severe or new for you, mention them to a clinician.</p>
+<p>Do cramps get better with age? Often, yes, for primary dysmenorrhea. Mayo Clinic notes cramps not caused by another condition tend to lessen with age and frequently improve after giving birth. Pain that worsens over time is more a reason to get it checked.</p>
+<p>When should painkillers prompt a doctor&#x27;s visit instead? When they stop helping. Both the Office on Women&#x27;s Health and the NHS treat over-the-counter pain relief that no longer controls the pain, or pain that still stops your daily activities, as the point to see someone.</p>
+<p>Can a tracking app diagnose why my periods hurt? No. It can record when the pain comes and how it changes, which is useful to bring to a clinician, but the diagnosis is theirs to make, not the app&#x27;s.</p>
+<h2>The one-line version</h2>
+<p>Period cramps come from the uterus contracting under prostaglandins; they typically start one to three days before bleeding, peak around the first day, and ease within a few days, and more than half of people who menstruate get some pain.</p>
+<p>NSAIDs started early, heat, and gentle movement help everyday cramps. Pain that disrupts your life every month, keeps worsening, or comes with bleeding between periods or pain during sex is worth a doctor&#x27;s visit, and a tracked record is what to bring.</p>
+                <div class="callout">
+                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="menstrual-cramps-whats-normal-period-pain" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                </div>
+                <h2>References</h2>
+                <ul class="references">
+        <li><a href="https://www.mayoclinic.org/diseases-conditions/menstrual-cramps/symptoms-causes/syc-20374938">Mayo Clinic. Menstrual cramps — Symptoms &amp; causes.</a></li>
+<li><a href="https://womenshealth.gov/menstrual-cycle/period-problems">Office on Women&#x27;s Health (U.S. HHS). Period problems.</a></li>
+<li><a href="https://www.nhs.uk/conditions/period-pain/">NHS. Period pain.</a></li>
+<li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
+                </ul>
+              </article>
+            </main>
+          </body>
+        </html>
