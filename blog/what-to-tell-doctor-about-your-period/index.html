@@ -1,0 +1,172 @@
+        <!doctype html>
+        <html lang="en">
+                <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>What to tell your doctor about your period: a tracking guide</title>
+          <meta name="description" content="Heading to a period appointment? What to track in the weeks before, which dates and symptoms are worth bringing, and how a clear record makes the visit faster.">
+          <link rel="canonical" href="https://minicycle.net/blog/what-to-tell-doctor-about-your-period/">
+            <link rel="alternate" hreflang="en" href="https://minicycle.net/blog/what-to-tell-doctor-about-your-period/">
+    <link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/what-to-tell-doctor-about-your-period/">
+    <link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/what-to-tell-doctor-about-your-period/">
+          <link rel="alternate" type="application/rss+xml" title="MiniCycle Blog" href="https://minicycle.net/feed.xml">
+          <meta property="og:type" content="article">
+          <meta property="og:title" content="What to tell your doctor about your period: a tracking guide">
+          <meta property="og:description" content="Heading to a period appointment? What to track in the weeks before, which dates and symptoms are worth bringing, and how a clear record makes the visit faster.">
+          <meta property="og:url" content="https://minicycle.net/blog/what-to-tell-doctor-about-your-period/">
+          <meta property="og:image" content="https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg">
+          <meta name="twitter:card" content="summary_large_image">
+            <link rel="icon" href="../../favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+          <link rel="stylesheet" href="../../styles.css">
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
+  function trackBlogArticleEngagement() {
+    const article = document.querySelector('article.article[data-content-group]');
+    if (!article || typeof gtag !== 'function') return;
+
+    const progressThresholds = [50, 75, 90];
+    const sentProgress = new Set();
+    const minReadMs = Number(article.dataset.minReadMs || 30000);
+    let maxPercent = 0;
+    let readCompleteSent = false;
+    let activeMs = 0;
+    let lastTick = Date.now();
+    let wasActive = !document.hidden && document.hasFocus();
+
+    function recordActiveTime() {
+      const now = Date.now();
+      if (wasActive) activeMs += now - lastTick;
+      lastTick = now;
+      wasActive = !document.hidden && document.hasFocus();
+    }
+
+    function articlePercent() {
+      const articleTop = article.getBoundingClientRect().top + window.scrollY;
+      const articleHeight = Math.max(article.offsetHeight, 1);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      return Math.max(0, Math.min(100, Math.floor(((viewportBottom - articleTop) / articleHeight) * 100)));
+    }
+
+    function send(eventName, params) {
+      gtag('event', eventName, Object.assign({
+        language: article.dataset.language,
+        content_group: article.dataset.contentGroup,
+        article_path: window.location.pathname,
+        transport_type: 'beacon'
+      }, params));
+    }
+
+    function evaluate() {
+      recordActiveTime();
+      maxPercent = Math.max(maxPercent, articlePercent());
+
+      progressThresholds.forEach((threshold) => {
+        if (maxPercent >= threshold && !sentProgress.has(threshold)) {
+          sentProgress.add(threshold);
+          send('blog_article_progress', {
+            scroll_percent: threshold,
+            active_seconds: Math.round(activeMs / 1000)
+          });
+        }
+      });
+
+      if (!readCompleteSent && maxPercent >= 90 && activeMs >= minReadMs) {
+        readCompleteSent = true;
+        send('blog_article_read_complete', {
+          max_percent: maxPercent,
+          active_seconds: Math.round(activeMs / 1000),
+          min_read_seconds: Math.round(minReadMs / 1000)
+        });
+      }
+    }
+
+    window.addEventListener('scroll', evaluate, { passive: true });
+    window.addEventListener('resize', evaluate);
+    document.addEventListener('visibilitychange', evaluate);
+    window.addEventListener('pagehide', evaluate);
+    window.setInterval(evaluate, 5000);
+    evaluate();
+  }
+  window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
+</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"What to tell your doctor about your period: a tracking guide","description":"Heading to a period appointment? What to track in the weeks before, which dates and symptoms are worth bringing, and how a clear record makes the visit faster.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-06-15","dateModified":"2026-06-15","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/what-to-tell-doctor-about-your-period/"}}</script>
+        </head>
+          <body>
+        <header class="site-header">
+  <a class="brand" href="../../">MiniCycle</a>
+  <nav aria-label="Primary navigation">
+    <a href="../../blog/">Blog</a>
+    <a href="../../support/">Support</a>
+    <a href="../../privacy/">Privacy</a>
+    <a href="../../ko/blog/what-to-tell-doctor-about-your-period/">한국어</a>
+  </nav>
+</header>
+            <main class="page">
+              <article class="article" data-language="en" data-content-group="what-to-tell-doctor-about-your-period" data-min-read-ms="90000">
+                <p class="eyebrow">Cycle health</p>
+                <h1>What to tell your doctor about your period: a tracking guide</h1>
+                <p class="article-meta">Published June 15, 2026 by MiniCycle</p>
+                <p class="lead">The first line of the intake form asks for the date your last period started. You count backward, land on a guess, and write it down with a question mark. Most of a period appointment runs on dates and details like that one, and the visit goes faster when you are not reconstructing them on the spot. The fix is small: bring a record instead of a memory. A handful of start dates, a few words about anything that was off. Here is what is worth having ready, and what the record can and can&#x27;t settle once you are in the room.</p>
+                <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
+        <h2>Start the record before you book the visit</h2>
+<p>The American College of Obstetricians and Gynecologists makes a useful point about timing. To find the cause of abnormal uterine bleeding, your ob-gyn may ask you to keep track of your bleeding for several weeks before the office visit, in what they call an abnormal bleeding diary. The implication runs the other way too: if something already feels off, the moment to start logging is now, not when you sit down in the exam room.</p>
+<p>Even a few weeks of dates is more than most people walk in with. You do not need a special form. ACOG notes you can track it on your phone, or print a chart, fill it out, and bring it. What matters is that the record exists before the appointment rather than getting assembled from memory during it.</p>
+<h2>The dates that carry the most weight</h2>
+<p>The single most useful entry is the first day of each period. Mayo Clinic counts a cycle from the first day of one period to the first day of the next, so a run of start dates is what lets anyone read your cycle length. Two starts give one cycle length; several give the pattern, which is the thing a clinician is actually looking at.</p>
+<p>Two more numbers help. How many days the bleeding lasts, which Mayo Clinic puts at a typical 2 to 7 days, and whether your cycles tend to fall 21 to 35 days apart, the typical range. Bring the real figures rather than a rounded sense of them. There is a difference between cycles that ran 26, 31, then 29 days and a flat about a month.</p>
+<h2>What to note beyond the dates</h2>
+<p>When you are worried about your periods, Mayo Clinic lists a few things worth recording alongside the dates: how long the period lasts, the flow and how often you change a pad or tampon and whether you have passed clots, any bleeding between periods, pain and whether it is worse than usual, and any change in mood or anything new that happened around the time things shifted. None of it needs to be more than a few words.</p>
+<p>Life outside the cycle earns a line too, because it explains the odd month later. A bad illness, a stretch of short sleep, a long flight across time zones, a new medication. A note from the month it happened lets you and the clinician connect the two instead of guessing.</p>
+<h2>The changes worth flagging</h2>
+<p>Some patterns are worth raising directly, and a record is what turns a vague worry into a specific line. Mayo Clinic lists reasons to talk with a provider: periods that suddenly stop for more than 90 days when you are not pregnant, cycles that become irregular after having been regular, bleeding for more than seven days, soaking through a pad or tampon every hour or two, periods less than 21 or more than 35 days apart, bleeding between periods, and severe pain.</p>
+<p>The Office on Women&#x27;s Health frames the why in one line: irregular, painful, or heavy periods can be signs of a health problem, and a doctor can work with you on them. Walking in able to point to the month a 90-day gap started beats a sense that it has been a while.</p>
+<h2>Bringing it to the appointment</h2>
+<p>However you keep it, the goal is that the clinician reads your own dates rather than your best guess. ACOG says plainly that you can track abnormal bleeding on your phone or bring a printed, filled-in chart. Either is fine; the record is the point, not its format.</p>
+<p>This is the one place an app earns its keep. In MiniCycle the calendar holds the period start dates you have logged, the statistics tab sums up your recent cycle and period lengths, and the daily note on each date holds the symptom line, all kept on your device and ready to show on your phone in the room.</p>
+<h2>What the record can&#x27;t settle</h2>
+<p>A record describes; it does not diagnose. MiniCycle&#x27;s predicted dates are reference information drawn from your past cycles, not a medical verdict and not contraception: the next period is estimated from your saved start dates, ovulation is counted back from it using a luteal phase that flexes between 9 and 14 days rather than a fixed number, and the fertile window runs from five days before that estimated ovulation through the day after.</p>
+<p>So the app shows the pattern clearly; the clinician is the one who reads meaning into it. Bring the record as the starting point for that conversation, not as a stand-in for it. The dates make the appointment faster and more concrete, and that is the whole job they have.</p>
+<h2>A short list to have ready</h2>
+<p>If you want one checklist, this is it. Your last several period start dates. How long the bleeding usually lasts. How heavy it is and how often you change a pad or tampon. Any bleeding between periods. Pain, and whether it was worse than usual. Anything unusual that month, like an illness, travel, or a new medication. And the one question you most want answered.</p>
+<p>You do not need all of it. The dates alone carry most of the weight, and the rest is there for the months something felt off. A few words per item beats a polished paragraph you never write down.</p>
+<h2>Frequently asked questions</h2>
+<p>How far back should my dates go? More is better, but even a few months of start dates beats none. Mayo Clinic suggests tracking your start date for several months in a row to see how regular your periods are.</p>
+<p>Do I need to track every symptom? No. The dates do most of the work. Add flow, pain, and any bleeding between periods if you are worried, which is the short list Mayo Clinic points to.</p>
+<p>Can I just show it on my phone? Yes. ACOG notes you can track abnormal bleeding on your phone, or print a chart and bring it. Either reaches the same goal.</p>
+<p>Will the app tell the doctor what is wrong? No. It records your pattern so you can bring it along. The diagnosis is the clinician&#x27;s to make, not the app&#x27;s.</p>
+<h2>The one-line version</h2>
+<p>Bring a record, not a memory: a run of period start dates, how long and how heavy the bleeding is, any bleeding between periods, pain, and anything unusual that month. ACOG notes an ob-gyn may ask you to keep a bleeding diary for weeks before the visit, and you can keep it on your phone or on paper.</p>
+<p>Flag periods that stop for more than 90 days without a pregnancy, turn irregular after being regular, last more than seven days, soak a pad or tampon every hour or two, or fall under 21 or over 35 days apart. The record describes your pattern; the diagnosis is the clinician&#x27;s.</p>
+                <div class="callout">
+                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="what-to-tell-doctor-about-your-period" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                </div>
+                <h2>References</h2>
+                <ul class="references">
+        <li><a href="https://www.mayoclinic.org/healthy-lifestyle/womens-health/in-depth/menstrual-cycle/art-20047186">Mayo Clinic. Menstrual cycle: What&#x27;s normal, what&#x27;s not.</a></li>
+<li><a href="https://www.acog.org/womens-health/health-tools/abnormal-bleeding-diary">American College of Obstetricians and Gynecologists. Abnormal Bleeding Diary.</a></li>
+<li><a href="https://womenshealth.gov/menstrual-cycle/period-problems">Office on Women&#x27;s Health (U.S. HHS). Period problems.</a></li>
+<li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
+                </ul>
+              </article>
+            </main>
+          </body>
+        </html>

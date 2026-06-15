@@ -1,0 +1,172 @@
+        <!doctype html>
+        <html lang="ko">
+                <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>산부인과 가기 전, 생리 기록에서 무엇을 챙겨 갈까요</title>
+          <meta name="description" content="산부인과 진료를 앞두고 있다면 며칠 전부터 무엇을 적어 두면 좋은지, 어떤 날짜와 증상을 챙겨 가면 되는지, 정리된 기록이 진료를 어떻게 도와주는지 정리했습니다.">
+          <link rel="canonical" href="https://minicycle.net/ko/blog/what-to-tell-doctor-about-your-period/">
+            <link rel="alternate" hreflang="en" href="https://minicycle.net/blog/what-to-tell-doctor-about-your-period/">
+    <link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/what-to-tell-doctor-about-your-period/">
+    <link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/what-to-tell-doctor-about-your-period/">
+          <link rel="alternate" type="application/rss+xml" title="MiniCycle Blog" href="https://minicycle.net/feed.xml">
+          <meta property="og:type" content="article">
+          <meta property="og:title" content="산부인과 가기 전, 생리 기록에서 무엇을 챙겨 갈까요">
+          <meta property="og:description" content="산부인과 진료를 앞두고 있다면 며칠 전부터 무엇을 적어 두면 좋은지, 어떤 날짜와 증상을 챙겨 가면 되는지, 정리된 기록이 진료를 어떻게 도와주는지 정리했습니다.">
+          <meta property="og:url" content="https://minicycle.net/ko/blog/what-to-tell-doctor-about-your-period/">
+          <meta property="og:image" content="https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg">
+          <meta name="twitter:card" content="summary_large_image">
+            <link rel="icon" href="../../../favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../../../apple-touch-icon.png">
+          <link rel="stylesheet" href="../../../styles.css">
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
+  function trackBlogArticleEngagement() {
+    const article = document.querySelector('article.article[data-content-group]');
+    if (!article || typeof gtag !== 'function') return;
+
+    const progressThresholds = [50, 75, 90];
+    const sentProgress = new Set();
+    const minReadMs = Number(article.dataset.minReadMs || 30000);
+    let maxPercent = 0;
+    let readCompleteSent = false;
+    let activeMs = 0;
+    let lastTick = Date.now();
+    let wasActive = !document.hidden && document.hasFocus();
+
+    function recordActiveTime() {
+      const now = Date.now();
+      if (wasActive) activeMs += now - lastTick;
+      lastTick = now;
+      wasActive = !document.hidden && document.hasFocus();
+    }
+
+    function articlePercent() {
+      const articleTop = article.getBoundingClientRect().top + window.scrollY;
+      const articleHeight = Math.max(article.offsetHeight, 1);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      return Math.max(0, Math.min(100, Math.floor(((viewportBottom - articleTop) / articleHeight) * 100)));
+    }
+
+    function send(eventName, params) {
+      gtag('event', eventName, Object.assign({
+        language: article.dataset.language,
+        content_group: article.dataset.contentGroup,
+        article_path: window.location.pathname,
+        transport_type: 'beacon'
+      }, params));
+    }
+
+    function evaluate() {
+      recordActiveTime();
+      maxPercent = Math.max(maxPercent, articlePercent());
+
+      progressThresholds.forEach((threshold) => {
+        if (maxPercent >= threshold && !sentProgress.has(threshold)) {
+          sentProgress.add(threshold);
+          send('blog_article_progress', {
+            scroll_percent: threshold,
+            active_seconds: Math.round(activeMs / 1000)
+          });
+        }
+      });
+
+      if (!readCompleteSent && maxPercent >= 90 && activeMs >= minReadMs) {
+        readCompleteSent = true;
+        send('blog_article_read_complete', {
+          max_percent: maxPercent,
+          active_seconds: Math.round(activeMs / 1000),
+          min_read_seconds: Math.round(minReadMs / 1000)
+        });
+      }
+    }
+
+    window.addEventListener('scroll', evaluate, { passive: true });
+    window.addEventListener('resize', evaluate);
+    document.addEventListener('visibilitychange', evaluate);
+    window.addEventListener('pagehide', evaluate);
+    window.setInterval(evaluate, 5000);
+    evaluate();
+  }
+  window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
+</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"산부인과 가기 전, 생리 기록에서 무엇을 챙겨 갈까요","description":"산부인과 진료를 앞두고 있다면 며칠 전부터 무엇을 적어 두면 좋은지, 어떤 날짜와 증상을 챙겨 가면 되는지, 정리된 기록이 진료를 어떻게 도와주는지 정리했습니다.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg","datePublished":"2026-06-15","dateModified":"2026-06-15","inLanguage":"ko","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/ko/blog/what-to-tell-doctor-about-your-period/"}}</script>
+        </head>
+          <body>
+        <header class="site-header">
+  <a class="brand" href="../../">MiniCycle</a>
+  <nav aria-label="Primary navigation">
+    <a href="../../blog/">블로그</a>
+    <a href="../../support/">지원</a>
+    <a href="../../privacy/">개인정보</a>
+    <a href="../../../blog/what-to-tell-doctor-about-your-period/">English</a>
+  </nav>
+</header>
+            <main class="page">
+              <article class="article" data-language="ko" data-content-group="what-to-tell-doctor-about-your-period" data-min-read-ms="90000">
+                <p class="eyebrow">주기 건강</p>
+                <h1>산부인과 가기 전, 생리 기록에서 무엇을 챙겨 갈까요</h1>
+                <p class="article-meta">2026년 6월 15일 MiniCycle 작성</p>
+                <p class="lead">접수 종이 첫 칸에 마지막 생리 시작일을 적으라고 합니다. 손가락을 꼽아 거꾸로 세다가, 결국 물음표를 붙인 날짜 하나를 적죠. 생리 진료는 대개 이런 날짜와 세부 사항으로 흘러가는데, 그 자리에서 기억을 더듬을수록 진료는 더뎌집니다. 그래서 기억 대신 기록을 챙겨 가는 편이 낫습니다. 품도 많이 들지 않습니다. 시작일 몇 개, 평소와 달랐던 점 몇 마디면 됩니다. 진료실에 들고 가면 좋은 것이 무엇인지, 그 기록으로 알 수 있는 것과 없는 것을 짚어 보겠습니다.</p>
+                <img class="article-hero" src="../../../assets/home-capture-iphone17-1118-ko-20260518.jpg" alt="MiniCycle 아이폰 실제 캡처 화면: 생리 캘린더와 위젯 경험" width="552" height="1200" loading="eager">
+        <h2>기록은 예약 전부터 시작하세요</h2>
+<p>미국산부인과학회(ACOG)가 시점에 관해 쓸 만한 말을 합니다. 비정상 자궁출혈의 원인을 찾으려고, 의사가 진료 몇 주 전부터 출혈을 기록해 오라고 하는 경우가 있다는 거예요. 이른바 비정상 출혈 일지죠. 뒤집어 말하면, 이미 뭔가 이상하다 싶을 때 적기 시작할 시점은 진료실에 앉는 날이 아니라 바로 지금입니다.</p>
+<p>단 몇 주치 날짜라도 대부분의 사람이 들고 오는 것보다 많습니다. 특별한 양식도 필요 없습니다. ACOG는 폰에 기록해도 되고, 표를 출력해 적은 뒤 가져와도 된다고 안내합니다. 중요한 건 진료 중에 기억으로 짜 맞추는 게 아니라, 진료 전에 기록이 이미 있는 것입니다.</p>
+<h2>가장 쓸모 있는 건 시작일입니다</h2>
+<p>하나만 챙긴다면 생리가 시작된 첫날입니다. Mayo Clinic은 주기를 한 생리 첫날부터 다음 생리 첫날까지로 셉니다. 그래서 시작일이 줄지어 있으면 누구든 주기 길이를 읽을 수 있습니다. 시작일 둘이면 주기 하나, 여럿이면 패턴이 보입니다. 의료진이 실제로 들여다보는 게 바로 이 패턴이고요.</p>
+<p>숫자 두 개가 더 도움이 됩니다. 생리가 며칠 가는지, Mayo Clinic은 보통 2–7일로 봅니다. 그리고 주기가 21–35일 사이에 드는지요. 어림이 아니라 실제 숫자를 가져가세요. 26일, 31일, 29일로 오간 주기와 그냥 한 달쯤은 전혀 다른 정보입니다.</p>
+<h2>날짜 말고 적어 두면 좋은 것</h2>
+<p>생리가 걱정될 때 Mayo Clinic이 날짜와 함께 적어 두라고 꼽는 게 몇 가지 있습니다. 생리가 며칠 가는지, 양은 어떤지와 패드나 탐폰을 얼마나 자주 갈았는지, 핏덩어리가 나왔는지, 생리 사이 출혈이 있었는지, 통증과 평소보다 심했는지, 기분 변화나 증상이 달라질 무렵 새로 생긴 일이요. 전부 몇 단어면 충분합니다.</p>
+<p>주기 바깥의 일도 한 줄 적어 두면 나중에 튄 달이 설명됩니다. 독한 몸살, 잠을 설친 한 주, 시차 큰 장거리 비행, 새로 시작한 약. 그달의 메모가 둘을 이어 줍니다. 짐작으로 메우는 대신에요.</p>
+<h2>이럴 땐 꼭 이야기하세요</h2>
+<p>몇몇 양상은 진료 때 바로 꺼내 볼 만하고, 막연한 걱정을 또렷한 한 줄로 바꿔 주는 게 기록입니다. Mayo Clinic은 진료를 권하는 경우로 임신이 아닌데 생리가 90일 넘게 갑자기 멈춘 때, 규칙적이다가 불규칙해진 때, 7일 넘게 출혈하는 때, 한두 시간마다 패드나 탐폰을 갈아야 할 만큼 양이 많은 때, 주기가 21일보다 짧거나 35일보다 긴 때, 생리 사이 출혈, 심한 통증을 듭니다.</p>
+<p>미국 여성건강국(OWH)은 이유를 한 줄로 정리합니다. 불규칙하거나 아프거나 양이 많은 생리는 건강 문제의 신호일 수 있고, 의사가 함께 살펴 줄 수 있다고요. 90일 공백이 시작된 달을 짚어 말할 수 있는 편이 한참 됐다는 느낌보다 낫습니다.</p>
+<h2>진료실에 어떻게 가져가나요</h2>
+<p>어떻게 적든 목표는 하나입니다. 의료진이 내 짐작이 아니라 내 날짜를 읽게 하는 것이요. ACOG는 비정상 출혈을 폰에 기록하거나, 출력한 표에 적어 가져와도 된다고 분명히 말합니다. 어느 쪽이든 좋습니다. 형식이 아니라 기록 자체가 핵심이니까요.</p>
+<p>앱이 제값을 하는 자리가 여기입니다. MiniCycle은 달력에 기록해 둔 생리 시작일을, 통계 탭에 최근 주기와 생리 길이 요약을, 날짜별 메모에 증상 한 줄을 담아 둡니다. 모두 기기 안에 있어 진료실에서 폰으로 바로 보여 줄 수 있습니다.</p>
+<h2>기록으로 알 수 없는 것</h2>
+<p>기록은 설명이지 진단이 아닙니다. MiniCycle이 찍어 주는 날짜는 지난 주기에서 뽑은 참고 정보이고, 의학적 판정도 피임 수단도 아닙니다. 다음 생리는 저장된 시작일에서 추정하고, 배란일은 고정된 숫자가 아니라 9–14일 사이에서 움직이는 황체기를 거꾸로 세어 잡으며, 가임기는 그 예상 배란일 5일 전부터 다음 날까지로 둡니다.</p>
+<p>그러니 앱은 패턴을 또렷이 보여 줄 뿐, 거기서 의미를 읽는 건 의료진입니다. 기록은 그 대화의 출발점으로 가져가는 것이지 대화를 대신하는 게 아닙니다. 날짜는 진료를 더 빠르고 구체적으로 만들어 줍니다. 기록이 맡은 일은 거기까지예요.</p>
+<h2>미리 챙겨 두면 좋은 목록</h2>
+<p>체크리스트 하나로 정리하면 이렇습니다. 최근 생리 시작일 몇 개. 보통 며칠 가는지. 양이 얼마나 많고 패드나 탐폰을 얼마나 자주 갈았는지. 생리 사이 출혈이 있었는지. 통증과 평소보다 심했는지. 그달 유난했던 일, 이를테면 몸살이나 여행, 새 약. 그리고 가장 묻고 싶은 질문 하나.</p>
+<p>전부 챙길 필요는 없습니다. 날짜만으로 대부분이 해결되고, 나머지는 뭔가 이상했던 달을 위한 자리입니다. 항목마다 몇 단어면 충분합니다. 끝내 적지 못한 매끈한 문단보다 낫습니다.</p>
+<h2>자주 묻는 질문</h2>
+<p>며칠 치를 기록해 가야 하나요? 많을수록 좋지만, 몇 달치 시작일만 있어도 없는 것보다 낫습니다. Mayo Clinic은 몇 달 동안 시작일을 적어 규칙성을 살펴보라고 권합니다.</p>
+<p>증상을 다 적어야 하나요? 아니요. 날짜가 대부분을 합니다. 걱정된다면 Mayo Clinic이 꼽는 짧은 목록대로 양, 통증, 생리 사이 출혈을 더하세요.</p>
+<p>폰으로 보여 줘도 되나요? 네. ACOG는 비정상 출혈을 폰에 기록하거나 표를 출력해 가져와도 된다고 안내합니다. 둘 다 같은 목적에 닿습니다.</p>
+<p>앱이 원인을 알려 주나요? 아니요. 패턴을 기록해 가져갈 수 있게 해 줄 뿐, 진단은 앱이 아니라 의료진의 몫입니다.</p>
+<h2>한 줄로</h2>
+<p>기억이 아니라 기록을 챙겨 가세요. 생리 시작일 몇 개, 며칠 가고 얼마나 많은지, 생리 사이 출혈, 통증, 그달 유난했던 일. ACOG는 의사가 진료 몇 주 전부터 출혈 일지를 적어 오라고 하기도 한다고 안내하며, 폰에 적어도 종이에 적어도 됩니다.</p>
+<p>임신이 아닌데 90일 넘게 멈추거나, 규칙적이다가 불규칙해지거나, 7일 넘게 가거나, 한두 시간마다 패드를 갈거나, 21일 미만·35일 초과 간격이면 꼭 이야기하세요. 기록은 패턴을 보여 줄 뿐, 진단은 의료진의 몫입니다.</p>
+                <div class="callout">
+                  <p>MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="ko" data-placement="blog_article_callout" data-content-group="what-to-tell-doctor-about-your-period" onclick="trackAppStoreClick(this)">App Store에서 받기</a>
+                </div>
+                <h2>참고 자료</h2>
+                <ul class="references">
+        <li><a href="https://www.mayoclinic.org/healthy-lifestyle/womens-health/in-depth/menstrual-cycle/art-20047186">Mayo Clinic. Menstrual cycle: What&#x27;s normal, what&#x27;s not.</a></li>
+<li><a href="https://www.acog.org/womens-health/health-tools/abnormal-bleeding-diary">American College of Obstetricians and Gynecologists. Abnormal Bleeding Diary.</a></li>
+<li><a href="https://womenshealth.gov/menstrual-cycle/period-problems">Office on Women&#x27;s Health (U.S. HHS). Period problems.</a></li>
+<li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
+                </ul>
+              </article>
+            </main>
+          </body>
+        </html>
