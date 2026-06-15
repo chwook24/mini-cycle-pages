@@ -1,0 +1,168 @@
+        <!doctype html>
+        <html lang="ko">
+                <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>MiniCycle 위젯을 아이폰 홈 화면에 추가하는 방법</title>
+          <meta name="description" content="아이폰 홈 화면에 MiniCycle 생리 위젯을 추가하는 방법을 단계별로 정리했습니다. 위젯에 무엇이 보이는지, 앱과 어떻게 같은 예측을 쓰는지, 날짜가 비어 보일 때 무엇을 확인하면 되는지 함께 설명합니다.">
+          <link rel="canonical" href="https://minicycle.net/ko/blog/add-minicycle-widget-iphone-home-screen/">
+            <link rel="alternate" hreflang="en" href="https://minicycle.net/blog/add-minicycle-widget-iphone-home-screen/">
+    <link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/add-minicycle-widget-iphone-home-screen/">
+    <link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/add-minicycle-widget-iphone-home-screen/">
+          <link rel="alternate" type="application/rss+xml" title="MiniCycle Blog" href="https://minicycle.net/feed.xml">
+          <meta property="og:type" content="article">
+          <meta property="og:title" content="MiniCycle 위젯을 아이폰 홈 화면에 추가하는 방법">
+          <meta property="og:description" content="아이폰 홈 화면에 MiniCycle 생리 위젯을 추가하는 방법을 단계별로 정리했습니다. 위젯에 무엇이 보이는지, 앱과 어떻게 같은 예측을 쓰는지, 날짜가 비어 보일 때 무엇을 확인하면 되는지 함께 설명합니다.">
+          <meta property="og:url" content="https://minicycle.net/ko/blog/add-minicycle-widget-iphone-home-screen/">
+          <meta property="og:image" content="https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg">
+          <meta name="twitter:card" content="summary_large_image">
+            <link rel="icon" href="../../../favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../../../apple-touch-icon.png">
+          <link rel="stylesheet" href="../../../styles.css">
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
+  function trackBlogArticleEngagement() {
+    const article = document.querySelector('article.article[data-content-group]');
+    if (!article || typeof gtag !== 'function') return;
+
+    const progressThresholds = [50, 75, 90];
+    const sentProgress = new Set();
+    const minReadMs = Number(article.dataset.minReadMs || 30000);
+    let maxPercent = 0;
+    let readCompleteSent = false;
+    let activeMs = 0;
+    let lastTick = Date.now();
+    let wasActive = !document.hidden && document.hasFocus();
+
+    function recordActiveTime() {
+      const now = Date.now();
+      if (wasActive) activeMs += now - lastTick;
+      lastTick = now;
+      wasActive = !document.hidden && document.hasFocus();
+    }
+
+    function articlePercent() {
+      const articleTop = article.getBoundingClientRect().top + window.scrollY;
+      const articleHeight = Math.max(article.offsetHeight, 1);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      return Math.max(0, Math.min(100, Math.floor(((viewportBottom - articleTop) / articleHeight) * 100)));
+    }
+
+    function send(eventName, params) {
+      gtag('event', eventName, Object.assign({
+        language: article.dataset.language,
+        content_group: article.dataset.contentGroup,
+        article_path: window.location.pathname,
+        transport_type: 'beacon'
+      }, params));
+    }
+
+    function evaluate() {
+      recordActiveTime();
+      maxPercent = Math.max(maxPercent, articlePercent());
+
+      progressThresholds.forEach((threshold) => {
+        if (maxPercent >= threshold && !sentProgress.has(threshold)) {
+          sentProgress.add(threshold);
+          send('blog_article_progress', {
+            scroll_percent: threshold,
+            active_seconds: Math.round(activeMs / 1000)
+          });
+        }
+      });
+
+      if (!readCompleteSent && maxPercent >= 90 && activeMs >= minReadMs) {
+        readCompleteSent = true;
+        send('blog_article_read_complete', {
+          max_percent: maxPercent,
+          active_seconds: Math.round(activeMs / 1000),
+          min_read_seconds: Math.round(minReadMs / 1000)
+        });
+      }
+    }
+
+    window.addEventListener('scroll', evaluate, { passive: true });
+    window.addEventListener('resize', evaluate);
+    document.addEventListener('visibilitychange', evaluate);
+    window.addEventListener('pagehide', evaluate);
+    window.setInterval(evaluate, 5000);
+    evaluate();
+  }
+  window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
+</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"MiniCycle 위젯을 아이폰 홈 화면에 추가하는 방법","description":"아이폰 홈 화면에 MiniCycle 생리 위젯을 추가하는 방법을 단계별로 정리했습니다. 위젯에 무엇이 보이는지, 앱과 어떻게 같은 예측을 쓰는지, 날짜가 비어 보일 때 무엇을 확인하면 되는지 함께 설명합니다.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg","datePublished":"2026-06-15","dateModified":"2026-06-15","inLanguage":"ko","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/ko/blog/add-minicycle-widget-iphone-home-screen/"}}</script>
+        </head>
+          <body>
+        <header class="site-header">
+  <a class="brand" href="../../">MiniCycle</a>
+  <nav aria-label="Primary navigation">
+    <a href="../../blog/">블로그</a>
+    <a href="../../support/">지원</a>
+    <a href="../../privacy/">개인정보</a>
+    <a href="../../../blog/add-minicycle-widget-iphone-home-screen/">English</a>
+  </nav>
+</header>
+            <main class="page">
+              <article class="article" data-language="ko" data-content-group="add-minicycle-widget-iphone-home-screen" data-min-read-ms="78000">
+                <p class="eyebrow">위젯</p>
+                <h1>MiniCycle 위젯을 아이폰 홈 화면에 추가하는 방법</h1>
+                <p class="article-meta">2026년 6월 15일 MiniCycle 작성</p>
+                <p class="lead">MiniCycle 위젯은 홈 화면의 작은 사각형 하나로, 앱을 열기 전에 오늘 내가 주기의 어디쯤 있는지 알려 줍니다. 추가하는 데는 다섯 번 남짓 탭이면 충분합니다. 처음 한 번, 어느 화면에서 시작하는지만 찾으면 됩니다.</p>
+                <img class="article-hero" src="../../../assets/home-capture-iphone17-1118-ko-20260518.jpg" alt="MiniCycle 아이폰 실제 캡처 화면: 생리 캘린더와 위젯 경험" width="552" height="1200" loading="eager">
+        <h2>위젯 추가, 다섯 번의 탭</h2>
+<p>홈 화면의 빈 곳을 앱 아이콘이 흔들릴 때까지 길게 누릅니다. 왼쪽 위 편집을 누르고 위젯 추가를 누르면 검색창과 앱 목록이 나옵니다. MiniCycle을 찾거나 이름을 입력하고, 원하는 크기를 고른 뒤 위젯 추가를 누릅니다. 마지막으로 완료를 누르면 위젯이 화면에 놓이고, 원하는 자리로 끌어 옮길 수 있습니다.</p>
+<p>날씨나 캘린더 위젯을 넣는 것과 같은 방식입니다. iOS 버전이 조금 다르면 문구가 살짝 달라지지만, 길게 누르고 편집하고 추가하고 크기를 고르고 완료하는 흐름은 같습니다.</p>
+<h2>위젯에는 무엇이 보이나요</h2>
+<p>위젯은 작은 월간 달력에 지금 주기 상태를 표시합니다. 다음 생리 예정일, 가임기, 예상 배란일, 그리고 선택한 날짜가 함께 보입니다. 앱을 열지 않고도 오늘이 주기의 어디쯤인지 한눈에 확인하라는 뜻입니다.</p>
+<p>위젯은 앱과 같은 기록을 읽습니다. 색 구분도 앱 안과 같아서, 홈 화면에서 분홍으로 보이는 날짜는 앱에서도 분홍입니다.</p>
+<h2>앱과 위젯이 똑같이 맞는 이유</h2>
+<p>위젯과 앱은 계산을 따로 하지 않고 하나만 씁니다. 둘 다 저장된 생리 시작일에서 다음 생리를 추정하고, 배란일은 고정된 숫자가 아니라 9–14일 사이에서 달라지는 황체기를 거꾸로 세어 잡으며, 가임기는 예상 배란일 5일 전부터 다음 날까지로 둡니다. 기록이 적을 때 쓰는 기본값도 같습니다. 주기 29일, 생리 5일입니다.</p>
+<p>이 공통 로직 덕분에 두 화면이 어긋나지 않습니다. 앱을 열면 위젯 타임라인도 새로 고쳐지기 때문에, 앱에서 기록한 생리가 며칠 뒤가 아니라 곧 홈 화면에도 나타납니다.</p>
+<h2>위젯이 비어 보이거나 날짜가 안 맞을 때</h2>
+<p>새 위젯에는 예측할 거리가 있어야 합니다. 생리 시작일을 한 번도 기록하지 않았다면 표시할 게 없어 달력이 비어 보입니다. 앱에서 시작일을 기록하면 다음 새로 고침 때 채워집니다.</p>
+<p>날짜가 이상하다면 두 가지를 확인해 보세요. 먼저 앱을 한 번 열어 새로 고침을 강제합니다. iOS가 위젯을 자체 일정으로 갱신하다 보니 예전 상태를 보여 주고 있을 수 있습니다. 그다음 주 시작 요일 설정을 봅니다. 앱은 월요일로 시작하는데 위젯은 일요일로 시작한다면 대개 설정이 어긋난 것이지 오류가 아닙니다. 설정을 저장하면 둘은 같은 요일을 따릅니다.</p>
+<h2>위젯이 일부러 빼 둔 것</h2>
+<p>위젯은 기록이 아니라 확인을 위한 화면입니다. 날짜별 메모나 성생활 표시는 보여 주지 않고, 날짜를 고치는 버튼도 없습니다. 그런 것들은 공간이 넉넉하고 Face ID 숨기기로 민감한 부분을 가릴 수 있는 앱 안에 있습니다.</p>
+<p>함께 쓰거나 흘깃 보이는 폰일수록 이 점이 중요합니다. 홈 화면은 폰을 든 누구에게나 보이므로, 위젯은 주기 예측만 두고 메모와 성생활 기록은 앱 뒤에 남깁니다. 생리를 추가하거나 종료일을 고치거나 메모를 남길 때는 앱을 열고, 위젯은 빠른 확인용으로 두면 됩니다.</p>
+<h2>잠금 화면과 오늘 보기에도 같은 방식으로</h2>
+<p>위젯을 둘 수 있는 곳은 홈 화면만이 아닙니다. Apple은 잠금 화면과, 화면을 오른쪽으로 쓸어 여는 오늘 보기에도 위젯을 추가할 수 있게 합니다. 잠금 화면은 화면을 길게 눌러 사용자화가 나오면 시작하고, 오늘 보기는 홈 화면과 같은 길게 누르기·편집·위젯 추가 순서를 씁니다.</p>
+<p>어디가 좋은지는 확인하는 습관에 달려 있습니다. 잠금 화면 위젯은 잠금을 풀기 전에 보여 가장 빠르고, 홈 화면 위젯은 달력을 넣을 자리가 더 넓습니다. 한 곳만 골라야 하는 건 아니고, 여러 곳에 같이 둘 수 있습니다.</p>
+<h2>자주 묻는 질문</h2>
+<p>위젯 크기는 어떤 걸 고르나요? 달력을 한 번에 얼마나 보고 싶은지로 정하면 됩니다. 큰 크기는 한 달을 더 많이 담고, 작은 크기는 자리를 덜 차지합니다. 언제든 지우고 다른 크기로 바꿀 수 있으니 둘 다 써 보는 편이 좋습니다.</p>
+<p>위젯이 갱신되지 않아요. MiniCycle을 한 번 여세요. 앱이 화면에 나타날 때 위젯 타임라인을 새로 고치기 때문에, 방금 기록한 날짜를 가장 빨리 반영하는 방법입니다. 그 외에는 iOS가 자체 일정으로 위젯을 갱신합니다.</p>
+<p>계정 없이도 위젯을 쓸 수 있나요? 네. MiniCycle은 기록을 기기에 저장하고 계정을 요구하지 않습니다. 생리 시작일을 한 번 기록하면 로그인 없이 위젯이 동작합니다.</p>
+<p>함께 쓰는 폰에서 위젯이 기록을 드러내나요? 달력의 주기 예측은 보이지만, 메모나 성생활 표시는 보이지 않습니다. 더 민감한 것은 Face ID 숨기기 뒤, 앱 안에 남습니다.</p>
+<h2>한 줄로</h2>
+<p>홈 화면 빈 곳을 길게 눌러 아이콘이 흔들리면 편집, 위젯 추가를 차례로 누르고, MiniCycle을 찾아 크기를 고른 뒤 위젯 추가와 완료를 누르면 됩니다.</p>
+<p>위젯은 앱과 같은 기록과 같은 예측 엔진을 써서 달력이 앱 안과 일치합니다. 무언가 보이려면 생리 시작일이 최소 한 번 기록돼 있어야 하고, 메모와 성생활 표시는 개인정보를 위해 앱 안에 남겨 둡니다.</p>
+                <div class="callout">
+                  <p>MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="ko" data-placement="blog_article_callout" data-content-group="add-minicycle-widget-iphone-home-screen" onclick="trackAppStoreClick(this)">App Store에서 받기</a>
+                </div>
+                <h2>참고 자료</h2>
+                <ul class="references">
+        <li><a href="https://support.apple.com/en-us/118610">Apple Support. How to add and edit widgets on your iPhone.</a></li>
+<li><a href="https://developer.apple.com/design/human-interface-guidelines/widgets">Apple Human Interface Guidelines. Widgets.</a></li>
+<li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
+                </ul>
+              </article>
+            </main>
+          </body>
+        </html>

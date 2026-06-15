@@ -1,0 +1,168 @@
+        <!doctype html>
+        <html lang="en">
+                <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>How to add the MiniCycle widget to your iPhone home screen</title>
+          <meta name="description" content="Add the MiniCycle period widget to your iPhone home screen in about five taps. What the widget shows, why it matches the app, and what to check if it looks empty.">
+          <link rel="canonical" href="https://minicycle.net/blog/add-minicycle-widget-iphone-home-screen/">
+            <link rel="alternate" hreflang="en" href="https://minicycle.net/blog/add-minicycle-widget-iphone-home-screen/">
+    <link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/add-minicycle-widget-iphone-home-screen/">
+    <link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/add-minicycle-widget-iphone-home-screen/">
+          <link rel="alternate" type="application/rss+xml" title="MiniCycle Blog" href="https://minicycle.net/feed.xml">
+          <meta property="og:type" content="article">
+          <meta property="og:title" content="How to add the MiniCycle widget to your iPhone home screen">
+          <meta property="og:description" content="Add the MiniCycle period widget to your iPhone home screen in about five taps. What the widget shows, why it matches the app, and what to check if it looks empty.">
+          <meta property="og:url" content="https://minicycle.net/blog/add-minicycle-widget-iphone-home-screen/">
+          <meta property="og:image" content="https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg">
+          <meta name="twitter:card" content="summary_large_image">
+            <link rel="icon" href="../../favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+          <link rel="stylesheet" href="../../styles.css">
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
+  function trackBlogArticleEngagement() {
+    const article = document.querySelector('article.article[data-content-group]');
+    if (!article || typeof gtag !== 'function') return;
+
+    const progressThresholds = [50, 75, 90];
+    const sentProgress = new Set();
+    const minReadMs = Number(article.dataset.minReadMs || 30000);
+    let maxPercent = 0;
+    let readCompleteSent = false;
+    let activeMs = 0;
+    let lastTick = Date.now();
+    let wasActive = !document.hidden && document.hasFocus();
+
+    function recordActiveTime() {
+      const now = Date.now();
+      if (wasActive) activeMs += now - lastTick;
+      lastTick = now;
+      wasActive = !document.hidden && document.hasFocus();
+    }
+
+    function articlePercent() {
+      const articleTop = article.getBoundingClientRect().top + window.scrollY;
+      const articleHeight = Math.max(article.offsetHeight, 1);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      return Math.max(0, Math.min(100, Math.floor(((viewportBottom - articleTop) / articleHeight) * 100)));
+    }
+
+    function send(eventName, params) {
+      gtag('event', eventName, Object.assign({
+        language: article.dataset.language,
+        content_group: article.dataset.contentGroup,
+        article_path: window.location.pathname,
+        transport_type: 'beacon'
+      }, params));
+    }
+
+    function evaluate() {
+      recordActiveTime();
+      maxPercent = Math.max(maxPercent, articlePercent());
+
+      progressThresholds.forEach((threshold) => {
+        if (maxPercent >= threshold && !sentProgress.has(threshold)) {
+          sentProgress.add(threshold);
+          send('blog_article_progress', {
+            scroll_percent: threshold,
+            active_seconds: Math.round(activeMs / 1000)
+          });
+        }
+      });
+
+      if (!readCompleteSent && maxPercent >= 90 && activeMs >= minReadMs) {
+        readCompleteSent = true;
+        send('blog_article_read_complete', {
+          max_percent: maxPercent,
+          active_seconds: Math.round(activeMs / 1000),
+          min_read_seconds: Math.round(minReadMs / 1000)
+        });
+      }
+    }
+
+    window.addEventListener('scroll', evaluate, { passive: true });
+    window.addEventListener('resize', evaluate);
+    document.addEventListener('visibilitychange', evaluate);
+    window.addEventListener('pagehide', evaluate);
+    window.setInterval(evaluate, 5000);
+    evaluate();
+  }
+  window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
+</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"How to add the MiniCycle widget to your iPhone home screen","description":"Add the MiniCycle period widget to your iPhone home screen in about five taps. What the widget shows, why it matches the app, and what to check if it looks empty.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-06-15","dateModified":"2026-06-15","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/add-minicycle-widget-iphone-home-screen/"}}</script>
+        </head>
+          <body>
+        <header class="site-header">
+  <a class="brand" href="../../">MiniCycle</a>
+  <nav aria-label="Primary navigation">
+    <a href="../../blog/">Blog</a>
+    <a href="../../support/">Support</a>
+    <a href="../../privacy/">Privacy</a>
+    <a href="../../ko/blog/add-minicycle-widget-iphone-home-screen/">한국어</a>
+  </nav>
+</header>
+            <main class="page">
+              <article class="article" data-language="en" data-content-group="add-minicycle-widget-iphone-home-screen" data-min-read-ms="90000">
+                <p class="eyebrow">Widget</p>
+                <h1>How to add the MiniCycle widget to your iPhone home screen</h1>
+                <p class="article-meta">Published June 15, 2026 by MiniCycle</p>
+                <p class="lead">The MiniCycle widget is a small square on your home screen that answers one question before you open anything: where am I in my cycle right now. Putting it there takes about five taps. The only real friction is finding the right screen the first time, so here is the whole path, plus what the widget can and can&#x27;t do once it is sitting there.</p>
+                <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
+        <h2>Add the widget in about five taps</h2>
+<p>Touch and hold an empty part of your home screen until the app icons start to jiggle. Tap Edit in the upper-left corner, then tap Add Widget. A search field and a list of apps appear. Scroll to MiniCycle or type its name, pick the size you want, and tap Add Widget. Tap Done, and the widget drops onto the screen where you can drag it wherever it suits you.</p>
+<p>These are Apple&#x27;s standard steps, the same ones you would use for Weather or Calendar. On an older version of iOS the wording shifts a little, but the shape holds: hold, edit, add, choose, done.</p>
+<h2>What the widget shows</h2>
+<p>The widget puts a small monthly calendar on your home screen with the current cycle state marked on it: your predicted next period, the fertile window, the estimated ovulation day, and the day you have selected. The idea is to make the next useful check available at a glance, so you can see where today sits without opening the app.</p>
+<p>It reads the same records the app does, and the colors follow the same legend you see inside MiniCycle. A date that shows up pink on the home screen is pink in the app too.</p>
+<h2>Why the widget can match the app exactly</h2>
+<p>The widget and the app share one calculation, not two. Both estimate your next period from your saved period start dates. Both count ovulation back from that date using a luteal phase that varies between 9 and 14 days rather than a fixed number. Both draw the fertile window from five days before estimated ovulation through the day after it. When data is thin they fall back on the same defaults: a 29-day cycle and a 5-day period.</p>
+<p>That shared logic is why the two surfaces agree. MiniCycle also refreshes the widget&#x27;s timeline when you open the app, so a period you log inside the app shows up on the home screen shortly after, not days later.</p>
+<h2>If the widget looks empty or out of date</h2>
+<p>A fresh widget needs something to predict from. Until you have logged at least one period start, there is nothing to mark, so the calendar can look bare. Log a start date in the app and the widget fills in on its next refresh.</p>
+<p>If the dates look off, two things are worth checking. Open the app once to force a refresh, since iOS updates widgets on its own schedule and may be showing an older snapshot. Then confirm your week start setting: a calendar that begins on Monday in the app but Sunday on the widget is usually a settings mismatch, not a bug. MiniCycle keeps both on the same setting once it is saved.</p>
+<h2>What the widget leaves off on purpose</h2>
+<p>The widget is built for reading, not recording. It does not show your daily notes or your private activity marks, and it has no buttons to edit a date. Those live inside the app, where there is room for them and where the Face ID hide option can protect the more sensitive parts.</p>
+<p>This matters most on a shared or glanced-at phone. A home screen is visible to anyone who picks up the device, so the widget keeps to cycle predictions and leaves notes and activity logging behind the app. Open the app when you need to add a period, fix an end date, or write a note. The widget is there for the quick look.</p>
+<h2>The same steps for the Lock Screen and Today View</h2>
+<p>The home screen is not the only place a widget can sit. Apple lets you add widgets to the Lock Screen and to Today View, the panel you reach by swiping right. The Lock Screen flow starts by touching and holding the Lock Screen until Customize appears; Today View uses the same hold, Edit, Add Widget steps as the home screen.</p>
+<p>Which spot is best depends on how you check. A Lock Screen widget is the fastest glance because you see it before unlocking, while a home screen widget gives the calendar more room. There is no wrong choice, and you can place a widget in more than one of them.</p>
+<h2>Frequently asked questions</h2>
+<p>Which widget size should I pick? Choose by how much of the calendar you want at once. A larger size fits more of the month; a smaller one takes less space. You can remove one size and add another at any time, so it is worth trying both.</p>
+<p>The widget is not updating. What now? Open MiniCycle once. The app refreshes the widget&#x27;s timeline when it appears, which is the quickest way to pull in a date you just logged. Otherwise iOS updates widgets on its own schedule.</p>
+<p>Can I add the widget without an account? Yes. MiniCycle stores records on the device and does not require an account, so the widget works as soon as you have logged a period start, with no sign-in step.</p>
+<p>Does the widget reveal my data on a shared phone? It shows cycle predictions on the calendar, but not your notes or activity marks. Anything more sensitive stays inside the app, behind the Face ID hide option.</p>
+<h2>The one-line version</h2>
+<p>To add the MiniCycle widget, touch and hold an empty spot on the home screen until the icons jiggle, tap Edit then Add Widget, find MiniCycle, choose a size, tap Add Widget, and tap Done.</p>
+<p>The widget reads the same records as the app and uses the same prediction engine, so its calendar matches what you see inside MiniCycle. It needs at least one logged period start to show anything, and it leaves notes and activity marks inside the app for privacy.</p>
+                <div class="callout">
+                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="add-minicycle-widget-iphone-home-screen" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                </div>
+                <h2>References</h2>
+                <ul class="references">
+        <li><a href="https://support.apple.com/en-us/118610">Apple Support. How to add and edit widgets on your iPhone.</a></li>
+<li><a href="https://developer.apple.com/design/human-interface-guidelines/widgets">Apple Human Interface Guidelines. Widgets.</a></li>
+<li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
+                </ul>
+              </article>
+            </main>
+          </body>
+        </html>
