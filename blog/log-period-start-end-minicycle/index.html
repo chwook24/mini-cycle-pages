@@ -1,0 +1,168 @@
+        <!doctype html>
+        <html lang="en">
+                <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>How to log a period start and end date in MiniCycle</title>
+          <meta name="description" content="Tap a date, pick period start, and MiniCycle fills the end with your period length. How logging start and end works, the seven-day replace rule, and the 14-day cap.">
+          <link rel="canonical" href="https://minicycle.net/blog/log-period-start-end-minicycle/">
+            <link rel="alternate" hreflang="en" href="https://minicycle.net/blog/log-period-start-end-minicycle/">
+    <link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/log-period-start-end-minicycle/">
+    <link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/log-period-start-end-minicycle/">
+          <link rel="alternate" type="application/rss+xml" title="MiniCycle Blog" href="https://minicycle.net/feed.xml">
+          <meta property="og:type" content="article">
+          <meta property="og:title" content="How to log a period start and end date in MiniCycle">
+          <meta property="og:description" content="Tap a date, pick period start, and MiniCycle fills the end with your period length. How logging start and end works, the seven-day replace rule, and the 14-day cap.">
+          <meta property="og:url" content="https://minicycle.net/blog/log-period-start-end-minicycle/">
+          <meta property="og:image" content="https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg">
+          <meta name="twitter:card" content="summary_large_image">
+            <link rel="icon" href="../../favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+          <link rel="stylesheet" href="../../styles.css">
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
+  function trackBlogArticleEngagement() {
+    const article = document.querySelector('article.article[data-content-group]');
+    if (!article || typeof gtag !== 'function') return;
+
+    const progressThresholds = [50, 75, 90];
+    const sentProgress = new Set();
+    const minReadMs = Number(article.dataset.minReadMs || 30000);
+    let maxPercent = 0;
+    let readCompleteSent = false;
+    let activeMs = 0;
+    let lastTick = Date.now();
+    let wasActive = !document.hidden && document.hasFocus();
+
+    function recordActiveTime() {
+      const now = Date.now();
+      if (wasActive) activeMs += now - lastTick;
+      lastTick = now;
+      wasActive = !document.hidden && document.hasFocus();
+    }
+
+    function articlePercent() {
+      const articleTop = article.getBoundingClientRect().top + window.scrollY;
+      const articleHeight = Math.max(article.offsetHeight, 1);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      return Math.max(0, Math.min(100, Math.floor(((viewportBottom - articleTop) / articleHeight) * 100)));
+    }
+
+    function send(eventName, params) {
+      gtag('event', eventName, Object.assign({
+        language: article.dataset.language,
+        content_group: article.dataset.contentGroup,
+        article_path: window.location.pathname,
+        transport_type: 'beacon'
+      }, params));
+    }
+
+    function evaluate() {
+      recordActiveTime();
+      maxPercent = Math.max(maxPercent, articlePercent());
+
+      progressThresholds.forEach((threshold) => {
+        if (maxPercent >= threshold && !sentProgress.has(threshold)) {
+          sentProgress.add(threshold);
+          send('blog_article_progress', {
+            scroll_percent: threshold,
+            active_seconds: Math.round(activeMs / 1000)
+          });
+        }
+      });
+
+      if (!readCompleteSent && maxPercent >= 90 && activeMs >= minReadMs) {
+        readCompleteSent = true;
+        send('blog_article_read_complete', {
+          max_percent: maxPercent,
+          active_seconds: Math.round(activeMs / 1000),
+          min_read_seconds: Math.round(minReadMs / 1000)
+        });
+      }
+    }
+
+    window.addEventListener('scroll', evaluate, { passive: true });
+    window.addEventListener('resize', evaluate);
+    document.addEventListener('visibilitychange', evaluate);
+    window.addEventListener('pagehide', evaluate);
+    window.setInterval(evaluate, 5000);
+    evaluate();
+  }
+  window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
+</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"How to log a period start and end date in MiniCycle","description":"Tap a date, pick period start, and MiniCycle fills the end with your period length. How logging start and end works, the seven-day replace rule, and the 14-day cap.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-06-16","dateModified":"2026-06-16","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/log-period-start-end-minicycle/"}}</script>
+        </head>
+          <body>
+        <header class="site-header">
+  <a class="brand" href="../../">MiniCycle</a>
+  <nav aria-label="Primary navigation">
+    <a href="../../blog/">Blog</a>
+    <a href="../../support/">Support</a>
+    <a href="../../privacy/">Privacy</a>
+    <a href="../../ko/blog/log-period-start-end-minicycle/">한국어</a>
+  </nav>
+</header>
+            <main class="page">
+              <article class="article" data-language="en" data-content-group="log-period-start-end-minicycle" data-min-read-ms="90000">
+                <p class="eyebrow">Logging</p>
+                <h1>How to log a period start and end date in MiniCycle</h1>
+                <p class="article-meta">Published June 16, 2026 by MiniCycle</p>
+                <p class="lead">It is the first day of a period and you open MiniCycle to mark it. There is a calendar, a date, and a choice: period start or period end. Pick start and the app does more than drop a dot on that day. It builds a span, fills in an end date, and quietly decides whether this is a new period or a correction to one already there. None of that is obvious from the single tap, so here is what each choice does, what limits it has, and how to fix it when the dates come out wrong.</p>
+                <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
+        <h2>Log the start first, and the app fills the rest</h2>
+<p>Tap the day your period began and choose period start. MiniCycle creates a closed range that starts on that day and runs for your period length, so a single tap marks more than one day. With the default period length of five days, marking June 3 as a start fills the range through June 7 without another tap.</p>
+<p>The length it uses is your setting, not a fixed number. Leave period length on automatic and the app estimates it from your recent finished periods; set it manually and that value wins. Either way the start tap is enough to get a usable span on the calendar, and you can adjust the end afterward if the real one differs.</p>
+<h2>Set the real end when the bleeding stops</h2>
+<p>When your period ends, tap that day and choose period end. The app moves the range&#x27;s end to the day you picked, as long as it lands on or after the start. Tap a day before the start and MiniCycle declines and asks for an end on or after the start instead.</p>
+<p>There is a ceiling. A single period range can run at most 14 days from start to end, counting both, so an end that would stretch the span past two weeks is refused. If you tap period end on a calendar with no start logged yet, the app stops you and asks for a start first, since there is no range to close.</p>
+<h2>Will logging a start twice create two periods?</h2>
+<p>No, and that is deliberate. Day one is often a guess, and you may tap the wrong date and want to move it a day. So MiniCycle treats a new start logged within seven days of an existing start as a correction: it replaces the old range rather than stacking a second one beside it. Log June 3, realize it was really June 4, tap June 4, and you end with one period, not two.</p>
+<p>The seven-day window cuts both ways, before or after the saved start. A start logged eight or more days from any existing one is read as a genuinely new period and kept on its own. When the replacement would change dates you already saved, the app asks you to confirm before it overwrites.</p>
+<h2>When two periods overlap, the most recent start wins</h2>
+<p>Records can still end up overlapping, usually from an end date pushed long or two starts logged close together. When ranges cover the same day, MiniCycle resolves it by start date: the range with the most recent start takes priority for what shows on that day. The newer entry, in other words, is treated as the better one.</p>
+<p>In practice a fresh, accurate start quietly wins over a stale range you forgot to close. If a day still looks wrong after that, the fix is to correct or remove the older range rather than to add another on top of it.</p>
+<h2>What these dates feed, and what they can&#x27;t</h2>
+<p>Your start dates are the engine for everything the app predicts. The next period is estimated from the start dates you have saved. Ovulation is counted back from that estimate using a luteal phase that flexes between 9 and 14 days with your cycle length, not a fixed two weeks, and the fertile window runs from five days before that estimated ovulation through the day after. Better start dates mean better predictions, which is the whole reason the logging is worth getting right.</p>
+<p>What the dates can&#x27;t do is diagnose or decide anything medical. The predictions are reference information drawn from your own pattern, not contraception and not a verdict on pregnancy. They stay on your device, since MiniCycle keeps records locally with no account, so the cost of fixing a wrong date is one tap and the benefit is a calendar that matches what actually happened.</p>
+<h2>A worked example with real dates</h2>
+<p>Say your period starts on June 3 and you usually run five days. Tap June 3, choose period start, and the range fills from June 3 through June 7. It turns out the bleeding stops on June 6, a day early. Tap June 6, choose period end, and the range shortens to June 3 through June 6, four days. Nothing else needs touching.</p>
+<p>Now suppose you mis-tapped and the real start was June 4. Tap June 4 and choose period start. Because June 4 is within seven days of the June 3 range, MiniCycle replaces it instead of adding a second period, after a confirmation. You are left with one clean range beginning June 4.</p>
+<h2>Frequently asked questions</h2>
+<p>Do I have to log an end date? No. The start tap already fills an end using your period length, so a span exists either way. Logging the end just replaces that estimate with the day it actually stopped.</p>
+<p>Why won&#x27;t the app accept my end date? Two limits cause this. The end has to fall on or after the start, and the whole period can be at most 14 days. An end before the start, or one that stretches past two weeks, is refused.</p>
+<p>I logged the same period twice. Now what? If the second start was within seven days of the first, the app already replaced the first rather than keeping both. If the two are more than seven days apart, delete or correct the one that is wrong.</p>
+<p>Can I log a future period start? You can tap any date, but the app is built around recording periods that have happened. Predicted dates are shown separately and are estimated from your saved starts, not entered by hand.</p>
+<h2>The one-line version</h2>
+<p>Tap the first day and choose period start: MiniCycle builds a closed range that runs for your period length, five days by default. Tap the last day and choose period end to set the real finish, which has to be on or after the start and no more than 14 days from it.</p>
+<p>A start logged within seven days of an existing one replaces it instead of duplicating, and when ranges overlap the most recent start wins. Those dates feed the next-period, ovulation, and fertile-window estimates, all kept on your device.</p>
+                <div class="callout">
+                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="log-period-start-end-minicycle" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                </div>
+                <h2>References</h2>
+                <ul class="references">
+        <li><a href="https://www.mayoclinic.org/healthy-lifestyle/womens-health/in-depth/menstrual-cycle/art-20047186">Mayo Clinic. Menstrual cycle: What&#x27;s normal, what&#x27;s not.</a></li>
+<li><a href="https://www.nature.com/articles/s41746-019-0152-7">Bull, J.R., et al. Real-world menstrual cycle characteristics of more than 600,000 menstrual cycles. npj Digital Medicine (2019).</a></li>
+<li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
+                </ul>
+              </article>
+            </main>
+          </body>
+        </html>
