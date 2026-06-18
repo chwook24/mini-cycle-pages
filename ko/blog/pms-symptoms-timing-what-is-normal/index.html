@@ -1,0 +1,175 @@
+        <!doctype html>
+        <html lang="ko">
+                <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>월경전증후군(PMS) 증상과 시기, 어디까지가 정상일까</title>
+          <meta name="description" content="PMS는 배란 뒤 황체기에 나타나 생리가 시작되면 며칠 안에 가라앉습니다. 흔한 증상과 시기, 정상으로 보는 범위, 그리고 병원에 가 볼 기준을 정리했습니다.">
+          <link rel="canonical" href="https://minicycle.net/ko/blog/pms-symptoms-timing-what-is-normal/">
+            <link rel="alternate" hreflang="en" href="https://minicycle.net/blog/pms-symptoms-timing-what-is-normal/">
+    <link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/pms-symptoms-timing-what-is-normal/">
+    <link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/pms-symptoms-timing-what-is-normal/">
+          <link rel="alternate" type="application/rss+xml" title="MiniCycle Blog" href="https://minicycle.net/feed.xml">
+          <meta property="og:type" content="article">
+          <meta property="og:title" content="월경전증후군(PMS) 증상과 시기, 어디까지가 정상일까">
+          <meta property="og:description" content="PMS는 배란 뒤 황체기에 나타나 생리가 시작되면 며칠 안에 가라앉습니다. 흔한 증상과 시기, 정상으로 보는 범위, 그리고 병원에 가 볼 기준을 정리했습니다.">
+          <meta property="og:url" content="https://minicycle.net/ko/blog/pms-symptoms-timing-what-is-normal/">
+          <meta property="og:image" content="https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg">
+          <meta name="twitter:card" content="summary_large_image">
+            <link rel="icon" href="../../../favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../../../apple-touch-icon.png">
+          <link rel="stylesheet" href="../../../styles.css">
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
+  function trackBlogArticleEngagement() {
+    const article = document.querySelector('article.article[data-content-group]');
+    if (!article || typeof gtag !== 'function') return;
+
+    const progressThresholds = [50, 75, 90];
+    const sentProgress = new Set();
+    const minReadMs = Number(article.dataset.minReadMs || 30000);
+    let maxPercent = 0;
+    let readCompleteSent = false;
+    let activeMs = 0;
+    let lastTick = Date.now();
+    let wasActive = !document.hidden && document.hasFocus();
+
+    function recordActiveTime() {
+      const now = Date.now();
+      if (wasActive) activeMs += now - lastTick;
+      lastTick = now;
+      wasActive = !document.hidden && document.hasFocus();
+    }
+
+    function articlePercent() {
+      const articleTop = article.getBoundingClientRect().top + window.scrollY;
+      const articleHeight = Math.max(article.offsetHeight, 1);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      return Math.max(0, Math.min(100, Math.floor(((viewportBottom - articleTop) / articleHeight) * 100)));
+    }
+
+    function send(eventName, params) {
+      gtag('event', eventName, Object.assign({
+        language: article.dataset.language,
+        content_group: article.dataset.contentGroup,
+        article_path: window.location.pathname,
+        transport_type: 'beacon'
+      }, params));
+    }
+
+    function evaluate() {
+      recordActiveTime();
+      maxPercent = Math.max(maxPercent, articlePercent());
+
+      progressThresholds.forEach((threshold) => {
+        if (maxPercent >= threshold && !sentProgress.has(threshold)) {
+          sentProgress.add(threshold);
+          send('blog_article_progress', {
+            scroll_percent: threshold,
+            active_seconds: Math.round(activeMs / 1000)
+          });
+        }
+      });
+
+      if (!readCompleteSent && maxPercent >= 90 && activeMs >= minReadMs) {
+        readCompleteSent = true;
+        send('blog_article_read_complete', {
+          max_percent: maxPercent,
+          active_seconds: Math.round(activeMs / 1000),
+          min_read_seconds: Math.round(minReadMs / 1000)
+        });
+      }
+    }
+
+    window.addEventListener('scroll', evaluate, { passive: true });
+    window.addEventListener('resize', evaluate);
+    document.addEventListener('visibilitychange', evaluate);
+    window.addEventListener('pagehide', evaluate);
+    window.setInterval(evaluate, 5000);
+    evaluate();
+  }
+  window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
+</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"월경전증후군(PMS) 증상과 시기, 어디까지가 정상일까","description":"PMS는 배란 뒤 황체기에 나타나 생리가 시작되면 며칠 안에 가라앉습니다. 흔한 증상과 시기, 정상으로 보는 범위, 그리고 병원에 가 볼 기준을 정리했습니다.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg","datePublished":"2026-06-18","dateModified":"2026-06-18","inLanguage":"ko","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/ko/blog/pms-symptoms-timing-what-is-normal/"}}</script>
+        </head>
+          <body>
+        <header class="site-header">
+  <a class="brand" href="../../">MiniCycle</a>
+  <nav aria-label="Primary navigation">
+    <a href="../../blog/">블로그</a>
+    <a href="../../support/">지원</a>
+    <a href="../../privacy/">개인정보</a>
+    <a href="../../../blog/pms-symptoms-timing-what-is-normal/">English</a>
+  </nav>
+</header>
+            <main class="page">
+              <article class="article" data-language="ko" data-content-group="pms-symptoms-timing-what-is-normal" data-min-read-ms="90000">
+                <p class="eyebrow">주기 건강</p>
+                <h1>월경전증후군(PMS) 증상과 시기, 어디까지가 정상일까</h1>
+                <p class="article-meta">2026년 6월 18일 MiniCycle 작성</p>
+                <p class="lead">생리를 사흘쯤 앞두고 아랫배가 더부룩하고, 가슴이 단단하게 뭉치고, 평소 같으면 넘겼을 일에 유독 날이 섭니다. 그러다 생리가 시작되면 하루 이틀 만에 스르륵 가라앉습니다. 이 흐름에 붙은 이름이 월경전증후군, PMS입니다. 생리를 하는 사람 넷 중 셋 정도가 어떤 형태로든 겪고, 대부분은 가볍게 지나갑니다. PMS인지 아닌지는 어느 한 증상이 얼마나 심한가보다, 언제 나타나서 언제 사라지는가로 갈립니다.</p>
+                <img class="article-hero" src="../../../assets/home-capture-iphone17-1118-ko-20260518.jpg" alt="MiniCycle 아이폰 실제 캡처 화면: 생리 캘린더와 위젯 경험" width="552" height="1200" loading="eager">
+        <h2>PMS가 정확히 무엇인지</h2>
+<p>PMS는 배란이 끝난 뒤 나타났다가 생리가 시작되면 가라앉는 몸과 마음의 변화 묶음입니다. 미국 여성건강국(OWH)은 이 시기를 호르몬으로 설명합니다. 배란 뒤 임신이 되지 않으면 에스트로겐과 프로게스테론이 가파르게 떨어지고, 생리가 시작돼 호르몬이 다시 오르면 며칠 안에 증상이 누그러진다고요.</p>
+<p>그러니 어느 정도 겪는 건 자연스럽습니다. 같은 자료는 PMS가 생리가 멈추는 폐경 뒤에는 대개 사라지고, 출산 뒤에는 다른 모양으로 돌아오기도 한다고 덧붙입니다. 주기의 호르몬 출렁임에 묶여 있어서, 주기를 따라 그렇게 움직이는 거죠.</p>
+<h2>핵심은 증상보다 시기입니다</h2>
+<p>세기는 사람마다 다르지만, 의료진이 실제로 보는 건 시기입니다. OWH는 그 양상을 이렇게 정리합니다. 생리 며칠 전부터 증상이 나타나 여러 주기에 걸쳐 되풀이되고, 생리가 시작되면 나흘 안에 끝나며, 일상에 지장을 준다고요. Mayo Clinic도 같은 말을 합니다. 증상은 예측 가능한 패턴으로 반복되고 보통 생리 시작 후 나흘 안에 사라진다고요.</p>
+<p>여기서 흔한 오해가 끼어듭니다. PMS는 한 달의 절반을 우울하게 보내는 것도, 딱 2주짜리로 정해진 것도 아닙니다. 배란과 다음 생리 사이, 곧 황체기에 속합니다. MiniCycle은 이 황체기를 고정 14일이 아니라 9–14일로 거꾸로 셉니다. 주기의 엉뚱한 시점에 찾아오거나 생리가 와도 가시지 않는 기분은 PMS의 패턴과 맞지 않습니다. 그 어긋남을 눈여겨볼 만합니다.</p>
+<h2>흔한 증상과 그 개수</h2>
+<p>목록은 길지만 대부분은 그중 몇 가지만 겪습니다. 몸으로는 더부룩함이나 가스 찬 느낌, 가슴이 붓거나 아픈 것, 두통이나 허리 통증, 피로, 아랫배 당김, 음식이 당기는 것이 있습니다. 마음으로는 짜증, 감정 기복, 불안이나 긴장, 가라앉는 기분이나 눈물, 집중이 안 됨, 너무 자거나 못 자는 잠, 줄어든 성욕이 있고요.</p>
+<p>몸 증상과 마음 증상이 섞여 나타나는 건 이상한 일이 아니라 흔한 일입니다. 마음 쪽 증상도 몸 쪽만큼 실재하고, 둘 다 같은 호르몬 변화에서 비롯됩니다.</p>
+<h2>PMS를 넘어설 때 — PMDD</h2>
+<p>PMS에는 심한 형태가 따로 있습니다. 월경전불쾌장애, PMDD입니다. OWH는 가임기 여성의 5% 미만으로 봅니다. 차이는 새 증상이 생기는 게 아니라 강도입니다. PMDD의 증상은, 주로 기분과 관련된 것인데, 매달 일이나 학업, 관계를 무너뜨릴 만큼 심합니다.</p>
+<p>Mayo Clinic도 같은 틀로 설명합니다. 증상이 일상을 마비시킬 만큼 심한 소수가 있다고요. 생리 전 시기가 그저 귀찮은 정도를 넘어 매번 삶을 흔든다면, 한번 의료진과 이야기해 볼 일입니다.</p>
+<h2>PMS를 더 심하게 만드는 것들</h2>
+<p>몇 가지가 더 심한 PMS와 함께 갑니다. OWH는 높은 스트레스, 그리고 본인이나 가족의 우울증 이력과 연관 짓고, 평균적으로 30대에 가장 흔하다고 봅니다. 30대 후반에서 40대로 들어서며 폐경이행기에 접어들면 호르몬이 더 들쭉날쭉해지면서 증상이 더 세질 수도 있습니다.</p>
+<p>겹쳐 오는 문제도 살펴야 합니다. PMS 완화를 원하는 사람의 절반쯤은 우울증, 불안장애, 과민대장증후군, 편두통처럼 생리 전에 악화되는 다른 문제를 함께 갖고 있습니다. 그러면 PMS 자체가 전부가 아닌데도 생리 전 한 주가 더 힘들게 느껴질 수 있습니다.</p>
+<h2>언제 병원에 가 볼까</h2>
+<p>기준은 요란하지 않고 실용적입니다. Mayo Clinic은 생활 습관을 바꿔도 PMS가 다스려지지 않고 건강과 일상에 지장을 준다면 진료를 받으라고 합니다. PMS 자체에서 따질 건, 그것이 사는 방식을 방해하느냐입니다.</p>
+<p>진료 전 숙제는 OWH와 Mayo Clinic이 똑같이 권합니다. 적어도 두세 주기 동안 증상을 매일 적어 두라는 것. 그래야 기억에 기대지 않고 패턴을 함께 볼 수 있습니다.</p>
+<h2>기록으로 알 수 있는 것과 없는 것</h2>
+<p>기록이 제 몫을 하는 대목이 여기입니다. 그날그날 기분을 달력에 적어 두면 시기가 눈에 들어옵니다. 증상이 황체기에 몰렸다가 생리가 오면 가시는 것이 PMS의 서명이고, 그 패턴과 맞지 않는 흐름은 그 자체로 쓸모 있는 신호입니다. MiniCycle은 메모로 어느 날짜에든 기분이나 더부룩함, 잠을 적어 둘 수 있고, 황체기가 어디인지 보여 주는 배란일·가임기 표시도 함께 있습니다. 모두 기기 안에 저장되고요.</p>
+<p>메모가 못 하는 일은 무언가를 진단하는 것입니다. 시기와 빈도는 보여 주지만 원인은 알려 주지 못하고, 같은 시기에 악화되는 다른 문제와 PMS를 가려내지도 못합니다. 이 날짜들은 내 주기에서 뽑은 참고 정보일 뿐이고, 생리 전 시기가 계속 삶을 흔든다면 그건 참고 버틸 일이 아니라 물어볼 일입니다.</p>
+<h2>두세 주기로 패턴 보기</h2>
+<p>전부 기록할 필요는 없습니다. 가장 거슬리는 증상 두세 개, 기분이든 더부룩함이든 가슴 통증이든 골라서, 며칠에 나타나는지를 두어 달 표시해 보세요. 보려는 건 모양입니다. 생리 전 일주일쯤에 몰리는지, 그리고 생리가 시작되면 가시는지요.</p>
+<p>예를 들어 어느 달엔 생리 닷새 전부터 기분이 가라앉고 가슴이 아프다가 생리 이틀째엔 둘 다 누그러집니다. 다음 달에도 같은 자리에 다시 줄을 섭니다. 황체기에 몰렸다가 곧 사라지는 이 되풀이가, 우연히 근처에 떨어진 일이 아니라 생리 전 증상임을 가리킵니다. 생리와 상관없이 이어지는 증상이라면 다른 이야기를 하고 있는 거고요.</p>
+<h2>자주 묻는 질문</h2>
+<p>생리 전에 예민해지는 게 정상인가요? 생리 며칠 전에 더 짜증이 나고 불안하거나 눈물이 나는 건 가장 흔한 생리 전 변화 중 하나이고, 그 자체로는 문제가 아닙니다. 중요한 건 시기, 그리고 그게 일상을 흔드는지입니다. 감정이 드는 것 자체가 아니라요.</p>
+<p>왜 어떤 달은 PMS가 더 심할까요? 증상 세기는 주기마다 다르고, 스트레스나 부족한 잠, 생리 전에 악화되는 다른 문제가 그달에 보태질 수 있습니다. 힘든 달이 이어진다면, 특히 30대 후반에서 40대로 가는 길목이라면 적어 둘 만합니다.</p>
+<p>PMS와 PMDD는 같은 건가요? 아닙니다. PMDD는 가임기 여성의 5% 미만에게 오는 심한 형태로, 주로 기분 증상이 매달 일상을 마비시킬 정도입니다. 대부분의 PMS는 가벼운 데서 중간 정도에 머뭅니다.</p>
+<p>PMS는 언젠가 사라지나요? 생리가 멈추는 폐경 뒤에는 누그러지거나 멎습니다. 살면서 모양이 바뀌기도 하고, 출산 뒤에는 다른 형태로 돌아오기도 합니다.</p>
+<h2>한 줄로</h2>
+<p>PMS는 배란 뒤 황체기에 나타나 생리가 시작되면 며칠 안에 가라앉는 몸과 마음 증상의 묶음입니다. 생리를 하는 사람 넷 중 셋 정도가 어떤 형태로든 겪고, 대부분은 가볍습니다. PMS를 가르는 건 어느 증상이 얼마나 심한가가 아니라 주기를 따르는 시기입니다.</p>
+<p>5% 미만은 심한 형태인 PMDD를 겪는데, 기분 증상이 매달 일상을 마비시킬 정도입니다. PMS가 일상에 지장을 주거나 생활 습관으로 다스려지지 않으면 진료를 받고, 그전에 두세 주기 동안 증상을 적어 패턴을 분명히 해 두세요. 진단이 아니라 참고 정보입니다.</p>
+                <div class="callout">
+                  <p>MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="ko" data-placement="blog_article_callout" data-content-group="pms-symptoms-timing-what-is-normal" onclick="trackAppStoreClick(this)">App Store에서 받기</a>
+                </div>
+                <h2>참고 자료</h2>
+                <ul class="references">
+        <li><a href="https://womenshealth.gov/menstrual-cycle/premenstrual-syndrome">Office on Women&#x27;s Health. Premenstrual syndrome (PMS).</a></li>
+<li><a href="https://www.mayoclinic.org/diseases-conditions/premenstrual-syndrome/symptoms-causes/syc-20376780">Mayo Clinic. Premenstrual syndrome (PMS): Symptoms &amp; causes.</a></li>
+<li><a href="https://www.acog.org/womens-health/faqs/premenstrual-syndrome">ACOG. Premenstrual Syndrome (PMS).</a></li>
+<li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
+                </ul>
+              </article>
+            </main>
+          </body>
+        </html>

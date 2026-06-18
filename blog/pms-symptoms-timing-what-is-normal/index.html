@@ -1,0 +1,175 @@
+        <!doctype html>
+        <html lang="en">
+                <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>PMS symptoms and timing: what&#x27;s normal before a period</title>
+          <meta name="description" content="PMS shows up after ovulation and fades within a few days of your period. Here is what counts as normal premenstrual change, what doesn&#x27;t, and when to see a doctor.">
+          <link rel="canonical" href="https://minicycle.net/blog/pms-symptoms-timing-what-is-normal/">
+            <link rel="alternate" hreflang="en" href="https://minicycle.net/blog/pms-symptoms-timing-what-is-normal/">
+    <link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/pms-symptoms-timing-what-is-normal/">
+    <link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/pms-symptoms-timing-what-is-normal/">
+          <link rel="alternate" type="application/rss+xml" title="MiniCycle Blog" href="https://minicycle.net/feed.xml">
+          <meta property="og:type" content="article">
+          <meta property="og:title" content="PMS symptoms and timing: what&#x27;s normal before a period">
+          <meta property="og:description" content="PMS shows up after ovulation and fades within a few days of your period. Here is what counts as normal premenstrual change, what doesn&#x27;t, and when to see a doctor.">
+          <meta property="og:url" content="https://minicycle.net/blog/pms-symptoms-timing-what-is-normal/">
+          <meta property="og:image" content="https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg">
+          <meta name="twitter:card" content="summary_large_image">
+            <link rel="icon" href="../../favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+          <link rel="stylesheet" href="../../styles.css">
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
+  function trackBlogArticleEngagement() {
+    const article = document.querySelector('article.article[data-content-group]');
+    if (!article || typeof gtag !== 'function') return;
+
+    const progressThresholds = [50, 75, 90];
+    const sentProgress = new Set();
+    const minReadMs = Number(article.dataset.minReadMs || 30000);
+    let maxPercent = 0;
+    let readCompleteSent = false;
+    let activeMs = 0;
+    let lastTick = Date.now();
+    let wasActive = !document.hidden && document.hasFocus();
+
+    function recordActiveTime() {
+      const now = Date.now();
+      if (wasActive) activeMs += now - lastTick;
+      lastTick = now;
+      wasActive = !document.hidden && document.hasFocus();
+    }
+
+    function articlePercent() {
+      const articleTop = article.getBoundingClientRect().top + window.scrollY;
+      const articleHeight = Math.max(article.offsetHeight, 1);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      return Math.max(0, Math.min(100, Math.floor(((viewportBottom - articleTop) / articleHeight) * 100)));
+    }
+
+    function send(eventName, params) {
+      gtag('event', eventName, Object.assign({
+        language: article.dataset.language,
+        content_group: article.dataset.contentGroup,
+        article_path: window.location.pathname,
+        transport_type: 'beacon'
+      }, params));
+    }
+
+    function evaluate() {
+      recordActiveTime();
+      maxPercent = Math.max(maxPercent, articlePercent());
+
+      progressThresholds.forEach((threshold) => {
+        if (maxPercent >= threshold && !sentProgress.has(threshold)) {
+          sentProgress.add(threshold);
+          send('blog_article_progress', {
+            scroll_percent: threshold,
+            active_seconds: Math.round(activeMs / 1000)
+          });
+        }
+      });
+
+      if (!readCompleteSent && maxPercent >= 90 && activeMs >= minReadMs) {
+        readCompleteSent = true;
+        send('blog_article_read_complete', {
+          max_percent: maxPercent,
+          active_seconds: Math.round(activeMs / 1000),
+          min_read_seconds: Math.round(minReadMs / 1000)
+        });
+      }
+    }
+
+    window.addEventListener('scroll', evaluate, { passive: true });
+    window.addEventListener('resize', evaluate);
+    document.addEventListener('visibilitychange', evaluate);
+    window.addEventListener('pagehide', evaluate);
+    window.setInterval(evaluate, 5000);
+    evaluate();
+  }
+  window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
+</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"PMS symptoms and timing: what's normal before a period","description":"PMS shows up after ovulation and fades within a few days of your period. Here is what counts as normal premenstrual change, what doesn't, and when to see a doctor.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-06-18","dateModified":"2026-06-18","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/pms-symptoms-timing-what-is-normal/"}}</script>
+        </head>
+          <body>
+        <header class="site-header">
+  <a class="brand" href="../../">MiniCycle</a>
+  <nav aria-label="Primary navigation">
+    <a href="../../blog/">Blog</a>
+    <a href="../../support/">Support</a>
+    <a href="../../privacy/">Privacy</a>
+    <a href="../../ko/blog/pms-symptoms-timing-what-is-normal/">한국어</a>
+  </nav>
+</header>
+            <main class="page">
+              <article class="article" data-language="en" data-content-group="pms-symptoms-timing-what-is-normal" data-min-read-ms="90000">
+                <p class="eyebrow">Cycle health</p>
+                <h1>PMS symptoms and timing: what&#x27;s normal before a period</h1>
+                <p class="article-meta">Published June 18, 2026 by MiniCycle</p>
+                <p class="lead">Three or four days before your period, your jeans feel tight, your chest is sore, and small things land harder than they should. Then your period starts and within a day or two it lifts. That arc has a name: premenstrual syndrome. As many as three in four people who menstruate notice some version of it, and for most it stays mild. What makes it PMS is not how dramatic any one symptom is. It is when the symptoms show up, and when they leave.</p>
+                <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
+        <h2>What PMS actually is</h2>
+<p>PMS is a cluster of physical and emotional changes that arrive after ovulation and fade once bleeding begins. The Office on Women&#x27;s Health ties the timing to hormones: in the days after ovulation, if no pregnancy happens, estrogen and progesterone drop sharply, and symptoms ease within a few days of your period starting as those levels climb again.</p>
+<p>So feeling some of this is ordinary. The same source notes that PMS usually eases or stops after menopause, when periods stop, and can return in a different shape after a pregnancy. It is tied to the hormonal swing of a cycle, which is why it tracks the cycle so closely.</p>
+<h2>The timing is the real tell</h2>
+<p>Severity varies, but timing is what clinicians actually look at. The Office on Women&#x27;s Health describes the pattern as symptoms that appear in the days before your period, repeat for several cycles in a row, end within about four days of bleeding starting, and get in the way of normal activities. Mayo Clinic makes the same point: the signs recur in a predictable pattern and generally clear within four days of the period beginning.</p>
+<p>This is where a common misread creeps in. PMS is not feeling low for half the month, and it is not a fixed two-week event. It belongs to the luteal phase, the stretch between ovulation and your next period, which MiniCycle counts back as 9 to 14 days rather than a flat 14. A bad mood that lands at a random point in your cycle, or one that never lifts when your period comes, does not fit the PMS pattern, and that mismatch is worth noticing.</p>
+<h2>Common symptoms, and how many to expect</h2>
+<p>The list is long, but most people get only a few. On the physical side: bloating or a gassy feeling, tender or swollen breasts, headache or backache, fatigue, cramping, and food cravings. On the emotional side: irritability, mood swings, anxiety or tension, low mood or crying spells, trouble concentrating, sleep that runs too long or too short, and less interest in sex.</p>
+<p>Mixing physical and emotional symptoms is typical, not a sign that something is unusual. The emotional ones are as real as the physical ones, and both trace back to the same hormonal shift.</p>
+<h2>When it is more than PMS</h2>
+<p>There is a severe form called premenstrual dysphoric disorder, or PMDD. The Office on Women&#x27;s Health puts it at fewer than 5% of people of childbearing age. The difference is not a new symptom so much as scale: PMDD symptoms, often the mood ones, are disabling enough to disrupt work, school, or relationships every month.</p>
+<p>Mayo Clinic frames it the same way, as a small number of people whose premenstrual symptoms are disabling. If your premenstrual stretch reliably derails your life rather than just annoying you, that is the kind of thing worth raising with a clinician.</p>
+<h2>What can make PMS feel worse</h2>
+<p>A few things track with heavier PMS. The Office on Women&#x27;s Health links it to high stress and to a personal or family history of depression, and notes that, on average, people in their 30s are most likely to report it. Symptoms can also intensify in the late 30s and 40s heading into perimenopause, when hormone levels swing less predictably.</p>
+<p>There is overlap to watch for too. About half of those who seek relief from PMS have another condition, such as depression, anxiety, irritable bowel syndrome, or migraine, that flares in the days before a period. That can make a premenstrual week feel worse without PMS itself being the whole story.</p>
+<h2>When is it worth seeing a doctor?</h2>
+<p>The threshold is practical, not dramatic. Mayo Clinic&#x27;s guidance is to see a doctor if you cannot manage PMS with lifestyle changes and the symptoms are affecting your health and daily life. For PMS itself, the question is simply whether it is interfering with how you live.</p>
+<p>Before that visit, the Office on Women&#x27;s Health and Mayo Clinic suggest the same homework: write your symptoms down each day for at least two or three cycles, so you and the clinician can see the pattern instead of relying on memory.</p>
+<h2>What tracking can and can&#x27;t tell you</h2>
+<p>This is where a record earns its place. If you note how you feel on the calendar each day, the timing becomes visible: symptoms clustering in the luteal phase and lifting when your period arrives is the PMS signature, and a pattern that does not match is its own useful signal. In MiniCycle the daily notes let you jot mood, bloating, or sleep on any date, next to the ovulation and fertile-window marks that show where your luteal phase falls, all kept on your device.</p>
+<p>What the notes cannot do is diagnose anything. They show timing and frequency, not cause, and they cannot separate PMS from a condition that happens to flare on the same schedule. The dates are reference information drawn from your own cycles, and a premenstrual stretch that keeps disrupting your life is a reason to ask, not to wait it out.</p>
+<h2>Seeing the pattern across a few cycles</h2>
+<p>You do not need to track everything. Pick the two or three symptoms that bother you most, mood, bloating, sore breasts, whatever they are, and mark which days they show up for a couple of months. What you are looking for is shape: do they cluster in the week or so before your period, and do they fade once it starts?</p>
+<p>Say one month your mood dips and your breasts ache from about five days before your period, then both ease by the second day of bleeding. The next month the same thing lines up again. That repetition, in the luteal phase and gone soon after, is what marks it as premenstrual rather than something that happened to land nearby. A symptom that ignores your period entirely is telling you something different.</p>
+<h2>Frequently asked questions</h2>
+<p>Is it normal to feel emotional before my period? Feeling more irritable, anxious, or tearful in the days before a period is one of the most common premenstrual changes, and on its own it is not a problem. The timing, and whether it disrupts your life, is what matters, not the feeling itself.</p>
+<p>Why is my PMS worse some months than others? Symptom intensity varies cycle to cycle, and stress, poor sleep, and other conditions that flare premenstrually can each add to a given month. A run of harder months is worth noting, especially heading into your late 30s and 40s.</p>
+<p>Is PMS the same as PMDD? No. PMDD is a severe form affecting fewer than 5% of people of childbearing age, where the symptoms, usually mood ones, are disabling every month. For most people PMS stays mild to moderate.</p>
+<p>Does PMS ever go away? It eases or stops after menopause, when periods stop. It can also change over your life, and after a pregnancy it may return in a different form.</p>
+<h2>The one-line version</h2>
+<p>PMS is a mix of physical and emotional symptoms that arrive after ovulation, in the luteal phase, and fade within a few days of your period starting. As many as three in four menstruating people get some version, and for most it stays mild. What defines it is the cyclical timing, not the severity of any one symptom.</p>
+<p>Fewer than 5% have the severe form, PMDD, where mood symptoms are disabling every month. See a doctor if PMS is affecting your daily life or you cannot manage it with lifestyle changes, and track your symptoms for two or three cycles first so the pattern is clear. This is reference information, not a diagnosis.</p>
+                <div class="callout">
+                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="pms-symptoms-timing-what-is-normal" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                </div>
+                <h2>References</h2>
+                <ul class="references">
+        <li><a href="https://womenshealth.gov/menstrual-cycle/premenstrual-syndrome">Office on Women&#x27;s Health. Premenstrual syndrome (PMS).</a></li>
+<li><a href="https://www.mayoclinic.org/diseases-conditions/premenstrual-syndrome/symptoms-causes/syc-20376780">Mayo Clinic. Premenstrual syndrome (PMS): Symptoms &amp; causes.</a></li>
+<li><a href="https://www.acog.org/womens-health/faqs/premenstrual-syndrome">ACOG. Premenstrual Syndrome (PMS).</a></li>
+<li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
+                </ul>
+              </article>
+            </main>
+          </body>
+        </html>
