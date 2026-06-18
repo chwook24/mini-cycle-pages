@@ -1,0 +1,174 @@
+        <!doctype html>
+        <html lang="ko">
+                <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>MiniCycle은 어떤 데이터를 수집하나 — 앱 분석과 기기 저장</title>
+          <meta name="description" content="MiniCycle은 생리 날짜와 메모를 기기 안에 두고, 앱에 들어 있는 Firebase Analytics는 화면 조회 같은 사용 이벤트만 기록합니다. 무엇이 어디에 남는지 정확히 갈라 정리했습니다.">
+          <link rel="canonical" href="https://minicycle.net/ko/blog/what-data-minicycle-collects/">
+            <link rel="alternate" hreflang="en" href="https://minicycle.net/blog/what-data-minicycle-collects/">
+    <link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/what-data-minicycle-collects/">
+    <link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/what-data-minicycle-collects/">
+          <link rel="alternate" type="application/rss+xml" title="MiniCycle Blog" href="https://minicycle.net/feed.xml">
+          <meta property="og:type" content="article">
+          <meta property="og:title" content="MiniCycle은 어떤 데이터를 수집하나 — 앱 분석과 기기 저장">
+          <meta property="og:description" content="MiniCycle은 생리 날짜와 메모를 기기 안에 두고, 앱에 들어 있는 Firebase Analytics는 화면 조회 같은 사용 이벤트만 기록합니다. 무엇이 어디에 남는지 정확히 갈라 정리했습니다.">
+          <meta property="og:url" content="https://minicycle.net/ko/blog/what-data-minicycle-collects/">
+          <meta property="og:image" content="https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg">
+          <meta name="twitter:card" content="summary_large_image">
+            <link rel="icon" href="../../../favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../../../apple-touch-icon.png">
+          <link rel="stylesheet" href="../../../styles.css">
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
+  function trackBlogArticleEngagement() {
+    const article = document.querySelector('article.article[data-content-group]');
+    if (!article || typeof gtag !== 'function') return;
+
+    const progressThresholds = [50, 75, 90];
+    const sentProgress = new Set();
+    const minReadMs = Number(article.dataset.minReadMs || 30000);
+    let maxPercent = 0;
+    let readCompleteSent = false;
+    let activeMs = 0;
+    let lastTick = Date.now();
+    let wasActive = !document.hidden && document.hasFocus();
+
+    function recordActiveTime() {
+      const now = Date.now();
+      if (wasActive) activeMs += now - lastTick;
+      lastTick = now;
+      wasActive = !document.hidden && document.hasFocus();
+    }
+
+    function articlePercent() {
+      const articleTop = article.getBoundingClientRect().top + window.scrollY;
+      const articleHeight = Math.max(article.offsetHeight, 1);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      return Math.max(0, Math.min(100, Math.floor(((viewportBottom - articleTop) / articleHeight) * 100)));
+    }
+
+    function send(eventName, params) {
+      gtag('event', eventName, Object.assign({
+        language: article.dataset.language,
+        content_group: article.dataset.contentGroup,
+        article_path: window.location.pathname,
+        transport_type: 'beacon'
+      }, params));
+    }
+
+    function evaluate() {
+      recordActiveTime();
+      maxPercent = Math.max(maxPercent, articlePercent());
+
+      progressThresholds.forEach((threshold) => {
+        if (maxPercent >= threshold && !sentProgress.has(threshold)) {
+          sentProgress.add(threshold);
+          send('blog_article_progress', {
+            scroll_percent: threshold,
+            active_seconds: Math.round(activeMs / 1000)
+          });
+        }
+      });
+
+      if (!readCompleteSent && maxPercent >= 90 && activeMs >= minReadMs) {
+        readCompleteSent = true;
+        send('blog_article_read_complete', {
+          max_percent: maxPercent,
+          active_seconds: Math.round(activeMs / 1000),
+          min_read_seconds: Math.round(minReadMs / 1000)
+        });
+      }
+    }
+
+    window.addEventListener('scroll', evaluate, { passive: true });
+    window.addEventListener('resize', evaluate);
+    document.addEventListener('visibilitychange', evaluate);
+    window.addEventListener('pagehide', evaluate);
+    window.setInterval(evaluate, 5000);
+    evaluate();
+  }
+  window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
+</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"MiniCycle은 어떤 데이터를 수집하나 — 앱 분석과 기기 저장","description":"MiniCycle은 생리 날짜와 메모를 기기 안에 두고, 앱에 들어 있는 Firebase Analytics는 화면 조회 같은 사용 이벤트만 기록합니다. 무엇이 어디에 남는지 정확히 갈라 정리했습니다.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg","datePublished":"2026-06-18","dateModified":"2026-06-18","inLanguage":"ko","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/ko/blog/what-data-minicycle-collects/"}}</script>
+        </head>
+          <body>
+        <header class="site-header">
+  <a class="brand" href="../../">MiniCycle</a>
+  <nav aria-label="Primary navigation">
+    <a href="../../blog/">블로그</a>
+    <a href="../../support/">지원</a>
+    <a href="../../privacy/">개인정보</a>
+    <a href="../../../blog/what-data-minicycle-collects/">English</a>
+  </nav>
+</header>
+            <main class="page">
+              <article class="article" data-language="ko" data-content-group="what-data-minicycle-collects" data-min-read-ms="90000">
+                <p class="eyebrow">개인정보</p>
+                <h1>MiniCycle은 어떤 데이터를 수집하나 — 앱 분석과 기기 저장</h1>
+                <p class="article-meta">2026년 6월 18일 MiniCycle 작성</p>
+                <p class="lead">생리 앱은 민감한 주제를 다루니, 내 기록이 어디로 가는지 묻는 건 당연합니다. MiniCycle의 답은 사람들이 흔히 하나로 뭉뚱그리는 두 갈래로 나뉩니다. 생리 날짜와 메모, 성생활 표시, 설정 같은 주기 데이터는 휴대폰 안에 남습니다. 그와 별개로, 앱에는 Firebase Analytics가 들어 있어 앱을 어떻게 쓰는지를 기록합니다. 화면이 열렸다, 탭을 눌렀다, 기록을 저장했다 같은 것들요. 둘은 서로 다른 흐름이고, 두 번째 흐름은 첫 번째 내용을 담지 않도록 만들어져 있습니다.</p>
+                <img class="article-hero" src="../../../assets/home-capture-iphone17-1118-ko-20260518.jpg" alt="MiniCycle 아이폰 실제 캡처 화면: 생리 캘린더와 위젯 경험" width="552" height="1200" loading="eager">
+        <h2>하나로 헷갈리는 두 가지 흐름</h2>
+<p>헷갈릴 만합니다. 기기에 저장된다와 앱 밖으로 아무것도 안 나간다는 같은 말처럼 들리지만, 둘은 다릅니다. MiniCycle은 주기 기록을 기기 안에 두고, 동시에 사용 분석을 보냅니다. 두 가지가 한꺼번에 사실입니다.</p>
+<p>그러니 정직한 요약은 MiniCycle이 아무것도 수집하지 않는다가 아닙니다. 대부분이 걱정하는 것, 즉 생리 날짜와 메모가 분석에 실리지 않는다는 쪽입니다. 이벤트가 담는 건 앱 안에서 어떻게 움직였는가이지, 거기에 무엇을 적었는가가 아닙니다.</p>
+<h2>휴대폰 안에 남는 것</h2>
+<p>생리 날짜, 날짜별 메모, 성생활 표시, 그리고 주기 설정은 기본적으로 기기 안에 저장됩니다. 만들 MiniCycle 계정도 없고, 기록을 쥐고 있는 MiniCycle 서버도 없습니다.</p>
+<p>iCloud 저장을 켜면 사본이 Apple CloudKit을 거쳐 사용자 본인의 비공개 iCloud 계정에 들어갑니다. 같은 Apple ID로 로그인한 새 아이폰에서 복원할 수 있게요. 그 사본은 MiniCycle 서버가 아니라 내 iCloud에 있습니다. MiniCycle은 자체 동기화 서비스를 돌리지 않습니다.</p>
+<h2>앱 분석이 실제로 기록하는 것</h2>
+<p>앱에는 Firebase Analytics가 들어 있습니다. Google이 무료로 제공하는 앱 측정 SDK죠. Google 문서는 이렇게 설명합니다. SDK를 붙이면 데이터 수집이 자동으로 시작되어 표준 이벤트를 모으고, 개발자가 직접 이벤트를 정의할 수도 있다고요. MiniCycle에서 그 이벤트는 앱 열기, 화면과 탭 이동, 캘린더 조작, 큰 분류의 기록 동작, 설정 변경, 알림 권한 결과, iCloud 저장 사용 여부 정도를 다룹니다.</p>
+<p>이 데이터의 목적은 사용 패턴입니다. 어떤 화면을 열고, 어디를 누르고, 설정을 바꾸는지요. Apple의 개인정보 분류가 앱 실행, 탭, 클릭이라고 부르는 것과 같은 종류의 상호작용 데이터입니다.</p>
+<h2>분석 이벤트가 일부러 빼는 것</h2>
+<p>생리 앱에서 정작 중요한 대목이 여기입니다. 분석 이벤트는 생리 날짜, 메모 본문, 성생활 표시, 정확한 주기 설정, 정확한 알림 시간, 주기 이력을 담지 않도록 설계되어 있습니다. 기록 동작 이벤트는 기록이 만들어졌다 혹은 수정되었다를 남길 뿐, 어느 날짜를 적었는지나 그 내용이 무엇인지는 싣지 않습니다.</p>
+<p>그래서 어느 날 생리 기록이 저장되었다가 신호의 모양이고, 생리가 12일에 시작되었다가 아닙니다. 이 선은 일부러 그은 것입니다. 어떤 기능이 쓰인다는 사실은 알되, 내 주기는 모르게 하는 장치죠.</p>
+<h2>기기에 있는 것과 수집되는 것은 다릅니다</h2>
+<p>여기서 Apple이 또렷한 선을 긋는데, 빌려 쓸 만합니다. Apple의 정의로는, 기기 안에서만 처리되는 데이터는 아예 수집이 아닙니다. 수집이란 데이터를 기기 밖으로 보내, 요청을 처리하는 데 필요한 시간보다 오래 읽을 수 있는 형태로 두는 것입니다. 내 주기 기록은 그 선의 기기 안쪽에 있습니다.</p>
+<p>분석 이벤트는 반대쪽입니다. 휴대폰을 떠나 Google의 Firebase로 갑니다. 이 글이 개인정보라는 한마디로 뭉개지 않고 둘을 갈라 두는 이유가 바로 이것입니다. 따져야 할 질문은 무언가 휴대폰을 떠나느냐가 아니라, 무엇이, 무엇을 싣고 떠나느냐입니다.</p>
+<h2>웹사이트 분석은 별개입니다</h2>
+<p>지금 이 글을 보고 있는 사이트는 Google Analytics로 페이지 조회 수와 방문 경로를 셉니다. 이건 앱이 아니라 웹사이트이고, 둘은 이어져 있지 않습니다. 웹사이트 분석에는 앱 안의 생리 날짜나 메모, 주기 이력이 들어가지 않습니다.</p>
+<p>둘 다 Google이 얽혀 있어 섞이기 쉽습니다. 하지만 블로그 페이지 조회와 앱 기록은 서로 다른 곳에 있는 다른 데이터이고, 어느 쪽도 상대에 손을 뻗지 않습니다.</p>
+<h2>이 글이 약속할 수 있는 것과 없는 것</h2>
+<p>정직하게 보면 한계가 있습니다. Firebase Analytics는 제3자 SDK라서, 사용 이벤트는 MiniCycle만이 아니라 Google에도 Google의 약관 아래 전달됩니다. 설계가 주기 내용을 그 이벤트에서 빼 두기는 하지만, 어쨌든 분석이고, 담지 않도록 설계라는 말은 의도와 구현을 가리키는 것이지 법정에서의 보증은 아닙니다.</p>
+<p>기기 저장이 곧 빈틈없는 의료 정보 보호인 것도 아닙니다. 기기 백업, iCloud 설정, 스크린샷, 함께 쓰거나 잠금이 풀린 휴대폰은 여전히 변수이고, 기록이 어디 있느냐로 풀리는 문제가 아닙니다. 앱의 입장은 좁고, 또 분명하려 합니다. 주기 데이터는 기기에 두고, 그 내용을 담지 않도록 만든 사용 신호만 보내며, 제3자 SDK와 웹사이트 분석이 그림의 일부임을 소리 내어 밝히는 것. 전체 문구는 MiniCycle 개인정보 처리방침에 있습니다.</p>
+<h2>이벤트 하나를 예로 보면</h2>
+<p>화요일에 생리 시작을 기록한다고 해 봅시다. 휴대폰에서는 MiniCycle이 실제 날짜를 저장하고, 캘린더와 예측은 그 날짜를 읽습니다. Firebase Analytics로는 훨씬 얇은 내용만 갑니다. 기록이 만들어졌다는 큰 분류의 기록 동작 이벤트죠. 화요일이라는 날짜는 그 이벤트에 없습니다. 거기 붙였을 메모도, 기존 기록을 대체했는지도 없습니다.</p>
+<p>같은 일을 Apple의 정의로 보면 경계가 분명합니다. 저장된 날짜는 기기 안에서 처리되니 Apple의 표현으로는 수집이 아닙니다. 기록 동작 이벤트는 휴대폰을 떠나니 수집이고, Apple이 탭과 실행이라 부르는 상호작용 데이터로 잡힙니다. 같은 탭 한 번이 서로 다른 두 흔적을 남기는 셈입니다.</p>
+<h2>자주 묻는 질문</h2>
+<p>MiniCycle이 제 생리 날짜를 올리나요? 아니요. 생리 날짜, 메모, 활동 표시, 설정은 기본적으로 기기에 저장되고, 분석 이벤트는 이를 담지 않도록 설계되어 있습니다. iCloud 저장을 켜면 사본은 MiniCycle 서버가 아니라 본인의 비공개 iCloud로 갑니다.</p>
+<p>그럼 MiniCycle은 분석을 아예 안 하나요? 합니다. 앱에는 사용 이벤트를 위한 Firebase Analytics가 있고, 웹사이트는 Google Analytics를 씁니다. 정확한 표현은 분석이 없다가 아니라, 그 분석이 주기 데이터가 아니라 사용 신호를 싣도록 만들어져 있다는 것입니다.</p>
+<p>분석을 끌 수 있나요? 이 이벤트는 계정 데이터가 아니라 사용 분석이고, 주기 내용은 설계상 거기서 빠져 있습니다. 어떤 데이터가 무엇이고 어떻게 쓰이는지는 MiniCycle 개인정보 처리방침이 기준이고, 데이터 분류는 Apple의 App Store 개인정보 안내에 정리되어 있습니다.</p>
+<p>기기 저장이 곧 비공개와 같은가요? 도움은 되지만 완전한 보증은 아닙니다. 기록이 어디 있든 기기 백업, iCloud 설정, 스크린샷, 함께 쓰는 휴대폰은 여전히 변수입니다.</p>
+<h2>한 줄로</h2>
+<p>MiniCycle은 생리 날짜, 메모, 성생활 표시, 주기 설정을 기본적으로 기기에 두고 MiniCycle 계정을 요구하지 않습니다. iCloud 저장을 켜면 사본이 Apple CloudKit을 거쳐 MiniCycle 서버가 아닌 본인의 비공개 iCloud에 저장됩니다. 이와 별개로 앱에는 Firebase Analytics가 있어 앱 열기, 화면과 탭 이동, 캘린더 조작, 큰 분류의 기록 동작, 설정 변경, 알림 권한 결과 같은 사용 이벤트를 기록합니다.</p>
+<p>이 분석 이벤트는 생리 날짜, 메모 본문, 활동 표시, 정확한 설정, 정확한 알림 시간, 주기 이력을 담지 않도록 설계되어 있습니다. Apple의 정의로 기기 안 데이터는 수집이 아니고, Firebase로 보내는 이벤트는 수집입니다. 웹사이트는 별개로 Google Analytics를 페이지 조회에 씁니다. 어쨌든 제3자 SDK를 통한 분석이지 데이터가 전혀 없다는 보증은 아니며, 전체 문구는 MiniCycle 개인정보 처리방침에 있습니다.</p>
+                <div class="callout">
+                  <p>MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="ko" data-placement="blog_article_callout" data-content-group="what-data-minicycle-collects" onclick="trackAppStoreClick(this)">App Store에서 받기</a>
+                </div>
+                <h2>참고 자료</h2>
+                <ul class="references">
+        <li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
+<li><a href="https://firebase.google.com/docs/analytics">Firebase. Google Analytics for Firebase.</a></li>
+<li><a href="https://developer.apple.com/app-store/app-privacy-details/">Apple. App privacy details on the App Store.</a></li>
+                </ul>
+              </article>
+            </main>
+          </body>
+        </html>

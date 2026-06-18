@@ -5,6 +5,12 @@
             <link>https://minicycle.net/blog/</link>
             <description>Period calendar guides from MiniCycle.</description>
         <item>
+  <title>What data MiniCycle collects, and what stays on your phone</title>
+  <link>https://minicycle.net/blog/what-data-minicycle-collects/</link>
+  <guid>https://minicycle.net/blog/what-data-minicycle-collects/</guid>
+  <pubDate>Thu, 18 Jun 2026 00:00:00 +0900</pubDate>
+  <description>MiniCycle keeps your period dates and notes on the device, while its Firebase Analytics logs only usage events like screen views, never your cycle data. Here is the exact split.</description>
+</item><item>
   <title>What counts as a heavy period, and what&#x27;s normal flow</title>
   <link>https://minicycle.net/blog/what-counts-as-a-heavy-period/</link>
   <guid>https://minicycle.net/blog/what-counts-as-a-heavy-period/</guid>
