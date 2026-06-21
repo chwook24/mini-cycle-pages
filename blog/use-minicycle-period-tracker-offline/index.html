@@ -1,0 +1,173 @@
+        <!doctype html>
+        <html lang="en">
+                <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>Does MiniCycle work offline? Period tracking with no signal</title>
+          <meta name="description" content="MiniCycle logs periods, predicts ovulation, and sends reminders entirely on your phone, so it works offline. Here is what needs a connection and what doesn&#x27;t.">
+          <link rel="canonical" href="https://minicycle.net/blog/use-minicycle-period-tracker-offline/">
+            <link rel="alternate" hreflang="en" href="https://minicycle.net/blog/use-minicycle-period-tracker-offline/">
+    <link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/use-minicycle-period-tracker-offline/">
+    <link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/use-minicycle-period-tracker-offline/">
+          <link rel="alternate" type="application/rss+xml" title="MiniCycle Blog" href="https://minicycle.net/feed.xml">
+          <meta property="og:type" content="article">
+          <meta property="og:title" content="Does MiniCycle work offline? Period tracking with no signal">
+          <meta property="og:description" content="MiniCycle logs periods, predicts ovulation, and sends reminders entirely on your phone, so it works offline. Here is what needs a connection and what doesn&#x27;t.">
+          <meta property="og:url" content="https://minicycle.net/blog/use-minicycle-period-tracker-offline/">
+          <meta property="og:image" content="https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg">
+          <meta name="twitter:card" content="summary_large_image">
+            <link rel="icon" href="../../favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+          <link rel="stylesheet" href="../../styles.css">
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
+  function trackBlogArticleEngagement() {
+    const article = document.querySelector('article.article[data-content-group]');
+    if (!article || typeof gtag !== 'function') return;
+
+    const progressThresholds = [50, 75, 90];
+    const sentProgress = new Set();
+    const minReadMs = Number(article.dataset.minReadMs || 30000);
+    let maxPercent = 0;
+    let readCompleteSent = false;
+    let activeMs = 0;
+    let lastTick = Date.now();
+    let wasActive = !document.hidden && document.hasFocus();
+
+    function recordActiveTime() {
+      const now = Date.now();
+      if (wasActive) activeMs += now - lastTick;
+      lastTick = now;
+      wasActive = !document.hidden && document.hasFocus();
+    }
+
+    function articlePercent() {
+      const articleTop = article.getBoundingClientRect().top + window.scrollY;
+      const articleHeight = Math.max(article.offsetHeight, 1);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      return Math.max(0, Math.min(100, Math.floor(((viewportBottom - articleTop) / articleHeight) * 100)));
+    }
+
+    function send(eventName, params) {
+      gtag('event', eventName, Object.assign({
+        language: article.dataset.language,
+        content_group: article.dataset.contentGroup,
+        article_path: window.location.pathname,
+        transport_type: 'beacon'
+      }, params));
+    }
+
+    function evaluate() {
+      recordActiveTime();
+      maxPercent = Math.max(maxPercent, articlePercent());
+
+      progressThresholds.forEach((threshold) => {
+        if (maxPercent >= threshold && !sentProgress.has(threshold)) {
+          sentProgress.add(threshold);
+          send('blog_article_progress', {
+            scroll_percent: threshold,
+            active_seconds: Math.round(activeMs / 1000)
+          });
+        }
+      });
+
+      if (!readCompleteSent && maxPercent >= 90 && activeMs >= minReadMs) {
+        readCompleteSent = true;
+        send('blog_article_read_complete', {
+          max_percent: maxPercent,
+          active_seconds: Math.round(activeMs / 1000),
+          min_read_seconds: Math.round(minReadMs / 1000)
+        });
+      }
+    }
+
+    window.addEventListener('scroll', evaluate, { passive: true });
+    window.addEventListener('resize', evaluate);
+    document.addEventListener('visibilitychange', evaluate);
+    window.addEventListener('pagehide', evaluate);
+    window.setInterval(evaluate, 5000);
+    evaluate();
+  }
+  window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
+</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Does MiniCycle work offline? Period tracking with no signal","description":"MiniCycle logs periods, predicts ovulation, and sends reminders entirely on your phone, so it works offline. Here is what needs a connection and what doesn't.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-06-21","dateModified":"2026-06-21","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/use-minicycle-period-tracker-offline/"}}</script>
+        </head>
+          <body>
+        <header class="site-header">
+  <a class="brand" href="../../">MiniCycle</a>
+  <nav aria-label="Primary navigation">
+    <a href="../../blog/">Blog</a>
+    <a href="../../support/">Support</a>
+    <a href="../../privacy/">Privacy</a>
+    <a href="../../ko/blog/use-minicycle-period-tracker-offline/">한국어</a>
+  </nav>
+</header>
+            <main class="page">
+              <article class="article" data-language="en" data-content-group="use-minicycle-period-tracker-offline" data-min-read-ms="90000">
+                <p class="eyebrow">How it works</p>
+                <h1>Does MiniCycle work offline? Period tracking with no signal</h1>
+                <p class="article-meta">Published June 21, 2026 by MiniCycle</p>
+                <p class="lead">You are on a flight with the Wi-Fi off, or somewhere with one bar of signal, and your period starts. Can you still log it? With MiniCycle, yes. The app records the date, redraws the calendar, works out your next period and fertile window, and fires its reminders without touching the internet. The reason is plain: there is no account to sign into and no MiniCycle server to reach. One part does use the network, and it is worth naming out loud rather than hiding.</p>
+                <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
+        <h2>The short answer</h2>
+<p>Everything you do day to day in MiniCycle runs on the phone itself. Logging a period, editing a date, reading the predictions, jotting a note, checking the widget, getting a reminder: none of it waits on a connection. Turn on airplane mode and the app behaves exactly the same.</p>
+<p>The usual assumption is that a period app has to sync with a server, the way a chat or mail app does, so losing signal would freeze it. MiniCycle is built the other way around. Your records live on the device, and the math that turns them into predictions also runs on the device. The network is not in that loop.</p>
+<h2>What works with no connection</h2>
+<p>The core of the app is fully offline. You can log a period start and end, fix a wrong date, and watch the calendar update. The predictions recalculate on the spot: the next period from your saved start dates, ovulation counted back from it, and the fertile window around that.</p>
+<p>Daily notes, the statistics tab, and the home-screen widget all read from the same on-device data, so they behave the same with no signal. Reminders do too, because they are local notifications scheduled on the phone rather than messages pushed from a server. A reminder set for next Tuesday arrives next Tuesday whether or not you have been online since.</p>
+<h2>Why it can run without a server</h2>
+<p>MiniCycle has no login and keeps no copy of your history on a MiniCycle server. That choice is what makes offline use possible, not a side effect of it. With nothing to fetch and nothing to upload before it can answer, the app already has everything it needs on the device.</p>
+<p>The prediction engine is part of that. It estimates your cycle length from up to your last 12 period starts, using a median rather than a mean (once there are at least 10 intervals it first drops the single shortest and longest), and falls back to 29 days when there is little history. Ovulation is counted back from the next expected period with a luteal phase clamped to 9–14 days, and the fertile window runs from 5 days before estimated ovulation through the day after. All of that arithmetic happens locally, in the moment you open the calendar.</p>
+<h2>The one part that uses the network</h2>
+<p>Being honest means naming the exception. MiniCycle includes Firebase Analytics, Google&#x27;s usage-measurement SDK, which logs events such as app opens and screen views to show how the app is used. Sending those events needs a connection.</p>
+<p>It does not block anything. When you are offline the usage events wait on the device and upload later, once you are back online, and in the meantime every feature keeps working. The website you are reading this on separately uses Google Analytics, but that is the site, not the app. So the accurate line is not that MiniCycle never uses the network, but that nothing you actually do with your cycle depends on it.</p>
+<h2>When you do need a connection</h2>
+<p>There is one obvious moment: installing the app or updating it goes through the App Store, which needs the internet. That is a one-time download, not a daily requirement.</p>
+<p>After that, ordinary use asks nothing of the network. If you travel abroad with data roaming off, or spend a week somewhere with no Wi-Fi, the app keeps logging and predicting as usual. The reminders you set before the trip still fire on schedule.</p>
+<h2>What offline use can and can&#x27;t do</h2>
+<p>Working offline does not change what the predictions are. They are reference information drawn from your own dates, not contraception, a pregnancy test, or a medical opinion, and being computed on the device with no connection makes them no more and no less certain than they would be online.</p>
+<p>It also is not the same as a backup. Records kept only on the device can be lost if the phone is lost, reset, or the app is deleted, and offline use does not protect against that on its own. If keeping a copy matters to you, that is a separate question from whether the app needs a signal day to day.</p>
+<h2>Airplane mode, travel, and a weak signal</h2>
+<p>Picture a long-haul flight. You put the phone in airplane mode at the gate, and three hours in your period starts. Open MiniCycle, tap the date, log the start: it saves, the calendar redraws, and the next-period estimate shifts, all at 35,000 feet. Land, turn the radios back on, and there is nothing to catch up.</p>
+<p>Or picture a week in a cabin with no Wi-Fi and roaming switched off. You log each day as usual, your notes save, and the period reminder you set last month still pops up on time. The only thing waiting for a connection is the handful of anonymous usage events, which upload quietly the next time you are online.</p>
+<h2>Frequently asked questions</h2>
+<p>Do I need to create an account or sign in? No. MiniCycle has no account, so there is no login step and nothing to authenticate against a server. You open the app and it works.</p>
+<p>Will reminders still arrive in airplane mode? Yes. Reminders are local notifications scheduled on the phone, so they fire on their dates regardless of connection.</p>
+<p>Does turning off Wi-Fi delete or hide my data? No. Your records sit on the device, so connection state does not touch them. They look the same online and off.</p>
+<p>Does the widget update offline? Yes. The widget reads the same on-device data the app uses, so it reflects your latest records and predictions without a network.</p>
+<p>Is anything sent while I am offline? Only the app&#x27;s usage analytics, and only later. Those events wait on the device and upload once you reconnect. They are not your cycle data.</p>
+<h2>The one-line version</h2>
+<p>MiniCycle runs its core entirely on the phone, so it works with no internet: logging periods, fixing dates, the calendar, predictions, daily notes, statistics, the widget, and reminders all work offline because there is no account and no MiniCycle server, and the prediction engine (median cycle length from up to 12 records, a 9–14 day luteal phase, fertile window 5 days before ovulation through 1 day after, 29-day default) runs locally.</p>
+<p>The one networked piece is Firebase Analytics, which logs anonymous usage events and uploads them later when you are back online; it never blocks a feature and does not carry your cycle data. A connection is only needed to install or update the app from the App Store. Offline use does not change how certain the predictions are, and it is not a substitute for a backup.</p>
+                <div class="callout">
+                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="use-minicycle-period-tracker-offline" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                </div>
+                <h2>References</h2>
+                <ul class="references">
+        <li><a href="https://support.apple.com/en-us/118610">Apple Support. How to add and edit widgets on your iPhone.</a></li>
+<li><a href="https://developer.apple.com/documentation/usernotifications">Apple Developer Documentation. User Notifications.</a></li>
+<li><a href="https://firebase.google.com/docs/analytics">Firebase. Google Analytics for Firebase.</a></li>
+<li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
+                </ul>
+              </article>
+            </main>
+          </body>
+        </html>
