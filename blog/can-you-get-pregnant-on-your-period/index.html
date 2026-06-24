@@ -1,0 +1,173 @@
+        <!doctype html>
+        <html lang="en">
+                <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>Can you get pregnant on your period? What&#x27;s actually possible</title>
+          <meta name="description" content="Getting pregnant on your period is unlikely but not impossible, mostly on short cycles with long periods. Here is why it happens and why a calendar is not contraception.">
+          <link rel="canonical" href="https://minicycle.net/blog/can-you-get-pregnant-on-your-period/">
+            <link rel="alternate" hreflang="en" href="https://minicycle.net/blog/can-you-get-pregnant-on-your-period/">
+    <link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/can-you-get-pregnant-on-your-period/">
+    <link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/can-you-get-pregnant-on-your-period/">
+          <link rel="alternate" type="application/rss+xml" title="MiniCycle Blog" href="https://minicycle.net/feed.xml">
+          <meta property="og:type" content="article">
+          <meta property="og:title" content="Can you get pregnant on your period? What&#x27;s actually possible">
+          <meta property="og:description" content="Getting pregnant on your period is unlikely but not impossible, mostly on short cycles with long periods. Here is why it happens and why a calendar is not contraception.">
+          <meta property="og:url" content="https://minicycle.net/blog/can-you-get-pregnant-on-your-period/">
+          <meta property="og:image" content="https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg">
+          <meta name="twitter:card" content="summary_large_image">
+            <link rel="icon" href="../../favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+          <link rel="stylesheet" href="../../styles.css">
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
+  function trackBlogArticleEngagement() {
+    const article = document.querySelector('article.article[data-content-group]');
+    if (!article || typeof gtag !== 'function') return;
+
+    const progressThresholds = [50, 75, 90];
+    const sentProgress = new Set();
+    const minReadMs = Number(article.dataset.minReadMs || 30000);
+    let maxPercent = 0;
+    let readCompleteSent = false;
+    let activeMs = 0;
+    let lastTick = Date.now();
+    let wasActive = !document.hidden && document.hasFocus();
+
+    function recordActiveTime() {
+      const now = Date.now();
+      if (wasActive) activeMs += now - lastTick;
+      lastTick = now;
+      wasActive = !document.hidden && document.hasFocus();
+    }
+
+    function articlePercent() {
+      const articleTop = article.getBoundingClientRect().top + window.scrollY;
+      const articleHeight = Math.max(article.offsetHeight, 1);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      return Math.max(0, Math.min(100, Math.floor(((viewportBottom - articleTop) / articleHeight) * 100)));
+    }
+
+    function send(eventName, params) {
+      gtag('event', eventName, Object.assign({
+        language: article.dataset.language,
+        content_group: article.dataset.contentGroup,
+        article_path: window.location.pathname,
+        transport_type: 'beacon'
+      }, params));
+    }
+
+    function evaluate() {
+      recordActiveTime();
+      maxPercent = Math.max(maxPercent, articlePercent());
+
+      progressThresholds.forEach((threshold) => {
+        if (maxPercent >= threshold && !sentProgress.has(threshold)) {
+          sentProgress.add(threshold);
+          send('blog_article_progress', {
+            scroll_percent: threshold,
+            active_seconds: Math.round(activeMs / 1000)
+          });
+        }
+      });
+
+      if (!readCompleteSent && maxPercent >= 90 && activeMs >= minReadMs) {
+        readCompleteSent = true;
+        send('blog_article_read_complete', {
+          max_percent: maxPercent,
+          active_seconds: Math.round(activeMs / 1000),
+          min_read_seconds: Math.round(minReadMs / 1000)
+        });
+      }
+    }
+
+    window.addEventListener('scroll', evaluate, { passive: true });
+    window.addEventListener('resize', evaluate);
+    document.addEventListener('visibilitychange', evaluate);
+    window.addEventListener('pagehide', evaluate);
+    window.setInterval(evaluate, 5000);
+    evaluate();
+  }
+  window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
+</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Can you get pregnant on your period? What's actually possible","description":"Getting pregnant on your period is unlikely but not impossible, mostly on short cycles with long periods. Here is why it happens and why a calendar is not contraception.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-06-24","dateModified":"2026-06-24","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/can-you-get-pregnant-on-your-period/"}}</script>
+        </head>
+          <body>
+        <header class="site-header">
+  <a class="brand" href="../../">MiniCycle</a>
+  <nav aria-label="Primary navigation">
+    <a href="../../blog/">Blog</a>
+    <a href="../../support/">Support</a>
+    <a href="../../privacy/">Privacy</a>
+    <a href="../../ko/blog/can-you-get-pregnant-on-your-period/">한국어</a>
+  </nav>
+</header>
+            <main class="page">
+              <article class="article" data-language="en" data-content-group="can-you-get-pregnant-on-your-period" data-min-read-ms="90000">
+                <p class="eyebrow">Cycle health</p>
+                <h1>Can you get pregnant on your period? What&#x27;s actually possible</h1>
+                <p class="article-meta">Published June 24, 2026 by MiniCycle</p>
+                <p class="lead">You are on your period, you have unprotected sex, and a day later the question lands: could that lead to a pregnancy? The short version is yes, it can, even though your period is one of the less likely times. The idea that bleeding is a free pass is one of the most common myths about the cycle, and it falls apart for a plain reason: the days do not line up as neatly as the textbook diagram suggests.</p>
+                <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
+        <h2>The short answer</h2>
+<p>Pregnancy during a period is uncommon, not impossible. Cleveland Clinic puts it plainly: having unprotected sex at any point in your cycle can lead to pregnancy, including during menstruation, and your period is most likely the lowest-risk window rather than a no-risk one. For most people the chance is real but small, and it climbs in specific situations rather than across the board.</p>
+<p>So the honest answer is not a flat yes or no. It is closer to: usually no, sometimes yes, and the difference comes down to your own cycle rather than a rule that holds for everyone.</p>
+<h2>Why it&#x27;s possible at all</h2>
+<p>Two facts do most of the work. First, sperm last. ACOG says sperm can live in the body for as long as five days; the NHS puts the upper figure at seven. Either way, sperm from sex today can still be present most of a week later. Second, an egg, once released, survives only about 12 to 24 hours. Put the two together and the fertile window is roughly six days, the five days before ovulation through ovulation day itself.</p>
+<p>The catch is that ovulation does not keep to a fixed date. The popular rule says you ovulate on day 14, but the NHS describes ovulation as happening somewhere around 10 to 16 days before the next period, and Cleveland Clinic notes that only about 30% of people ovulate between days 10 and 17 of their cycle. Some ovulate earlier, some later, and the same person can shift from one month to the next. Day 14 is an average, not an appointment.</p>
+<h2>Short cycle, long period: when the days overlap</h2>
+<p>The clearest way pregnancy happens during a period is when two things combine: a short cycle and a long period. Say your cycle runs 22 days instead of 29, and your period lasts a full week. Ovulation on a cycle that short lands earlier, not far past the bleeding. Have unprotected sex on the last days of that period, and sperm that survive five days can still be waiting when the egg arrives.</p>
+<p>This is also why right after your period is riskier than during it. As Cleveland Clinic points out, the days just after bleeding ends move you closer to ovulation, not further from it. The end of a period is not the start of a safe stretch.</p>
+<h2>Bleeding isn&#x27;t always a period</h2>
+<p>There is a quieter reason the period-as-safe-time idea fails: not every bleed is a period. A true period sheds the whole uterine lining. Other bleeding, a little spotting around ovulation, light bleeding from a cyst, breakthrough bleeding on contraception, can look similar and get logged as a period when it is not one.</p>
+<p>That matters because some of those bleeds happen close to ovulation, the most fertile part of the cycle. If you treat a mid-cycle spot as a period and assume you are covered, you can be at your most fertile while thinking you are at your least. When in doubt, the pattern across several cycles tells you more than a single ambiguous day.</p>
+<h2>Why a calendar can&#x27;t promise a safe day</h2>
+<p>This is where calendar math reaches its limit. A predicted fertile window is built from your past dates, and it assumes the next cycle behaves like recent ones. A cold, a stressful week, a change in weight or sleep, or a new medication can move ovulation, and the calendar only finds out after the fact. Cleveland Clinic&#x27;s phrase is worth keeping: your cycle can change on a dime.</p>
+<p>So a period-tracking app is reference information, not contraception. MiniCycle estimates ovulation by counting back a luteal phase of 9 to 14 days from your next expected period, then marks a fertile window from five days before that through the day after, all on your device. That window can show when pregnancy is more or less likely on a typical cycle; it cannot promise a day with no chance at all. If avoiding pregnancy is the goal, the NHS and Cleveland Clinic agree there is no reliably safe day to count on, and a chosen birth control method is what actually does that job.</p>
+<h2>What tracking can and can&#x27;t tell you</h2>
+<p>What a record is good for is noticing your own range: how long your cycles tend to run, how many days your period lasts, whether a bleed showed up off schedule. Those are exactly the details worth bringing to a clinician if something seems off, or if you are trying to conceive and want a sense of your likely fertile days.</p>
+<p>What it cannot do is turn an estimate into a guarantee, in either direction. It will not confirm a pregnancy, and it will not rule one out. For that, a test and, if needed, a clinician are the right tools. The calendar is a map of your tendencies, not a fence around them.</p>
+<h2>A short-cycle example, step by step</h2>
+<p>Take a 22-day cycle with a 6-day period, and count day 1 as the first day of bleeding. Ovulation on a cycle this short comes earlier than the textbook day 14, often near the start of the second week. Unprotected sex on day 5 or 6, while you are still spotting, can leave sperm that survive into day 10 or 11, which is close to when that early ovulation could happen. The bleeding and the fertile days never touch, but five days of sperm survival can bridge the gap.</p>
+<p>Stretch the period to eight days, or shorten the cycle further, and the overlap gets easier, not harder. None of this is a forecast for any single month. It is the reason &#x27;I was on my period&#x27; is not the reassurance it sounds like.</p>
+<h2>Frequently asked questions</h2>
+<p>Is the first day of a period safe? It is among the lower-risk days, but not a guaranteed safe one. On a short cycle, even early-period sex can leave sperm present near an early ovulation.</p>
+<p>Can you get pregnant the day before your period? It is one of the least likely times, because ovulation has usually passed and the egg is gone. The catch is being sure that bleed is a real period and that ovulation already happened, which a calendar cannot confirm in the moment.</p>
+<p>Does a regular cycle make period sex safe? More predictable, not safe. Cleveland Clinic notes that even normally regular cycles can shift suddenly with illness, stress, or a change in weight.</p>
+<p>If I am bleeding, does that mean I did not ovulate near it? Not necessarily. Spotting around ovulation or other mid-cycle bleeding can be mistaken for a period, and that bleeding can sit right next to your most fertile days.</p>
+<p>Is a period-tracking app a form of birth control? No. It estimates likely fertile days from your history as reference information. To prevent pregnancy, a clinician-recommended method is what to rely on.</p>
+<h2>The one-line version</h2>
+<p>Yes, you can get pregnant on your period, though it is among the least likely times. Sperm survive up to five days (the NHS says up to seven) and an egg lasts about 12 to 24 hours, so the fertile window spans roughly the five days before ovulation through the day after. Because ovulation is not fixed to day 14 and runs earlier on short cycles, sex late in a long period during a short cycle can leave sperm present when an early egg arrives, and not every bleed is a true period.</p>
+<p>A predicted fertile window is built from past dates and cannot account for a cycle that shifts with illness, stress, or sleep, so it is reference information, not contraception. MiniCycle marks a fertile window (five days before its estimated ovulation, using a 9–14 day luteal phase, through the day after) on your device; it cannot promise a day with zero chance. To avoid pregnancy, rely on a chosen birth control method, and use a test plus a clinician to confirm or rule out a pregnancy.</p>
+                <div class="callout">
+                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="can-you-get-pregnant-on-your-period" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                </div>
+                <h2>References</h2>
+                <ul class="references">
+        <li><a href="https://www.acog.org/womens-health/experts-and-stories/the-latest/trying-to-get-pregnant-heres-when-to-have-sex">ACOG. Trying to Get Pregnant? Here&#x27;s When to Have Sex.</a></li>
+<li><a href="https://www.nhs.uk/conditions/periods/fertility-in-the-menstrual-cycle/">NHS. Periods and fertility in the menstrual cycle.</a></li>
+<li><a href="https://health.clevelandclinic.org/can-you-get-pregnant-on-your-period">Cleveland Clinic. Can You Get Pregnant if You Have Sex During Your Period?</a></li>
+<li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
+                </ul>
+              </article>
+            </main>
+          </body>
+        </html>

@@ -1,0 +1,173 @@
+        <!doctype html>
+        <html lang="ko">
+                <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>생리 중에도 임신이 될 수 있을까요</title>
+          <meta name="description" content="생리 중 임신은 드물지만 불가능하지 않습니다. 주기가 짧고 생리가 길 때 특히 그렇습니다. 왜 가능한지, 달력 예측이 왜 피임이 아닌지 정리했습니다.">
+          <link rel="canonical" href="https://minicycle.net/ko/blog/can-you-get-pregnant-on-your-period/">
+            <link rel="alternate" hreflang="en" href="https://minicycle.net/blog/can-you-get-pregnant-on-your-period/">
+    <link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/can-you-get-pregnant-on-your-period/">
+    <link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/can-you-get-pregnant-on-your-period/">
+          <link rel="alternate" type="application/rss+xml" title="MiniCycle Blog" href="https://minicycle.net/feed.xml">
+          <meta property="og:type" content="article">
+          <meta property="og:title" content="생리 중에도 임신이 될 수 있을까요">
+          <meta property="og:description" content="생리 중 임신은 드물지만 불가능하지 않습니다. 주기가 짧고 생리가 길 때 특히 그렇습니다. 왜 가능한지, 달력 예측이 왜 피임이 아닌지 정리했습니다.">
+          <meta property="og:url" content="https://minicycle.net/ko/blog/can-you-get-pregnant-on-your-period/">
+          <meta property="og:image" content="https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg">
+          <meta name="twitter:card" content="summary_large_image">
+            <link rel="icon" href="../../../favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../../../apple-touch-icon.png">
+          <link rel="stylesheet" href="../../../styles.css">
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
+  function trackBlogArticleEngagement() {
+    const article = document.querySelector('article.article[data-content-group]');
+    if (!article || typeof gtag !== 'function') return;
+
+    const progressThresholds = [50, 75, 90];
+    const sentProgress = new Set();
+    const minReadMs = Number(article.dataset.minReadMs || 30000);
+    let maxPercent = 0;
+    let readCompleteSent = false;
+    let activeMs = 0;
+    let lastTick = Date.now();
+    let wasActive = !document.hidden && document.hasFocus();
+
+    function recordActiveTime() {
+      const now = Date.now();
+      if (wasActive) activeMs += now - lastTick;
+      lastTick = now;
+      wasActive = !document.hidden && document.hasFocus();
+    }
+
+    function articlePercent() {
+      const articleTop = article.getBoundingClientRect().top + window.scrollY;
+      const articleHeight = Math.max(article.offsetHeight, 1);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      return Math.max(0, Math.min(100, Math.floor(((viewportBottom - articleTop) / articleHeight) * 100)));
+    }
+
+    function send(eventName, params) {
+      gtag('event', eventName, Object.assign({
+        language: article.dataset.language,
+        content_group: article.dataset.contentGroup,
+        article_path: window.location.pathname,
+        transport_type: 'beacon'
+      }, params));
+    }
+
+    function evaluate() {
+      recordActiveTime();
+      maxPercent = Math.max(maxPercent, articlePercent());
+
+      progressThresholds.forEach((threshold) => {
+        if (maxPercent >= threshold && !sentProgress.has(threshold)) {
+          sentProgress.add(threshold);
+          send('blog_article_progress', {
+            scroll_percent: threshold,
+            active_seconds: Math.round(activeMs / 1000)
+          });
+        }
+      });
+
+      if (!readCompleteSent && maxPercent >= 90 && activeMs >= minReadMs) {
+        readCompleteSent = true;
+        send('blog_article_read_complete', {
+          max_percent: maxPercent,
+          active_seconds: Math.round(activeMs / 1000),
+          min_read_seconds: Math.round(minReadMs / 1000)
+        });
+      }
+    }
+
+    window.addEventListener('scroll', evaluate, { passive: true });
+    window.addEventListener('resize', evaluate);
+    document.addEventListener('visibilitychange', evaluate);
+    window.addEventListener('pagehide', evaluate);
+    window.setInterval(evaluate, 5000);
+    evaluate();
+  }
+  window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
+</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"생리 중에도 임신이 될 수 있을까요","description":"생리 중 임신은 드물지만 불가능하지 않습니다. 주기가 짧고 생리가 길 때 특히 그렇습니다. 왜 가능한지, 달력 예측이 왜 피임이 아닌지 정리했습니다.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg","datePublished":"2026-06-24","dateModified":"2026-06-24","inLanguage":"ko","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/ko/blog/can-you-get-pregnant-on-your-period/"}}</script>
+        </head>
+          <body>
+        <header class="site-header">
+  <a class="brand" href="../../">MiniCycle</a>
+  <nav aria-label="Primary navigation">
+    <a href="../../blog/">블로그</a>
+    <a href="../../support/">지원</a>
+    <a href="../../privacy/">개인정보</a>
+    <a href="../../../blog/can-you-get-pregnant-on-your-period/">English</a>
+  </nav>
+</header>
+            <main class="page">
+              <article class="article" data-language="ko" data-content-group="can-you-get-pregnant-on-your-period" data-min-read-ms="90000">
+                <p class="eyebrow">주기 건강</p>
+                <h1>생리 중에도 임신이 될 수 있을까요</h1>
+                <p class="article-meta">2026년 6월 24일 MiniCycle 작성</p>
+                <p class="lead">생리 중에 피임 없이 관계를 가졌고, 다음 날 문득 걱정이 됩니다. 이때도 임신이 될까. 짧게 답하면, 가능성은 낮지만 됩니다. 생리 중에는 임신이 안 된다는 말은 주기에 관한 흔한 오해인데, 이유는 단순합니다. 실제 몸의 날짜는 교과서 그림처럼 깔끔하게 떨어지지 않거든요.</p>
+                <img class="article-hero" src="../../../assets/home-capture-iphone17-1118-ko-20260518.jpg" alt="MiniCycle 아이폰 실제 캡처 화면: 생리 캘린더와 위젯 경험" width="552" height="1200" loading="eager">
+        <h2>짧게 답하면</h2>
+<p>생리 중 임신은 드물 뿐, 불가능하지 않습니다. 클리블랜드 클리닉은 주기의 어느 시점이든 피임 없이 관계를 가지면 임신으로 이어질 수 있고, 생리 중은 위험이 가장 낮은 시기일 뿐 위험이 없는 시기는 아니라고 설명합니다. 대부분에게 확률은 분명 작지만, 특정 상황에서 그 확률이 올라갑니다.</p>
+<p>그래서 정직한 답은 된다, 안 된다의 단답이 아닙니다. 보통은 아니고 가끔은 그렇다, 그 차이는 누구에게나 들어맞는 규칙이 아니라 내 주기에서 갈립니다.</p>
+<h2>왜 가능할까요</h2>
+<p>두 가지가 핵심입니다. 먼저 정자는 오래 삽니다. ACOG는 정자가 몸 안에서 최대 5일까지 산다고 보고, NHS는 그 상한을 7일로 잡습니다. 어느 쪽이든 오늘 들어온 정자가 거의 일주일 뒤까지 남아 있을 수 있다는 뜻입니다. 반면 배란된 난자는 약 12–24시간만 버팁니다. 둘을 합치면 가임기는 대략 6일, 곧 배란 5일 전부터 배란 당일까지입니다.</p>
+<p>문제는 배란일이 고정이 아니라는 점입니다. 배란은 14일째라는 통념과 달리, NHS는 배란이 다음 생리 약 10–16일 전 사이에 일어난다고 설명하고, 클리블랜드 클리닉은 주기의 10–17일 사이에 배란하는 사람이 약 30%뿐이라고 짚습니다. 누구는 더 일찍, 누구는 더 늦게 배란하고, 같은 사람도 달마다 달라집니다. 14일은 평균이지 약속된 날짜가 아닙니다.</p>
+<h2>주기가 짧고 생리가 길 때</h2>
+<p>생리 중 임신이 가장 잘 일어나는 경우는 짧은 주기와 긴 생리가 겹칠 때입니다. 주기가 29일이 아니라 22일이고 생리가 일주일쯤 간다고 해 봅시다. 주기가 짧으면 배란도 그만큼 앞당겨져, 생리가 끝난 자리에서 멀지 않습니다. 그 생리의 마지막 날쯤 관계를 가지면, 5일까지 사는 정자가 난자가 나올 때까지 남아 있을 수 있습니다.</p>
+<p>생리 직후가 생리 중보다 오히려 더 조심스러운 이유도 같습니다. 클리블랜드 클리닉의 설명처럼, 생리가 끝난 직후의 며칠은 배란에서 멀어지는 게 아니라 가까워집니다. 생리가 끝났다고 안전 구간이 시작되는 건 아닙니다.</p>
+<h2>모든 출혈이 생리는 아닙니다</h2>
+<p>조용한 함정이 하나 더 있습니다. 모든 출혈이 생리는 아니라는 점입니다. 진짜 생리는 자궁내막 전체가 떨어져 나오는 것입니다. 배란기 즈음의 점 출혈, 낭종에서 비롯된 약간의 출혈, 피임 중의 부정 출혈은 생리처럼 보여서 생리로 기록되기 쉽습니다.</p>
+<p>이게 왜 중요하냐면, 그런 출혈 중 일부는 가장 가임력이 높은 배란기 가까이에서 일어나기 때문입니다. 배란기의 점 출혈을 생리로 여기고 안전하다 생각하면, 실은 가장 가임력이 높은 때에 가장 낮다고 착각하는 셈입니다. 헷갈릴 때는 하루의 애매한 출혈보다 여러 주기에 걸친 패턴이 더 많은 걸 알려 줍니다.</p>
+<h2>달력은 안전한 날을 약속하지 못합니다</h2>
+<p>여기서 달력 계산의 한계가 드러납니다. 예측된 가임기는 지난 날짜로 만든 것이고, 다음 주기가 최근과 비슷하게 흘러갈 거라고 가정합니다. 감기, 스트레스가 큰 한 주, 체중이나 수면의 변화, 새로 먹는 약은 배란을 옮길 수 있고, 달력은 그 사실을 지나고 나서야 압니다. 클리블랜드 클리닉의 표현처럼 주기는 한순간에 바뀔 수 있습니다.</p>
+<p>그래서 생리 기록 앱은 참고 정보이지 피임 수단이 아닙니다. MiniCycle은 다음 예정 생리에서 9–14일의 황체기를 거꾸로 빼 배란일을 추정하고, 그 5일 전부터 다음 날까지를 가임기로 표시합니다. 모두 기기 안에서요. 이 가임기는 평범한 주기에서 임신 가능성이 높고 낮은 때를 알려 줄 수는 있어도, 가능성이 0인 날을 약속하진 못합니다. 임신을 피하는 게 목적이라면, NHS와 클리블랜드 클리닉 모두 믿고 기댈 안전한 날은 없다고 말합니다. 그 일은 정해 둔 피임법이 합니다.</p>
+<h2>기록으로 알 수 있는 것과 없는 것</h2>
+<p>기록이 잘하는 일은 내 범위를 알아차리는 것입니다. 내 주기가 보통 며칠인지, 생리가 며칠 가는지, 예정에서 벗어난 출혈이 있었는지. 뭔가 이상하다 싶을 때, 혹은 임신을 준비하며 가임기를 가늠하고 싶을 때 의료진에게 가져갈 만한 정보가 바로 이런 것들입니다.</p>
+<p>기록이 못 하는 일은 추정을 확신으로 바꾸는 것입니다. 임신이 됐는지도, 안 됐는지도 가려 주지 못합니다. 그건 임신 테스트와, 필요하면 의료진의 몫입니다. 달력은 내 경향을 그린 지도일 뿐, 그 경향을 가두는 울타리가 아닙니다.</p>
+<h2>짧은 주기, 날짜로 따라가 보면</h2>
+<p>22일 주기에 6일 생리를 예로 들어, 출혈 첫날을 1일로 셉니다. 이렇게 짧은 주기에서는 배란이 교과서의 14일째보다 앞당겨져, 둘째 주 초쯤에 오는 일이 많습니다. 아직 약간 비치는 5–6일째에 피임 없이 관계를 가지면, 그 정자가 10–11일째까지 살아남을 수 있고, 이는 이른 배란이 일어날 만한 시점과 가깝습니다. 출혈과 가임기가 맞붙지 않아도, 5일이라는 정자 생존이 그 사이를 메웁니다.</p>
+<p>생리를 8일로 늘리거나 주기를 더 줄이면 겹침은 쉬워지지 어려워지지 않습니다. 이건 특정한 달의 예보가 아니라, 생리 중이었으니까가 들리는 만큼 안심할 말이 아닌 이유입니다.</p>
+<h2>자주 묻는 질문</h2>
+<p>생리 첫날은 안전한가요? 위험이 낮은 축에 들지만, 보장된 안전한 날은 아닙니다. 주기가 짧으면 생리 초반의 관계라도 이른 배란 가까이에 정자가 남을 수 있습니다.</p>
+<p>생리 바로 전날은요? 가능성이 가장 낮은 때 중 하나입니다. 보통 배란이 이미 지나 난자가 사라진 뒤라서요. 다만 그 출혈이 진짜 생리이고 배란이 이미 끝났음을 확신할 수 있어야 하는데, 달력이 그 순간에 확인해 주지는 못합니다.</p>
+<p>규칙적인 주기면 생리 중 관계가 안전한가요? 더 예측 가능할 뿐, 안전한 건 아닙니다. 클리블랜드 클리닉은 평소 규칙적이던 주기도 질병이나 스트레스, 체중 변화로 갑자기 흔들릴 수 있다고 말합니다.</p>
+<p>출혈이 있으면 그 근처엔 배란이 없었다는 뜻인가요? 꼭 그렇지는 않습니다. 배란기 점 출혈이나 다른 중간 출혈이 생리로 오인될 수 있고, 그 출혈은 가장 가임력 높은 날 바로 옆일 수 있습니다.</p>
+<p>생리 기록 앱은 피임이 되나요? 아니요. 기록에서 가임 가능성이 높은 날을 참고용으로 추정할 뿐입니다. 임신을 피하려면 의료진이 권하는 피임법에 기대야 합니다.</p>
+<h2>한 줄로</h2>
+<p>생리 중에도 임신은 될 수 있습니다. 다만 가능성이 가장 낮은 때에 속합니다. 정자는 최대 5일(NHS는 7일까지), 난자는 약 12–24시간 살아서 가임기는 대략 배란 5일 전부터 다음 날까지입니다. 배란은 14일째로 고정되지 않고 짧은 주기에서는 더 앞당겨지므로, 짧은 주기에 생리가 길면 생리 후반의 관계로 남은 정자가 이른 배란과 만날 수 있고, 모든 출혈이 진짜 생리인 것도 아닙니다.</p>
+<p>예측 가임기는 지난 날짜로 만든 것이라 질병이나 스트레스, 수면으로 옮겨가는 주기를 미리 반영하지 못합니다. 그래서 피임이 아니라 참고 정보입니다. MiniCycle은 9–14일 황체기로 추정한 배란의 5일 전부터 다음 날까지를 기기 안에서 가임기로 표시하지만, 가능성이 0인 날을 약속하진 못합니다. 임신을 피하려면 정해 둔 피임법에 기대고, 임신 여부는 테스트와 의료진으로 확인하세요.</p>
+                <div class="callout">
+                  <p>MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="ko" data-placement="blog_article_callout" data-content-group="can-you-get-pregnant-on-your-period" onclick="trackAppStoreClick(this)">App Store에서 받기</a>
+                </div>
+                <h2>참고 자료</h2>
+                <ul class="references">
+        <li><a href="https://www.acog.org/womens-health/experts-and-stories/the-latest/trying-to-get-pregnant-heres-when-to-have-sex">ACOG. Trying to Get Pregnant? Here&#x27;s When to Have Sex.</a></li>
+<li><a href="https://www.nhs.uk/conditions/periods/fertility-in-the-menstrual-cycle/">NHS. Periods and fertility in the menstrual cycle.</a></li>
+<li><a href="https://health.clevelandclinic.org/can-you-get-pregnant-on-your-period">Cleveland Clinic. Can You Get Pregnant if You Have Sex During Your Period?</a></li>
+<li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
+                </ul>
+              </article>
+            </main>
+          </body>
+        </html>
