@@ -1,0 +1,173 @@
+        <!doctype html>
+        <html lang="ko">
+                <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>생리는 며칠 하는 게 정상일까요</title>
+          <meta name="description" content="생리 기간은 보통 2–7일, 대개 5일쯤입니다. 정해진 정답 일수가 아니라 내 몸의 꾸준한 패턴이 기준입니다. 정상 범위와, 변화가 병원 신호가 되는 때를 정리했습니다.">
+          <link rel="canonical" href="https://minicycle.net/ko/blog/how-long-does-a-normal-period-last/">
+            <link rel="alternate" hreflang="en" href="https://minicycle.net/blog/how-long-does-a-normal-period-last/">
+    <link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/how-long-does-a-normal-period-last/">
+    <link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/how-long-does-a-normal-period-last/">
+          <link rel="alternate" type="application/rss+xml" title="MiniCycle Blog" href="https://minicycle.net/feed.xml">
+          <meta property="og:type" content="article">
+          <meta property="og:title" content="생리는 며칠 하는 게 정상일까요">
+          <meta property="og:description" content="생리 기간은 보통 2–7일, 대개 5일쯤입니다. 정해진 정답 일수가 아니라 내 몸의 꾸준한 패턴이 기준입니다. 정상 범위와, 변화가 병원 신호가 되는 때를 정리했습니다.">
+          <meta property="og:url" content="https://minicycle.net/ko/blog/how-long-does-a-normal-period-last/">
+          <meta property="og:image" content="https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg">
+          <meta name="twitter:card" content="summary_large_image">
+            <link rel="icon" href="../../../favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../../../apple-touch-icon.png">
+          <link rel="stylesheet" href="../../../styles.css">
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
+  function trackBlogArticleEngagement() {
+    const article = document.querySelector('article.article[data-content-group]');
+    if (!article || typeof gtag !== 'function') return;
+
+    const progressThresholds = [50, 75, 90];
+    const sentProgress = new Set();
+    const minReadMs = Number(article.dataset.minReadMs || 30000);
+    let maxPercent = 0;
+    let readCompleteSent = false;
+    let activeMs = 0;
+    let lastTick = Date.now();
+    let wasActive = !document.hidden && document.hasFocus();
+
+    function recordActiveTime() {
+      const now = Date.now();
+      if (wasActive) activeMs += now - lastTick;
+      lastTick = now;
+      wasActive = !document.hidden && document.hasFocus();
+    }
+
+    function articlePercent() {
+      const articleTop = article.getBoundingClientRect().top + window.scrollY;
+      const articleHeight = Math.max(article.offsetHeight, 1);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      return Math.max(0, Math.min(100, Math.floor(((viewportBottom - articleTop) / articleHeight) * 100)));
+    }
+
+    function send(eventName, params) {
+      gtag('event', eventName, Object.assign({
+        language: article.dataset.language,
+        content_group: article.dataset.contentGroup,
+        article_path: window.location.pathname,
+        transport_type: 'beacon'
+      }, params));
+    }
+
+    function evaluate() {
+      recordActiveTime();
+      maxPercent = Math.max(maxPercent, articlePercent());
+
+      progressThresholds.forEach((threshold) => {
+        if (maxPercent >= threshold && !sentProgress.has(threshold)) {
+          sentProgress.add(threshold);
+          send('blog_article_progress', {
+            scroll_percent: threshold,
+            active_seconds: Math.round(activeMs / 1000)
+          });
+        }
+      });
+
+      if (!readCompleteSent && maxPercent >= 90 && activeMs >= minReadMs) {
+        readCompleteSent = true;
+        send('blog_article_read_complete', {
+          max_percent: maxPercent,
+          active_seconds: Math.round(activeMs / 1000),
+          min_read_seconds: Math.round(minReadMs / 1000)
+        });
+      }
+    }
+
+    window.addEventListener('scroll', evaluate, { passive: true });
+    window.addEventListener('resize', evaluate);
+    document.addEventListener('visibilitychange', evaluate);
+    window.addEventListener('pagehide', evaluate);
+    window.setInterval(evaluate, 5000);
+    evaluate();
+  }
+  window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
+</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"생리는 며칠 하는 게 정상일까요","description":"생리 기간은 보통 2–7일, 대개 5일쯤입니다. 정해진 정답 일수가 아니라 내 몸의 꾸준한 패턴이 기준입니다. 정상 범위와, 변화가 병원 신호가 되는 때를 정리했습니다.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg","datePublished":"2026-07-02","dateModified":"2026-07-02","inLanguage":"ko","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/ko/blog/how-long-does-a-normal-period-last/"}}</script>
+        </head>
+          <body>
+        <header class="site-header">
+  <a class="brand" href="../../">MiniCycle</a>
+  <nav aria-label="Primary navigation">
+    <a href="../../blog/">블로그</a>
+    <a href="../../support/">지원</a>
+    <a href="../../privacy/">개인정보</a>
+    <a href="../../../blog/how-long-does-a-normal-period-last/">English</a>
+  </nav>
+</header>
+            <main class="page">
+              <article class="article" data-language="ko" data-content-group="how-long-does-a-normal-period-last" data-min-read-ms="90000">
+                <p class="eyebrow">주기 기초</p>
+                <h1>생리는 며칠 하는 게 정상일까요</h1>
+                <p class="article-meta">2026년 7월 2일 MiniCycle 작성</p>
+                <p class="lead">누구는 사흘, 누구는 일주일. 둘 다 정상 생리일 수 있습니다. 사람들이 실제로 궁금해하는 건 단순합니다. 생리는 대체 며칠 하는 게 맞을까. 답은 하나의 숫자가 아니라 범위입니다. 이 범위를 알고 나면 이번 달이 유난히 짧거나 길어도 굳이 문제로 여길 일이 아니게 됩니다.</p>
+                <img class="article-hero" src="../../../assets/home-capture-iphone17-1118-ko-20260518.jpg" alt="MiniCycle 아이폰 실제 캡처 화면: 생리 캘린더와 위젯 경험" width="552" height="1200" loading="eager">
+        <h2>짧게 답하면, 이삼일에서 일주일</h2>
+<p>대부분의 생리는 2–7일쯤 이어집니다. 영국 NHS는 보통 5일 정도로 보고, 첫 이틀에 양이 가장 많다고 안내합니다. 클리블랜드 클리닉도 같은 2–7일을 말하고, Mayo Clinic은 위쪽을 조금 더 넓혀 최대 8일까지 갈 수 있다고 봅니다. 세 곳 모두 범위의 한가운데는 5일 근처입니다.</p>
+<p>그러니 5일은 내 패턴을 알기 전에 가정해 둘 만한 값이지, 꼭 맞춰야 할 목표가 아닙니다. 사흘 생리도, 이레 생리도 평범한 범위 안입니다. 내 숫자를 정하는 건 평균이 아니라 내 몸입니다.</p>
+<h2>생리 기간과 주기는 다른 숫자입니다</h2>
+<p>이름이 비슷해서 헷갈리기 쉬운 두 길이가 있습니다. 생리 기간은 며칠 동안 피가 나오는가입니다. 주기는 한 생리의 첫날부터 다음 생리의 첫날까지의 간격이고, 기관들은 대략 21일에서 38일 사이로 봅니다. 29일 주기 안에 5일 생리가 들어 있는 식이죠. 생리는 출혈 부분, 주기는 한 바퀴 전체입니다.</p>
+<p>기록을 시작하면 이 구분이 쓸모 있어집니다. 하나가 바뀌었다고 다른 하나도 바뀐 건 아니거든요. 둘을 나눠 두면 &#x27;출혈이 길어졌다&#x27;와 &#x27;생리 간격이 좁아졌다&#x27;를 헷갈리지 않습니다. 물어볼 것도, 지켜볼 것도 다른 이야기입니다.</p>
+<h2>정답 일수는 없습니다</h2>
+<p>가장 흔한 걱정은 생리가 딱 며칠이어야 정상이고 그 밖은 이상이라는 생각입니다. 그렇지 않습니다. 클리블랜드 클리닉의 에린 히긴스 산부인과 전문의는 정상을 개인의 것으로 설명합니다. 나에게 일반적인 것이 남에게는 아닐 수 있고, 중요한 건 내가 알아볼 수 있는 패턴이라는 거죠. 달마다 나흘쯤에서 안정적으로 도는 생리는, 친구 것이 엿새라도 제 할 일을 하고 있는 겁니다.</p>
+<p>내 패턴 안의 작은 움직임도 평범합니다. 히긴스는 사흘에서 나흘로 바뀌는 정도는 정상 변동이라고 콕 집어 말합니다. 매달 똑같지 않아도 됩니다. 봐야 할 건 고정된 일수가 아니라 대략적인 일관성입니다.</p>
+<h2>생리를 짧게 또는 길게 만드는 것들</h2>
+<p>숫자를 움직이는 평범한 이유가 몇 가지 있습니다. 대표적인 게 호르몬 피임입니다. 먹는 피임약, 패치, 링, 호르몬 자궁내 장치, 삽입형, 주사는 대개 생리를 짧고 가볍게 만들고, 방법에 따라 출혈이 아예 없기도 합니다. 피임을 시작한 뒤 생리가 짧아졌다면 보통은 그 방법이 설계대로 작동하는 것입니다.</p>
+<p>나이도 숫자를 바꿉니다. 초경 후 몇 년은 주기를 조절하는 몸의 체계가 자리를 잡는 동안 기간도 양도 들쭉날쭉할 수 있습니다. 폐경을 앞둔 시기에는 다시 달라지고요. Mayo Clinic은 나이가 들수록 주기가 짧아지고 더 규칙적으로 되는 경향이 있다고 설명합니다. 이 변화들은 그 자체로 문제가 아니라, 몸의 변화를 기간이 따라가는 것입니다.</p>
+<h2>MiniCycle은 생리 기간을 어떻게 다루나요</h2>
+<p>MiniCycle은 생리 기간을 주기와 별개의 설정으로 둡니다. 앱이 추정하게 두거나 직접 정할 수 있습니다. 자동이면 최근의 닫힌 생리, 곧 시작과 종료가 모두 기록된 생리를 최대 12개까지 읽어 평소 기간을 잡고, 참고할 게 없으면 5일로 가정합니다. 직접 정하면 1–10일 사이에서 내가 정한 값이 우선합니다.</p>
+<p>그래서 시작뿐 아니라 종료까지 찍어 두는 몇 초가 아깝지 않습니다. 종료일이 정확해야 추정이 나를 닮으니까요. 새 생리 시작을 표시하면 앱이 생리 기간 설정에 맞춰 종료일을 미리 채워 두고, 생리가 끝난 실제 날짜로 끌어다 고칠 수 있습니다. 모든 기록은 계정 없이 기기 안에 남습니다. 앱의 숫자가 기본값이 아니라 내 기간을 반영하길 바란다면, 종료일을 솔직하게 찍어 두는 게 요령의 거의 전부입니다.</p>
+<h2>기간 변화가 병원 신호가 될 때</h2>
+<p>생리 기간은 하나의 단서입니다. 혼자 지켜보기보다 의료진에게 이야기해 볼 만한 패턴이 몇 가지 있습니다. Mayo Clinic은 출혈이 8일을 넘길 때, 규칙적이던 생리가 불규칙해질 때, 한두 시간마다 생리대나 탐폰을 갈아야 할 만큼 양이 많을 때를 꼽습니다. 클리블랜드 클리닉은 알기 쉬운 예를 더합니다. 사흘이던 생리가 엿새로 바뀌어 그대로 이어질 때입니다.</p>
+<p>핵심은 특정 일수를 못 맞춘 게 아니라, 내 평소에서 실제로, 그리고 계속 벗어난 변화입니다. 유난했던 한 달 하나가 아니고요. 기록이 있으면 이 대화가 빨라집니다. 몇 달치 시작일과 종료일이 기억보다 변화를 잘 보여주니까요. 분명히 해 둘 한계 하나. 앱은 며칠 출혈했는지 기록할 수 있어도, 그 길이가 왜 변했는지는 진단하지 못합니다. 날짜는 나를 위한, 그리고 뭔가 이상할 때 의료진을 위한 참고 정보입니다.</p>
+<h2>둘 다 정상인 두 생리</h2>
+<p>친구 둘을 그려 봅니다. 한 명은 기억하는 한 늘 사흘 만에 딱 끝나고, 다른 한 명은 어김없이 엿새를 갑니다. 둘 다 고칠 문제가 없습니다. 각자 안정적인 패턴이 있고, 그 안정성이 일수보다 중요한 신호입니다. 사흘이던 친구가 갑자기 매달 엿새씩 흘린다면, 엿새가 틀려서가 아니라 그에게 새로운 변화라서 한번 이야기해 볼 만합니다.</p>
+<p>남과 생리 기간을 비교해서 얻을 게 별로 없는 이유이기도 합니다. 내 평소 일수와 남의 일수가 며칠 달라도 둘 다 평범할 수 있습니다. 견줄 만한 건 내 최근 몇 달이고, 기록이 있으면 바로 그걸 할 수 있습니다.</p>
+<h2>자주 묻는 질문</h2>
+<p>생리는 며칠이 정상인가요? 대개 2–7일, 보통 5일쯤입니다. 위쪽을 8일까지 보는 곳도 있습니다. 범위의 짧은 쪽이든 긴 쪽이든, 나에게 꾸준하다면 정상일 수 있습니다.</p>
+<p>이틀이면 너무 짧은가요? 그 자체로는 아닙니다. 짧은 생리가 내 패턴일 수 있고, 호르몬 피임은 흔히 생리를 짧게 만듭니다. 평소보다 갑자기 훨씬 짧아졌다면 그 변화를 한번 이야기해 볼 만합니다.</p>
+<p>7일이면 문제인가요? 아니요. 7일은 평범한 범위 안입니다. 8일쯤을 넘겨 이어지거나, 눈에 띄게 길어져 그대로 굳은 생리를 Mayo Clinic은 확인해 보라고 안내합니다.</p>
+<p>생리가 왜 짧아졌을까요? 호르몬 피임을 시작했거나 나이가 드는 것이 흔한 이유입니다. 주기는 나이에 따라 짧아지곤 하니까요. 갑작스럽고 설명되지 않는 변화라면 의료진과 상의하세요.</p>
+<p>생리 기간으로 주기나 가임력을 알 수 있나요? 그렇지는 않습니다. 생리 기간은 출혈한 날수이고, 주기의 길이와 날짜가 가임 관련 질문에는 더 쓸모 있습니다. 두 숫자는 서로 다른 것을 따라갑니다.</p>
+<h2>한 줄로</h2>
+<p>정상 생리 기간은 대개 2–7일, 보통 5일쯤이고 첫 이틀에 양이 가장 많습니다. 위쪽을 8일까지 보기도 합니다. 정해진 정답 일수는 없고 내 몸의 꾸준한 패턴이 기준이라, 사흘 생리도 이레 생리도 괜찮을 수 있습니다. 생리 기간(출혈한 날수)과 주기(생리 시작 사이의 간격)는 서로 다른 숫자입니다.</p>
+<p>호르몬 피임이나 나이 같은 평범한 이유로 생리는 짧아지거나 길어질 수 있습니다. 병원에 이야기할 변화는 실제로 꾸준히 이어지는 변화입니다. 8일쯤을 넘기는 출혈, 한두 시간마다 생리대를 적실 만큼 많은 양, 바뀐 채 굳어 버린 기간이 그렇습니다. MiniCycle은 생리 기간을 별개 설정으로 두고(직접 1–10일, 또는 최근 닫힌 생리 12개까지에서의 추정, 기본값 5일) 모두 기기 안에서 다룹니다. 며칠 출혈했는지는 기록해도 왜 변했는지는 진단하지 않습니다.</p>
+                <div class="callout">
+                  <p>MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="ko" data-placement="blog_article_callout" data-content-group="how-long-does-a-normal-period-last" onclick="trackAppStoreClick(this)">App Store에서 받기</a>
+                </div>
+                <h2>참고 자료</h2>
+                <ul class="references">
+        <li><a href="https://www.nhs.uk/conditions/periods/">NHS. Periods.</a></li>
+<li><a href="https://health.clevelandclinic.org/how-long-should-your-period-last">Cleveland Clinic. How Long Should Your Period Last?</a></li>
+<li><a href="https://www.mayoclinic.org/healthy-lifestyle/womens-health/in-depth/menstrual-cycle/art-20047186">Mayo Clinic. Menstrual cycle: What&#x27;s normal, what&#x27;s not.</a></li>
+<li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
+                </ul>
+              </article>
+            </main>
+          </body>
+        </html>

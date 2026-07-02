@@ -1,0 +1,161 @@
+        <!doctype html>
+        <html lang="en">
+                <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>Using MiniCycle&#x27;s fertile window when trying to conceive</title>
+          <meta name="description" content="MiniCycle marks a six-day fertile window and estimated ovulation from your logged periods. How to use them when trying to conceive, and where the estimate stops.">
+          <link rel="canonical" href="https://minicycle.net/blog/trying-to-conceive-fertile-window-minicycle/">
+            <link rel="alternate" hreflang="en" href="https://minicycle.net/blog/trying-to-conceive-fertile-window-minicycle/">
+    <link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/trying-to-conceive-fertile-window-minicycle/">
+    <link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/trying-to-conceive-fertile-window-minicycle/">
+          <link rel="alternate" type="application/rss+xml" title="MiniCycle Blog" href="https://minicycle.net/feed.xml">
+          <meta property="og:type" content="article">
+          <meta property="og:title" content="Using MiniCycle&#x27;s fertile window when trying to conceive">
+          <meta property="og:description" content="MiniCycle marks a six-day fertile window and estimated ovulation from your logged periods. How to use them when trying to conceive, and where the estimate stops.">
+          <meta property="og:url" content="https://minicycle.net/blog/trying-to-conceive-fertile-window-minicycle/">
+          <meta property="og:image" content="https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg">
+          <meta name="twitter:card" content="summary_large_image">
+            <link rel="icon" href="../../favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+          <link rel="stylesheet" href="../../styles.css">
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
+  function trackBlogArticleEngagement() {
+    const article = document.querySelector('article.article[data-content-group]');
+    if (!article || typeof gtag !== 'function') return;
+
+    const progressThresholds = [50, 75, 90];
+    const sentProgress = new Set();
+    const minReadMs = Number(article.dataset.minReadMs || 30000);
+    let maxPercent = 0;
+    let readCompleteSent = false;
+    let activeMs = 0;
+    let lastTick = Date.now();
+    let wasActive = !document.hidden && document.hasFocus();
+
+    function recordActiveTime() {
+      const now = Date.now();
+      if (wasActive) activeMs += now - lastTick;
+      lastTick = now;
+      wasActive = !document.hidden && document.hasFocus();
+    }
+
+    function articlePercent() {
+      const articleTop = article.getBoundingClientRect().top + window.scrollY;
+      const articleHeight = Math.max(article.offsetHeight, 1);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      return Math.max(0, Math.min(100, Math.floor(((viewportBottom - articleTop) / articleHeight) * 100)));
+    }
+
+    function send(eventName, params) {
+      gtag('event', eventName, Object.assign({
+        language: article.dataset.language,
+        content_group: article.dataset.contentGroup,
+        article_path: window.location.pathname,
+        transport_type: 'beacon'
+      }, params));
+    }
+
+    function evaluate() {
+      recordActiveTime();
+      maxPercent = Math.max(maxPercent, articlePercent());
+
+      progressThresholds.forEach((threshold) => {
+        if (maxPercent >= threshold && !sentProgress.has(threshold)) {
+          sentProgress.add(threshold);
+          send('blog_article_progress', {
+            scroll_percent: threshold,
+            active_seconds: Math.round(activeMs / 1000)
+          });
+        }
+      });
+
+      if (!readCompleteSent && maxPercent >= 90 && activeMs >= minReadMs) {
+        readCompleteSent = true;
+        send('blog_article_read_complete', {
+          max_percent: maxPercent,
+          active_seconds: Math.round(activeMs / 1000),
+          min_read_seconds: Math.round(minReadMs / 1000)
+        });
+      }
+    }
+
+    window.addEventListener('scroll', evaluate, { passive: true });
+    window.addEventListener('resize', evaluate);
+    document.addEventListener('visibilitychange', evaluate);
+    window.addEventListener('pagehide', evaluate);
+    window.setInterval(evaluate, 5000);
+    evaluate();
+  }
+  window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
+</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Using MiniCycle's fertile window when trying to conceive","description":"MiniCycle marks a six-day fertile window and estimated ovulation from your logged periods. How to use them when trying to conceive, and where the estimate stops.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-06-28","dateModified":"2026-06-28","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/trying-to-conceive-fertile-window-minicycle/"}}</script>
+        </head>
+          <body>
+        <header class="site-header">
+  <a class="brand" href="../../">MiniCycle</a>
+  <nav aria-label="Primary navigation">
+    <a href="../../blog/">Blog</a>
+    <a href="../../support/">Support</a>
+    <a href="../../privacy/">Privacy</a>
+    <a href="../../ko/blog/trying-to-conceive-fertile-window-minicycle/">한국어</a>
+  </nav>
+</header>
+            <main class="page">
+              <article class="article" data-language="en" data-content-group="trying-to-conceive-fertile-window-minicycle" data-min-read-ms="90000">
+                <p class="eyebrow">Trying to conceive</p>
+                <h1>Using MiniCycle&#x27;s fertile window when trying to conceive</h1>
+                <p class="article-meta">Published June 28, 2026 by MiniCycle</p>
+                <p class="lead">You decide you want to get pregnant, and the calendar starts to matter in a way it never did before. The good news is that MiniCycle already does most of the work: it marks a fertile window and an estimated ovulation day from the periods you have logged. What is left is knowing how to read those marks, what to do with them, and when to stop leaning on them. One assumption gets in the way more than any other, the belief that there is a single perfect day to aim for. There is not. The fertile stretch runs about six days, and once you see why, the way you use the app changes.</p>
+                <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
+        <h2>Find the window the app already draws</h2>
+<p>Open the calendar and the fertile days are already there, shaded sky blue, with the estimated ovulation day marked in a deeper blue inside them. MiniCycle builds both from your saved period start dates, the same dates that drive every other prediction. You do not switch on a separate fertility mode. Logging your periods is what puts the window on the screen.</p>
+<p>The window is six days wide: the five days before the estimated ovulation day, through the day after it. That span is not arbitrary. The American College of Obstetricians and Gynecologists puts the fertile window at about six days for the same biological reason, since sperm can survive up to five days while an egg lasts only about 12 to 24 hours after it is released. The app&#x27;s sky-blue band and the textbook fertile window describe the same thing.</p>
+<h2>Aim for the window, not one day</h2>
+<p>Here is where the perfect-day idea quietly costs people. Because sperm live for days, the useful time to have sex is the stretch leading up to ovulation, not only the ovulation day itself. ACOG&#x27;s advice is plain: have sex every day or every other day across the six-day window. Mayo Clinic frames it as sex from three or four days before ovulation through the day after. Either way, the days before the estimated ovulation mark carry more of the chance than the day after it, when the egg is already near the end of its short life.</p>
+<p>Read practically, that means the sky-blue days are the ones to act on, with the deeper-blue ovulation day sitting toward the back of the window rather than at its center. If having sex every day feels like pressure, every other day across those six days covers the same ground without it.</p>
+<h2>Log intimacy and check it against the window</h2>
+<p>MiniCycle can record sexual activity as a small purple mark on a date, tapped on or off from the day panel. For someone tracking a cycle in general, this is just context. When you are trying to conceive, it turns into feedback. Logged next to the sky-blue band, the purple marks show at a glance whether the days you had sex actually fell inside the fertile window or drifted to its edges.</p>
+<p>A month where the marks sit outside the window is not a failure. It is information for the next one. The two sets of marks live on the same calendar precisely so you can see them together, without doing the counting in your head.</p>
+<h2>Use daily notes for the signs the app can&#x27;t see</h2>
+<p>The window MiniCycle draws is an estimate from dates. Your body shows ovulation in ways a calendar cannot. The most useful sign to watch, by both ACOG and Mayo Clinic, is cervical mucus: in the day or two before ovulation it turns clear, thin, and stretchy. A small rise in basal body temperature, taken each morning before you get out of bed, tends to confirm ovulation just after it happens.</p>
+<p>MiniCycle gives each date a daily note. Jotting down a mucus change or a temperature reading there lets you line up what your body did against what the app predicted. When the signs and the sky-blue band agree, the estimate has earned more trust. When they pull apart, your own signs are the better guide for that month.</p>
+<h2>Set the fertile-window reminder</h2>
+<p>You should not have to open the app every morning to check where you are. MiniCycle can send a reminder for the start of the fertile window, on the day itself or up to three days ahead, at a time you choose. Set it a day or two early and you get a quiet heads-up before the window opens, instead of realizing afterward that it already passed.</p>
+<p>The ovulation-day reminder works the same way, if you would rather be nudged near the midpoint. The reminders are scheduled on your phone and move automatically when a new period shifts the prediction, so they keep pointing at the right days as your cycle data fills in.</p>
+<h2>Where the estimate stops, and when to ask for help</h2>
+<p>An app window cannot confirm that you ovulated, and it cannot tell you that a cycle ended in pregnancy. It is reference information drawn from your past dates, on the assumption that the next cycle resembles them. If your periods are highly irregular, ACOG notes that home prediction is unreliable, and the better move is to talk with a clinician rather than chase a date.</p>
+<p>Timing matters for that conversation too. More than half of healthy couples conceive within six months, and most within a year. ACOG and Mayo Clinic suggest seeing a clinician after a year of trying if you are under 35, after six months if you are 35 or older, and sooner if you already know of something like endometriosis or PCOS. One smaller comfort while you track: your records stay on your device, with no account, which is worth knowing given that period apps are not covered by medical privacy law. MiniCycle is there to point at the likely days. The rest is yours and, when you need it, your clinician&#x27;s.</p>
+                <div class="callout">
+                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="trying-to-conceive-fertile-window-minicycle" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                </div>
+                <h2>References</h2>
+                <ul class="references">
+        <li><a href="https://www.acog.org/womens-health/experts-and-stories/the-latest/trying-to-get-pregnant-heres-when-to-have-sex">ACOG. Trying to Get Pregnant? Here&#x27;s When to Have Sex.</a></li>
+<li><a href="https://www.mayoclinic.org/healthy-lifestyle/getting-pregnant/in-depth/how-to-get-pregnant/art-20047611">Mayo Clinic. How to get pregnant.</a></li>
+<li><a href="https://www.acog.org/womens-health/faqs/fertility-awareness-based-methods-of-family-planning">ACOG. Fertility Awareness-Based Methods of Family Planning.</a></li>
+<li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
+                </ul>
+              </article>
+            </main>
+          </body>
+        </html>

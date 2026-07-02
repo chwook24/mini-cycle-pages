@@ -1,0 +1,173 @@
+        <!doctype html>
+        <html lang="en">
+                <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>How long should a period last? What&#x27;s a normal length</title>
+          <meta name="description" content="A normal period lasts about 2 to 7 days, usually around 5. What counts as normal is your own steady pattern. Here is the range, and when a change is worth a check.">
+          <link rel="canonical" href="https://minicycle.net/blog/how-long-does-a-normal-period-last/">
+            <link rel="alternate" hreflang="en" href="https://minicycle.net/blog/how-long-does-a-normal-period-last/">
+    <link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/how-long-does-a-normal-period-last/">
+    <link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/how-long-does-a-normal-period-last/">
+          <link rel="alternate" type="application/rss+xml" title="MiniCycle Blog" href="https://minicycle.net/feed.xml">
+          <meta property="og:type" content="article">
+          <meta property="og:title" content="How long should a period last? What&#x27;s a normal length">
+          <meta property="og:description" content="A normal period lasts about 2 to 7 days, usually around 5. What counts as normal is your own steady pattern. Here is the range, and when a change is worth a check.">
+          <meta property="og:url" content="https://minicycle.net/blog/how-long-does-a-normal-period-last/">
+          <meta property="og:image" content="https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg">
+          <meta name="twitter:card" content="summary_large_image">
+            <link rel="icon" href="../../favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+          <link rel="stylesheet" href="../../styles.css">
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
+  function trackBlogArticleEngagement() {
+    const article = document.querySelector('article.article[data-content-group]');
+    if (!article || typeof gtag !== 'function') return;
+
+    const progressThresholds = [50, 75, 90];
+    const sentProgress = new Set();
+    const minReadMs = Number(article.dataset.minReadMs || 30000);
+    let maxPercent = 0;
+    let readCompleteSent = false;
+    let activeMs = 0;
+    let lastTick = Date.now();
+    let wasActive = !document.hidden && document.hasFocus();
+
+    function recordActiveTime() {
+      const now = Date.now();
+      if (wasActive) activeMs += now - lastTick;
+      lastTick = now;
+      wasActive = !document.hidden && document.hasFocus();
+    }
+
+    function articlePercent() {
+      const articleTop = article.getBoundingClientRect().top + window.scrollY;
+      const articleHeight = Math.max(article.offsetHeight, 1);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      return Math.max(0, Math.min(100, Math.floor(((viewportBottom - articleTop) / articleHeight) * 100)));
+    }
+
+    function send(eventName, params) {
+      gtag('event', eventName, Object.assign({
+        language: article.dataset.language,
+        content_group: article.dataset.contentGroup,
+        article_path: window.location.pathname,
+        transport_type: 'beacon'
+      }, params));
+    }
+
+    function evaluate() {
+      recordActiveTime();
+      maxPercent = Math.max(maxPercent, articlePercent());
+
+      progressThresholds.forEach((threshold) => {
+        if (maxPercent >= threshold && !sentProgress.has(threshold)) {
+          sentProgress.add(threshold);
+          send('blog_article_progress', {
+            scroll_percent: threshold,
+            active_seconds: Math.round(activeMs / 1000)
+          });
+        }
+      });
+
+      if (!readCompleteSent && maxPercent >= 90 && activeMs >= minReadMs) {
+        readCompleteSent = true;
+        send('blog_article_read_complete', {
+          max_percent: maxPercent,
+          active_seconds: Math.round(activeMs / 1000),
+          min_read_seconds: Math.round(minReadMs / 1000)
+        });
+      }
+    }
+
+    window.addEventListener('scroll', evaluate, { passive: true });
+    window.addEventListener('resize', evaluate);
+    document.addEventListener('visibilitychange', evaluate);
+    window.addEventListener('pagehide', evaluate);
+    window.setInterval(evaluate, 5000);
+    evaluate();
+  }
+  window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
+</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"How long should a period last? What's a normal length","description":"A normal period lasts about 2 to 7 days, usually around 5. What counts as normal is your own steady pattern. Here is the range, and when a change is worth a check.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-07-02","dateModified":"2026-07-02","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/how-long-does-a-normal-period-last/"}}</script>
+        </head>
+          <body>
+        <header class="site-header">
+  <a class="brand" href="../../">MiniCycle</a>
+  <nav aria-label="Primary navigation">
+    <a href="../../blog/">Blog</a>
+    <a href="../../support/">Support</a>
+    <a href="../../privacy/">Privacy</a>
+    <a href="../../ko/blog/how-long-does-a-normal-period-last/">한국어</a>
+  </nav>
+</header>
+            <main class="page">
+              <article class="article" data-language="en" data-content-group="how-long-does-a-normal-period-last" data-min-read-ms="90000">
+                <p class="eyebrow">Cycle basics</p>
+                <h1>How long should a period last? What&#x27;s a normal length</h1>
+                <p class="article-meta">Published July 2, 2026 by MiniCycle</p>
+                <p class="lead">Two people can both have perfectly normal periods and count a different number of days. One bleeds for three days, the other for a week. The question people actually type is simpler than the answer feels: how many days is a period supposed to last? It is a range, not a single figure, and once you know the range, a short month or a long one stops feeling like a problem to solve.</p>
+                <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
+        <h2>The short answer: about two to seven days</h2>
+<p>Most periods run about two to seven days. The NHS puts the usual length at around five days, with the bleeding heaviest in the first two. Cleveland Clinic gives the same two-to-seven-day span, and Mayo Clinic stretches the upper end a little further, describing bleeding that can last up to eight days. Across all three, the middle of the range sits near five.</p>
+<p>So five is a reasonable value to assume before you know your own pattern, not a target to hit. A three-day period and a seven-day period are both inside the ordinary range. What sets your number is your body, not the average.</p>
+<h2>Period length and cycle length are two different numbers</h2>
+<p>It is easy to mix up two lengths that sound alike. Period length is how many days you bleed. Cycle length is the gap from the first day of one period to the first day of the next, which guidelines put somewhere between about 21 and 38 days. A five-day period sits inside a cycle of, say, twenty-nine days: the period is the bleeding part, the cycle is the whole loop.</p>
+<p>The distinction matters once you start tracking. A change in one does not have to mean a change in the other. Keeping them separate is the difference between noticing that your bleeding got longer and noticing that your periods are arriving closer together, which are not the same thing to raise or to watch.</p>
+<h2>Why there&#x27;s no single right number of days</h2>
+<p>The most common worry is that a period should last some exact number of days, and anything else is off. It should not. Cleveland Clinic&#x27;s Dr. Erin Higgins frames normal as personal: what is typical for you may not be typical for someone else, and the useful thing is a pattern you can recognize. A period that holds steady around four days, month after month, is doing exactly what it should, even if a friend&#x27;s runs six.</p>
+<p>Small movement inside your own pattern is ordinary too. Higgins gives a concrete line for it: a shift from three days to four is normal variation. Your period will not be identical every month. What you are looking for is rough consistency, not a fixed count.</p>
+<h2>What can make a period run shorter or longer</h2>
+<p>A few ordinary things move the number. Hormonal birth control is a common one. The pill, patch, ring, hormonal IUD, implant, and injection tend to make periods shorter and lighter, and some methods stop the bleeding altogether. If your period got shorter after starting a method, that is usually the method working as designed.</p>
+<p>Age shifts it too. In the first years after a first period, both the length and the flow can be unpredictable while the system that runs the cycle matures. Later, heading into menopause, periods often change again, and Mayo Clinic notes that cycles tend to grow shorter and more regular as you age. None of these are problems in themselves. The length is tracking a change in your body.</p>
+<h2>How MiniCycle records period length</h2>
+<p>MiniCycle keeps period length as its own setting, separate from cycle length. You can let the app estimate it or set it by hand. On automatic, it reads your recent closed periods, the ones with both a start and an end logged, and works out a typical length from up to your latest twelve. With nothing to go on, it assumes five days. Set it yourself and your number wins, anywhere from one to ten days.</p>
+<p>This is why logging the end of a period, not only the start, earns the extra tap: an accurate end date is what makes the estimate match you. When you mark a new period start, the app fills an end date from your period-length setting, and you can drag it to the real day whenever the period wraps up. Everything stays on your device, with no account. If you want the app&#x27;s number to reflect your own length instead of a default, honest end dates are most of the work.</p>
+<h2>When a change in length is worth asking about</h2>
+<p>A period&#x27;s length is a clue, and a few patterns are worth raising with a clinician rather than watching alone. Mayo Clinic points to bleeding that lasts more than eight days, periods that turn irregular after having been regular, and flow heavy enough that you soak through a pad or tampon every hour or two. Cleveland Clinic adds a plain example of a change worth checking: periods that used to run three days and now run six, and stay that way.</p>
+<p>The theme is a real, sustained shift from your own normal, not one unusual month and not missing a particular number. A tracked history makes that conversation faster, since a few months of start and end dates show the change better than memory does. One limit is worth stating plainly: an app can record how long you bleed, but it cannot diagnose why a length changed. The dates are reference information for you and, when something seems off, for your clinician.</p>
+<h2>Two periods, both normal</h2>
+<p>Picture two friends. One has bled for three days, start to finish, for as long as she can remember. The other reliably goes six. Neither has a problem to fix. Each has a steady pattern, and steadiness is the signal that matters more than the count. If the three-day friend suddenly started bleeding six days every month, that change would be worth a mention, not because six is wrong, but because it is new for her.</p>
+<p>This is also why comparing period lengths with someone else rarely tells you much. Your usual number and theirs can differ by days and both be ordinary. The comparison worth making is with your own recent months, which is exactly what a record lets you do.</p>
+<h2>Frequently asked questions</h2>
+<p>How many days is a normal period? About two to seven, and usually around five. Some guidance puts the upper end at eight. A period on the shorter or longer edge of that range can still be normal if it is steady for you.</p>
+<p>Is a two-day period too short? Not on its own. A short period can simply be your pattern, and hormonal birth control commonly makes periods shorter. A period that suddenly becomes much shorter than your usual is the part worth a mention.</p>
+<p>Is it bad if my period lasts seven days? No. Seven days is within the ordinary range. Bleeding beyond about eight days, or a period that grew noticeably longer and stayed that way, is what Mayo Clinic suggests checking.</p>
+<p>Why did my period get shorter? Common reasons include starting hormonal birth control and getting older, since cycles often shorten with age. If the change is sudden and unexplained, raise it with a clinician.</p>
+<p>Does period length predict my cycle or fertility? Not really. Period length is the days you bleed; your cycle length and its dates are more useful for fertility questions. The two numbers track different things.</p>
+<h2>The one-line version</h2>
+<p>A normal period lasts about two to seven days, usually around five, with the flow heaviest in the first couple of days; some guidance puts the upper end at eight. There is no single correct number, and what counts as normal is your own steady pattern, so a three-day period and a seven-day one can both be fine. Period length (the days you bleed) is a different measure from cycle length (the gap between period starts).</p>
+<p>Ordinary things like hormonal birth control and age can shorten or lengthen a period. A change worth raising with a clinician is a real, sustained one: bleeding beyond about eight days, periods heavy enough to soak a pad or tampon hourly, or a length that shifted and stayed shifted. MiniCycle keeps period length as its own setting (manual 1–10 days, or an estimate from up to your latest 12 closed periods, defaulting to 5), all on your device; it records how long you bleed but does not diagnose why it changed.</p>
+                <div class="callout">
+                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="how-long-does-a-normal-period-last" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                </div>
+                <h2>References</h2>
+                <ul class="references">
+        <li><a href="https://www.nhs.uk/conditions/periods/">NHS. Periods.</a></li>
+<li><a href="https://health.clevelandclinic.org/how-long-should-your-period-last">Cleveland Clinic. How Long Should Your Period Last?</a></li>
+<li><a href="https://www.mayoclinic.org/healthy-lifestyle/womens-health/in-depth/menstrual-cycle/art-20047186">Mayo Clinic. Menstrual cycle: What&#x27;s normal, what&#x27;s not.</a></li>
+<li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
+                </ul>
+              </article>
+            </main>
+          </body>
+        </html>
