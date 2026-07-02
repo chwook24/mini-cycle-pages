@@ -1,0 +1,173 @@
+        <!doctype html>
+        <html lang="ko">
+                <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>MiniCycle 생리 예정일이 자꾸 바뀌는 이유</title>
+          <meta name="description" content="생리를 새로 기록할 때마다 MiniCycle이 다음 예정일을 다시 계산해 날짜가 옮겨갑니다. 예정일이 바뀌는 건 오류가 아니라 최신 기록에 맞춰 정확해지는 과정이라는 점을 계산 방식과 함께 정리했습니다.">
+          <link rel="canonical" href="https://minicycle.net/ko/blog/why-minicycle-predicted-period-date-changes/">
+            <link rel="alternate" hreflang="en" href="https://minicycle.net/blog/why-minicycle-predicted-period-date-changes/">
+    <link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/why-minicycle-predicted-period-date-changes/">
+    <link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/why-minicycle-predicted-period-date-changes/">
+          <link rel="alternate" type="application/rss+xml" title="MiniCycle Blog" href="https://minicycle.net/feed.xml">
+          <meta property="og:type" content="article">
+          <meta property="og:title" content="MiniCycle 생리 예정일이 자꾸 바뀌는 이유">
+          <meta property="og:description" content="생리를 새로 기록할 때마다 MiniCycle이 다음 예정일을 다시 계산해 날짜가 옮겨갑니다. 예정일이 바뀌는 건 오류가 아니라 최신 기록에 맞춰 정확해지는 과정이라는 점을 계산 방식과 함께 정리했습니다.">
+          <meta property="og:url" content="https://minicycle.net/ko/blog/why-minicycle-predicted-period-date-changes/">
+          <meta property="og:image" content="https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg">
+          <meta name="twitter:card" content="summary_large_image">
+            <link rel="icon" href="../../../favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../../../apple-touch-icon.png">
+          <link rel="stylesheet" href="../../../styles.css">
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
+  function trackBlogArticleEngagement() {
+    const article = document.querySelector('article.article[data-content-group]');
+    if (!article || typeof gtag !== 'function') return;
+
+    const progressThresholds = [50, 75, 90];
+    const sentProgress = new Set();
+    const minReadMs = Number(article.dataset.minReadMs || 30000);
+    let maxPercent = 0;
+    let readCompleteSent = false;
+    let activeMs = 0;
+    let lastTick = Date.now();
+    let wasActive = !document.hidden && document.hasFocus();
+
+    function recordActiveTime() {
+      const now = Date.now();
+      if (wasActive) activeMs += now - lastTick;
+      lastTick = now;
+      wasActive = !document.hidden && document.hasFocus();
+    }
+
+    function articlePercent() {
+      const articleTop = article.getBoundingClientRect().top + window.scrollY;
+      const articleHeight = Math.max(article.offsetHeight, 1);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      return Math.max(0, Math.min(100, Math.floor(((viewportBottom - articleTop) / articleHeight) * 100)));
+    }
+
+    function send(eventName, params) {
+      gtag('event', eventName, Object.assign({
+        language: article.dataset.language,
+        content_group: article.dataset.contentGroup,
+        article_path: window.location.pathname,
+        transport_type: 'beacon'
+      }, params));
+    }
+
+    function evaluate() {
+      recordActiveTime();
+      maxPercent = Math.max(maxPercent, articlePercent());
+
+      progressThresholds.forEach((threshold) => {
+        if (maxPercent >= threshold && !sentProgress.has(threshold)) {
+          sentProgress.add(threshold);
+          send('blog_article_progress', {
+            scroll_percent: threshold,
+            active_seconds: Math.round(activeMs / 1000)
+          });
+        }
+      });
+
+      if (!readCompleteSent && maxPercent >= 90 && activeMs >= minReadMs) {
+        readCompleteSent = true;
+        send('blog_article_read_complete', {
+          max_percent: maxPercent,
+          active_seconds: Math.round(activeMs / 1000),
+          min_read_seconds: Math.round(minReadMs / 1000)
+        });
+      }
+    }
+
+    window.addEventListener('scroll', evaluate, { passive: true });
+    window.addEventListener('resize', evaluate);
+    document.addEventListener('visibilitychange', evaluate);
+    window.addEventListener('pagehide', evaluate);
+    window.setInterval(evaluate, 5000);
+    evaluate();
+  }
+  window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
+</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"MiniCycle 생리 예정일이 자꾸 바뀌는 이유","description":"생리를 새로 기록할 때마다 MiniCycle이 다음 예정일을 다시 계산해 날짜가 옮겨갑니다. 예정일이 바뀌는 건 오류가 아니라 최신 기록에 맞춰 정확해지는 과정이라는 점을 계산 방식과 함께 정리했습니다.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg","datePublished":"2026-07-02","dateModified":"2026-07-02","inLanguage":"ko","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/ko/blog/why-minicycle-predicted-period-date-changes/"}}</script>
+        </head>
+          <body>
+        <header class="site-header">
+  <a class="brand" href="../../">MiniCycle</a>
+  <nav aria-label="Primary navigation">
+    <a href="../../blog/">블로그</a>
+    <a href="../../support/">지원</a>
+    <a href="../../privacy/">개인정보</a>
+    <a href="../../../blog/why-minicycle-predicted-period-date-changes/">English</a>
+  </nav>
+</header>
+            <main class="page">
+              <article class="article" data-language="ko" data-content-group="why-minicycle-predicted-period-date-changes" data-min-read-ms="90000">
+                <p class="eyebrow">예측</p>
+                <h1>MiniCycle 생리 예정일이 자꾸 바뀌는 이유</h1>
+                <p class="article-meta">2026년 7월 2일 MiniCycle 작성</p>
+                <p class="lead">지난주에 볼 때는 12일이라더니, 오늘 열어 보니 14일로 바뀌어 있습니다. 고장이 아닙니다. 그사이 생리를 한 번 기록했고, 앱은 하기로 되어 있는 일을 했을 뿐입니다. 다시 계산한 거죠. 예정일이 움직인다는 건 오류가 아니라 앱이 가장 최근 기록을 따라잡고 있다는 신호입니다. 무엇이 언제 바뀌는지, 그리고 예정일이 흔들리는 게 왜 대개 예측이 나빠지는 쪽이 아니라 좋아지는 쪽인지 짚어 보겠습니다.</p>
+                <img class="article-hero" src="../../../assets/home-capture-iphone17-1118-ko-20260518.jpg" alt="MiniCycle 아이폰 실제 캡처 화면: 생리 캘린더와 위젯 경험" width="552" height="1200" loading="eager">
+        <h2>예정일은 왜 움직일까요</h2>
+<p>MiniCycle은 예정일을 하나 정해 저장해 두지 않습니다. 날짜가 바뀔 때마다 저장된 기록에서 다시 계산합니다. 새 값을 부르는 조건은 셋입니다. 생리 시작일을 새로 기록할 때, 기록을 고치거나 지울 때, 주기 길이나 생리 기간 설정을 바꿀 때. 이 중 하나를 하고 앱을 열면 예상 생리일도, 배란일도, 가임기도 전과 다른 날에 놓일 수 있습니다.</p>
+<p>셋 중 아무것도 건드리지 않았다면 예정일은 그대로입니다. 같은 입력이면 계산도 같은 결과를 내니까요. 그러니 날짜가 바뀌었다면 앱이 두 번 다르게 찍은 게 아니라 입력이 바뀐 겁니다.</p>
+<h2>기준점은 마지막 시작일입니다</h2>
+<p>미래 예측은 전부 한 날짜에서 앞으로 세어 나갑니다. 가장 최근에 기록한 생리 시작일이죠. MiniCycle은 그 날짜에 주기 길이를 더해 다음 예정일을 잡고, 그 주변에 배란일과 가임기를 그립니다. 새 시작일을 찍으면 기준점이 그날로 옮겨가고, 예측 전체가 따라서 미끄러집니다.</p>
+<p>그래서 마지막으로 넣은 날짜가 오래된 어떤 날짜보다 중요합니다. 지난달 시작일을 이틀 고치면 다음 달 예정일도 이틀쯤 움직입니다. 기록 깊숙이 묻힌 옛 날짜는 거의 아무것도 바꾸지 않지만, 가장 최근 날짜는 전부를 움직입니다.</p>
+<h2>주기 길이는 고정값이 아니라 움직이는 중앙값</h2>
+<p>기준점에 더하는 간격도 상수가 아닙니다. MiniCycle은 최근 생리 시작일을 최대 12개까지 보고 주기 길이를 추정하고, 하나 기록할 때마다 다시 추정합니다. 평균이 아니라 최근 간격들의 중앙값을 쓰기 때문에, 유난한 한 달이 숫자를 덜 끌어당깁니다. 측정된 간격이 10개 이상 모이면 가장 짧은 값과 가장 긴 값을 하나씩 뺀 뒤 중앙값을 잡아 양 끝을 다듬습니다.</p>
+<p>참고할 기록이 적을 때는 29일을 기본값으로 시작해 내 날짜가 쌓일 때까지 그 값에 기댑니다. 초반에는 새 생리 하나가 앱이 아는 전부에서 큰 비중을 차지해 추정이 더 흔들립니다. 기록이 늘수록 새 주기 하나가 중앙값을 조금씩만 움직이고, 예정일도 차분해집니다.</p>
+<h2>배란일과 가임기도 함께 움직입니다</h2>
+<p>배란일은 14일째로 못 박혀 있지 않습니다. MiniCycle은 주기 길이에 따라 9–14일 사이에서 달라지는 황체기를 다음 예정일에서 거꾸로 세어 배란일을 잡습니다. 가임기는 그 추정 배란일 5일 전부터 다음 날까지고요. 모두 다음 예정일에 매달려 있습니다.</p>
+<p>그러니 예정일이 움직이면 배란일과 하늘색 가임기 띠도 같은 방향으로 함께 옮겨갑니다. 따로 맞출 필요가 없습니다. 앱이 실제로 추정하는 건 그 한 날짜이고, 나머지는 거기서 딸려 나옵니다.</p>
+<h2>알림과 위젯은 알아서 따라옵니다</h2>
+<p>알림을 다시 맞출 일은 없습니다. MiniCycle 알림은 서버가 보내는 게 아니라 기기 안에서 만들어지는 로컬 알림이고, 예측이 바뀔 때마다 새 날짜에 맞춰 다시 예약됩니다. 이틀 전으로 맞춘 생리 알림은 바뀐 예정일 기준으로 계속 이틀 전을 가리킵니다.</p>
+<p>홈 화면 위젯도 같은 저장 상태를 따릅니다. 앱을 열면 위젯 타임라인이 새로 고쳐지기 때문에, 방금 기록한 생리가 iOS의 느린 자동 갱신을 기다리지 않고 곧 위젯에도 반영됩니다. 위젯이 하루 뒤처져 보이면 앱을 한 번 여는 게 해결의 전부입니다.</p>
+<h2>바뀌는 날짜로 알 수 있는 것과 없는 것</h2>
+<p>예정일이 흔들린다는 건 내 건강이 아니라 내 데이터를 비추는 일입니다. 주기는 원래 달라집니다. 60만 건이 넘는 주기를 분석한 연구에서도 주기 길이는 사람마다, 또 같은 사람이라도 달마다 달랐습니다. MiniCycle이 하나의 숫자를 믿는 대신 계속 다시 추정하는 이유죠. 예측이 며칠 빗나가는 건 앱의 잘못도 내 잘못도 아닌 평범한 일입니다.</p>
+<p>다만 바뀌는 날짜가 할 수 없는 일은 진단입니다. 이건 내 날짜에서 뽑은 참고 정보일 뿐, 피임 수단도 임신 여부 판정도 아닙니다. Mayo Clinic은 생리 간격이 24일보다 짧거나 38일보다 길 때, 임신이 아닌데 90일 넘게 없을 때, 규칙적이다가 불규칙해질 때 의료진과 상의하라고 안내합니다. 예정일이 나를 최대한 가깝게 따라오길 바란다면, 가장 도움이 되는 습관 하나는 생리 시작일을 그날그날 바로 찍어 두는 것입니다. 앱이 재는 기준점이 늘 정확하도록요.</p>
+<h2>세 번 기록한 예시로</h2>
+<p>생리 시작일을 세 번 찍었다고 해 봅시다. 3월 3일, 4월 1일, 4월 30일. 간격이 29일, 29일이라 MiniCycle은 다음 생리를 5월 29일쯤으로 잡고, 29일 주기에서 배란일을 약 13일 거꾸로 세어 5월 16일 근처로 봅니다. 그런데 이번 주기가 길어져 실제 시작일을 6월 2일에 찍습니다. 예측보다 사흘 늦었죠. 두 가지가 동시에 바뀝니다. 기준점이 4월 30일에서 6월 2일로 옮겨가고, 33일이라는 새 간격이 기록에 더해져 중앙값을 살짝 위로 밀어 올립니다. 다음 예정일은 이제 6월 2일에서부터 다시 재고, 29일을 곧이곧대로 더했을 때보다 조금 더 뒤로 갑니다.</p>
+<p>여기에 설정을 바꾸거나 손으로 고친 건 없습니다. 실제 날짜 하나를 찍었더니 예측이 그 위로 다시 중심을 잡은 것뿐입니다. 만약 6월이 29일 주기로 왔다면 기준점은 옮겨가도 예정일은 거의 그대로였을 겁니다. 간격이 앱이 이미 예상하던 값과 같으니까요.</p>
+<h2>예정일 변화에 관한 질문들</h2>
+<p>예정일이 저절로 바뀌었어요. 왜죠? 저절로 바뀌진 않습니다. 입력이 달라진 겁니다. 새로 기록한 시작일, 고치거나 지운 기록, 바뀐 길이 설정 중 하나죠. 저장된 날짜가 그대로면 예정일도 그대로입니다.</p>
+<p>앱이 자꾸 날짜를 바꿔서 못 믿겠어요. 예정일이 움직이는 건 앱이 최신 주기를 따라가는 것이지 틀리는 게 아닙니다. 실제 주기는 달마다 달라서, 한 번 정하고 안 바꾸는 예측이라면 현실에서 점점 멀어집니다.</p>
+<p>생리를 기록했더니 앞으로의 날짜가 전부 밀렸어요. 정상인가요? 정상입니다. 가장 최근 시작일이 모든 미래 예측의 기준점이라, 새 시작일 하나가 배란일과 가임기까지 예측 전체를 한 번에 옮깁니다.</p>
+<p>옛날 날짜를 고치면 예측이 많이 바뀌나요? 대개 조금만 바뀝니다. 주기 추정이 튀는 값에 덜 흔들리는 중앙값을 쓰고, 옛 날짜는 기준점도 아니니까요. 가장 최근 시작일을 고칠 때 영향이 가장 큽니다.</p>
+<p>위젯이 아직 옛날 날짜를 보여줘요. 앱을 한 번 열어 보세요. iOS의 자동 갱신을 기다리는 대신, 앱에 저장된 상태로 위젯 타임라인이 새로 고쳐집니다.</p>
+<h2>한 줄로</h2>
+<p>MiniCycle은 예정일을 정해 저장하지 않고, 저장된 날짜가 바뀔 때마다 다시 계산합니다. 그 계기는 새 생리 시작일 기록, 기록 수정·삭제, 길이 설정 변경입니다. 미래 날짜는 가장 최근 시작일(기준점)에서 재고, 주기 길이는 최근 12개까지의 중앙값을 씁니다. 간격이 10개 이상이면 가장 짧은 값과 긴 값을 하나씩 빼며, 기록이 적으면 29일이 기본값입니다. 그래서 새 시작일은 기준점과 간격을 함께 바꿔 예정일을 옮깁니다.</p>
+<p>배란일은 9–14일 가변 황체기로 거꾸로 세어 따라오고, 가임기는 그 5일 전부터 다음 날까지입니다. 알림은 다시 예약되고 위젯은 앱을 열면 갱신됩니다. 날짜가 바뀌는 건 오류가 아니라 데이터를 반영하는 것이며, 주기 길이가 달마다 다르기 때문입니다. 이는 기기 안에 있는 참고 정보일 뿐 진단이나 피임이 아닙니다. 생리 간격이 24일 미만이거나 38일 초과, 임신이 아닌데 90일 넘게 없음, 규칙적이다 불규칙해짐이면 의료진과 상의하세요.</p>
+                <div class="callout">
+                  <p>MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="ko" data-placement="blog_article_callout" data-content-group="why-minicycle-predicted-period-date-changes" onclick="trackAppStoreClick(this)">App Store에서 받기</a>
+                </div>
+                <h2>참고 자료</h2>
+                <ul class="references">
+        <li><a href="https://www.nature.com/articles/s41746-019-0152-7">Bull JR, Rowland SP, Scherwitzl EB, et al. Real-world menstrual cycle characteristics of more than 600,000 menstrual cycles. npj Digital Medicine. 2019.</a></li>
+<li><a href="https://www.mayoclinic.org/healthy-lifestyle/womens-health/in-depth/menstrual-cycle/art-20047186">Mayo Clinic. Menstrual cycle: What&#x27;s normal, what&#x27;s not.</a></li>
+<li><a href="https://developer.apple.com/documentation/usernotifications">Apple Developer Documentation. User Notifications.</a></li>
+<li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
+                </ul>
+              </article>
+            </main>
+          </body>
+        </html>

@@ -1,0 +1,173 @@
+        <!doctype html>
+        <html lang="en">
+                <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>Why MiniCycle&#x27;s predicted period date keeps changing</title>
+          <meta name="description" content="MiniCycle re-estimates your next period every time your saved dates change, so the predicted date can move. Here is what shifts, when, and why a moving estimate is the app working.">
+          <link rel="canonical" href="https://minicycle.net/blog/why-minicycle-predicted-period-date-changes/">
+            <link rel="alternate" hreflang="en" href="https://minicycle.net/blog/why-minicycle-predicted-period-date-changes/">
+    <link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/why-minicycle-predicted-period-date-changes/">
+    <link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/why-minicycle-predicted-period-date-changes/">
+          <link rel="alternate" type="application/rss+xml" title="MiniCycle Blog" href="https://minicycle.net/feed.xml">
+          <meta property="og:type" content="article">
+          <meta property="og:title" content="Why MiniCycle&#x27;s predicted period date keeps changing">
+          <meta property="og:description" content="MiniCycle re-estimates your next period every time your saved dates change, so the predicted date can move. Here is what shifts, when, and why a moving estimate is the app working.">
+          <meta property="og:url" content="https://minicycle.net/blog/why-minicycle-predicted-period-date-changes/">
+          <meta property="og:image" content="https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg">
+          <meta name="twitter:card" content="summary_large_image">
+            <link rel="icon" href="../../favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+          <link rel="stylesheet" href="../../styles.css">
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
+  function trackBlogArticleEngagement() {
+    const article = document.querySelector('article.article[data-content-group]');
+    if (!article || typeof gtag !== 'function') return;
+
+    const progressThresholds = [50, 75, 90];
+    const sentProgress = new Set();
+    const minReadMs = Number(article.dataset.minReadMs || 30000);
+    let maxPercent = 0;
+    let readCompleteSent = false;
+    let activeMs = 0;
+    let lastTick = Date.now();
+    let wasActive = !document.hidden && document.hasFocus();
+
+    function recordActiveTime() {
+      const now = Date.now();
+      if (wasActive) activeMs += now - lastTick;
+      lastTick = now;
+      wasActive = !document.hidden && document.hasFocus();
+    }
+
+    function articlePercent() {
+      const articleTop = article.getBoundingClientRect().top + window.scrollY;
+      const articleHeight = Math.max(article.offsetHeight, 1);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      return Math.max(0, Math.min(100, Math.floor(((viewportBottom - articleTop) / articleHeight) * 100)));
+    }
+
+    function send(eventName, params) {
+      gtag('event', eventName, Object.assign({
+        language: article.dataset.language,
+        content_group: article.dataset.contentGroup,
+        article_path: window.location.pathname,
+        transport_type: 'beacon'
+      }, params));
+    }
+
+    function evaluate() {
+      recordActiveTime();
+      maxPercent = Math.max(maxPercent, articlePercent());
+
+      progressThresholds.forEach((threshold) => {
+        if (maxPercent >= threshold && !sentProgress.has(threshold)) {
+          sentProgress.add(threshold);
+          send('blog_article_progress', {
+            scroll_percent: threshold,
+            active_seconds: Math.round(activeMs / 1000)
+          });
+        }
+      });
+
+      if (!readCompleteSent && maxPercent >= 90 && activeMs >= minReadMs) {
+        readCompleteSent = true;
+        send('blog_article_read_complete', {
+          max_percent: maxPercent,
+          active_seconds: Math.round(activeMs / 1000),
+          min_read_seconds: Math.round(minReadMs / 1000)
+        });
+      }
+    }
+
+    window.addEventListener('scroll', evaluate, { passive: true });
+    window.addEventListener('resize', evaluate);
+    document.addEventListener('visibilitychange', evaluate);
+    window.addEventListener('pagehide', evaluate);
+    window.setInterval(evaluate, 5000);
+    evaluate();
+  }
+  window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
+</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Why MiniCycle's predicted period date keeps changing","description":"MiniCycle re-estimates your next period every time your saved dates change, so the predicted date can move. Here is what shifts, when, and why a moving estimate is the app working.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-07-02","dateModified":"2026-07-02","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/why-minicycle-predicted-period-date-changes/"}}</script>
+        </head>
+          <body>
+        <header class="site-header">
+  <a class="brand" href="../../">MiniCycle</a>
+  <nav aria-label="Primary navigation">
+    <a href="../../blog/">Blog</a>
+    <a href="../../support/">Support</a>
+    <a href="../../privacy/">Privacy</a>
+    <a href="../../ko/blog/why-minicycle-predicted-period-date-changes/">한국어</a>
+  </nav>
+</header>
+            <main class="page">
+              <article class="article" data-language="en" data-content-group="why-minicycle-predicted-period-date-changes" data-min-read-ms="90000">
+                <p class="eyebrow">Predictions</p>
+                <h1>Why MiniCycle&#x27;s predicted period date keeps changing</h1>
+                <p class="article-meta">Published July 2, 2026 by MiniCycle</p>
+                <p class="lead">You checked MiniCycle last week and it pointed at the 12th. You open it today and it says the 14th. Nothing broke. You logged a period in between, and the app did what it is built to do: it recalculated. A predicted date that moves is not a glitch. It is the app keeping up with your most recent data. Here is exactly what shifts, when it shifts, and why a moving estimate is usually a sign the prediction is getting better, not worse.</p>
+                <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
+        <h2>Why the date moves at all</h2>
+<p>MiniCycle does not store a fixed prediction. It recomputes one from your saved dates every time those dates change. Three things trigger a new number: logging a new period start, editing or deleting a record, and changing your cycle-length or period-length setting. Open the app after any of those and the predicted period, the ovulation day, and the fertile window can land on different days than before.</p>
+<p>If you have not touched any of those, the prediction holds. The estimate is deterministic, so the same saved dates always produce the same forecast. A date that changed means an input changed, not that the app guessed twice.</p>
+<h2>Your most recent start is the anchor</h2>
+<p>Every future prediction is measured forward from one date: your latest logged period start. MiniCycle places the next expected period one cycle length after it, then builds the ovulation estimate and the fertile window around that. Log a new start and the anchor jumps to the new day, so the whole forecast slides to match.</p>
+<p>This is why the last date you enter matters more than any older one. Correct last month&#x27;s start by two days and next month&#x27;s predicted date moves by about two days too. An old date buried in your history barely nudges anything. The most recent one moves everything.</p>
+<h2>Cycle length is a moving median, not a fixed number</h2>
+<p>The gap the app adds to the anchor is not a constant. MiniCycle estimates your cycle length from up to your latest 12 period starts, and re-estimates it each time you log one. It works from the median of your recent intervals rather than the average, so one unusual month pulls the number less than it would pull a mean. Once there are at least 10 measured intervals, it drops your single shortest and single longest before taking the median, trimming the extremes.</p>
+<p>With little history to go on, it starts from a 29-day default and leans on that until your own dates take over. Early on, when every new period is a large share of what the app knows, the estimate can swing more. As records build up, each new cycle moves the median less, and the predicted date settles down.</p>
+<h2>Ovulation and the fertile window shift with it</h2>
+<p>Ovulation is not pinned to a fixed day 14. MiniCycle counts it backward from the next expected period using a luteal phase that flexes between 9 and 14 days depending on your cycle length. The fertile window then runs from five days before that estimated ovulation through the day after it. All of it hangs off the next-period estimate.</p>
+<p>So when the period date moves, ovulation and the sky-blue fertile band move with it, in the same direction. You do not adjust them separately. They sit downstream of the one date the app is really estimating.</p>
+<h2>Reminders and the widget update on their own</h2>
+<p>You do not have to reschedule anything. MiniCycle reminders are local notifications, generated on your device rather than sent from a server, and they are rebuilt around the new prediction whenever it changes. A period reminder set for two days ahead keeps pointing two days ahead of the revised date.</p>
+<p>The home-screen widget follows the same saved state. MiniCycle refreshes the widget&#x27;s timeline when you open the app, so a period you just logged shows up there shortly after, instead of on the slower schedule iOS uses to update widgets on its own. If the widget looks a day behind, opening the app once is the whole fix.</p>
+<h2>What a moving date can and cannot tell you</h2>
+<p>A shifting estimate reflects your data, not your health. Cycles vary. An analysis of more than 600,000 cycles found that cycle length differs from person to person and from month to month for most people, which is the reason MiniCycle keeps re-estimating instead of trusting a single figure. A prediction that lands a few days off is ordinary, not a fault in the app or in you.</p>
+<p>What the moving date cannot do is diagnose anything. It is reference information drawn from your own dates, not contraception and not a verdict on pregnancy. Mayo Clinic suggests checking with a clinician if your periods come less than 24 or more than 38 days apart, stop for more than 90 days without pregnancy, or turn irregular after being regular. If you want the predicted date to track you as closely as possible, the habit that helps most is logging each period start on the day it happens, so the anchor the app measures from is always right.</p>
+<h2>A worked example, three cycles in</h2>
+<p>Say you have logged three starts: March 3, April 1, and April 30. The intervals are 29 and 29 days, so MiniCycle predicts the next period around May 29 and, with a 29-day cycle, counts ovulation back about 13 days to roughly May 16. Then this cycle runs long and you log the real start on June 2, three days later than predicted. Two things update at once. The anchor moves from April 30 to June 2, and a new 33-day interval joins your history, nudging the median cycle length upward. The next predicted period is now measured from June 2, and it sits a touch further out than a flat 29-day gap would put it.</p>
+<p>None of that required a settings change or a manual fix. You logged one true date, and the forecast re-centered on it. Had June come in at 29 days instead, the anchor would still have moved, but the predicted date would have barely shifted, because the interval matched what the app already expected.</p>
+<h2>Common questions about changing predictions</h2>
+<p>Why did my predicted period date change on its own? It did not change on its own. Something updated the inputs: a new logged start, an edited or deleted record, or a changed length setting. With the same saved dates, the estimate stays put.</p>
+<p>The app keeps moving the date. Is it unreliable? A moving estimate is the app tracking your latest cycle, not failing. Real cycles vary month to month, so a forecast that never adjusted would drift further from reality, not closer.</p>
+<p>I logged a period and all my future dates shifted. Is that normal? Yes. Your most recent start is the anchor for every future prediction, so a new start moves the whole forecast at once, including ovulation and the fertile window.</p>
+<p>Does editing an old date change my predictions much? Usually only a little. The cycle estimate uses a median that resists one odd value, and old dates are not the anchor. Correcting your most recent start has the biggest effect.</p>
+<p>My widget still shows the old date. What do I do? Open the app once. That refreshes the widget&#x27;s timeline from the app&#x27;s saved state, instead of waiting for iOS to update it on its own schedule.</p>
+<h2>The one-line version</h2>
+<p>MiniCycle does not save a fixed prediction; it recomputes one from your saved dates whenever they change, which happens when you log a new period start, edit or delete a record, or change a length setting. Future dates are measured from your most recent start (the anchor), using a median cycle length from up to your latest 12 records (dropping one shortest and one longest once there are at least 10 intervals, defaulting to 29 days), so a new start moves both the anchor and the interval and the predicted date shifts.</p>
+<p>Ovulation follows, counted back with a 9–14 day variable luteal phase, and the fertile window runs five days before it through the day after; reminders reschedule and the widget refreshes when you open the app. A moving date reflects your data, not a bug, since cycle length varies month to month. It is reference information on your device, not a diagnosis or contraception. See a clinician if periods come less than 24 or more than 38 days apart, stop over 90 days without pregnancy, or turn irregular after being regular.</p>
+                <div class="callout">
+                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="why-minicycle-predicted-period-date-changes" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                </div>
+                <h2>References</h2>
+                <ul class="references">
+        <li><a href="https://www.nature.com/articles/s41746-019-0152-7">Bull JR, Rowland SP, Scherwitzl EB, et al. Real-world menstrual cycle characteristics of more than 600,000 menstrual cycles. npj Digital Medicine. 2019.</a></li>
+<li><a href="https://www.mayoclinic.org/healthy-lifestyle/womens-health/in-depth/menstrual-cycle/art-20047186">Mayo Clinic. Menstrual cycle: What&#x27;s normal, what&#x27;s not.</a></li>
+<li><a href="https://developer.apple.com/documentation/usernotifications">Apple Developer Documentation. User Notifications.</a></li>
+<li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
+                </ul>
+              </article>
+            </main>
+          </body>
+        </html>
