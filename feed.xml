@@ -5,6 +5,18 @@
             <link>https://minicycle.net/blog/</link>
             <description>Period calendar guides from MiniCycle.</description>
         <item>
+  <title>Why the MiniCycle widget isn&#x27;t updating, and how it refreshes</title>
+  <link>https://minicycle.net/blog/minicycle-widget-not-updating-refresh/</link>
+  <guid>https://minicycle.net/blog/minicycle-widget-not-updating-refresh/</guid>
+  <pubDate>Sat, 04 Jul 2026 00:00:00 +0900</pubDate>
+  <description>The MiniCycle home-screen widget updates on iOS&#x27;s schedule, not the instant you log a period. Here is how WidgetKit refreshes it and what to check when it looks stale.</description>
+</item><item>
+  <title>Ovulation pain (mittelschmerz): what that mid-cycle twinge is</title>
+  <link>https://minicycle.net/blog/ovulation-pain-mittelschmerz-what-it-is/</link>
+  <guid>https://minicycle.net/blog/ovulation-pain-mittelschmerz-what-it-is/</guid>
+  <pubDate>Fri, 03 Jul 2026 00:00:00 +0900</pubDate>
+  <description>Ovulation pain, or mittelschmerz, is a one-sided mid-cycle twinge that affects up to 40% of people who ovulate. What it feels like, why it happens, and when it isn&#x27;t ordinary.</description>
+</item><item>
   <title>Why MiniCycle&#x27;s predicted period date keeps changing</title>
   <link>https://minicycle.net/blog/why-minicycle-predicted-period-date-changes/</link>
   <guid>https://minicycle.net/blog/why-minicycle-predicted-period-date-changes/</guid>

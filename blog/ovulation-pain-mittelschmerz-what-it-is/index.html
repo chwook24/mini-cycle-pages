@@ -1,0 +1,161 @@
+        <!doctype html>
+        <html lang="en">
+                <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>Ovulation pain (mittelschmerz): what that mid-cycle twinge is</title>
+          <meta name="description" content="Ovulation pain, or mittelschmerz, is a one-sided mid-cycle twinge that affects up to 40% of people who ovulate. What it feels like, why it happens, and when it isn&#x27;t ordinary.">
+          <link rel="canonical" href="https://minicycle.net/blog/ovulation-pain-mittelschmerz-what-it-is/">
+            <link rel="alternate" hreflang="en" href="https://minicycle.net/blog/ovulation-pain-mittelschmerz-what-it-is/">
+    <link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/ovulation-pain-mittelschmerz-what-it-is/">
+    <link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/ovulation-pain-mittelschmerz-what-it-is/">
+          <link rel="alternate" type="application/rss+xml" title="MiniCycle Blog" href="https://minicycle.net/feed.xml">
+          <meta property="og:type" content="article">
+          <meta property="og:title" content="Ovulation pain (mittelschmerz): what that mid-cycle twinge is">
+          <meta property="og:description" content="Ovulation pain, or mittelschmerz, is a one-sided mid-cycle twinge that affects up to 40% of people who ovulate. What it feels like, why it happens, and when it isn&#x27;t ordinary.">
+          <meta property="og:url" content="https://minicycle.net/blog/ovulation-pain-mittelschmerz-what-it-is/">
+          <meta property="og:image" content="https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg">
+          <meta name="twitter:card" content="summary_large_image">
+            <link rel="icon" href="../../favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+          <link rel="stylesheet" href="../../styles.css">
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
+  function trackBlogArticleEngagement() {
+    const article = document.querySelector('article.article[data-content-group]');
+    if (!article || typeof gtag !== 'function') return;
+
+    const progressThresholds = [50, 75, 90];
+    const sentProgress = new Set();
+    const minReadMs = Number(article.dataset.minReadMs || 30000);
+    let maxPercent = 0;
+    let readCompleteSent = false;
+    let activeMs = 0;
+    let lastTick = Date.now();
+    let wasActive = !document.hidden && document.hasFocus();
+
+    function recordActiveTime() {
+      const now = Date.now();
+      if (wasActive) activeMs += now - lastTick;
+      lastTick = now;
+      wasActive = !document.hidden && document.hasFocus();
+    }
+
+    function articlePercent() {
+      const articleTop = article.getBoundingClientRect().top + window.scrollY;
+      const articleHeight = Math.max(article.offsetHeight, 1);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      return Math.max(0, Math.min(100, Math.floor(((viewportBottom - articleTop) / articleHeight) * 100)));
+    }
+
+    function send(eventName, params) {
+      gtag('event', eventName, Object.assign({
+        language: article.dataset.language,
+        content_group: article.dataset.contentGroup,
+        article_path: window.location.pathname,
+        transport_type: 'beacon'
+      }, params));
+    }
+
+    function evaluate() {
+      recordActiveTime();
+      maxPercent = Math.max(maxPercent, articlePercent());
+
+      progressThresholds.forEach((threshold) => {
+        if (maxPercent >= threshold && !sentProgress.has(threshold)) {
+          sentProgress.add(threshold);
+          send('blog_article_progress', {
+            scroll_percent: threshold,
+            active_seconds: Math.round(activeMs / 1000)
+          });
+        }
+      });
+
+      if (!readCompleteSent && maxPercent >= 90 && activeMs >= minReadMs) {
+        readCompleteSent = true;
+        send('blog_article_read_complete', {
+          max_percent: maxPercent,
+          active_seconds: Math.round(activeMs / 1000),
+          min_read_seconds: Math.round(minReadMs / 1000)
+        });
+      }
+    }
+
+    window.addEventListener('scroll', evaluate, { passive: true });
+    window.addEventListener('resize', evaluate);
+    document.addEventListener('visibilitychange', evaluate);
+    window.addEventListener('pagehide', evaluate);
+    window.setInterval(evaluate, 5000);
+    evaluate();
+  }
+  window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
+</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Ovulation pain (mittelschmerz): what that mid-cycle twinge is","description":"Ovulation pain, or mittelschmerz, is a one-sided mid-cycle twinge that affects up to 40% of people who ovulate. What it feels like, why it happens, and when it isn't ordinary.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-07-03","dateModified":"2026-07-03","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/ovulation-pain-mittelschmerz-what-it-is/"}}</script>
+        </head>
+          <body>
+        <header class="site-header">
+  <a class="brand" href="../../">MiniCycle</a>
+  <nav aria-label="Primary navigation">
+    <a href="../../blog/">Blog</a>
+    <a href="../../support/">Support</a>
+    <a href="../../privacy/">Privacy</a>
+    <a href="../../ko/blog/ovulation-pain-mittelschmerz-what-it-is/">한국어</a>
+  </nav>
+</header>
+            <main class="page">
+              <article class="article" data-language="en" data-content-group="ovulation-pain-mittelschmerz-what-it-is" data-min-read-ms="90000">
+                <p class="eyebrow">Cycle health</p>
+                <h1>Ovulation pain (mittelschmerz): what that mid-cycle twinge is</h1>
+                <p class="article-meta">Published July 3, 2026 by MiniCycle</p>
+                <p class="lead">You are about ten days past your last period, and a small ache shows up low on one side. Not cramps exactly, and nowhere near your period. It fades by evening. This is one of the most common things a cycle does that nobody warns you about: a mid-cycle twinge that lines up with ovulation. It has a name, mittelschmerz, and for most people it is ordinary. Knowing what it is, and the few times it is worth a second look, takes the mystery out of it.</p>
+                <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
+        <h2>The one-sided ache that shows up mid-cycle</h2>
+<p>Mittelschmerz is German for ‘middle pain,’ and that is roughly where it lands: partway through your cycle, low on one side of the belly, around the time an ovary releases an egg. Mayo Clinic dates it to about two weeks before your next period is due. It is common. Cleveland Clinic puts it at up to 40% of people who ovulate, so if you have felt it, you are in a large crowd.</p>
+<p>Some people notice it most months. Others feel it once and never place it again. Both are normal. The pain sits on the side of the ovary doing the work that cycle, which is why it can appear on the right one month and the left the next.</p>
+<h2>What it feels like, and how long it lasts</h2>
+<p>There is no single version. It can be a dull ache that reads like a mild period cramp, or a sharp, sudden twinge that makes you stop for a second. It is almost always one-sided. Some people also notice a little clear, stretchy discharge, like raw egg white, or a trace of spotting on the same day.</p>
+<p>It does not linger. The NHS and Mayo Clinic both describe a span of a few minutes to a day or two; Cleveland Clinic says a few hours is typical and up to 48 hours at the far end. If a mid-cycle pain drags on well past that, or keeps getting worse, that is the part that separates ordinary mittelschmerz from something worth asking about.</p>
+<h2>Why releasing an egg can hurt</h2>
+<p>The egg grows inside a fluid-filled sac called a follicle. As ovulation nears, the follicle swells and stretches the surface of the ovary, and then it ruptures to let the egg out. Mayo Clinic points to two plausible sources of the ache: the stretching itself, and the small amount of blood and fluid the burst follicle releases, which can irritate the lining of the abdomen nearby.</p>
+<p>The exact mechanism is not settled, and that matters for one common assumption. Because the stretch happens before release and the fluid comes after it, the twinge is not a precise stopwatch for the moment the egg drops. It marks the neighborhood of ovulation, not the exact minute.</p>
+<h2>It doesn&#x27;t mean you&#x27;re more fertile, and it isn&#x27;t birth control</h2>
+<p>Two myths ride along with ovulation pain. The first is that feeling it means you are especially fertile. Cleveland Clinic is blunt about this: ovulation pain does not make you more fertile and does not change your odds of conceiving that cycle. It is a sensation, not an advantage.</p>
+<p>The second is that you can use the twinge to avoid pregnancy by steering clear of that one day. You cannot rely on it that way. The pain is approximate, the fertile window spans several days, and sperm can outlive the ache. If you are trying to conceive, a twinge is a useful nudge that ovulation is near; if you are trying not to, it is not a method.</p>
+<h2>When a mid-cycle pain is not mittelschmerz</h2>
+<p>Mittelschmerz is harmless and passes on its own, often with nothing more than a warm bath or an over-the-counter pain reliever like ibuprofen or paracetamol. What it should not do is escalate. Mayo Clinic says to contact a clinician if new pelvic pain turns severe, comes with nausea or fever, or simply does not go away.</p>
+<p>Cleveland Clinic adds a few specific flags: a fever over 100.4°F (38°C), pain when you urinate, vomiting, heavy bleeding between periods, or mid-cycle pain that lasts more than a day or shows up hard most months. The reason to take these seriously is not that mittelschmerz is dangerous, but that a handful of conditions can imitate it, including an ovarian cyst, ovarian torsion, appendicitis, pelvic inflammatory disease, and ectopic pregnancy. Sudden, severe, one-sided pain is worth a call, not a wait.</p>
+<h2>Tracking the twinge against your calendar</h2>
+<p>Both Mayo Clinic and Cleveland Clinic suggest the same low-effort test: keep a record for a few cycles and note the day you feel the pain. If it lands mid-cycle and clears on its own, it is most likely mittelschmerz. A few months of dates turn a vague worry into a pattern you can see.</p>
+<p>This is where a tracker earns its place. In MiniCycle you can drop a daily note on the day the twinge shows up, then look at how it sits against the deeper-blue estimated ovulation day on the calendar. The app estimates ovulation by counting back from your next expected period using a luteal phase that flexes between 9 and 14 days with your cycle length, so both the twinge and the estimate are approximations of the same event, and each is a rough check on the other. Your notes stay on your device, with no account. None of it is a diagnosis. It is your own record, which is exactly what makes a conversation with a clinician quicker if a mid-cycle pain ever stops looking ordinary.</p>
+                <div class="callout">
+                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="ovulation-pain-mittelschmerz-what-it-is" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                </div>
+                <h2>References</h2>
+                <ul class="references">
+        <li><a href="https://www.mayoclinic.org/diseases-conditions/mittelschmerz/symptoms-causes/syc-20375122">Mayo Clinic. Mittelschmerz — Symptoms and causes.</a></li>
+<li><a href="https://my.clevelandclinic.org/health/diseases/9134-ovulation-pain-mittelschmerz">Cleveland Clinic. Ovulation Pain (Mittelschmerz).</a></li>
+<li><a href="https://www.nhs.uk/symptoms/ovulation-pain/">NHS. Ovulation pain.</a></li>
+<li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
+                </ul>
+              </article>
+            </main>
+          </body>
+        </html>

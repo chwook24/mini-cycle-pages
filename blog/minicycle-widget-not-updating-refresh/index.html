@@ -1,0 +1,171 @@
+        <!doctype html>
+        <html lang="en">
+                <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>Why the MiniCycle widget isn&#x27;t updating, and how it refreshes</title>
+          <meta name="description" content="The MiniCycle home-screen widget updates on iOS&#x27;s schedule, not the instant you log a period. Here is how WidgetKit refreshes it and what to check when it looks stale.">
+          <link rel="canonical" href="https://minicycle.net/blog/minicycle-widget-not-updating-refresh/">
+            <link rel="alternate" hreflang="en" href="https://minicycle.net/blog/minicycle-widget-not-updating-refresh/">
+    <link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/minicycle-widget-not-updating-refresh/">
+    <link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/minicycle-widget-not-updating-refresh/">
+          <link rel="alternate" type="application/rss+xml" title="MiniCycle Blog" href="https://minicycle.net/feed.xml">
+          <meta property="og:type" content="article">
+          <meta property="og:title" content="Why the MiniCycle widget isn&#x27;t updating, and how it refreshes">
+          <meta property="og:description" content="The MiniCycle home-screen widget updates on iOS&#x27;s schedule, not the instant you log a period. Here is how WidgetKit refreshes it and what to check when it looks stale.">
+          <meta property="og:url" content="https://minicycle.net/blog/minicycle-widget-not-updating-refresh/">
+          <meta property="og:image" content="https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg">
+          <meta name="twitter:card" content="summary_large_image">
+            <link rel="icon" href="../../favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+          <link rel="stylesheet" href="../../styles.css">
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-339Q79533S');
+  function trackAppStoreClick(link) {
+    if (typeof gtag !== 'function') return true;
+    gtag('event', 'app_store_click', {
+      link_url: link.href,
+      link_text: link.textContent.trim(),
+      language: link.dataset.language,
+      placement: link.dataset.placement,
+      content_group: link.dataset.contentGroup || '',
+      transport_type: 'beacon'
+    });
+    return true;
+  }
+  function trackBlogArticleEngagement() {
+    const article = document.querySelector('article.article[data-content-group]');
+    if (!article || typeof gtag !== 'function') return;
+
+    const progressThresholds = [50, 75, 90];
+    const sentProgress = new Set();
+    const minReadMs = Number(article.dataset.minReadMs || 30000);
+    let maxPercent = 0;
+    let readCompleteSent = false;
+    let activeMs = 0;
+    let lastTick = Date.now();
+    let wasActive = !document.hidden && document.hasFocus();
+
+    function recordActiveTime() {
+      const now = Date.now();
+      if (wasActive) activeMs += now - lastTick;
+      lastTick = now;
+      wasActive = !document.hidden && document.hasFocus();
+    }
+
+    function articlePercent() {
+      const articleTop = article.getBoundingClientRect().top + window.scrollY;
+      const articleHeight = Math.max(article.offsetHeight, 1);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      return Math.max(0, Math.min(100, Math.floor(((viewportBottom - articleTop) / articleHeight) * 100)));
+    }
+
+    function send(eventName, params) {
+      gtag('event', eventName, Object.assign({
+        language: article.dataset.language,
+        content_group: article.dataset.contentGroup,
+        article_path: window.location.pathname,
+        transport_type: 'beacon'
+      }, params));
+    }
+
+    function evaluate() {
+      recordActiveTime();
+      maxPercent = Math.max(maxPercent, articlePercent());
+
+      progressThresholds.forEach((threshold) => {
+        if (maxPercent >= threshold && !sentProgress.has(threshold)) {
+          sentProgress.add(threshold);
+          send('blog_article_progress', {
+            scroll_percent: threshold,
+            active_seconds: Math.round(activeMs / 1000)
+          });
+        }
+      });
+
+      if (!readCompleteSent && maxPercent >= 90 && activeMs >= minReadMs) {
+        readCompleteSent = true;
+        send('blog_article_read_complete', {
+          max_percent: maxPercent,
+          active_seconds: Math.round(activeMs / 1000),
+          min_read_seconds: Math.round(minReadMs / 1000)
+        });
+      }
+    }
+
+    window.addEventListener('scroll', evaluate, { passive: true });
+    window.addEventListener('resize', evaluate);
+    document.addEventListener('visibilitychange', evaluate);
+    window.addEventListener('pagehide', evaluate);
+    window.setInterval(evaluate, 5000);
+    evaluate();
+  }
+  window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
+</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Why the MiniCycle widget isn't updating, and how it refreshes","description":"The MiniCycle home-screen widget updates on iOS's schedule, not the instant you log a period. Here is how WidgetKit refreshes it and what to check when it looks stale.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-07-04","dateModified":"2026-07-04","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/minicycle-widget-not-updating-refresh/"}}</script>
+        </head>
+          <body>
+        <header class="site-header">
+  <a class="brand" href="../../">MiniCycle</a>
+  <nav aria-label="Primary navigation">
+    <a href="../../blog/">Blog</a>
+    <a href="../../support/">Support</a>
+    <a href="../../privacy/">Privacy</a>
+    <a href="../../ko/blog/minicycle-widget-not-updating-refresh/">한국어</a>
+  </nav>
+</header>
+            <main class="page">
+              <article class="article" data-language="en" data-content-group="minicycle-widget-not-updating-refresh" data-min-read-ms="90000">
+                <p class="eyebrow">Widget</p>
+                <h1>Why the MiniCycle widget isn&#x27;t updating, and how it refreshes</h1>
+                <p class="article-meta">Published July 4, 2026 by MiniCycle</p>
+                <p class="lead">A home-screen widget can lag behind what you just did in the app, and that is usually iOS doing its job rather than a bug. The MiniCycle widget draws from a timeline the app hands to the system, and the system decides when to repaint it. Once you know what actually moves the widget, a stale square stops being a mystery, and the fix is almost always a single tap.</p>
+                <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
+        <h2>Widgets update on iOS&#x27;s schedule, not the moment you log</h2>
+<p>A home-screen widget is not a live screen that redraws the instant anything changes. It draws from a timeline the app hands to iOS, and iOS decides when to repaint it. To protect battery, the system limits how often widgets refresh, so a change you just made can take a few minutes, sometimes longer, to show up. That is WidgetKit working as designed.</p>
+<p>The common expectation is the opposite: log a period, and the widget flips to the new status right away. It usually does not flip on the spot. The record is saved; the picture on the home screen catches up on the system&#x27;s next pass.</p>
+<h2>Two things move the MiniCycle widget</h2>
+<p>The first is opening the app. Every time you open MiniCycle, it asks iOS to reload the widget, so a period you just logged appears on the home screen shortly after you return to it. Reopening the app is the reliable nudge when you want the widget current now.</p>
+<p>The second is a daily refresh. The widget schedules itself to redraw after the start of the next day, so the red today marker and the D-count roll forward each morning on their own, even on a day you never open the app.</p>
+<h2>Why the widget can look a step behind</h2>
+<p>Because the system batches widget refreshes to save power, a change may not appear the second you make it. If you log a start, glance at the widget half a second later, and it still shows yesterday, that is timing, not a lost record. The app has the date. Reopening MiniCycle pushes it out.</p>
+<p>The widget also reads from a small shared store that the app writes to. It can only show the last state the app saved there. So when the app calendar and the widget disagree, the widget is showing an older snapshot, and one trip through the app lines them back up.</p>
+<h2>If the widget looks stale or blank: what to check</h2>
+<p>Go in order. First, open MiniCycle once and return to the home screen; that forces a fresh timeline. Second, confirm you have logged at least one period start. With no start date there is nothing to predict, so the widget shows its start-tracking state. That empty look is by design, not a fault.</p>
+<p>Third, check the size. MiniCycle offers only the small square, so if you were hunting for a medium or large one, that is why it is missing from the list. Fourth, if a widget seems frozen, remove it and add it again; a fresh instance pulls a new timeline. Low Power Mode or a busy phone can also delay a refresh, and it usually catches up on its own.</p>
+<h2>A date that looks a day off is usually a settings match</h2>
+<p>If the widget&#x27;s weekday columns or a highlighted date look shifted from the app, check two settings: the week start (Sunday or Monday) and the app language. The widget reads both from the same place the app does, so once they are saved, the two surfaces line up.</p>
+<p>The numbers themselves come from the same estimate the app uses: a median-based next-period date from your recent starts, a 29-day cycle as the fallback when history is thin, and a fertile window running from five days before the estimated ovulation through the day after. The widget should never predict something the app would not.</p>
+<h2>Does the widget update in the background?</h2>
+<p>Yes, but on a schedule rather than in real time. Crossing midnight advances the date, so the today marker and countdown move overnight without you opening anything. Beyond that, iOS reloads the widget within a battery budget, and it can fold in the refresh MiniCycle requested the last time you opened the app.</p>
+<p>What it does not do is poll every minute. A period you logged on a different day, or a change made while the app was closed, still needs the app opened once, or the next scheduled pass, before it shows. Low Power Mode and a heavily loaded phone can stretch that timing out, and the widget usually catches up once conditions ease.</p>
+<h2>The widget and the app read from one shared place</h2>
+<p>The widget does not run its own copy of your data. It reads the same records and settings the app saves to a shared storage area on your device, then recalculates the current status from them. That is why the two surfaces agree, and why the widget can never show more than the app last wrote there. It is also why the widget works with no account and no internet: the records it needs are already on the phone.</p>
+<h2>Quick answers</h2>
+<p>I logged my period but the widget still shows the old status. The record is saved in the app; the widget just has not redrawn yet. Open MiniCycle and return to the home screen to push a fresh timeline, instead of waiting for the system&#x27;s next scheduled pass.</p>
+<p>The widget is blank or tells me to start tracking. That is the empty state, shown until you log at least one period start. Add a start date in the app and the widget fills in on its next refresh.</p>
+<p>I can&#x27;t find a large MiniCycle widget. MiniCycle offers only the small square, so the medium and large sizes will not appear in the list. Choose the small size when you add it.</p>
+<p>The widget&#x27;s dates look a day off. Check the week-start setting and the app language; the widget shares both with the app, so saving them lines the two up. The underlying prediction is the same on both.</p>
+<p>Do I need an account or internet for the widget? No. It reads records stored on your device, so it works offline and without a MiniCycle account.</p>
+<h2>What the widget is and isn&#x27;t for</h2>
+<p>The widget is a quick read of an estimate, not a live medical monitor. Its dates are reference information calculated from your own logs, which is helpful for planning but is not contraception, a pregnancy test, or a diagnosis. When you need to record or edit a date, or reach your notes and private marks, open MiniCycle; the home screen stays a glance.</p>
+                <div class="callout">
+                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="minicycle-widget-not-updating-refresh" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                </div>
+                <h2>References</h2>
+                <ul class="references">
+        <li><a href="https://developer.apple.com/documentation/widgetkit/keeping-a-widget-up-to-date">Apple Developer Documentation. Keeping a widget up to date.</a></li>
+<li><a href="https://developer.apple.com/documentation/widgetkit/widgetcenter/reloadalltimelines()">Apple Developer Documentation. WidgetCenter reloadAllTimelines().</a></li>
+<li><a href="https://support.apple.com/en-us/118610">Apple Support. How to add and edit widgets on your iPhone.</a></li>
+<li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
+                </ul>
+              </article>
+            </main>
+          </body>
+        </html>
