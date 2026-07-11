@@ -3,6 +3,8 @@
                 <head>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1">
+          <meta name="color-scheme" content="light dark">
+          <meta name="theme-color" content="#fbf8fa" data-theme-color>
           <title>MiniCycle 지원</title>
           <meta name="description" content="로컬 기록과 홈 화면 위젯을 제공하는 아이폰 생리 캘린더 MiniCycle 지원 페이지입니다.">
           <link rel="canonical" href="https://minicycle.net/ko/support/">
@@ -19,7 +21,75 @@
             <link rel="icon" href="../../favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
     <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
-          <link rel="stylesheet" href="../../styles.css">
+        <script>
+  (() => {
+    const storageKey = 'minicycle-theme';
+    const root = document.documentElement;
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+    root.classList.add('js');
+
+    function storedTheme() {
+      try {
+        const value = window.localStorage.getItem(storageKey);
+        return value === 'light' || value === 'dark' ? value : null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function currentTheme() {
+      return root.dataset.theme || (systemTheme.matches ? 'dark' : 'light');
+    }
+
+    function updateThemeUI() {
+      const dark = currentTheme() === 'dark';
+      const themeColor = document.querySelector('[data-theme-color]');
+      if (themeColor) themeColor.setAttribute('content', dark ? '#121014' : '#fbf8fa');
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      const label = dark
+        ? toggle.dataset.lightLabel
+        : toggle.dataset.darkLabel;
+      toggle.setAttribute('aria-label', label);
+      toggle.setAttribute('title', label);
+    }
+
+    const savedTheme = storedTheme();
+    if (savedTheme) root.dataset.theme = savedTheme;
+    updateThemeUI();
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      updateThemeUI();
+      toggle.addEventListener('click', () => {
+        const nextTheme = currentTheme() === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = nextTheme;
+        try {
+          window.localStorage.setItem(storageKey, nextTheme);
+        } catch (_) {
+          // The selected theme still applies for this page when storage is unavailable.
+        }
+        updateThemeUI();
+      });
+      if (typeof systemTheme.addEventListener === 'function') {
+        systemTheme.addEventListener('change', () => {
+          if (!root.dataset.theme) updateThemeUI();
+        });
+      }
+      window.addEventListener('storage', (event) => {
+        if (event.key !== storageKey) return;
+        if (event.newValue === 'light' || event.newValue === 'dark') {
+          root.dataset.theme = event.newValue;
+        } else {
+          delete root.dataset.theme;
+        }
+        updateThemeUI();
+      });
+    });
+  })();
+</script>
+          <link rel="stylesheet" href="../../styles.css?v=20260711-4">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -109,17 +179,29 @@
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"MiniCycle 지원","description":"로컬 기록과 홈 화면 위젯을 제공하는 아이폰 생리 캘린더 MiniCycle 지원 페이지입니다.","url":"https://minicycle.net/ko/support/","inLanguage":"ko"}</script>
         </head>
-          <body>
-        <header class="site-header">
-  <a class="brand" href="../">MiniCycle</a>
-  <nav aria-label="Primary navigation">
-    <a href="../blog/">블로그</a>
-    <a href="../support/">지원</a>
-    <a href="../privacy/">개인정보</a>
-    <a href="../../support/">English</a>
-  </nav>
+          <body class="simple-page">
+        <a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="../">
+      <img class="brand-icon" src="../../assets/minicycle-app-icon.png" alt="" width="34" height="34">
+      <span>MiniCycle</span>
+    </a>
+    <nav class="site-nav" aria-label="주요 탐색">
+      <a href="../blog/">블로그</a>
+      <a href="../support/" aria-current="page">지원</a>
+      <a href="../privacy/">개인정보</a>
+    </nav>
+    <div class="header-controls">
+      <button class="theme-toggle" type="button" data-theme-toggle data-light-label="라이트 모드로 전환" data-dark-label="다크 모드로 전환" aria-label="화면 모드 전환">
+        <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
+        <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.1 15.4A8.2 8.2 0 0 1 8.6 3.9 8.2 8.2 0 1 0 20.1 15.4Z"></path></svg>
+      </button>
+      <a class="language-link" href="../../support/" lang="en" hreflang="en" aria-label="English">English</a>
+    </div>
+  </div>
 </header>
-            <main class="page">
+            <main class="page" id="main-content">
               <section class="hero compact">
                 <p class="eyebrow">MiniCycle</p>
                 <h1>MiniCycle 지원</h1>
@@ -132,5 +214,22 @@
 <p>화면 문제라면 스크린샷이 도움이 됩니다. 꼭 필요한 경우가 아니라면 민감한 주기 메모는 보내지 않는 것이 좋습니다.</p>
               </section>
             </main>
+        <footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="../">
+        <img class="brand-icon" src="../../assets/minicycle-app-icon.png" alt="" width="34" height="34" loading="lazy">
+        <span>MiniCycle</span>
+      </a>
+      <p>내 주기를 이해하는 더 조용하고 사적인 방법.</p>
+    </div>
+    <nav class="footer-nav" aria-label="하단 탐색">
+      <a href="../blog/">블로그</a>
+      <a href="../support/">지원</a>
+      <a href="../privacy/">개인정보</a>
+    </nav>
+    <p class="copyright">&copy; 2026 MiniCycle. iPhone을 위해 세심하게 만들었습니다.</p>
+  </div>
+</footer>
           </body>
         </html>

@@ -3,6 +3,8 @@
                 <head>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1">
+          <meta name="color-scheme" content="light dark">
+          <meta name="theme-color" content="#fbf8fa" data-theme-color>
           <title>생리통은 왜 생기고 어디까지가 정상일까요</title>
           <meta name="description" content="생리하는 사람의 절반 넘게 생리통을 겪습니다. 생리통이 왜 생기는지, 보통 언제 시작해 며칠 가는지, 무엇이 통증을 덜어 주는지, 어떤 통증일 때 병원에 가야 하는지 정리했습니다.">
           <link rel="canonical" href="https://minicycle.net/ko/blog/menstrual-cramps-whats-normal-period-pain/">
@@ -19,7 +21,75 @@
             <link rel="icon" href="../../../favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32x32.png">
     <link rel="apple-touch-icon" href="../../../apple-touch-icon.png">
-          <link rel="stylesheet" href="../../../styles.css">
+        <script>
+  (() => {
+    const storageKey = 'minicycle-theme';
+    const root = document.documentElement;
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+    root.classList.add('js');
+
+    function storedTheme() {
+      try {
+        const value = window.localStorage.getItem(storageKey);
+        return value === 'light' || value === 'dark' ? value : null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function currentTheme() {
+      return root.dataset.theme || (systemTheme.matches ? 'dark' : 'light');
+    }
+
+    function updateThemeUI() {
+      const dark = currentTheme() === 'dark';
+      const themeColor = document.querySelector('[data-theme-color]');
+      if (themeColor) themeColor.setAttribute('content', dark ? '#121014' : '#fbf8fa');
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      const label = dark
+        ? toggle.dataset.lightLabel
+        : toggle.dataset.darkLabel;
+      toggle.setAttribute('aria-label', label);
+      toggle.setAttribute('title', label);
+    }
+
+    const savedTheme = storedTheme();
+    if (savedTheme) root.dataset.theme = savedTheme;
+    updateThemeUI();
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      updateThemeUI();
+      toggle.addEventListener('click', () => {
+        const nextTheme = currentTheme() === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = nextTheme;
+        try {
+          window.localStorage.setItem(storageKey, nextTheme);
+        } catch (_) {
+          // The selected theme still applies for this page when storage is unavailable.
+        }
+        updateThemeUI();
+      });
+      if (typeof systemTheme.addEventListener === 'function') {
+        systemTheme.addEventListener('change', () => {
+          if (!root.dataset.theme) updateThemeUI();
+        });
+      }
+      window.addEventListener('storage', (event) => {
+        if (event.key !== storageKey) return;
+        if (event.newValue === 'light' || event.newValue === 'dark') {
+          root.dataset.theme = event.newValue;
+        } else {
+          delete root.dataset.theme;
+        }
+        updateThemeUI();
+      });
+    });
+  })();
+</script>
+          <link rel="stylesheet" href="../../../styles.css?v=20260711-4">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -109,64 +179,198 @@
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"생리통은 왜 생기고 어디까지가 정상일까요","description":"생리하는 사람의 절반 넘게 생리통을 겪습니다. 생리통이 왜 생기는지, 보통 언제 시작해 며칠 가는지, 무엇이 통증을 덜어 주는지, 어떤 통증일 때 병원에 가야 하는지 정리했습니다.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg","datePublished":"2026-06-14","dateModified":"2026-06-14","inLanguage":"ko","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/ko/blog/menstrual-cramps-whats-normal-period-pain/"}}</script>
         </head>
-          <body>
-        <header class="site-header">
-  <a class="brand" href="../../">MiniCycle</a>
-  <nav aria-label="Primary navigation">
-    <a href="../../blog/">블로그</a>
-    <a href="../../support/">지원</a>
-    <a href="../../privacy/">개인정보</a>
-    <a href="../../../blog/menstrual-cramps-whats-normal-period-pain/">English</a>
-  </nav>
+          <body class="article-page">
+        <a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="../../">
+      <img class="brand-icon" src="../../../assets/minicycle-app-icon.png" alt="" width="34" height="34">
+      <span>MiniCycle</span>
+    </a>
+    <nav class="site-nav" aria-label="주요 탐색">
+      <a href="../../blog/">블로그</a>
+      <a href="../../support/">지원</a>
+      <a href="../../privacy/">개인정보</a>
+    </nav>
+    <div class="header-controls">
+      <button class="theme-toggle" type="button" data-theme-toggle data-light-label="라이트 모드로 전환" data-dark-label="다크 모드로 전환" aria-label="화면 모드 전환">
+        <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
+        <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.1 15.4A8.2 8.2 0 0 1 8.6 3.9 8.2 8.2 0 1 0 20.1 15.4Z"></path></svg>
+      </button>
+      <a class="language-link" href="../../../blog/menstrual-cramps-whats-normal-period-pain/" lang="en" hreflang="en" aria-label="English">English</a>
+    </div>
+  </div>
 </header>
-            <main class="page">
+            <main class="page article-page-main" id="main-content">
               <article class="article" data-language="ko" data-content-group="menstrual-cramps-whats-normal-period-pain" data-min-read-ms="90000">
-                <p class="eyebrow">주기 건강</p>
-                <h1>생리통은 왜 생기고 어디까지가 정상일까요</h1>
-                <p class="article-meta">2026년 6월 14일 MiniCycle 작성</p>
-                <p class="lead">둘째 날 어디쯤, 약속을 취소하게 만드는 통증이 옵니다. 진통제를 먹고 배에 찜질팩을 올린 채 버티면서, 한편으로는 이만큼 아픈 게 정상인지, 남들은 더 잘 견디는 건 아닌지 생각하게 되죠. 생리통은 흔합니다. 생리하는 사람의 절반 넘게 어느 정도는 겪으니까요. 그렇다고 모든 생리통을 이를 악물고 넘겨야 하는 건 아닙니다. 알아 둘 만한 건 둘을 구분하는 일입니다. 으레 따라오는 통증과, 진료를 권하는 통증이요.</p>
-                <img class="article-hero" src="../../../assets/home-capture-iphone17-1118-ko-20260518.jpg" alt="MiniCycle 아이폰 실제 캡처 화면: 생리 캘린더와 위젯 경험" width="552" height="1200" loading="eager">
-        <h2>생리통은 왜 생기나요</h2>
+                <a class="back-link" href="../"><span aria-hidden="true">&larr;</span> 전체 글</a>
+                <header class="article-header">
+                  <div class="article-heading">
+                    <p class="category-pill">주기 건강</p>
+                    <h1>생리통은 왜 생기고 어디까지가 정상일까요</h1>
+                    <p class="article-meta"><time datetime="2026-06-14">2026년 6월 14일 MiniCycle 작성</time><span aria-hidden="true">&middot;</span><span>약 3분 읽기</span></p>
+                    <p class="lead">둘째 날 어디쯤, 약속을 취소하게 만드는 통증이 옵니다. 진통제를 먹고 배에 찜질팩을 올린 채 버티면서, 한편으로는 이만큼 아픈 게 정상인지, 남들은 더 잘 견디는 건 아닌지 생각하게 되죠. 생리통은 흔합니다. 생리하는 사람의 절반 넘게 어느 정도는 겪으니까요. 그렇다고 모든 생리통을 이를 악물고 넘겨야 하는 건 아닙니다. 알아 둘 만한 건 둘을 구분하는 일입니다. 으레 따라오는 통증과, 진료를 권하는 통증이요.</p>
+                  </div>
+                  <figure class="article-visual">
+                    <div class="article-visual-frame">
+                      <span class="visual-orbit visual-orbit-one" aria-hidden="true"></span>
+                      <span class="visual-orbit visual-orbit-two" aria-hidden="true"></span>
+                      <img class="article-hero" src="../../../assets/home-capture-iphone17-1118-ko-20260518.jpg" alt="MiniCycle 아이폰 실제 캡처 화면: 생리 캘린더와 위젯 경험" width="552" height="1200" loading="eager">
+                    </div>
+                    <figcaption>iPhone에서 보는 MiniCycle 캘린더</figcaption>
+                  </figure>
+                </header>
+                <div class="article-layout">
+                  <div class="article-body">
+        <section class="article-section" aria-labelledby="section-1">
+  <h2 id="section-1">생리통은 왜 생기나요</h2>
 <p>의학 용어로는 월경곤란증, 흔히 생리통이라고 합니다. 원리는 이름보다 단순합니다. 생리 때 자궁은 안쪽 막을 밀어내려고 수축합니다. 이 수축을 일으키는 게 프로스타글란딘이에요. 자궁 내막에서 만들어지는, 통증·염증과 얽힌 호르몬 유사 물질입니다. 이 수치가 높을수록 통증도 세지는데, 수치가 가장 높은 첫 하루 이틀이 대개 제일 아픈 이유가 여기 있습니다.</p>
 <p>느낌은 익숙합니다. 아랫배가 욱신거리거나 쥐어짜듯 아프고, 묵직하게 이어지기도 하며, 허리와 허벅지까지 번지곤 합니다. 메스꺼움이나 묽은 변, 두통, 어지러움이 같이 오기도 하고요. Mayo Clinic은 이런 양상을 보통의 생리통으로 묶고, 미국 여성건강국(OWH)에 따르면 생리하는 사람의 절반 넘게 어떤 형태로든 겪습니다.</p>
-<h2>보통은 언제 시작해 며칠 가나요</h2>
+</section>
+<section class="article-section" aria-labelledby="section-2">
+  <h2 id="section-2">보통은 언제 시작해 며칠 가나요</h2>
 <p>전형적인 생리통에는 대략의 시간표가 있습니다. Mayo Clinic은 생리 1–3일 전에 시작해 출혈이 시작되고 약 24시간 뒤에 가장 심하다가 이후 2–3일에 걸쳐 가라앉는다고 설명합니다. NHS는 보통 3일까지로 봅니다. 어느 것도 한 사람에게 딱 맞는 정답은 아니에요. 내 통증이 따라야 할 규칙이 아니라, 대다수가 그리는 모양일 뿐입니다.</p>
 <p>이 흐름을 알아 두면 그 자체로 조금 안심이 됩니다. 고비가 대략 언제 지나갈지 가늠이 되니까요. 예외도 눈에 더 잘 들어옵니다. 주기 중 엉뚱한 때 찾아오거나, 그 며칠을 한참 넘겨 이어지는 통증은 그냥 버티기보다 살펴볼 신호입니다.</p>
-<h2>&#x27;참는 게 답&#x27;이라는 오해</h2>
+</section>
+<section class="article-section" aria-labelledby="section-3">
+  <h2 id="section-3">&#x27;참는 게 답&#x27;이라는 오해</h2>
 <p>흔한 것과 심한 것은 다른 말입니다. 생리통이 워낙 흔하다 보니 전부 정상으로 묶어 두고, 한 달에 한 번 이 악물고 견디는 게 답이라 여기기 쉽습니다. 절반 넘는 사람이 어느 정도 겪는다는 건 맞아요. 하지만 매달 일과 학업, 약속을 접어야 할 만큼 심한 통증은 당연히 치러야 할 대가가 아니고, 대개 다스릴 수 있습니다.</p>
 <p>Mayo Clinic은 매달 일상을 무너뜨리는 통증, 갈수록 심해지는 통증, 25세 이후에 처음으로 심하게 시작된 통증을 진통제를 더 먹을 이유가 아니라 진료를 받아야 할 이유로 꼽습니다. 그 정도 통증은 자궁내막증이나 자궁근종처럼 따로 치료법이 있는 원인을 가리킬 수도 있고요. 혼자 조용히 참는 것, 그 하나만은 도움이 안 됩니다.</p>
-<h2>통증을 덜어 주는 것</h2>
+</section>
+<section class="article-section" aria-labelledby="section-4">
+  <h2 id="section-4">통증을 덜어 주는 것</h2>
 <p>평소의 생리통이라면 첫 카드는 약입니다. OWH는 대부분의 생리통이 이부프로펜, 나프록센, 아스피린 같은 비스테로이드성 소염진통제(NSAID)에 반응한다고 설명합니다. 통증이 한껏 오른 뒤가 아니라 생리가 시작될 때 먹는 편이 더 잘 듣고, 같은 약이 생리 양이 많은 것도 줄여 줄 수 있다고 하고요.</p>
 <p>약 말고도 도움이 되는 게 있습니다. NHS는 배에 찜질팩이나 따뜻한 물주머니 올리기, 따뜻한 물로 목욕하기, 배와 허리 가볍게 주무르기, 걷기·수영·요가 같은 가벼운 움직임을 꼽습니다. 술을 줄이고 담배를 피우지 않는 것도 목록에 있어요. 완치법은 아니고 잘 듣는 정도도 사람마다 다르지만, 안 될 거라 단정하기 전에 해 볼 만합니다.</p>
-<h2>이럴 땐 병원에 가세요</h2>
+</section>
+<section class="article-section" aria-labelledby="section-5">
+  <h2 id="section-5">이럴 땐 병원에 가세요</h2>
 <p>몇 가지 양상은 한 번 진료받아 볼 만합니다. 겁을 주려는 게 아니라, 답이 있는 경우라서요. NHS는 생리가 더 아파지거나 양이 늘거나 불규칙해질 때, 통증 때문에 일상생활을 못 할 때, 성관계나 소변·배변 때 아플 때, 생리 사이에 출혈이 있을 때 진료를 권합니다. OWH는 동전만 한(약 2.5cm) 크기를 넘는 핏덩어리가 나오거나, 생리 무렵이 아닌 때에 아픈 경우를 덧붙입니다.</p>
 <p>이런 통증 뒤에는 이차성 월경곤란증, 즉 수축 자체가 아니라 다른 질환이 일으키는 생리통이 있을 수 있습니다. 자궁내막증, 자궁근종, 자궁선근증, 골반염이 흔히 거론되고요. 보통의 생리통과 달리 이런 통증은 나이가 들수록 나아지기보다 심해지는 경우가 많습니다. NHS는 골반이나 생리 통증이 심하거나 평소보다 더한데 진통제도 듣지 않는다면 빨리 도움을 청하라고 안내합니다.</p>
-<h2>기록이 할 수 있는 일과 없는 일</h2>
+</section>
+<section class="article-section" aria-labelledby="section-6">
+  <h2 id="section-6">기록이 할 수 있는 일과 없는 일</h2>
 <p>여기서 적어 둔 기록이 제값을 합니다. OWH는 증상과 생리를 달력이나 일기에 기록해 두면 의사가 원인을 진단하는 데 도움이 된다고 분명히 말합니다. &#x27;요즘 좀 심했어요&#x27;라는 막연한 느낌보다, &#x27;출혈 하루 전부터 아프기 시작해 첫날 가장 심하고, 최근 네 주기 동안 점점 나빠졌어요&#x27;라고 말할 수 있는 편이 훨씬 쓸모 있죠. MiniCycle의 날짜별 메모가 바로 그 자리입니다. 통증이 언제 왔고 얼마나 셌는지 몇 마디 적어, 날짜와 함께 기기에 저장해 두는 거예요.</p>
 <p>기록이 못 하는 일은 진단입니다. 쌓인 패턴은 내 주기에서 뽑은 참고 정보이지 의학적 판정이 아니고, 앱은 자궁내막증과 그냥 유난히 힘든 한 달을 가려내지 못합니다. 패턴을 또렷이 보여 줄 뿐이에요. 그 패턴이 앞의 신호 중 하나에 닿으면, 그 기록은 진료를 대신하는 게 아니라 진료실에 들고 갈 것이 됩니다.</p>
-<h2>원발성과 이차성, 두 갈래의 생리통</h2>
+</section>
+<section class="article-section" aria-labelledby="section-7">
+  <h2 id="section-7">원발성과 이차성, 두 갈래의 생리통</h2>
 <p>대부분의 생리통은 원발성 월경곤란증입니다. 자궁이 정상적으로 수축하면서 생기는 통증으로, 뒤에 깔린 질환이 따로 없는 경우죠. OWH는 이쪽이 흔하다고 설명합니다. 초경 뒤 한두 해 안에 시작되기도 하고, 많은 사람에게서 해가 갈수록 누그러집니다.</p>
 <p>이차성 월경곤란증은 다른 질환에서 오는 통증입니다. 자궁내막증이나 자궁근종 같은 것이요. 신호가 다릅니다. 더 늦게 시작되고, 보통의 며칠보다 길게 가며, 나이 들수록 잦아들기보다 심해지는 경향이 있습니다. 둘을 가르는 게 중요한 이유는, 두 번째 쪽은 원인을 찾으면 치료할 수 있기 때문입니다.</p>
-<h2>자주 묻는 질문</h2>
+</section>
+<section class="article-section" aria-labelledby="section-8">
+  <h2 id="section-8">자주 묻는 질문</h2>
 <p>생리통 때 메스껍고 어지러운 것도 정상인가요? 메스꺼움, 묽은 변, 두통, 어지러움은 생리통과 함께 올 수 있고 Mayo Clinic도 흔히 동반되는 증상으로 꼽습니다. 다만 심하거나 처음 겪는 증상이라면 진료 때 함께 이야기하세요.</p>
 <p>생리통은 나이 들면 나아지나요? 원발성이라면 그런 경우가 많습니다. Mayo Clinic은 다른 질환이 원인이 아닌 생리통은 나이가 들수록 덜해지고 출산 뒤 나아지는 일이 잦다고 설명합니다. 오히려 갈수록 심해지는 통증이 진료가 필요한 쪽이에요.</p>
 <p>진통제를 먹는데도 병원에 가야 할 때는 언제인가요? 약이 더는 듣지 않을 때입니다. OWH와 NHS 모두 진통제로 통증이 잡히지 않거나, 통증 때문에 일상을 여전히 못 한다면 그때를 진료 시점으로 봅니다.</p>
 <p>앱이 생리통의 원인을 진단해 주나요? 아니요. 통증이 언제 오고 어떻게 달라지는지 기록해 진료실에 가져가기 좋게 해 줄 뿐, 진단은 앱이 아니라 의료진의 몫입니다.</p>
-<h2>한 줄로</h2>
+</section>
+<section class="article-section" aria-labelledby="section-9">
+  <h2 id="section-9">한 줄로</h2>
 <p>생리통은 프로스타글란딘에 의해 자궁이 수축하면서 생깁니다. 보통 출혈 1–3일 전 시작해 첫날쯤 가장 심하고 며칠 안에 가라앉으며, 생리하는 사람의 절반 넘게 어느 정도 겪습니다.</p>
 <p>일찍 먹는 NSAID, 찜질, 가벼운 움직임이 평소 생리통에 도움이 됩니다. 매달 일상을 무너뜨리거나 갈수록 심해지거나 생리 사이 출혈·성관계 통증이 함께라면 진료를 받아 보세요. 그때 들고 갈 것이 잘 적어 둔 기록입니다.</p>
-                <div class="callout">
-                  <p>MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다.</p>
-                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="ko" data-placement="blog_article_callout" data-content-group="menstrual-cramps-whats-normal-period-pain" onclick="trackAppStoreClick(this)">App Store에서 받기</a>
+</section>
+                    <section class="callout" aria-labelledby="try-minicycle">
+                      <img class="callout-mark" src="../../../assets/minicycle-app-icon.png" alt="" width="42" height="42" loading="lazy">
+                      <div class="callout-copy">
+                        <p class="eyebrow">MiniCycle for iPhone</p>
+                        <h2 id="try-minicycle">MiniCycle 사용하기</h2>
+                        <p>MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다.</p>
+                      </div>
+                      <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="ko" data-placement="blog_article_callout" data-content-group="menstrual-cramps-whats-normal-period-pain" onclick="trackAppStoreClick(this)">App Store에서 받기</a>
+                    </section>
+                    <section class="references-section" aria-labelledby="references-title">
+                      <p class="eyebrow">MiniCycle editorial</p>
+                      <h2 id="references-title">참고 자료</h2>
+                      <ul class="references">
+        <li><a href="https://www.mayoclinic.org/diseases-conditions/menstrual-cramps/symptoms-causes/syc-20374938" lang="en">Mayo Clinic. Menstrual cramps — Symptoms &amp; causes.</a></li>
+<li><a href="https://womenshealth.gov/menstrual-cycle/period-problems" lang="en">Office on Women&#x27;s Health (U.S. HHS). Period problems.</a></li>
+<li><a href="https://www.nhs.uk/conditions/period-pain/" lang="en">NHS. Period pain.</a></li>
+<li><a href="https://minicycle.net/privacy/" lang="en">MiniCycle Privacy Policy.</a></li>
+                      </ul>
+                    </section>
+                  </div>
+                  <aside class="article-sidebar">
+                    <nav class="article-toc" aria-label="이 글에서 다루는 내용">
+                      <p class="toc-title">이 글에서 다루는 내용</p>
+                      <ol>
+        <li><a href="#section-1">생리통은 왜 생기나요</a></li>
+<li><a href="#section-2">보통은 언제 시작해 며칠 가나요</a></li>
+<li><a href="#section-3">&#x27;참는 게 답&#x27;이라는 오해</a></li>
+<li><a href="#section-4">통증을 덜어 주는 것</a></li>
+<li><a href="#section-5">이럴 땐 병원에 가세요</a></li>
+<li><a href="#section-6">기록이 할 수 있는 일과 없는 일</a></li>
+<li><a href="#section-7">원발성과 이차성, 두 갈래의 생리통</a></li>
+<li><a href="#section-8">자주 묻는 질문</a></li>
+<li><a href="#section-9">한 줄로</a></li>
+                      </ol>
+                    </nav>
+                  </aside>
                 </div>
-                <h2>참고 자료</h2>
-                <ul class="references">
-        <li><a href="https://www.mayoclinic.org/diseases-conditions/menstrual-cramps/symptoms-causes/syc-20374938">Mayo Clinic. Menstrual cramps — Symptoms &amp; causes.</a></li>
-<li><a href="https://womenshealth.gov/menstrual-cycle/period-problems">Office on Women&#x27;s Health (U.S. HHS). Period problems.</a></li>
-<li><a href="https://www.nhs.uk/conditions/period-pain/">NHS. Period pain.</a></li>
-<li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
-                </ul>
               </article>
+              <section class="related-section" aria-labelledby="related-title">
+                <div class="section-heading">
+                  <div>
+                    <p class="eyebrow">이어서 읽기</p>
+                    <h2 id="related-title">함께 읽으면 좋은 글</h2>
+                  </div>
+                  <a class="text-link section-link" href="../">전체 글<span aria-hidden="true">&nbsp;&rarr;</span></a>
+                </div>
+                <div class="post-grid related-grid">
+        <article class="post-card related-card" data-guide-card data-search-value="주기 건강 배란통이 뭘까요? 배란기에 아랫배가 아픈 이유 배란 무렵 한쪽 아랫배가 콕콕 쑤시는 배란통은 배란하는 사람의 40%까지 겪습니다. 어떤 느낌인지, 왜 생기는지, 그리고 배란통이 아닐 때는 언제인지 정리했습니다.">
+  <div class="post-card-topline">
+    <p class="category-pill">주기 건강</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../ovulation-pain-mittelschmerz-what-it-is/">배란통이 뭘까요? 배란기에 아랫배가 아픈 이유</a></h3>
+  <p class="post-description">배란 무렵 한쪽 아랫배가 콕콕 쑤시는 배란통은 배란하는 사람의 40%까지 겪습니다. 어떤 느낌인지, 왜 생기는지, 그리고 배란통이 아닐 때는 언제인지 정리했습니다.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-03">2026.07.03</time><span aria-hidden="true">&middot;</span>약 3분</p>
+    <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="주기 건강 생리 중에도 임신이 될 수 있을까요 생리 중 임신은 드물지만 불가능하지 않습니다. 주기가 짧고 생리가 길 때 특히 그렇습니다. 왜 가능한지, 달력 예측이 왜 피임이 아닌지 정리했습니다.">
+  <div class="post-card-topline">
+    <p class="category-pill">주기 건강</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../can-you-get-pregnant-on-your-period/">생리 중에도 임신이 될 수 있을까요</a></h3>
+  <p class="post-description">생리 중 임신은 드물지만 불가능하지 않습니다. 주기가 짧고 생리가 길 때 특히 그렇습니다. 왜 가능한지, 달력 예측이 왜 피임이 아닌지 정리했습니다.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-24">2026.06.24</time><span aria-hidden="true">&middot;</span>약 3분</p>
+    <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="주기 건강 생리혈 색깔, 갈색이나 검은색도 정상일까요 생리혈이 갈색이나 검은색을 띠는 건 대개 피가 나오기까지 시간이 걸렸다는 뜻입니다. 분홍·빨강·갈색이 다 정상인 이유와, 색보다 정작 살펴야 할 것을 정리했습니다.">
+  <div class="post-card-topline">
+    <p class="category-pill">주기 건강</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../period-blood-color-what-it-means/">생리혈 색깔, 갈색이나 검은색도 정상일까요</a></h3>
+  <p class="post-description">생리혈이 갈색이나 검은색을 띠는 건 대개 피가 나오기까지 시간이 걸렸다는 뜻입니다. 분홍·빨강·갈색이 다 정상인 이유와, 색보다 정작 살펴야 할 것을 정리했습니다.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-21">2026.06.21</time><span aria-hidden="true">&middot;</span>약 3분</p>
+    <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+                </div>
+              </section>
             </main>
+        <footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="../../">
+        <img class="brand-icon" src="../../../assets/minicycle-app-icon.png" alt="" width="34" height="34" loading="lazy">
+        <span>MiniCycle</span>
+      </a>
+      <p>내 주기를 이해하는 더 조용하고 사적인 방법.</p>
+    </div>
+    <nav class="footer-nav" aria-label="하단 탐색">
+      <a href="../../blog/">블로그</a>
+      <a href="../../support/">지원</a>
+      <a href="../../privacy/">개인정보</a>
+    </nav>
+    <p class="copyright">&copy; 2026 MiniCycle. iPhone을 위해 세심하게 만들었습니다.</p>
+  </div>
+</footer>
           </body>
         </html>

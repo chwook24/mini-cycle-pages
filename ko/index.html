@@ -3,6 +3,8 @@
                 <head>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1">
+          <meta name="color-scheme" content="light dark">
+          <meta name="theme-color" content="#fbf8fa" data-theme-color>
           <title>MiniCycle | 간단한 생리 캘린더와 아이폰 위젯</title>
           <meta name="description" content="MiniCycle은 생리 예정일, 배란일, 가임기, 선택적 iCloud 저장, 홈 화면 위젯을 제공하는 간단한 아이폰 생리 캘린더 앱입니다.">
           <link rel="canonical" href="https://minicycle.net/ko/">
@@ -19,7 +21,75 @@
             <link rel="icon" href="../favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
     <link rel="apple-touch-icon" href="../apple-touch-icon.png">
-          <link rel="stylesheet" href="../styles.css">
+        <script>
+  (() => {
+    const storageKey = 'minicycle-theme';
+    const root = document.documentElement;
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+    root.classList.add('js');
+
+    function storedTheme() {
+      try {
+        const value = window.localStorage.getItem(storageKey);
+        return value === 'light' || value === 'dark' ? value : null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function currentTheme() {
+      return root.dataset.theme || (systemTheme.matches ? 'dark' : 'light');
+    }
+
+    function updateThemeUI() {
+      const dark = currentTheme() === 'dark';
+      const themeColor = document.querySelector('[data-theme-color]');
+      if (themeColor) themeColor.setAttribute('content', dark ? '#121014' : '#fbf8fa');
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      const label = dark
+        ? toggle.dataset.lightLabel
+        : toggle.dataset.darkLabel;
+      toggle.setAttribute('aria-label', label);
+      toggle.setAttribute('title', label);
+    }
+
+    const savedTheme = storedTheme();
+    if (savedTheme) root.dataset.theme = savedTheme;
+    updateThemeUI();
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      updateThemeUI();
+      toggle.addEventListener('click', () => {
+        const nextTheme = currentTheme() === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = nextTheme;
+        try {
+          window.localStorage.setItem(storageKey, nextTheme);
+        } catch (_) {
+          // The selected theme still applies for this page when storage is unavailable.
+        }
+        updateThemeUI();
+      });
+      if (typeof systemTheme.addEventListener === 'function') {
+        systemTheme.addEventListener('change', () => {
+          if (!root.dataset.theme) updateThemeUI();
+        });
+      }
+      window.addEventListener('storage', (event) => {
+        if (event.key !== storageKey) return;
+        if (event.newValue === 'light' || event.newValue === 'dark') {
+          root.dataset.theme = event.newValue;
+        } else {
+          delete root.dataset.theme;
+        }
+        updateThemeUI();
+      });
+    });
+  })();
+</script>
+          <link rel="stylesheet" href="../styles.css?v=20260711-4">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -109,17 +179,29 @@
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"MiniCycle","applicationCategory":"HealthApplication","operatingSystem":"iOS","description":"MiniCycle은 생리 예정일, 배란일, 가임기, 선택적 iCloud 저장, 홈 화면 위젯을 제공하는 간단한 아이폰 생리 캘린더 앱입니다.","url":"https://minicycle.net/ko/","image":"https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg","installUrl":"https://apps.apple.com/us/app/mini-cycle/id6760011450","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
         </head>
-          <body>
-        <header class="site-header">
-  <a class="brand" href="./">MiniCycle</a>
-  <nav aria-label="Primary navigation">
-    <a href="./blog/">블로그</a>
-    <a href="./support/">지원</a>
-    <a href="./privacy/">개인정보</a>
-    <a href="../">English</a>
-  </nav>
+          <body class="home-page">
+        <a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="./">
+      <img class="brand-icon" src="../assets/minicycle-app-icon.png" alt="" width="34" height="34">
+      <span>MiniCycle</span>
+    </a>
+    <nav class="site-nav" aria-label="주요 탐색">
+      <a href="./blog/">블로그</a>
+      <a href="./support/">지원</a>
+      <a href="./privacy/">개인정보</a>
+    </nav>
+    <div class="header-controls">
+      <button class="theme-toggle" type="button" data-theme-toggle data-light-label="라이트 모드로 전환" data-dark-label="다크 모드로 전환" aria-label="화면 모드 전환">
+        <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
+        <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.1 15.4A8.2 8.2 0 0 1 8.6 3.9 8.2 8.2 0 1 0 20.1 15.4Z"></path></svg>
+      </button>
+      <a class="language-link" href="../" lang="en" hreflang="en" aria-label="English">English</a>
+    </div>
+  </div>
 </header>
-            <main class="page">
+            <main class="page" id="main-content">
               <section class="hero">
                 <div>
                   <p class="eyebrow">MiniCycle</p>
@@ -142,12 +224,45 @@
 <li>최근 기록 기반 주기와 생리 기간 통계</li>
 <li>기본 로컬 저장, 선택적 iCloud 저장</li></ul>
                 </div>
-                <img src="../assets/stats-capture-iphone17-1118-ko-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing recorded cycles in statistics" width="552" height="1200" loading="lazy">
+                <img src="../assets/stats-capture-iphone17-1118-ko-20260518.jpg" alt="MiniCycle 아이폰 실제 캡처 화면: 통계에 표시된 최근 주기 기록" width="552" height="1200" loading="lazy">
               </section>
               <section class="content">
                 <h2>블로그 글</h2>
                 <div class="post-grid compact-grid">
-        <article class="post-card"><p class="eyebrow">위젯</p><h3><a href="blog/minicycle-widget-not-updating-refresh/">MiniCycle 위젯이 안 바뀔 때, 새로 고침은 어떻게 되나요</a></h3><p>MiniCycle 홈 화면 위젯은 실시간이 아니라 iOS가 정한 시점에 갱신됩니다. 위젯이 어떻게 새로 고쳐지는지, 오래된 상태로 보일 때 무엇을 확인하면 되는지 정리했습니다.</p></article><article class="post-card"><p class="eyebrow">주기 건강</p><h3><a href="blog/ovulation-pain-mittelschmerz-what-it-is/">배란통이 뭘까요? 배란기에 아랫배가 아픈 이유</a></h3><p>배란 무렵 한쪽 아랫배가 콕콕 쑤시는 배란통은 배란하는 사람의 40%까지 겪습니다. 어떤 느낌인지, 왜 생기는지, 그리고 배란통이 아닐 때는 언제인지 정리했습니다.</p></article><article class="post-card"><p class="eyebrow">예측</p><h3><a href="blog/why-minicycle-predicted-period-date-changes/">MiniCycle 생리 예정일이 자꾸 바뀌는 이유</a></h3><p>생리를 새로 기록할 때마다 MiniCycle이 다음 예정일을 다시 계산해 날짜가 옮겨갑니다. 예정일이 바뀌는 건 오류가 아니라 최신 기록에 맞춰 정확해지는 과정이라는 점을 계산 방식과 함께 정리했습니다.</p></article>
+        <article class="post-card home-post-card" data-guide-card data-search-value="위젯 minicycle 위젯이 안 바뀔 때, 새로 고침은 어떻게 되나요 minicycle 홈 화면 위젯은 실시간이 아니라 ios가 정한 시점에 갱신됩니다. 위젯이 어떻게 새로 고쳐지는지, 오래된 상태로 보일 때 무엇을 확인하면 되는지 정리했습니다.">
+  <div class="post-card-topline">
+    <p class="category-pill">위젯</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="blog/minicycle-widget-not-updating-refresh/">MiniCycle 위젯이 안 바뀔 때, 새로 고침은 어떻게 되나요</a></h3>
+  <p class="post-description">MiniCycle 홈 화면 위젯은 실시간이 아니라 iOS가 정한 시점에 갱신됩니다. 위젯이 어떻게 새로 고쳐지는지, 오래된 상태로 보일 때 무엇을 확인하면 되는지 정리했습니다.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-04">2026.07.04</time><span aria-hidden="true">&middot;</span>약 3분</p>
+    <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
+  </div>
+</article><article class="post-card home-post-card" data-guide-card data-search-value="주기 건강 배란통이 뭘까요? 배란기에 아랫배가 아픈 이유 배란 무렵 한쪽 아랫배가 콕콕 쑤시는 배란통은 배란하는 사람의 40%까지 겪습니다. 어떤 느낌인지, 왜 생기는지, 그리고 배란통이 아닐 때는 언제인지 정리했습니다.">
+  <div class="post-card-topline">
+    <p class="category-pill">주기 건강</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="blog/ovulation-pain-mittelschmerz-what-it-is/">배란통이 뭘까요? 배란기에 아랫배가 아픈 이유</a></h3>
+  <p class="post-description">배란 무렵 한쪽 아랫배가 콕콕 쑤시는 배란통은 배란하는 사람의 40%까지 겪습니다. 어떤 느낌인지, 왜 생기는지, 그리고 배란통이 아닐 때는 언제인지 정리했습니다.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-03">2026.07.03</time><span aria-hidden="true">&middot;</span>약 3분</p>
+    <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
+  </div>
+</article><article class="post-card home-post-card" data-guide-card data-search-value="예측 minicycle 생리 예정일이 자꾸 바뀌는 이유 생리를 새로 기록할 때마다 minicycle이 다음 예정일을 다시 계산해 날짜가 옮겨갑니다. 예정일이 바뀌는 건 오류가 아니라 최신 기록에 맞춰 정확해지는 과정이라는 점을 계산 방식과 함께 정리했습니다.">
+  <div class="post-card-topline">
+    <p class="category-pill">예측</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="blog/why-minicycle-predicted-period-date-changes/">MiniCycle 생리 예정일이 자꾸 바뀌는 이유</a></h3>
+  <p class="post-description">생리를 새로 기록할 때마다 MiniCycle이 다음 예정일을 다시 계산해 날짜가 옮겨갑니다. 예정일이 바뀌는 건 오류가 아니라 최신 기록에 맞춰 정확해지는 과정이라는 점을 계산 방식과 함께 정리했습니다.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-02">2026.07.02</time><span aria-hidden="true">&middot;</span>약 3분</p>
+    <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
                 </div>
               </section>
               <section class="content">
@@ -155,5 +270,22 @@
                 <p>지원, 버그 제보, 개인정보 문의는 <a href="mailto:chwookqwe@gmail.com">chwookqwe@gmail.com</a>으로 보내주세요.</p>
               </section>
             </main>
+        <footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="./">
+        <img class="brand-icon" src="../assets/minicycle-app-icon.png" alt="" width="34" height="34" loading="lazy">
+        <span>MiniCycle</span>
+      </a>
+      <p>내 주기를 이해하는 더 조용하고 사적인 방법.</p>
+    </div>
+    <nav class="footer-nav" aria-label="하단 탐색">
+      <a href="./blog/">블로그</a>
+      <a href="./support/">지원</a>
+      <a href="./privacy/">개인정보</a>
+    </nav>
+    <p class="copyright">&copy; 2026 MiniCycle. iPhone을 위해 세심하게 만들었습니다.</p>
+  </div>
+</footer>
           </body>
         </html>

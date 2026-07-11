@@ -3,6 +3,8 @@
                 <head>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1">
+          <meta name="color-scheme" content="light dark">
+          <meta name="theme-color" content="#fbf8fa" data-theme-color>
           <title>The fertile window: six days, and why apps estimate it</title>
           <meta name="description" content="The fertile window is about six days: five before ovulation, one after. Why the window exists, and why any calendar estimate of it stays approximate.">
           <link rel="canonical" href="https://minicycle.net/blog/fertile-window-explained-why-calendar-estimates-approximate/">
@@ -19,7 +21,75 @@
             <link rel="icon" href="../../favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
     <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
-          <link rel="stylesheet" href="../../styles.css">
+        <script>
+  (() => {
+    const storageKey = 'minicycle-theme';
+    const root = document.documentElement;
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+    root.classList.add('js');
+
+    function storedTheme() {
+      try {
+        const value = window.localStorage.getItem(storageKey);
+        return value === 'light' || value === 'dark' ? value : null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function currentTheme() {
+      return root.dataset.theme || (systemTheme.matches ? 'dark' : 'light');
+    }
+
+    function updateThemeUI() {
+      const dark = currentTheme() === 'dark';
+      const themeColor = document.querySelector('[data-theme-color]');
+      if (themeColor) themeColor.setAttribute('content', dark ? '#121014' : '#fbf8fa');
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      const label = dark
+        ? toggle.dataset.lightLabel
+        : toggle.dataset.darkLabel;
+      toggle.setAttribute('aria-label', label);
+      toggle.setAttribute('title', label);
+    }
+
+    const savedTheme = storedTheme();
+    if (savedTheme) root.dataset.theme = savedTheme;
+    updateThemeUI();
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      updateThemeUI();
+      toggle.addEventListener('click', () => {
+        const nextTheme = currentTheme() === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = nextTheme;
+        try {
+          window.localStorage.setItem(storageKey, nextTheme);
+        } catch (_) {
+          // The selected theme still applies for this page when storage is unavailable.
+        }
+        updateThemeUI();
+      });
+      if (typeof systemTheme.addEventListener === 'function') {
+        systemTheme.addEventListener('change', () => {
+          if (!root.dataset.theme) updateThemeUI();
+        });
+      }
+      window.addEventListener('storage', (event) => {
+        if (event.key !== storageKey) return;
+        if (event.newValue === 'light' || event.newValue === 'dark') {
+          root.dataset.theme = event.newValue;
+        } else {
+          delete root.dataset.theme;
+        }
+        updateThemeUI();
+      });
+    });
+  })();
+</script>
+          <link rel="stylesheet" href="../../styles.css?v=20260711-4">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -109,63 +179,197 @@
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"The fertile window: six days, and why apps estimate it","description":"The fertile window is about six days: five before ovulation, one after. Why the window exists, and why any calendar estimate of it stays approximate.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-06-13","dateModified":"2026-06-13","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/fertile-window-explained-why-calendar-estimates-approximate/"}}</script>
         </head>
-          <body>
-        <header class="site-header">
-  <a class="brand" href="../../">MiniCycle</a>
-  <nav aria-label="Primary navigation">
-    <a href="../../blog/">Blog</a>
-    <a href="../../support/">Support</a>
-    <a href="../../privacy/">Privacy</a>
-    <a href="../../ko/blog/fertile-window-explained-why-calendar-estimates-approximate/">한국어</a>
-  </nav>
+          <body class="article-page">
+        <a class="skip-link" href="#main-content">Skip to content</a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="../../">
+      <img class="brand-icon" src="../../assets/minicycle-app-icon.png" alt="" width="34" height="34">
+      <span>MiniCycle</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="../../blog/">Blog</a>
+      <a href="../../support/">Support</a>
+      <a href="../../privacy/">Privacy</a>
+    </nav>
+    <div class="header-controls">
+      <button class="theme-toggle" type="button" data-theme-toggle data-light-label="Switch to light mode" data-dark-label="Switch to dark mode" aria-label="Toggle color theme">
+        <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
+        <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.1 15.4A8.2 8.2 0 0 1 8.6 3.9 8.2 8.2 0 1 0 20.1 15.4Z"></path></svg>
+      </button>
+      <a class="language-link" href="../../ko/blog/fertile-window-explained-why-calendar-estimates-approximate/" lang="ko" hreflang="ko" aria-label="한국어">한국어</a>
+    </div>
+  </div>
 </header>
-            <main class="page">
+            <main class="page article-page-main" id="main-content">
               <article class="article" data-language="en" data-content-group="fertile-window-explained-why-calendar-estimates-approximate" data-min-read-ms="90000">
-                <p class="eyebrow">Cycle health</p>
-                <h1>The fertile window: six days, and why apps estimate it</h1>
-                <p class="article-meta">Published June 13, 2026 by MiniCycle</p>
-                <p class="lead">Ask when you can get pregnant and the common answer is a single date: ovulation day. The biology is more forgiving than that, and harder to pin down. Sperm wait; the egg does not. Put those two facts together and pregnancy is possible across roughly six days each cycle, not one, and the exact placement of those six days drifts from month to month. That drift is why every calendar estimate of the window, this app&#x27;s included, is an estimate rather than a guarantee.</p>
-                <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
-        <h2>Why fertility is a window, not a day</h2>
+                <a class="back-link" href="../"><span aria-hidden="true">&larr;</span> All guides</a>
+                <header class="article-header">
+                  <div class="article-heading">
+                    <p class="category-pill">Cycle health</p>
+                    <h1>The fertile window: six days, and why apps estimate it</h1>
+                    <p class="article-meta"><time datetime="2026-06-13">Published June 13, 2026 by MiniCycle</time><span aria-hidden="true">&middot;</span><span>6 min read</span></p>
+                    <p class="lead">Ask when you can get pregnant and the common answer is a single date: ovulation day. The biology is more forgiving than that, and harder to pin down. Sperm wait; the egg does not. Put those two facts together and pregnancy is possible across roughly six days each cycle, not one, and the exact placement of those six days drifts from month to month. That drift is why every calendar estimate of the window, this app&#x27;s included, is an estimate rather than a guarantee.</p>
+                  </div>
+                  <figure class="article-visual">
+                    <div class="article-visual-frame">
+                      <span class="visual-orbit visual-orbit-one" aria-hidden="true"></span>
+                      <span class="visual-orbit visual-orbit-two" aria-hidden="true"></span>
+                      <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
+                    </div>
+                    <figcaption>The MiniCycle calendar on iPhone</figcaption>
+                  </figure>
+                </header>
+                <div class="article-layout">
+                  <div class="article-body">
+        <section class="article-section" aria-labelledby="section-1">
+  <h2 id="section-1">Why fertility is a window, not a day</h2>
 <p>Conception needs a living sperm and a living egg in the same place at the same time, and the two keep very different hours. Sperm can survive in the reproductive tract for up to five days, the American College of Obstetricians and Gynecologists notes, while a released egg lasts only about 12 to 24 hours. The longer-lived partner sets the schedule. Sex several days before ovulation can still end in pregnancy, because the sperm are already waiting when the egg arrives.</p>
 <p>Stack those numbers and the math lands near six days. ACOG puts the window of fertility at about six days each cycle: the five days leading up to ovulation, plus ovulation day itself. The single magic day many people picture does not really exist. Ovulation day is the peak of the window, not the whole of it.</p>
-<h2>The five-before, one-after window</h2>
+</section>
+<section class="article-section" aria-labelledby="section-2">
+  <h2 id="section-2">The five-before, one-after window</h2>
 <p>Read out in calendar terms, the fertile span runs from five days before ovulation through the day after. The front half does the heavy lifting, since those pre-ovulation days are when waiting sperm can meet a fresh egg. The day after ovulation is the tail end, when an unfertilized egg is near the close of its 12-to-24-hour life and the odds fall away.</p>
 <p>MiniCycle draws the window this way on the calendar: a sky-blue band that starts five days before the estimated ovulation day and ends the day after it, with ovulation day itself marked in a deeper blue. That is a seven-day highlight bracketing a roughly six-day biological window, deliberate margin rather than a claim of precision.</p>
-<h2>Is ovulation really 14 days before your period?</h2>
+</section>
+<section class="article-section" aria-labelledby="section-3">
+  <h2 id="section-3">Is ovulation really 14 days before your period?</h2>
 <p>The familiar rule says ovulation lands about 14 days before the next period, and as a rule of thumb it holds up reasonably well. The stretch from ovulation to the next period, the luteal phase, is the steadier half of the cycle. In a dataset of 612,613 cycles published in npj Digital Medicine, the average luteal phase ran 12.4 days. So counting back roughly a fortnight gets you into the right neighborhood for many cycles.</p>
 <p>But it is a neighborhood, not an address. That same study reported the luteal phase spanning about 7 to 17 days across cycles, and the first half, from period to ovulation, varied more still: an average of 16.9 days with a 95% range of roughly 10 to 30. Most of the gap between a short cycle and a long one sits in the wait before ovulation, not the part after it. That is exactly why a flat 14-day assumption misfires on the cycles that are not average, and why MiniCycle does not lean on one.</p>
-<h2>Why a calendar can only estimate the window</h2>
+</section>
+<section class="article-section" aria-labelledby="section-4">
+  <h2 id="section-4">Why a calendar can only estimate the window</h2>
 <p>Calendar methods work backward from your recent cycle lengths and project the next ovulation onto the same pattern. When cycles run steady, that projection is reasonable. When a cycle turns long or short, ovulation usually moves with it, and a window placed by last month&#x27;s math ends up sitting in the wrong week.</p>
 <p>Everyday life supplies the wobble. Illness, travel across time zones, short sleep, hard training, and stress can each delay ovulation in a given cycle, and a calendar has no way to see it coming. The body does leave real-time signs, though, and they observe ovulation rather than predict it: cervical mucus turns clear and stretchy in the day or two before ovulation, and basal body temperature ticks up just after. Mayo Clinic describes both. Those signs can confirm timing that a calendar could only guess at.</p>
-<h2>How MiniCycle places the window</h2>
+</section>
+<section class="article-section" aria-labelledby="section-5">
+  <h2 id="section-5">How MiniCycle places the window</h2>
 <p>The app starts from your saved period start dates and estimates cycle length as a median of the gaps between them, using up to your latest 12 records. Once there are at least ten intervals it drops the single shortest and single longest before taking the median, so one odd month does not drag the estimate around. With too little history it falls back to 29 days. Those start dates stay on your device by default, as the privacy policy describes.</p>
 <p>From the next predicted period the app counts backward by a luteal phase that is allowed to vary, kept between 9 and 14 days and tied to your cycle length rather than fixed at 14. That lands the estimated ovulation day, and the five-before-through-one-after window follows from it. The approach rests on the same variable-luteal-phase finding from the 612,613-cycle study above, which is the one nod the app earns in a post that is mostly about your body, not the software.</p>
-<h2>What the window can&#x27;t do</h2>
+</section>
+<section class="article-section" aria-labelledby="section-6">
+  <h2 id="section-6">What the window can&#x27;t do</h2>
 <p>A predicted fertile window is reference information, not a guarantee in either direction. For trying to conceive, it points at the days worth prioritizing; ACOG suggests sex every day or every other day across the window. For trying to avoid pregnancy, a calendar estimate alone is a weak guard, because the one cycle where ovulation shifts early is the cycle a back-dated window misses, and sperm survive long enough to punish that gap.</p>
 <p>None of this is medical advice, contraception, or a diagnosis, and a marked window cannot tell you whether a given cycle released an egg at all. If you are trying to conceive without success after a year, or six months past age 35, ACOG suggests seeing a clinician. The calendar is a useful way to notice your own pattern. The certainty has to come from your body&#x27;s signs, or from a test.</p>
-<h2>Trying to conceive, or trying to avoid?</h2>
+</section>
+<section class="article-section" aria-labelledby="section-7">
+  <h2 id="section-7">Trying to conceive, or trying to avoid?</h2>
 <p>If you are trying to conceive, treat the window as a running prompt rather than a single deadline. ACOG&#x27;s guidance is to have sex every day or every other day through the fertile days, which covers the timing without asking you to pinpoint ovulation to the hour. The five days before ovulation matter more than the day itself, so starting early in the window beats holding out for a perfect signal.</p>
 <p>If you are trying to avoid pregnancy, do not lean on a calendar window alone. The cycle most likely to catch you out is the one where ovulation arrives early, which is exactly the cycle a back-dated estimate places too late, and waiting sperm do the rest. Fertility-awareness methods that add daily signs like temperature and cervical mucus exist for this reason, and even those ask for training and consistency.</p>
-<h2>Frequently asked questions</h2>
+</section>
+<section class="article-section" aria-labelledby="section-8">
+  <h2 id="section-8">Frequently asked questions</h2>
 <p>How many days is the fertile window? About six: the five days before ovulation plus ovulation day, because sperm can last up to five days and the egg about one. MiniCycle highlights a slightly wider seven-day band, five days before through one day after, to leave margin.</p>
 <p>Can I get pregnant outside the fertile window? It is much less likely, but timing estimates can be off, and an early ovulation can shift the real window earlier than a calendar shows. No calendar prediction rules pregnancy in or out on its own.</p>
 <p>Why does the app&#x27;s ovulation day differ from day 14? MiniCycle counts back a luteal phase that varies between 9 and 14 days based on your cycle length, instead of assuming a flat 14. For cycles longer or shorter than average, that places ovulation somewhere other than the midpoint.</p>
-<h2>The one-line version</h2>
+</section>
+<section class="article-section" aria-labelledby="section-9">
+  <h2 id="section-9">The one-line version</h2>
 <p>The fertile window is about six days, the five before ovulation plus ovulation day, because sperm outlive the egg. MiniCycle marks a seven-day band, five days before through one day after the ovulation it estimates.</p>
 <p>It is an estimate because ovulation timing moves from cycle to cycle, mostly in the stretch before it. Read the window as reference for planning, never as contraception or a diagnosis.</p>
-                <div class="callout">
-                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
-                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="fertile-window-explained-why-calendar-estimates-approximate" onclick="trackAppStoreClick(this)">View on the App Store</a>
-                </div>
-                <h2>References</h2>
-                <ul class="references">
+</section>
+                    <section class="callout" aria-labelledby="try-minicycle">
+                      <img class="callout-mark" src="../../assets/minicycle-app-icon.png" alt="" width="42" height="42" loading="lazy">
+                      <div class="callout-copy">
+                        <p class="eyebrow">MiniCycle for iPhone</p>
+                        <h2 id="try-minicycle">Try MiniCycle</h2>
+                        <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                      </div>
+                      <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="fertile-window-explained-why-calendar-estimates-approximate" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                    </section>
+                    <section class="references-section" aria-labelledby="references-title">
+                      <p class="eyebrow">MiniCycle editorial</p>
+                      <h2 id="references-title">References</h2>
+                      <ul class="references">
         <li><a href="https://www.acog.org/womens-health/experts-and-stories/the-latest/trying-to-get-pregnant-heres-when-to-have-sex">American College of Obstetricians and Gynecologists. Trying to Get Pregnant: Here&#x27;s When to Have Sex.</a></li>
 <li><a href="https://www.mayoclinic.org/healthy-lifestyle/getting-pregnant/in-depth/how-to-get-pregnant/art-20047611">Mayo Clinic. How to get pregnant.</a></li>
 <li><a href="https://www.nature.com/articles/s41746-019-0152-7">Bull, J. R. et al. Real-world menstrual cycle characteristics of more than 600,000 menstrual cycles. npj Digital Medicine (2019).</a></li>
 <li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
-                </ul>
+                      </ul>
+                    </section>
+                  </div>
+                  <aside class="article-sidebar">
+                    <nav class="article-toc" aria-label="On this page">
+                      <p class="toc-title">On this page</p>
+                      <ol>
+        <li><a href="#section-1">Why fertility is a window, not a day</a></li>
+<li><a href="#section-2">The five-before, one-after window</a></li>
+<li><a href="#section-3">Is ovulation really 14 days before your period?</a></li>
+<li><a href="#section-4">Why a calendar can only estimate the window</a></li>
+<li><a href="#section-5">How MiniCycle places the window</a></li>
+<li><a href="#section-6">What the window can&#x27;t do</a></li>
+<li><a href="#section-7">Trying to conceive, or trying to avoid?</a></li>
+<li><a href="#section-8">Frequently asked questions</a></li>
+<li><a href="#section-9">The one-line version</a></li>
+                      </ol>
+                    </nav>
+                  </aside>
+                </div>
               </article>
+              <section class="related-section" aria-labelledby="related-title">
+                <div class="section-heading">
+                  <div>
+                    <p class="eyebrow">Keep exploring</p>
+                    <h2 id="related-title">More guides you may like</h2>
+                  </div>
+                  <a class="text-link section-link" href="../">All guides<span aria-hidden="true">&nbsp;&rarr;</span></a>
+                </div>
+                <div class="post-grid related-grid">
+        <article class="post-card related-card" data-guide-card data-search-value="cycle health ovulation pain (mittelschmerz): what that mid-cycle twinge is ovulation pain, or mittelschmerz, is a one-sided mid-cycle twinge that affects up to 40% of people who ovulate. what it feels like, why it happens, and when it isn&#x27;t ordinary.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle health</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../ovulation-pain-mittelschmerz-what-it-is/">Ovulation pain (mittelschmerz): what that mid-cycle twinge is</a></h3>
+  <p class="post-description">Ovulation pain, or mittelschmerz, is a one-sided mid-cycle twinge that affects up to 40% of people who ovulate. What it feels like, why it happens, and when it isn&#x27;t ordinary.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-03">2026.07.03</time><span aria-hidden="true">&middot;</span>4 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="cycle health can you get pregnant on your period? what&#x27;s actually possible getting pregnant on your period is unlikely but not impossible, mostly on short cycles with long periods. here is why it happens and why a calendar is not contraception.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle health</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../can-you-get-pregnant-on-your-period/">Can you get pregnant on your period? What&#x27;s actually possible</a></h3>
+  <p class="post-description">Getting pregnant on your period is unlikely but not impossible, mostly on short cycles with long periods. Here is why it happens and why a calendar is not contraception.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-24">2026.06.24</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="cycle health period blood color: what brown, dark, and bright red mean period blood color usually just reflects how long blood took to leave: pink, red, and brown are all normal. here is what the color means and what actually matters.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle health</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../period-blood-color-what-it-means/">Period blood color: what brown, dark, and bright red mean</a></h3>
+  <p class="post-description">Period blood color usually just reflects how long blood took to leave: pink, red, and brown are all normal. Here is what the color means and what actually matters.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-21">2026.06.21</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+                </div>
+              </section>
             </main>
+        <footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="../../">
+        <img class="brand-icon" src="../../assets/minicycle-app-icon.png" alt="" width="34" height="34" loading="lazy">
+        <span>MiniCycle</span>
+      </a>
+      <p>A quieter, more private way to understand your cycle.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="../../blog/">Blog</a>
+      <a href="../../support/">Support</a>
+      <a href="../../privacy/">Privacy</a>
+    </nav>
+    <p class="copyright">&copy; 2026 MiniCycle. Built thoughtfully for iPhone.</p>
+  </div>
+</footer>
           </body>
         </html>

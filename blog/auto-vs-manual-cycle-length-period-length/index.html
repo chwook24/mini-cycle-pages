@@ -3,6 +3,8 @@
                 <head>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1">
+          <meta name="color-scheme" content="light dark">
+          <meta name="theme-color" content="#fbf8fa" data-theme-color>
           <title>Auto vs manual cycle and period length in MiniCycle</title>
           <meta name="description" content="MiniCycle can estimate your cycle and period length, or let you set them by hand (21–42 and 1–10 days). When auto fits, when manual fits, and why the estimate uses a median.">
           <link rel="canonical" href="https://minicycle.net/blog/auto-vs-manual-cycle-length-period-length/">
@@ -19,7 +21,75 @@
             <link rel="icon" href="../../favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
     <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
-          <link rel="stylesheet" href="../../styles.css">
+        <script>
+  (() => {
+    const storageKey = 'minicycle-theme';
+    const root = document.documentElement;
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+    root.classList.add('js');
+
+    function storedTheme() {
+      try {
+        const value = window.localStorage.getItem(storageKey);
+        return value === 'light' || value === 'dark' ? value : null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function currentTheme() {
+      return root.dataset.theme || (systemTheme.matches ? 'dark' : 'light');
+    }
+
+    function updateThemeUI() {
+      const dark = currentTheme() === 'dark';
+      const themeColor = document.querySelector('[data-theme-color]');
+      if (themeColor) themeColor.setAttribute('content', dark ? '#121014' : '#fbf8fa');
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      const label = dark
+        ? toggle.dataset.lightLabel
+        : toggle.dataset.darkLabel;
+      toggle.setAttribute('aria-label', label);
+      toggle.setAttribute('title', label);
+    }
+
+    const savedTheme = storedTheme();
+    if (savedTheme) root.dataset.theme = savedTheme;
+    updateThemeUI();
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      updateThemeUI();
+      toggle.addEventListener('click', () => {
+        const nextTheme = currentTheme() === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = nextTheme;
+        try {
+          window.localStorage.setItem(storageKey, nextTheme);
+        } catch (_) {
+          // The selected theme still applies for this page when storage is unavailable.
+        }
+        updateThemeUI();
+      });
+      if (typeof systemTheme.addEventListener === 'function') {
+        systemTheme.addEventListener('change', () => {
+          if (!root.dataset.theme) updateThemeUI();
+        });
+      }
+      window.addEventListener('storage', (event) => {
+        if (event.key !== storageKey) return;
+        if (event.newValue === 'light' || event.newValue === 'dark') {
+          root.dataset.theme = event.newValue;
+        } else {
+          delete root.dataset.theme;
+        }
+        updateThemeUI();
+      });
+    });
+  })();
+</script>
+          <link rel="stylesheet" href="../../styles.css?v=20260711-4">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -109,62 +179,196 @@
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Auto vs manual cycle and period length in MiniCycle","description":"MiniCycle can estimate your cycle and period length, or let you set them by hand (21–42 and 1–10 days). When auto fits, when manual fits, and why the estimate uses a median.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-06-10","dateModified":"2026-06-10","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/auto-vs-manual-cycle-length-period-length/"}}</script>
         </head>
-          <body>
-        <header class="site-header">
-  <a class="brand" href="../../">MiniCycle</a>
-  <nav aria-label="Primary navigation">
-    <a href="../../blog/">Blog</a>
-    <a href="../../support/">Support</a>
-    <a href="../../privacy/">Privacy</a>
-    <a href="../../ko/blog/auto-vs-manual-cycle-length-period-length/">한국어</a>
-  </nav>
+          <body class="article-page">
+        <a class="skip-link" href="#main-content">Skip to content</a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="../../">
+      <img class="brand-icon" src="../../assets/minicycle-app-icon.png" alt="" width="34" height="34">
+      <span>MiniCycle</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="../../blog/">Blog</a>
+      <a href="../../support/">Support</a>
+      <a href="../../privacy/">Privacy</a>
+    </nav>
+    <div class="header-controls">
+      <button class="theme-toggle" type="button" data-theme-toggle data-light-label="Switch to light mode" data-dark-label="Switch to dark mode" aria-label="Toggle color theme">
+        <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
+        <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.1 15.4A8.2 8.2 0 0 1 8.6 3.9 8.2 8.2 0 1 0 20.1 15.4Z"></path></svg>
+      </button>
+      <a class="language-link" href="../../ko/blog/auto-vs-manual-cycle-length-period-length/" lang="ko" hreflang="ko" aria-label="한국어">한국어</a>
+    </div>
+  </div>
 </header>
-            <main class="page">
+            <main class="page article-page-main" id="main-content">
               <article class="article" data-language="en" data-content-group="auto-vs-manual-cycle-length-period-length" data-min-read-ms="90000">
-                <p class="eyebrow">Settings</p>
-                <h1>Auto vs manual cycle and period length in MiniCycle</h1>
-                <p class="article-meta">Published June 10, 2026 by MiniCycle</p>
-                <p class="lead">Open MiniCycle&#x27;s settings and you will find two numbers you can leave alone or take over: cycle length and period length. Left alone, the app works them out from your records. Set them by hand and your value wins instead. The defaults are 29 days for a cycle and 5 days for a period, and most people never touch either. The question worth answering is when taking over actually helps, and when it quietly makes the predictions worse.</p>
-                <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
-        <h2>Two settings, and what they start at</h2>
+                <a class="back-link" href="../"><span aria-hidden="true">&larr;</span> All guides</a>
+                <header class="article-header">
+                  <div class="article-heading">
+                    <p class="category-pill">Settings</p>
+                    <h1>Auto vs manual cycle and period length in MiniCycle</h1>
+                    <p class="article-meta"><time datetime="2026-06-10">Published June 10, 2026 by MiniCycle</time><span aria-hidden="true">&middot;</span><span>5 min read</span></p>
+                    <p class="lead">Open MiniCycle&#x27;s settings and you will find two numbers you can leave alone or take over: cycle length and period length. Left alone, the app works them out from your records. Set them by hand and your value wins instead. The defaults are 29 days for a cycle and 5 days for a period, and most people never touch either. The question worth answering is when taking over actually helps, and when it quietly makes the predictions worse.</p>
+                  </div>
+                  <figure class="article-visual">
+                    <div class="article-visual-frame">
+                      <span class="visual-orbit visual-orbit-one" aria-hidden="true"></span>
+                      <span class="visual-orbit visual-orbit-two" aria-hidden="true"></span>
+                      <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
+                    </div>
+                    <figcaption>The MiniCycle calendar on iPhone</figcaption>
+                  </figure>
+                </header>
+                <div class="article-layout">
+                  <div class="article-body">
+        <section class="article-section" aria-labelledby="section-1">
+  <h2 id="section-1">Two settings, and what they start at</h2>
 <p>Both settings live in Settings, and both offer the same choice: let MiniCycle estimate, or fix a value yourself. Cycle length is the gap from one period start to the next, and by hand you can set it anywhere from 21 to 42 days. Period length is how many days the bleeding lasts, with a manual range of 1 to 10 days.</p>
 <p>Left on automatic, the app fills in its own estimate and falls back to a default only when it has too little to go on. That default is 29 days for the cycle and 5 days for the period. The 29 is deliberate. The textbook figure is 28, but large real-world datasets put the typical cycle a little higher, so a fresh install starts closer to what the data shows than to the number on the poster.</p>
-<h2>How does the automatic estimate work?</h2>
+</section>
+<section class="article-section" aria-labelledby="section-2">
+  <h2 id="section-2">How does the automatic estimate work?</h2>
 <p>The cycle estimate reads your saved period start dates, up to the latest 12. It measures the gap between each pair of consecutive starts, then takes a median rather than a plain average. A median is the middle value, so one unusual month moves it far less than it would move a mean.</p>
 <p>There is one more step once history builds up. When at least 10 measured intervals exist, the app drops the single shortest and the single longest before taking the median. A cycle thrown off by illness, travel, or a missed log stops dragging the estimate around. Period length runs on the same idea: it reads your recent closed period ranges and estimates a typical length, using 5 days only when there is not enough to measure.</p>
-<h2>When automatic is the right setting</h2>
+</section>
+<section class="article-section" aria-labelledby="section-3">
+  <h2 id="section-3">When automatic is the right setting</h2>
 <p>For most people, leave both on automatic. If your cycles land in a familiar range and you log starts as they happen, the estimate keeps pace with your real pattern better than a number you picked once and forgot. It updates quietly as the months accumulate.</p>
 <p>This is also the honest answer to a common assumption: that setting the numbers by hand is somehow more accurate. It usually is not. A manual value is frozen. The automatic estimate is built from your last dozen cycles and trims its own outliers, so for a body whose rhythm shifts even a little, the moving estimate tends to track reality more closely than a fixed guess.</p>
-<h2>When setting it by hand makes sense</h2>
+</section>
+<section class="article-section" aria-labelledby="section-4">
+  <h2 id="section-4">When setting it by hand makes sense</h2>
 <p>A few situations are the exception. If you have just installed the app and have no history yet but already know your cycle runs, say, 31 days, entering that beats waiting for the default 29 to be corrected. If a clinician has given you a specific figure, use it.</p>
 <p>Manual also helps when the automatic estimate is being misled. After a recent change such as a new birth control method or the months following a pregnancy, your last dozen cycles may not describe the next one, and a hand-set value you trust stays steadier until fresh records build up. Period length is the same. If yours is reliably 3 days, setting it spares you waiting for the estimate to settle and keeps one unusually long-recorded period from stretching the prediction.</p>
-<h2>What the number changes, and what it leaves alone</h2>
+</section>
+<section class="article-section" aria-labelledby="section-5">
+  <h2 id="section-5">What the number changes, and what it leaves alone</h2>
 <p>Whichever way you set it, the cycle length feeds the forward predictions. Your next expected period is counted from your most recent start using that length. Ovulation is then counted backward from that predicted period using a luteal phase of 9 to 14 days, scaled to your cycle rather than fixed at 14. The fertile window is drawn from 5 days before the estimated ovulation through the day after. Change the cycle length and all of those shift together.</p>
 <p>What it does not touch is anything you actually recorded. A period you logged stays on its dates. Period length only shapes how far a new period start is filled in and how the estimate reads your history. It never edits a range you have already closed by hand.</p>
-<h2>What neither setting can promise</h2>
+</section>
+<section class="article-section" aria-labelledby="section-6">
+  <h2 id="section-6">What neither setting can promise</h2>
 <p>Both numbers produce estimates, and an estimate is not a measurement. ACOG describes a normal adult cycle as roughly 21 to 45 days with an average near 28, and a normal period as about 2 to 7 days, wider than any single setting suggests. Your own number can sit anywhere in that span and still be ordinary, and it can drift from month to month.</p>
 <p>So treat the prediction as reference for planning, not as medical advice, contraception, or a way to judge pregnancy. If your cycles run shorter than 21 days or longer than 45, or turn suddenly irregular, that is a conversation for a clinician rather than a setting to adjust. MiniCycle keeps your records on your device by default, as the privacy policy describes, so the number you choose stays yours to change.</p>
-<h2>Choosing in one minute</h2>
+</section>
+<section class="article-section" aria-labelledby="section-7">
+  <h2 id="section-7">Choosing in one minute</h2>
 <p>Default to automatic. Leave both settings alone unless you have a specific reason to override, and let a few months of logged starts do the work. The estimate trims its own outliers, so it handles the occasional odd cycle without help.</p>
 <p>Reach for manual in three cases: you are brand new with no history but know your usual length, a clinician gave you a number, or a recent change has made your recent cycles a poor guide to the next one. Outside those, a hand-set value tends to age worse than the moving estimate.</p>
-<h2>Frequently asked questions</h2>
+</section>
+<section class="article-section" aria-labelledby="section-8">
+  <h2 id="section-8">Frequently asked questions</h2>
 <p>Does setting cycle length by hand make predictions more accurate? Not usually. A manual value stays fixed, while the automatic estimate updates from your latest cycles and drops the shortest and longest once at least 10 intervals exist. For most people the moving estimate tracks reality better than a number set once.</p>
 <p>What can I set, and what are the defaults? Cycle length is 21 to 42 days by hand, period length 1 to 10. Left on automatic with too little history, the app uses 29 days for the cycle and 5 for the period.</p>
 <p>If I change cycle length, do my recorded periods move? No. Recorded dates stay put. The cycle length only changes the forward estimates: the next expected period, the ovulation day, and the fertile window.</p>
-<h2>The one-line version</h2>
+</section>
+<section class="article-section" aria-labelledby="section-9">
+  <h2 id="section-9">The one-line version</h2>
 <p>Automatic for almost everyone, manual for the few cases where you know something the last twelve cycles do not. The defaults, 29 days and 5 days, are starting points, not targets to match.</p>
 <p>The habit that makes either setting work is the same one everything in the app runs on: log the period start on the day it happens.</p>
-                <div class="callout">
-                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
-                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="auto-vs-manual-cycle-length-period-length" onclick="trackAppStoreClick(this)">View on the App Store</a>
-                </div>
-                <h2>References</h2>
-                <ul class="references">
+</section>
+                    <section class="callout" aria-labelledby="try-minicycle">
+                      <img class="callout-mark" src="../../assets/minicycle-app-icon.png" alt="" width="42" height="42" loading="lazy">
+                      <div class="callout-copy">
+                        <p class="eyebrow">MiniCycle for iPhone</p>
+                        <h2 id="try-minicycle">Try MiniCycle</h2>
+                        <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                      </div>
+                      <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="auto-vs-manual-cycle-length-period-length" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                    </section>
+                    <section class="references-section" aria-labelledby="references-title">
+                      <p class="eyebrow">MiniCycle editorial</p>
+                      <h2 id="references-title">References</h2>
+                      <ul class="references">
         <li><a href="https://www.acog.org/womens-health/faqs/your-first-period">ACOG. Your First Period.</a></li>
 <li><a href="https://www.nature.com/articles/s41746-019-0152-7">Bull JR, Rowland SP, Scherwitzl EB, et al. Real-world menstrual cycle characteristics of more than 600,000 menstrual cycles. npj Digital Medicine. 2019.</a></li>
 <li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
-                </ul>
+                      </ul>
+                    </section>
+                  </div>
+                  <aside class="article-sidebar">
+                    <nav class="article-toc" aria-label="On this page">
+                      <p class="toc-title">On this page</p>
+                      <ol>
+        <li><a href="#section-1">Two settings, and what they start at</a></li>
+<li><a href="#section-2">How does the automatic estimate work?</a></li>
+<li><a href="#section-3">When automatic is the right setting</a></li>
+<li><a href="#section-4">When setting it by hand makes sense</a></li>
+<li><a href="#section-5">What the number changes, and what it leaves alone</a></li>
+<li><a href="#section-6">What neither setting can promise</a></li>
+<li><a href="#section-7">Choosing in one minute</a></li>
+<li><a href="#section-8">Frequently asked questions</a></li>
+<li><a href="#section-9">The one-line version</a></li>
+                      </ol>
+                    </nav>
+                  </aside>
+                </div>
               </article>
+              <section class="related-section" aria-labelledby="related-title">
+                <div class="section-heading">
+                  <div>
+                    <p class="eyebrow">Keep exploring</p>
+                    <h2 id="related-title">More guides you may like</h2>
+                  </div>
+                  <a class="text-link section-link" href="../">All guides<span aria-hidden="true">&nbsp;&rarr;</span></a>
+                </div>
+                <div class="post-grid related-grid">
+        <article class="post-card related-card" data-guide-card data-search-value="settings how to reset minicycle and erase all your period records reset records wipes every period date, note, and activity mark in minicycle, and it cannot be undone. what it clears, what it keeps, and how to back up first.">
+  <div class="post-card-topline">
+    <p class="category-pill">Settings</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../reset-all-data-in-minicycle/">How to reset MiniCycle and erase all your period records</a></h3>
+  <p class="post-description">Reset records wipes every period date, note, and activity mark in MiniCycle, and it cannot be undone. What it clears, what it keeps, and how to back up first.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-14">2026.06.14</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="settings minicycle in english: change the app language and dark mode minicycle defaults to korean. how to switch the app to english in two taps, choose system, light, or dark appearance, and what the home-screen widget follows.">
+  <div class="post-card-topline">
+    <p class="category-pill">Settings</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../minicycle-dark-mode-app-language-settings/">MiniCycle in English: change the app language and dark mode</a></h3>
+  <p class="post-description">MiniCycle defaults to Korean. How to switch the app to English in two taps, choose System, Light, or Dark appearance, and what the home-screen widget follows.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-12">2026.06.12</time><span aria-hidden="true">&middot;</span>5 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="settings should a period calendar start on sunday or monday? minicycle&#x27;s calendar can start the week on sunday or monday. why calendars disagree, why the choice changes only the layout, and how the widget stays in sync.">
+  <div class="post-card-topline">
+    <p class="category-pill">Settings</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../week-start-sunday-monday-period-calendar/">Should a period calendar start on Sunday or Monday?</a></h3>
+  <p class="post-description">MiniCycle&#x27;s calendar can start the week on Sunday or Monday. Why calendars disagree, why the choice changes only the layout, and how the widget stays in sync.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-09">2026.06.09</time><span aria-hidden="true">&middot;</span>4 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+                </div>
+              </section>
             </main>
+        <footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="../../">
+        <img class="brand-icon" src="../../assets/minicycle-app-icon.png" alt="" width="34" height="34" loading="lazy">
+        <span>MiniCycle</span>
+      </a>
+      <p>A quieter, more private way to understand your cycle.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="../../blog/">Blog</a>
+      <a href="../../support/">Support</a>
+      <a href="../../privacy/">Privacy</a>
+    </nav>
+    <p class="copyright">&copy; 2026 MiniCycle. Built thoughtfully for iPhone.</p>
+  </div>
+</footer>
           </body>
         </html>

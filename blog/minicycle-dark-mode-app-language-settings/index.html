@@ -3,6 +3,8 @@
                 <head>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1">
+          <meta name="color-scheme" content="light dark">
+          <meta name="theme-color" content="#fbf8fa" data-theme-color>
           <title>MiniCycle in English: change the app language and dark mode</title>
           <meta name="description" content="MiniCycle defaults to Korean. How to switch the app to English in two taps, choose System, Light, or Dark appearance, and what the home-screen widget follows.">
           <link rel="canonical" href="https://minicycle.net/blog/minicycle-dark-mode-app-language-settings/">
@@ -19,7 +21,75 @@
             <link rel="icon" href="../../favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
     <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
-          <link rel="stylesheet" href="../../styles.css">
+        <script>
+  (() => {
+    const storageKey = 'minicycle-theme';
+    const root = document.documentElement;
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+    root.classList.add('js');
+
+    function storedTheme() {
+      try {
+        const value = window.localStorage.getItem(storageKey);
+        return value === 'light' || value === 'dark' ? value : null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function currentTheme() {
+      return root.dataset.theme || (systemTheme.matches ? 'dark' : 'light');
+    }
+
+    function updateThemeUI() {
+      const dark = currentTheme() === 'dark';
+      const themeColor = document.querySelector('[data-theme-color]');
+      if (themeColor) themeColor.setAttribute('content', dark ? '#121014' : '#fbf8fa');
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      const label = dark
+        ? toggle.dataset.lightLabel
+        : toggle.dataset.darkLabel;
+      toggle.setAttribute('aria-label', label);
+      toggle.setAttribute('title', label);
+    }
+
+    const savedTheme = storedTheme();
+    if (savedTheme) root.dataset.theme = savedTheme;
+    updateThemeUI();
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      updateThemeUI();
+      toggle.addEventListener('click', () => {
+        const nextTheme = currentTheme() === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = nextTheme;
+        try {
+          window.localStorage.setItem(storageKey, nextTheme);
+        } catch (_) {
+          // The selected theme still applies for this page when storage is unavailable.
+        }
+        updateThemeUI();
+      });
+      if (typeof systemTheme.addEventListener === 'function') {
+        systemTheme.addEventListener('change', () => {
+          if (!root.dataset.theme) updateThemeUI();
+        });
+      }
+      window.addEventListener('storage', (event) => {
+        if (event.key !== storageKey) return;
+        if (event.newValue === 'light' || event.newValue === 'dark') {
+          root.dataset.theme = event.newValue;
+        } else {
+          delete root.dataset.theme;
+        }
+        updateThemeUI();
+      });
+    });
+  })();
+</script>
+          <link rel="stylesheet" href="../../styles.css?v=20260711-4">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -109,62 +179,196 @@
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"MiniCycle in English: change the app language and dark mode","description":"MiniCycle defaults to Korean. How to switch the app to English in two taps, choose System, Light, or Dark appearance, and what the home-screen widget follows.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-06-12","dateModified":"2026-06-12","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/minicycle-dark-mode-app-language-settings/"}}</script>
         </head>
-          <body>
-        <header class="site-header">
-  <a class="brand" href="../../">MiniCycle</a>
-  <nav aria-label="Primary navigation">
-    <a href="../../blog/">Blog</a>
-    <a href="../../support/">Support</a>
-    <a href="../../privacy/">Privacy</a>
-    <a href="../../ko/blog/minicycle-dark-mode-app-language-settings/">한국어</a>
-  </nav>
+          <body class="article-page">
+        <a class="skip-link" href="#main-content">Skip to content</a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="../../">
+      <img class="brand-icon" src="../../assets/minicycle-app-icon.png" alt="" width="34" height="34">
+      <span>MiniCycle</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="../../blog/">Blog</a>
+      <a href="../../support/">Support</a>
+      <a href="../../privacy/">Privacy</a>
+    </nav>
+    <div class="header-controls">
+      <button class="theme-toggle" type="button" data-theme-toggle data-light-label="Switch to light mode" data-dark-label="Switch to dark mode" aria-label="Toggle color theme">
+        <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
+        <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.1 15.4A8.2 8.2 0 0 1 8.6 3.9 8.2 8.2 0 1 0 20.1 15.4Z"></path></svg>
+      </button>
+      <a class="language-link" href="../../ko/blog/minicycle-dark-mode-app-language-settings/" lang="ko" hreflang="ko" aria-label="한국어">한국어</a>
+    </div>
+  </div>
 </header>
-            <main class="page">
+            <main class="page article-page-main" id="main-content">
               <article class="article" data-language="en" data-content-group="minicycle-dark-mode-app-language-settings" data-min-read-ms="90000">
-                <p class="eyebrow">Settings</p>
-                <h1>MiniCycle in English: change the app language and dark mode</h1>
-                <p class="article-meta">Published June 12, 2026 by MiniCycle</p>
-                <p class="lead">MiniCycle was built in Korea, and a fresh install greets you in Korean. If you have just downloaded it and hit a wall of Hangul, the fix is two taps away, and you can make them without reading a single Korean word. While you are in Settings, the appearance control sits one group above the language one, with the same three-way simplicity. Both settings apply instantly, and neither touches a day of your records.</p>
-                <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
-        <h2>Why the app starts in Korean</h2>
+                <a class="back-link" href="../"><span aria-hidden="true">&larr;</span> All guides</a>
+                <header class="article-header">
+                  <div class="article-heading">
+                    <p class="category-pill">Settings</p>
+                    <h1>MiniCycle in English: change the app language and dark mode</h1>
+                    <p class="article-meta"><time datetime="2026-06-12">Published June 12, 2026 by MiniCycle</time><span aria-hidden="true">&middot;</span><span>5 min read</span></p>
+                    <p class="lead">MiniCycle was built in Korea, and a fresh install greets you in Korean. If you have just downloaded it and hit a wall of Hangul, the fix is two taps away, and you can make them without reading a single Korean word. While you are in Settings, the appearance control sits one group above the language one, with the same three-way simplicity. Both settings apply instantly, and neither touches a day of your records.</p>
+                  </div>
+                  <figure class="article-visual">
+                    <div class="article-visual-frame">
+                      <span class="visual-orbit visual-orbit-one" aria-hidden="true"></span>
+                      <span class="visual-orbit visual-orbit-two" aria-hidden="true"></span>
+                      <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
+                    </div>
+                    <figcaption>The MiniCycle calendar on iPhone</figcaption>
+                  </figure>
+                </header>
+                <div class="article-layout">
+                  <div class="article-body">
+        <section class="article-section" aria-labelledby="section-1">
+  <h2 id="section-1">Why the app starts in Korean</h2>
 <p>MiniCycle started as a Korean app, and Korean is still its first language: a new install opens in Korean regardless of what language your iPhone runs. That is an unusual choice on the App Store, where most apps follow the system language, so it deserves a plain explanation rather than a shrug. The app keeps its own language setting, separate from iOS, and it ships with exactly two options, Korean and English.</p>
 <p>An in-app setting has one real advantage: you choose, once, and the app stays put. There is also a small courtesy built into the picker. The two choices are always written in their own scripts, 한국어 and English, whichever language the app currently shows. The word English never disappears into a language you cannot read, so you cannot get stranded.</p>
-<h2>Switching to English, without reading Korean</h2>
+</section>
+<section class="article-section" aria-labelledby="section-2">
+  <h2 id="section-2">Switching to English, without reading Korean</h2>
 <p>Open the app and tap the circled gear at the top right of the calendar screen. That is Settings. In the second group of rows, look for the globe icon: next to it is a two-option switch, and one option reads English. Tap it. The change is immediate, with no restart and no confirmation step.</p>
 <p>Every label in the calendar, statistics, and settings flips at once, and dates reformat to English conventions along with them. The month header turns from 2026년 6월 into Jun 2026, a selected day from 6월 12일 into Jun 12, and the weekday letters across the top of the calendar switch too. The same switch works in reverse at any time, and 한국어 will be legible right where you left it.</p>
-<h2>Your iPhone&#x27;s language has nothing to do with it</h2>
+</section>
+<section class="article-section" aria-labelledby="section-3">
+  <h2 id="section-3">Your iPhone&#x27;s language has nothing to do with it</h2>
 <p>A reasonable first instinct is to change the phone&#x27;s system language and expect the app to follow. With MiniCycle that does nothing. The app reads only its own setting, so an iPhone switched to English still opens a Korean MiniCycle, and vice versa. The reverse direction also holds: setting the app to English leaves your iPhone exactly as it was.</p>
 <p>If you actually want the entire phone in another language, that lives in iOS Settings under General, then Language &amp; Region, and Apple documents the steps. But you never need to go there for this app. The in-app switch is the whole job.</p>
-<h2>Reminders and the widget follow the language</h2>
+</section>
+<section class="article-section" aria-labelledby="section-4">
+  <h2 id="section-4">Reminders and the widget follow the language</h2>
 <p>If you use the reminders for period, fertile-window start and end, or ovulation day, their texts are written in the app language at the moment they are scheduled, and changing the language reschedules them on the spot. A notification that would have arrived as 예상 생리일 2일 전 arrives as Expected period in 2 days instead. The timing settings, which day and what hour, carry over untouched.</p>
 <p>The home-screen widget reads the same language setting from storage shared between the app and the widget, so it follows the switch as well. Language is one of the settings where the app and the widget always move together.</p>
-<h2>System, Light, or Dark: the appearance setting</h2>
+</section>
+<section class="article-section" aria-labelledby="section-5">
+  <h2 id="section-5">System, Light, or Dark: the appearance setting</h2>
 <p>The first group in Settings, marked with a moon icon, holds the appearance control with three choices: System, Light, and Dark. The default is System, which hands the decision to iOS. When the phone enters dark mode, the app follows. If you keep your iPhone on a dark-mode schedule, Apple&#x27;s automatic option runs sunset to sunrise or any custom hours you set, and MiniCycle changes over on that schedule without further attention.</p>
 <p>Dark mode in MiniCycle is a near-black gray rather than pure black, with date cards and panels a step lighter so the structure stays readable, and the soft shadows of light mode removed, since they add nothing against a dark background. The calendar marks keep their hues: pink for period days, sky blue for the fertile window, a deeper blue for ovulation day, purple for activity. Their fills are painted slightly stronger in the dark so they hold up. A legend you learned in light mode needs no relearning.</p>
-<h2>One honest limit, and what never changes</h2>
+</section>
+<section class="article-section" aria-labelledby="section-6">
+  <h2 id="section-6">One honest limit, and what never changes</h2>
 <p>Forcing Light or Dark inside the app changes the app alone. The home-screen widget is drawn by iOS in whatever appearance the phone itself is in, because dark mode is a systemwide setting, so an app forced to Dark can sit behind a light widget all afternoon. If you want the app and the widget to match around the clock, leave the appearance on System.</p>
 <p>Neither setting reaches your data. Period records, notes, cycle and period length settings, and every predicted date are identical before and after any combination of switches. And the marks mean what they always meant: predicted period, ovulation, and fertile-window dates are estimates calculated from your records, reference information rather than medical advice or contraception, in either language and either mode.</p>
-<h2>If the screen is in Korean right now</h2>
+</section>
+<section class="article-section" aria-labelledby="section-7">
+  <h2 id="section-7">If the screen is in Korean right now</h2>
 <p>Here is the no-reading-required route. Open the app and tap the circled gear at the top right of the calendar screen. On the settings screen, find the globe icon in the second group of rows. The switch beside it has two options, and the right-hand one reads English, in English. Tap it, and the whole app becomes readable.</p>
 <p>Should you ever want Korean back, perhaps for someone you share the calendar with, the same switch sits in the same place, and 한국어 is written in Korean. The option you need is always printed in the language you need it in.</p>
-<h2>Frequently asked questions</h2>
+</section>
+<section class="article-section" aria-labelledby="section-8">
+  <h2 id="section-8">Frequently asked questions</h2>
 <p>Will switching the language delete or change my records? No. The language setting changes labels and date formats, nothing else. Periods, notes, settings values, and scheduled reminders all stay; only the reminder texts are reissued in the new language.</p>
 <p>Why is the widget still light when I set the app to Dark? The widget is drawn by iOS in the phone&#x27;s current appearance, so the in-app choice does not reach it. Set the appearance to System and the app and widget will match at every hour.</p>
 <p>Are there languages besides Korean and English? Not currently. The app ships with exactly those two, and the in-app switch is the only place the choice lives. Your iPhone&#x27;s system language does not affect it in either direction.</p>
-<h2>The one-line version</h2>
+</section>
+<section class="article-section" aria-labelledby="section-9">
+  <h2 id="section-9">The one-line version</h2>
 <p>Gear, globe, English: the language switch is two taps, applies instantly, and carries the reminders and the widget along with it. Your iPhone&#x27;s own language plays no part in either direction.</p>
 <p>Appearance offers System, Light, and Dark, and System follows your phone&#x27;s dark-mode schedule. The widget always follows the phone rather than the app, and neither setting touches a single record.</p>
-                <div class="callout">
-                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
-                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="minicycle-dark-mode-app-language-settings" onclick="trackAppStoreClick(this)">View on the App Store</a>
-                </div>
-                <h2>References</h2>
-                <ul class="references">
+</section>
+                    <section class="callout" aria-labelledby="try-minicycle">
+                      <img class="callout-mark" src="../../assets/minicycle-app-icon.png" alt="" width="42" height="42" loading="lazy">
+                      <div class="callout-copy">
+                        <p class="eyebrow">MiniCycle for iPhone</p>
+                        <h2 id="try-minicycle">Try MiniCycle</h2>
+                        <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                      </div>
+                      <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="minicycle-dark-mode-app-language-settings" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                    </section>
+                    <section class="references-section" aria-labelledby="references-title">
+                      <p class="eyebrow">MiniCycle editorial</p>
+                      <h2 id="references-title">References</h2>
+                      <ul class="references">
         <li><a href="https://support.apple.com/en-us/108350">Apple Support. Use Dark Mode on your iPhone and iPad.</a></li>
 <li><a href="https://developer.apple.com/design/human-interface-guidelines/dark-mode">Apple Human Interface Guidelines. Dark Mode.</a></li>
 <li><a href="https://support.apple.com/en-us/109358">Apple Support. Change the language on your iPhone or iPad.</a></li>
-                </ul>
+                      </ul>
+                    </section>
+                  </div>
+                  <aside class="article-sidebar">
+                    <nav class="article-toc" aria-label="On this page">
+                      <p class="toc-title">On this page</p>
+                      <ol>
+        <li><a href="#section-1">Why the app starts in Korean</a></li>
+<li><a href="#section-2">Switching to English, without reading Korean</a></li>
+<li><a href="#section-3">Your iPhone&#x27;s language has nothing to do with it</a></li>
+<li><a href="#section-4">Reminders and the widget follow the language</a></li>
+<li><a href="#section-5">System, Light, or Dark: the appearance setting</a></li>
+<li><a href="#section-6">One honest limit, and what never changes</a></li>
+<li><a href="#section-7">If the screen is in Korean right now</a></li>
+<li><a href="#section-8">Frequently asked questions</a></li>
+<li><a href="#section-9">The one-line version</a></li>
+                      </ol>
+                    </nav>
+                  </aside>
+                </div>
               </article>
+              <section class="related-section" aria-labelledby="related-title">
+                <div class="section-heading">
+                  <div>
+                    <p class="eyebrow">Keep exploring</p>
+                    <h2 id="related-title">More guides you may like</h2>
+                  </div>
+                  <a class="text-link section-link" href="../">All guides<span aria-hidden="true">&nbsp;&rarr;</span></a>
+                </div>
+                <div class="post-grid related-grid">
+        <article class="post-card related-card" data-guide-card data-search-value="settings how to reset minicycle and erase all your period records reset records wipes every period date, note, and activity mark in minicycle, and it cannot be undone. what it clears, what it keeps, and how to back up first.">
+  <div class="post-card-topline">
+    <p class="category-pill">Settings</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../reset-all-data-in-minicycle/">How to reset MiniCycle and erase all your period records</a></h3>
+  <p class="post-description">Reset records wipes every period date, note, and activity mark in MiniCycle, and it cannot be undone. What it clears, what it keeps, and how to back up first.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-14">2026.06.14</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="settings auto vs manual cycle and period length in minicycle minicycle can estimate your cycle and period length, or let you set them by hand (21–42 and 1–10 days). when auto fits, when manual fits, and why the estimate uses a median.">
+  <div class="post-card-topline">
+    <p class="category-pill">Settings</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../auto-vs-manual-cycle-length-period-length/">Auto vs manual cycle and period length in MiniCycle</a></h3>
+  <p class="post-description">MiniCycle can estimate your cycle and period length, or let you set them by hand (21–42 and 1–10 days). When auto fits, when manual fits, and why the estimate uses a median.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-10">2026.06.10</time><span aria-hidden="true">&middot;</span>5 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="settings should a period calendar start on sunday or monday? minicycle&#x27;s calendar can start the week on sunday or monday. why calendars disagree, why the choice changes only the layout, and how the widget stays in sync.">
+  <div class="post-card-topline">
+    <p class="category-pill">Settings</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../week-start-sunday-monday-period-calendar/">Should a period calendar start on Sunday or Monday?</a></h3>
+  <p class="post-description">MiniCycle&#x27;s calendar can start the week on Sunday or Monday. Why calendars disagree, why the choice changes only the layout, and how the widget stays in sync.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-09">2026.06.09</time><span aria-hidden="true">&middot;</span>4 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+                </div>
+              </section>
             </main>
+        <footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="../../">
+        <img class="brand-icon" src="../../assets/minicycle-app-icon.png" alt="" width="34" height="34" loading="lazy">
+        <span>MiniCycle</span>
+      </a>
+      <p>A quieter, more private way to understand your cycle.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="../../blog/">Blog</a>
+      <a href="../../support/">Support</a>
+      <a href="../../privacy/">Privacy</a>
+    </nav>
+    <p class="copyright">&copy; 2026 MiniCycle. Built thoughtfully for iPhone.</p>
+  </div>
+</footer>
           </body>
         </html>

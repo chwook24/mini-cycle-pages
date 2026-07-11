@@ -3,6 +3,8 @@
                 <head>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1">
+          <meta name="color-scheme" content="light dark">
+          <meta name="theme-color" content="#fbf8fa" data-theme-color>
           <title>What counts as an irregular period, and when to see a doctor</title>
           <meta name="description" content="Irregular periods usually have ordinary causes, but some patterns deserve a clinician. What counts as irregular, when to see a doctor, and how tracking actually helps.">
           <link rel="canonical" href="https://minicycle.net/blog/irregular-periods-what-counts-when-to-see-doctor/">
@@ -19,7 +21,75 @@
             <link rel="icon" href="../../favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
     <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
-          <link rel="stylesheet" href="../../styles.css">
+        <script>
+  (() => {
+    const storageKey = 'minicycle-theme';
+    const root = document.documentElement;
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+    root.classList.add('js');
+
+    function storedTheme() {
+      try {
+        const value = window.localStorage.getItem(storageKey);
+        return value === 'light' || value === 'dark' ? value : null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function currentTheme() {
+      return root.dataset.theme || (systemTheme.matches ? 'dark' : 'light');
+    }
+
+    function updateThemeUI() {
+      const dark = currentTheme() === 'dark';
+      const themeColor = document.querySelector('[data-theme-color]');
+      if (themeColor) themeColor.setAttribute('content', dark ? '#121014' : '#fbf8fa');
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      const label = dark
+        ? toggle.dataset.lightLabel
+        : toggle.dataset.darkLabel;
+      toggle.setAttribute('aria-label', label);
+      toggle.setAttribute('title', label);
+    }
+
+    const savedTheme = storedTheme();
+    if (savedTheme) root.dataset.theme = savedTheme;
+    updateThemeUI();
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      updateThemeUI();
+      toggle.addEventListener('click', () => {
+        const nextTheme = currentTheme() === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = nextTheme;
+        try {
+          window.localStorage.setItem(storageKey, nextTheme);
+        } catch (_) {
+          // The selected theme still applies for this page when storage is unavailable.
+        }
+        updateThemeUI();
+      });
+      if (typeof systemTheme.addEventListener === 'function') {
+        systemTheme.addEventListener('change', () => {
+          if (!root.dataset.theme) updateThemeUI();
+        });
+      }
+      window.addEventListener('storage', (event) => {
+        if (event.key !== storageKey) return;
+        if (event.newValue === 'light' || event.newValue === 'dark') {
+          root.dataset.theme = event.newValue;
+        } else {
+          delete root.dataset.theme;
+        }
+        updateThemeUI();
+      });
+    });
+  })();
+</script>
+          <link rel="stylesheet" href="../../styles.css?v=20260711-4">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -109,62 +179,196 @@
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"What counts as an irregular period, and when to see a doctor","description":"Irregular periods usually have ordinary causes, but some patterns deserve a clinician. What counts as irregular, when to see a doctor, and how tracking actually helps.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-06-10","dateModified":"2026-06-10","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/irregular-periods-what-counts-when-to-see-doctor/"}}</script>
         </head>
-          <body>
-        <header class="site-header">
-  <a class="brand" href="../../">MiniCycle</a>
-  <nav aria-label="Primary navigation">
-    <a href="../../blog/">Blog</a>
-    <a href="../../support/">Support</a>
-    <a href="../../privacy/">Privacy</a>
-    <a href="../../ko/blog/irregular-periods-what-counts-when-to-see-doctor/">한국어</a>
-  </nav>
+          <body class="article-page">
+        <a class="skip-link" href="#main-content">Skip to content</a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="../../">
+      <img class="brand-icon" src="../../assets/minicycle-app-icon.png" alt="" width="34" height="34">
+      <span>MiniCycle</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="../../blog/">Blog</a>
+      <a href="../../support/">Support</a>
+      <a href="../../privacy/">Privacy</a>
+    </nav>
+    <div class="header-controls">
+      <button class="theme-toggle" type="button" data-theme-toggle data-light-label="Switch to light mode" data-dark-label="Switch to dark mode" aria-label="Toggle color theme">
+        <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
+        <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.1 15.4A8.2 8.2 0 0 1 8.6 3.9 8.2 8.2 0 1 0 20.1 15.4Z"></path></svg>
+      </button>
+      <a class="language-link" href="../../ko/blog/irregular-periods-what-counts-when-to-see-doctor/" lang="ko" hreflang="ko" aria-label="한국어">한국어</a>
+    </div>
+  </div>
 </header>
-            <main class="page">
+            <main class="page article-page-main" id="main-content">
               <article class="article" data-language="en" data-content-group="irregular-periods-what-counts-when-to-see-doctor" data-min-read-ms="90000">
-                <p class="eyebrow">Cycle health</p>
-                <h1>What counts as an irregular period, and when to see a doctor</h1>
-                <p class="article-meta">Published June 10, 2026 by MiniCycle</p>
-                <p class="lead">Three cycles in a row: 26 days, then 41, then 28. Is that irregular, or normal variation? It is a common question to open a cycle app with, and it has a more precise answer than most people expect. Irregular is not just a feeling. Clinicians define it with numbers, and one of those three cycles crosses the line. Most uneven stretches have an ordinary cause and settle on their own. A few patterns are worth a clinician&#x27;s time. Telling them apart starts with knowing where the line actually is.</p>
-                <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
-        <h2>What &#x27;regular&#x27; actually means</h2>
+                <a class="back-link" href="../"><span aria-hidden="true">&larr;</span> All guides</a>
+                <header class="article-header">
+                  <div class="article-heading">
+                    <p class="category-pill">Cycle health</p>
+                    <h1>What counts as an irregular period, and when to see a doctor</h1>
+                    <p class="article-meta"><time datetime="2026-06-10">Published June 10, 2026 by MiniCycle</time><span aria-hidden="true">&middot;</span><span>6 min read</span></p>
+                    <p class="lead">Three cycles in a row: 26 days, then 41, then 28. Is that irregular, or normal variation? It is a common question to open a cycle app with, and it has a more precise answer than most people expect. Irregular is not just a feeling. Clinicians define it with numbers, and one of those three cycles crosses the line. Most uneven stretches have an ordinary cause and settle on their own. A few patterns are worth a clinician&#x27;s time. Telling them apart starts with knowing where the line actually is.</p>
+                  </div>
+                  <figure class="article-visual">
+                    <div class="article-visual-frame">
+                      <span class="visual-orbit visual-orbit-one" aria-hidden="true"></span>
+                      <span class="visual-orbit visual-orbit-two" aria-hidden="true"></span>
+                      <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
+                    </div>
+                    <figcaption>The MiniCycle calendar on iPhone</figcaption>
+                  </figure>
+                </header>
+                <div class="article-layout">
+                  <div class="article-body">
+        <section class="article-section" aria-labelledby="section-1">
+  <h2 id="section-1">What &#x27;regular&#x27; actually means</h2>
 <p>Start with the measurement, because it is easy to get wrong. A cycle is counted from the first day of one period to the first day of the next, not from the day bleeding stops. Mayo Clinic puts the typical range at 21 to 35 days, with bleeding that lasts 2 to 7 days. The textbook number everyone remembers, 28 days, sits inside that range rather than defining it.</p>
 <p>Regular does not mean identical. Mayo&#x27;s own framing is that a period can be light or heavy, long or short, and still be typical, and that within a broad range, typical is what is typical for you. A cycle that runs 27 days one month and 30 the next is not irregular. It is a cycle. The real question is how far the month-to-month drift can go before it counts as something.</p>
-<h2>So what counts as irregular?</h2>
+</section>
+<section class="article-section" aria-labelledby="section-2">
+  <h2 id="section-2">So what counts as irregular?</h2>
 <p>Here the definitions get specific. The U.S. Office on Women&#x27;s Health calls periods irregular when the cycle runs shorter than 24 days or longer than 38 days, measured start to start. It adds a second test that catches the cycles a single number misses: variation of more than 20 days from one month to the next. Its example is a cycle jumping from 25 days to 46 and back to 25.</p>
 <p>One thing worth being honest about: the exact cutoffs differ between sources. Mayo Clinic draws its typical band a little differently, at 21 to 35 days, so it flags cycles shorter than 21 or longer than 35. The two ranges do not line up perfectly, and that is the honest state of it. The shared point underneath is sturdier than the disagreement. A cycle holding roughly steady inside the mid-20s to upper-30s is regular. One that sits well outside it, or swings by weeks from month to month, is the kind of irregular worth noticing.</p>
-<h2>When irregular is expected</h2>
+</section>
+<section class="article-section" aria-labelledby="section-3">
+  <h2 id="section-3">When irregular is expected</h2>
 <p>Two stretches of life come with uneven cycles built in, and neither is a problem to solve. In the first few years after periods begin, long and irregular cycles are common; Mayo notes they tend to shorten and settle with age. The Office on Women&#x27;s Health says the same for the other end. During perimenopause, the years approaching menopause, cycles drift and turn less predictable again.</p>
 <p>Menopause carries one caveat worth stating plainly. Once periods have stopped for good, bleeding is not expected, and any bleeding after menopause is a reason to call a clinician rather than log and wait. The risk of uterine cancer rises with age, which is why that particular pattern gets handled differently from a teenager&#x27;s uneven first year.</p>
-<h2>Common reasons cycles turn irregular</h2>
+</section>
+<section class="article-section" aria-labelledby="section-4">
+  <h2 id="section-4">Common reasons cycles turn irregular</h2>
 <p>Between those life stages, a long list of ordinary things can nudge a cycle off its usual length. Stress is a documented one. So are large weight changes, an eating disorder, or a sharp jump in hard exercise. Thyroid problems, high prolactin, uncontrolled diabetes, and some medications for conditions like epilepsy or anxiety can all show up as irregular bleeding. None of these is a self-diagnosis from a calendar. They are reasons a clinician might investigate.</p>
 <p>Polycystic ovary syndrome deserves a specific mention because it is common: the Office on Women&#x27;s Health notes that about 1 in 10 women with irregular cycles has PCOS. Pregnancy and breastfeeding belong on the list too, since both pause or shift periods. The takeaway is not to match yourself to a cause. It is that &#x27;irregular&#x27; is a symptom with many possible explanations, which is exactly why a pattern, not a single odd month, is what a clinician wants to see.</p>
-<h2>When is it worth a doctor&#x27;s time?</h2>
+</section>
+<section class="article-section" aria-labelledby="section-5">
+  <h2 id="section-5">When is it worth a doctor&#x27;s time?</h2>
 <p>A handful of patterns move the question from an app to a person. The Office on Women&#x27;s Health lists two plainly: cycles that turn irregular after having been regular, and cycles that come more often than every 24 days or less often than every 38. Mayo adds the ones around bleeding itself, including periods that stop for more than 90 days when you are not pregnant, bleeding that lasts longer than seven days, bleeding heavier than usual, bleeding between periods, and severe pain.</p>
 <p>A few signals call for prompter attention than a tracked note. Soaking through a pad or tampon every hour or two, or feeling dizzy, short of breath, or chest pain during or after a period, can point to heavy blood loss and anemia. Bleeding after sex, or any bleeding after menopause, is worth a call on its own. None of these is a diagnosis. Each is a line that, once crossed, is better answered by an exam than by a calendar.</p>
-<h2>What tracking can and cannot do</h2>
+</section>
+<section class="article-section" aria-labelledby="section-6">
+  <h2 id="section-6">What tracking can and cannot do</h2>
 <p>This is where a record earns its place. A clinician evaluating irregular cycles wants dates: when periods started, how long they lasted, how much they varied. A list beats a memory every time, and it is the first thing most visits ask for. MiniCycle&#x27;s statistics tab summarizes your recent cycle length and period length from up to 24 recent records, which turns a vague sense that things have been all over the place into an actual range.</p>
 <p>What the app cannot do is judge what the pattern means. Its predictions assume a reasonably steady cycle, so for genuinely irregular ones they get looser, and they are reference information for planning, never medical advice, contraception, or a diagnosis. MiniCycle keeps these records on your device by default, as the privacy policy describes. The honest division holds: the app keeps the record clear, and a clinician reads what it means.</p>
-<h2>A quick read on your own cycle</h2>
+</section>
+<section class="article-section" aria-labelledby="section-7">
+  <h2 id="section-7">A quick read on your own cycle</h2>
 <p>If you want a single check, line up your last several start dates and look at two things: the shortest-to-longest spread, and whether any single cycle fell under 24 days or over 38. A spread within a couple of weeks that stays inside that band is regular, even if no two months match. A spread of more than 20 days, or cycles outside the band, is the pattern worth tracking and, if it persists, mentioning.</p>
 <p>One uneven month is not a verdict. Stress, a bad cold, travel, or a rough stretch of sleep can move a single cycle, and the next one returns to form. It is the repeating pattern, not the one-off, that earns a clinician&#x27;s attention.</p>
-<h2>Frequently asked questions</h2>
+</section>
+<section class="article-section" aria-labelledby="section-8">
+  <h2 id="section-8">Frequently asked questions</h2>
 <p>Is an irregular period the same as a late one? Not quite. A late period is one cycle running long; irregular describes the pattern across several cycles. A single late month with an obvious cause is usually nothing, while cycles that keep varying by more than 20 days are the definition of irregular.</p>
 <p>Can stress alone make my periods irregular? Yes. High, sustained stress is a recognized cause, and the Office on Women&#x27;s Health lists it among the reasons cycles turn irregular. Managing the stress often lets the pattern settle, though a stretch that does not is worth a clinician&#x27;s look.</p>
 <p>Will tracking make my cycles more regular? No. Tracking does not change your body; it changes what you can see. Its value is turning a vague sense of chaos into specific dates and a real range, which is what makes the next conversation, with a clinician or with yourself, a useful one.</p>
-<h2>The one-line version</h2>
+</section>
+<section class="article-section" aria-labelledby="section-9">
+  <h2 id="section-9">The one-line version</h2>
 <p>Regular means roughly steady and inside the mid-20s to upper-30s in days, not identical month to month. Irregular means cycles under 24 or over 38 days, or swinging by more than 20 days, and it is worth a clinician when it is new, persistent, or paired with heavy or painful bleeding.</p>
 <p>Either way, the move is the same: log each start on the day it happens, so the pattern is there to read when you need it.</p>
-                <div class="callout">
-                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
-                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="irregular-periods-what-counts-when-to-see-doctor" onclick="trackAppStoreClick(this)">View on the App Store</a>
-                </div>
-                <h2>References</h2>
-                <ul class="references">
+</section>
+                    <section class="callout" aria-labelledby="try-minicycle">
+                      <img class="callout-mark" src="../../assets/minicycle-app-icon.png" alt="" width="42" height="42" loading="lazy">
+                      <div class="callout-copy">
+                        <p class="eyebrow">MiniCycle for iPhone</p>
+                        <h2 id="try-minicycle">Try MiniCycle</h2>
+                        <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                      </div>
+                      <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="irregular-periods-what-counts-when-to-see-doctor" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                    </section>
+                    <section class="references-section" aria-labelledby="references-title">
+                      <p class="eyebrow">MiniCycle editorial</p>
+                      <h2 id="references-title">References</h2>
+                      <ul class="references">
         <li><a href="https://www.mayoclinic.org/healthy-lifestyle/womens-health/in-depth/menstrual-cycle/art-20047186">Mayo Clinic. Menstrual cycle: What&#x27;s normal, what&#x27;s not.</a></li>
 <li><a href="https://www.womenshealth.gov/menstrual-cycle/period-problems">Office on Women&#x27;s Health, U.S. Department of Health and Human Services. Period problems.</a></li>
 <li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
-                </ul>
+                      </ul>
+                    </section>
+                  </div>
+                  <aside class="article-sidebar">
+                    <nav class="article-toc" aria-label="On this page">
+                      <p class="toc-title">On this page</p>
+                      <ol>
+        <li><a href="#section-1">What &#x27;regular&#x27; actually means</a></li>
+<li><a href="#section-2">So what counts as irregular?</a></li>
+<li><a href="#section-3">When irregular is expected</a></li>
+<li><a href="#section-4">Common reasons cycles turn irregular</a></li>
+<li><a href="#section-5">When is it worth a doctor&#x27;s time?</a></li>
+<li><a href="#section-6">What tracking can and cannot do</a></li>
+<li><a href="#section-7">A quick read on your own cycle</a></li>
+<li><a href="#section-8">Frequently asked questions</a></li>
+<li><a href="#section-9">The one-line version</a></li>
+                      </ol>
+                    </nav>
+                  </aside>
+                </div>
               </article>
+              <section class="related-section" aria-labelledby="related-title">
+                <div class="section-heading">
+                  <div>
+                    <p class="eyebrow">Keep exploring</p>
+                    <h2 id="related-title">More guides you may like</h2>
+                  </div>
+                  <a class="text-link section-link" href="../">All guides<span aria-hidden="true">&nbsp;&rarr;</span></a>
+                </div>
+                <div class="post-grid related-grid">
+        <article class="post-card related-card" data-guide-card data-search-value="cycle health ovulation pain (mittelschmerz): what that mid-cycle twinge is ovulation pain, or mittelschmerz, is a one-sided mid-cycle twinge that affects up to 40% of people who ovulate. what it feels like, why it happens, and when it isn&#x27;t ordinary.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle health</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../ovulation-pain-mittelschmerz-what-it-is/">Ovulation pain (mittelschmerz): what that mid-cycle twinge is</a></h3>
+  <p class="post-description">Ovulation pain, or mittelschmerz, is a one-sided mid-cycle twinge that affects up to 40% of people who ovulate. What it feels like, why it happens, and when it isn&#x27;t ordinary.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-03">2026.07.03</time><span aria-hidden="true">&middot;</span>4 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="cycle health can you get pregnant on your period? what&#x27;s actually possible getting pregnant on your period is unlikely but not impossible, mostly on short cycles with long periods. here is why it happens and why a calendar is not contraception.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle health</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../can-you-get-pregnant-on-your-period/">Can you get pregnant on your period? What&#x27;s actually possible</a></h3>
+  <p class="post-description">Getting pregnant on your period is unlikely but not impossible, mostly on short cycles with long periods. Here is why it happens and why a calendar is not contraception.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-24">2026.06.24</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="cycle health period blood color: what brown, dark, and bright red mean period blood color usually just reflects how long blood took to leave: pink, red, and brown are all normal. here is what the color means and what actually matters.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle health</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../period-blood-color-what-it-means/">Period blood color: what brown, dark, and bright red mean</a></h3>
+  <p class="post-description">Period blood color usually just reflects how long blood took to leave: pink, red, and brown are all normal. Here is what the color means and what actually matters.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-21">2026.06.21</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+                </div>
+              </section>
             </main>
+        <footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="../../">
+        <img class="brand-icon" src="../../assets/minicycle-app-icon.png" alt="" width="34" height="34" loading="lazy">
+        <span>MiniCycle</span>
+      </a>
+      <p>A quieter, more private way to understand your cycle.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="../../blog/">Blog</a>
+      <a href="../../support/">Support</a>
+      <a href="../../privacy/">Privacy</a>
+    </nav>
+    <p class="copyright">&copy; 2026 MiniCycle. Built thoughtfully for iPhone.</p>
+  </div>
+</footer>
           </body>
         </html>

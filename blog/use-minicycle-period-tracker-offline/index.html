@@ -3,6 +3,8 @@
                 <head>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1">
+          <meta name="color-scheme" content="light dark">
+          <meta name="theme-color" content="#fbf8fa" data-theme-color>
           <title>Does MiniCycle work offline? Period tracking with no signal</title>
           <meta name="description" content="MiniCycle logs periods, predicts ovulation, and sends reminders entirely on your phone, so it works offline. Here is what needs a connection and what doesn&#x27;t.">
           <link rel="canonical" href="https://minicycle.net/blog/use-minicycle-period-tracker-offline/">
@@ -19,7 +21,75 @@
             <link rel="icon" href="../../favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
     <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
-          <link rel="stylesheet" href="../../styles.css">
+        <script>
+  (() => {
+    const storageKey = 'minicycle-theme';
+    const root = document.documentElement;
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+    root.classList.add('js');
+
+    function storedTheme() {
+      try {
+        const value = window.localStorage.getItem(storageKey);
+        return value === 'light' || value === 'dark' ? value : null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function currentTheme() {
+      return root.dataset.theme || (systemTheme.matches ? 'dark' : 'light');
+    }
+
+    function updateThemeUI() {
+      const dark = currentTheme() === 'dark';
+      const themeColor = document.querySelector('[data-theme-color]');
+      if (themeColor) themeColor.setAttribute('content', dark ? '#121014' : '#fbf8fa');
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      const label = dark
+        ? toggle.dataset.lightLabel
+        : toggle.dataset.darkLabel;
+      toggle.setAttribute('aria-label', label);
+      toggle.setAttribute('title', label);
+    }
+
+    const savedTheme = storedTheme();
+    if (savedTheme) root.dataset.theme = savedTheme;
+    updateThemeUI();
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      updateThemeUI();
+      toggle.addEventListener('click', () => {
+        const nextTheme = currentTheme() === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = nextTheme;
+        try {
+          window.localStorage.setItem(storageKey, nextTheme);
+        } catch (_) {
+          // The selected theme still applies for this page when storage is unavailable.
+        }
+        updateThemeUI();
+      });
+      if (typeof systemTheme.addEventListener === 'function') {
+        systemTheme.addEventListener('change', () => {
+          if (!root.dataset.theme) updateThemeUI();
+        });
+      }
+      window.addEventListener('storage', (event) => {
+        if (event.key !== storageKey) return;
+        if (event.newValue === 'light' || event.newValue === 'dark') {
+          root.dataset.theme = event.newValue;
+        } else {
+          delete root.dataset.theme;
+        }
+        updateThemeUI();
+      });
+    });
+  })();
+</script>
+          <link rel="stylesheet" href="../../styles.css?v=20260711-4">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -109,65 +179,199 @@
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Does MiniCycle work offline? Period tracking with no signal","description":"MiniCycle logs periods, predicts ovulation, and sends reminders entirely on your phone, so it works offline. Here is what needs a connection and what doesn't.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-06-21","dateModified":"2026-06-21","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/use-minicycle-period-tracker-offline/"}}</script>
         </head>
-          <body>
-        <header class="site-header">
-  <a class="brand" href="../../">MiniCycle</a>
-  <nav aria-label="Primary navigation">
-    <a href="../../blog/">Blog</a>
-    <a href="../../support/">Support</a>
-    <a href="../../privacy/">Privacy</a>
-    <a href="../../ko/blog/use-minicycle-period-tracker-offline/">한국어</a>
-  </nav>
+          <body class="article-page">
+        <a class="skip-link" href="#main-content">Skip to content</a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="../../">
+      <img class="brand-icon" src="../../assets/minicycle-app-icon.png" alt="" width="34" height="34">
+      <span>MiniCycle</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="../../blog/">Blog</a>
+      <a href="../../support/">Support</a>
+      <a href="../../privacy/">Privacy</a>
+    </nav>
+    <div class="header-controls">
+      <button class="theme-toggle" type="button" data-theme-toggle data-light-label="Switch to light mode" data-dark-label="Switch to dark mode" aria-label="Toggle color theme">
+        <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
+        <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.1 15.4A8.2 8.2 0 0 1 8.6 3.9 8.2 8.2 0 1 0 20.1 15.4Z"></path></svg>
+      </button>
+      <a class="language-link" href="../../ko/blog/use-minicycle-period-tracker-offline/" lang="ko" hreflang="ko" aria-label="한국어">한국어</a>
+    </div>
+  </div>
 </header>
-            <main class="page">
+            <main class="page article-page-main" id="main-content">
               <article class="article" data-language="en" data-content-group="use-minicycle-period-tracker-offline" data-min-read-ms="90000">
-                <p class="eyebrow">How it works</p>
-                <h1>Does MiniCycle work offline? Period tracking with no signal</h1>
-                <p class="article-meta">Published June 21, 2026 by MiniCycle</p>
-                <p class="lead">You are on a flight with the Wi-Fi off, or somewhere with one bar of signal, and your period starts. Can you still log it? With MiniCycle, yes. The app records the date, redraws the calendar, works out your next period and fertile window, and fires its reminders without touching the internet. The reason is plain: there is no account to sign into and no MiniCycle server to reach. One part does use the network, and it is worth naming out loud rather than hiding.</p>
-                <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
-        <h2>The short answer</h2>
+                <a class="back-link" href="../"><span aria-hidden="true">&larr;</span> All guides</a>
+                <header class="article-header">
+                  <div class="article-heading">
+                    <p class="category-pill">How it works</p>
+                    <h1>Does MiniCycle work offline? Period tracking with no signal</h1>
+                    <p class="article-meta"><time datetime="2026-06-21">Published June 21, 2026 by MiniCycle</time><span aria-hidden="true">&middot;</span><span>5 min read</span></p>
+                    <p class="lead">You are on a flight with the Wi-Fi off, or somewhere with one bar of signal, and your period starts. Can you still log it? With MiniCycle, yes. The app records the date, redraws the calendar, works out your next period and fertile window, and fires its reminders without touching the internet. The reason is plain: there is no account to sign into and no MiniCycle server to reach. One part does use the network, and it is worth naming out loud rather than hiding.</p>
+                  </div>
+                  <figure class="article-visual">
+                    <div class="article-visual-frame">
+                      <span class="visual-orbit visual-orbit-one" aria-hidden="true"></span>
+                      <span class="visual-orbit visual-orbit-two" aria-hidden="true"></span>
+                      <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
+                    </div>
+                    <figcaption>The MiniCycle calendar on iPhone</figcaption>
+                  </figure>
+                </header>
+                <div class="article-layout">
+                  <div class="article-body">
+        <section class="article-section" aria-labelledby="section-1">
+  <h2 id="section-1">The short answer</h2>
 <p>Everything you do day to day in MiniCycle runs on the phone itself. Logging a period, editing a date, reading the predictions, jotting a note, checking the widget, getting a reminder: none of it waits on a connection. Turn on airplane mode and the app behaves exactly the same.</p>
 <p>The usual assumption is that a period app has to sync with a server, the way a chat or mail app does, so losing signal would freeze it. MiniCycle is built the other way around. Your records live on the device, and the math that turns them into predictions also runs on the device. The network is not in that loop.</p>
-<h2>What works with no connection</h2>
+</section>
+<section class="article-section" aria-labelledby="section-2">
+  <h2 id="section-2">What works with no connection</h2>
 <p>The core of the app is fully offline. You can log a period start and end, fix a wrong date, and watch the calendar update. The predictions recalculate on the spot: the next period from your saved start dates, ovulation counted back from it, and the fertile window around that.</p>
 <p>Daily notes, the statistics tab, and the home-screen widget all read from the same on-device data, so they behave the same with no signal. Reminders do too, because they are local notifications scheduled on the phone rather than messages pushed from a server. A reminder set for next Tuesday arrives next Tuesday whether or not you have been online since.</p>
-<h2>Why it can run without a server</h2>
+</section>
+<section class="article-section" aria-labelledby="section-3">
+  <h2 id="section-3">Why it can run without a server</h2>
 <p>MiniCycle has no login and keeps no copy of your history on a MiniCycle server. That choice is what makes offline use possible, not a side effect of it. With nothing to fetch and nothing to upload before it can answer, the app already has everything it needs on the device.</p>
 <p>The prediction engine is part of that. It estimates your cycle length from up to your last 12 period starts, using a median rather than a mean (once there are at least 10 intervals it first drops the single shortest and longest), and falls back to 29 days when there is little history. Ovulation is counted back from the next expected period with a luteal phase clamped to 9–14 days, and the fertile window runs from 5 days before estimated ovulation through the day after. All of that arithmetic happens locally, in the moment you open the calendar.</p>
-<h2>The one part that uses the network</h2>
+</section>
+<section class="article-section" aria-labelledby="section-4">
+  <h2 id="section-4">The one part that uses the network</h2>
 <p>Being honest means naming the exception. MiniCycle includes Firebase Analytics, Google&#x27;s usage-measurement SDK, which logs events such as app opens and screen views to show how the app is used. Sending those events needs a connection.</p>
 <p>It does not block anything. When you are offline the usage events wait on the device and upload later, once you are back online, and in the meantime every feature keeps working. The website you are reading this on separately uses Google Analytics, but that is the site, not the app. So the accurate line is not that MiniCycle never uses the network, but that nothing you actually do with your cycle depends on it.</p>
-<h2>When you do need a connection</h2>
+</section>
+<section class="article-section" aria-labelledby="section-5">
+  <h2 id="section-5">When you do need a connection</h2>
 <p>There is one obvious moment: installing the app or updating it goes through the App Store, which needs the internet. That is a one-time download, not a daily requirement.</p>
 <p>After that, ordinary use asks nothing of the network. If you travel abroad with data roaming off, or spend a week somewhere with no Wi-Fi, the app keeps logging and predicting as usual. The reminders you set before the trip still fire on schedule.</p>
-<h2>What offline use can and can&#x27;t do</h2>
+</section>
+<section class="article-section" aria-labelledby="section-6">
+  <h2 id="section-6">What offline use can and can&#x27;t do</h2>
 <p>Working offline does not change what the predictions are. They are reference information drawn from your own dates, not contraception, a pregnancy test, or a medical opinion, and being computed on the device with no connection makes them no more and no less certain than they would be online.</p>
 <p>It also is not the same as a backup. Records kept only on the device can be lost if the phone is lost, reset, or the app is deleted, and offline use does not protect against that on its own. If keeping a copy matters to you, that is a separate question from whether the app needs a signal day to day.</p>
-<h2>Airplane mode, travel, and a weak signal</h2>
+</section>
+<section class="article-section" aria-labelledby="section-7">
+  <h2 id="section-7">Airplane mode, travel, and a weak signal</h2>
 <p>Picture a long-haul flight. You put the phone in airplane mode at the gate, and three hours in your period starts. Open MiniCycle, tap the date, log the start: it saves, the calendar redraws, and the next-period estimate shifts, all at 35,000 feet. Land, turn the radios back on, and there is nothing to catch up.</p>
 <p>Or picture a week in a cabin with no Wi-Fi and roaming switched off. You log each day as usual, your notes save, and the period reminder you set last month still pops up on time. The only thing waiting for a connection is the handful of anonymous usage events, which upload quietly the next time you are online.</p>
-<h2>Frequently asked questions</h2>
+</section>
+<section class="article-section" aria-labelledby="section-8">
+  <h2 id="section-8">Frequently asked questions</h2>
 <p>Do I need to create an account or sign in? No. MiniCycle has no account, so there is no login step and nothing to authenticate against a server. You open the app and it works.</p>
 <p>Will reminders still arrive in airplane mode? Yes. Reminders are local notifications scheduled on the phone, so they fire on their dates regardless of connection.</p>
 <p>Does turning off Wi-Fi delete or hide my data? No. Your records sit on the device, so connection state does not touch them. They look the same online and off.</p>
 <p>Does the widget update offline? Yes. The widget reads the same on-device data the app uses, so it reflects your latest records and predictions without a network.</p>
 <p>Is anything sent while I am offline? Only the app&#x27;s usage analytics, and only later. Those events wait on the device and upload once you reconnect. They are not your cycle data.</p>
-<h2>The one-line version</h2>
+</section>
+<section class="article-section" aria-labelledby="section-9">
+  <h2 id="section-9">The one-line version</h2>
 <p>MiniCycle runs its core entirely on the phone, so it works with no internet: logging periods, fixing dates, the calendar, predictions, daily notes, statistics, the widget, and reminders all work offline because there is no account and no MiniCycle server, and the prediction engine (median cycle length from up to 12 records, a 9–14 day luteal phase, fertile window 5 days before ovulation through 1 day after, 29-day default) runs locally.</p>
 <p>The one networked piece is Firebase Analytics, which logs anonymous usage events and uploads them later when you are back online; it never blocks a feature and does not carry your cycle data. A connection is only needed to install or update the app from the App Store. Offline use does not change how certain the predictions are, and it is not a substitute for a backup.</p>
-                <div class="callout">
-                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
-                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="use-minicycle-period-tracker-offline" onclick="trackAppStoreClick(this)">View on the App Store</a>
-                </div>
-                <h2>References</h2>
-                <ul class="references">
+</section>
+                    <section class="callout" aria-labelledby="try-minicycle">
+                      <img class="callout-mark" src="../../assets/minicycle-app-icon.png" alt="" width="42" height="42" loading="lazy">
+                      <div class="callout-copy">
+                        <p class="eyebrow">MiniCycle for iPhone</p>
+                        <h2 id="try-minicycle">Try MiniCycle</h2>
+                        <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                      </div>
+                      <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="use-minicycle-period-tracker-offline" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                    </section>
+                    <section class="references-section" aria-labelledby="references-title">
+                      <p class="eyebrow">MiniCycle editorial</p>
+                      <h2 id="references-title">References</h2>
+                      <ul class="references">
         <li><a href="https://support.apple.com/en-us/118610">Apple Support. How to add and edit widgets on your iPhone.</a></li>
 <li><a href="https://developer.apple.com/documentation/usernotifications">Apple Developer Documentation. User Notifications.</a></li>
 <li><a href="https://firebase.google.com/docs/analytics">Firebase. Google Analytics for Firebase.</a></li>
 <li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
-                </ul>
+                      </ul>
+                    </section>
+                  </div>
+                  <aside class="article-sidebar">
+                    <nav class="article-toc" aria-label="On this page">
+                      <p class="toc-title">On this page</p>
+                      <ol>
+        <li><a href="#section-1">The short answer</a></li>
+<li><a href="#section-2">What works with no connection</a></li>
+<li><a href="#section-3">Why it can run without a server</a></li>
+<li><a href="#section-4">The one part that uses the network</a></li>
+<li><a href="#section-5">When you do need a connection</a></li>
+<li><a href="#section-6">What offline use can and can&#x27;t do</a></li>
+<li><a href="#section-7">Airplane mode, travel, and a weak signal</a></li>
+<li><a href="#section-8">Frequently asked questions</a></li>
+<li><a href="#section-9">The one-line version</a></li>
+                      </ol>
+                    </nav>
+                  </aside>
+                </div>
               </article>
+              <section class="related-section" aria-labelledby="related-title">
+                <div class="section-heading">
+                  <div>
+                    <p class="eyebrow">Keep exploring</p>
+                    <h2 id="related-title">More guides you may like</h2>
+                  </div>
+                  <a class="text-link section-link" href="../">All guides<span aria-hidden="true">&nbsp;&rarr;</span></a>
+                </div>
+                <div class="post-grid related-grid">
+        <article class="post-card related-card" data-guide-card data-search-value="widget why the minicycle widget isn&#x27;t updating, and how it refreshes the minicycle home-screen widget updates on ios&#x27;s schedule, not the instant you log a period. here is how widgetkit refreshes it and what to check when it looks stale.">
+  <div class="post-card-topline">
+    <p class="category-pill">Widget</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../minicycle-widget-not-updating-refresh/">Why the MiniCycle widget isn&#x27;t updating, and how it refreshes</a></h3>
+  <p class="post-description">The MiniCycle home-screen widget updates on iOS&#x27;s schedule, not the instant you log a period. Here is how WidgetKit refreshes it and what to check when it looks stale.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-04">2026.07.04</time><span aria-hidden="true">&middot;</span>5 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="cycle health ovulation pain (mittelschmerz): what that mid-cycle twinge is ovulation pain, or mittelschmerz, is a one-sided mid-cycle twinge that affects up to 40% of people who ovulate. what it feels like, why it happens, and when it isn&#x27;t ordinary.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle health</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../ovulation-pain-mittelschmerz-what-it-is/">Ovulation pain (mittelschmerz): what that mid-cycle twinge is</a></h3>
+  <p class="post-description">Ovulation pain, or mittelschmerz, is a one-sided mid-cycle twinge that affects up to 40% of people who ovulate. What it feels like, why it happens, and when it isn&#x27;t ordinary.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-03">2026.07.03</time><span aria-hidden="true">&middot;</span>4 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="predictions why minicycle&#x27;s predicted period date keeps changing minicycle re-estimates your next period every time your saved dates change, so the predicted date can move. here is what shifts, when, and why a moving estimate is the app working.">
+  <div class="post-card-topline">
+    <p class="category-pill">Predictions</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../why-minicycle-predicted-period-date-changes/">Why MiniCycle&#x27;s predicted period date keeps changing</a></h3>
+  <p class="post-description">MiniCycle re-estimates your next period every time your saved dates change, so the predicted date can move. Here is what shifts, when, and why a moving estimate is the app working.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-02">2026.07.02</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+                </div>
+              </section>
             </main>
+        <footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="../../">
+        <img class="brand-icon" src="../../assets/minicycle-app-icon.png" alt="" width="34" height="34" loading="lazy">
+        <span>MiniCycle</span>
+      </a>
+      <p>A quieter, more private way to understand your cycle.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="../../blog/">Blog</a>
+      <a href="../../support/">Support</a>
+      <a href="../../privacy/">Privacy</a>
+    </nav>
+    <p class="copyright">&copy; 2026 MiniCycle. Built thoughtfully for iPhone.</p>
+  </div>
+</footer>
           </body>
         </html>

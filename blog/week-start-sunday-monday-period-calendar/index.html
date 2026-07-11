@@ -3,6 +3,8 @@
                 <head>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1">
+          <meta name="color-scheme" content="light dark">
+          <meta name="theme-color" content="#fbf8fa" data-theme-color>
           <title>Should a period calendar start on Sunday or Monday?</title>
           <meta name="description" content="MiniCycle&#x27;s calendar can start the week on Sunday or Monday. Why calendars disagree, why the choice changes only the layout, and how the widget stays in sync.">
           <link rel="canonical" href="https://minicycle.net/blog/week-start-sunday-monday-period-calendar/">
@@ -19,7 +21,75 @@
             <link rel="icon" href="../../favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
     <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
-          <link rel="stylesheet" href="../../styles.css">
+        <script>
+  (() => {
+    const storageKey = 'minicycle-theme';
+    const root = document.documentElement;
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+    root.classList.add('js');
+
+    function storedTheme() {
+      try {
+        const value = window.localStorage.getItem(storageKey);
+        return value === 'light' || value === 'dark' ? value : null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function currentTheme() {
+      return root.dataset.theme || (systemTheme.matches ? 'dark' : 'light');
+    }
+
+    function updateThemeUI() {
+      const dark = currentTheme() === 'dark';
+      const themeColor = document.querySelector('[data-theme-color]');
+      if (themeColor) themeColor.setAttribute('content', dark ? '#121014' : '#fbf8fa');
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      const label = dark
+        ? toggle.dataset.lightLabel
+        : toggle.dataset.darkLabel;
+      toggle.setAttribute('aria-label', label);
+      toggle.setAttribute('title', label);
+    }
+
+    const savedTheme = storedTheme();
+    if (savedTheme) root.dataset.theme = savedTheme;
+    updateThemeUI();
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      updateThemeUI();
+      toggle.addEventListener('click', () => {
+        const nextTheme = currentTheme() === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = nextTheme;
+        try {
+          window.localStorage.setItem(storageKey, nextTheme);
+        } catch (_) {
+          // The selected theme still applies for this page when storage is unavailable.
+        }
+        updateThemeUI();
+      });
+      if (typeof systemTheme.addEventListener === 'function') {
+        systemTheme.addEventListener('change', () => {
+          if (!root.dataset.theme) updateThemeUI();
+        });
+      }
+      window.addEventListener('storage', (event) => {
+        if (event.key !== storageKey) return;
+        if (event.newValue === 'light' || event.newValue === 'dark') {
+          root.dataset.theme = event.newValue;
+        } else {
+          delete root.dataset.theme;
+        }
+        updateThemeUI();
+      });
+    });
+  })();
+</script>
+          <link rel="stylesheet" href="../../styles.css?v=20260711-4">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -109,59 +179,190 @@
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Should a period calendar start on Sunday or Monday?","description":"MiniCycle's calendar can start the week on Sunday or Monday. Why calendars disagree, why the choice changes only the layout, and how the widget stays in sync.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-06-09","dateModified":"2026-06-09","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/week-start-sunday-monday-period-calendar/"}}</script>
         </head>
-          <body>
-        <header class="site-header">
-  <a class="brand" href="../../">MiniCycle</a>
-  <nav aria-label="Primary navigation">
-    <a href="../../blog/">Blog</a>
-    <a href="../../support/">Support</a>
-    <a href="../../privacy/">Privacy</a>
-    <a href="../../ko/blog/week-start-sunday-monday-period-calendar/">한국어</a>
-  </nav>
+          <body class="article-page">
+        <a class="skip-link" href="#main-content">Skip to content</a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="../../">
+      <img class="brand-icon" src="../../assets/minicycle-app-icon.png" alt="" width="34" height="34">
+      <span>MiniCycle</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="../../blog/">Blog</a>
+      <a href="../../support/">Support</a>
+      <a href="../../privacy/">Privacy</a>
+    </nav>
+    <div class="header-controls">
+      <button class="theme-toggle" type="button" data-theme-toggle data-light-label="Switch to light mode" data-dark-label="Switch to dark mode" aria-label="Toggle color theme">
+        <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
+        <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.1 15.4A8.2 8.2 0 0 1 8.6 3.9 8.2 8.2 0 1 0 20.1 15.4Z"></path></svg>
+      </button>
+      <a class="language-link" href="../../ko/blog/week-start-sunday-monday-period-calendar/" lang="ko" hreflang="ko" aria-label="한국어">한국어</a>
+    </div>
+  </div>
 </header>
-            <main class="page">
+            <main class="page article-page-main" id="main-content">
               <article class="article" data-language="en" data-content-group="week-start-sunday-monday-period-calendar" data-min-read-ms="90000">
-                <p class="eyebrow">Settings</p>
-                <h1>Should a period calendar start on Sunday or Monday?</h1>
-                <p class="article-meta">Published June 9, 2026 by MiniCycle</p>
-                <p class="lead">Open the calendar on two phones bought in different countries and the columns may not line up. One starts the week on Sunday, the other on Monday, and neither is wrong. About 67 countries begin the week on Sunday and around 160 begin on Monday. The international date standard sides with Monday, while most of the Americas, along with Korea, stay on Sunday. MiniCycle lets you choose. The setting is small. It changes only how the grid is drawn, and it leaves every date you recorded exactly where it was.</p>
-                <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
-        <h2>Where the setting lives, and what it changes</h2>
+                <a class="back-link" href="../"><span aria-hidden="true">&larr;</span> All guides</a>
+                <header class="article-header">
+                  <div class="article-heading">
+                    <p class="category-pill">Settings</p>
+                    <h1>Should a period calendar start on Sunday or Monday?</h1>
+                    <p class="article-meta"><time datetime="2026-06-09">Published June 9, 2026 by MiniCycle</time><span aria-hidden="true">&middot;</span><span>4 min read</span></p>
+                    <p class="lead">Open the calendar on two phones bought in different countries and the columns may not line up. One starts the week on Sunday, the other on Monday, and neither is wrong. About 67 countries begin the week on Sunday and around 160 begin on Monday. The international date standard sides with Monday, while most of the Americas, along with Korea, stay on Sunday. MiniCycle lets you choose. The setting is small. It changes only how the grid is drawn, and it leaves every date you recorded exactly where it was.</p>
+                  </div>
+                  <figure class="article-visual">
+                    <div class="article-visual-frame">
+                      <span class="visual-orbit visual-orbit-one" aria-hidden="true"></span>
+                      <span class="visual-orbit visual-orbit-two" aria-hidden="true"></span>
+                      <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
+                    </div>
+                    <figcaption>The MiniCycle calendar on iPhone</figcaption>
+                  </figure>
+                </header>
+                <div class="article-layout">
+                  <div class="article-body">
+        <section class="article-section" aria-labelledby="section-1">
+  <h2 id="section-1">Where the setting lives, and what it changes</h2>
 <p>You set this in one place. Open Settings, find Week starts on, and pick Sunday or Monday. New installs start on Sunday, the layout most phones in the US and Korea already use by default.</p>
 <p>The choice moves one thing: the leftmost column. Pick Monday and Monday becomes the first column, pushing Saturday and Sunday to the right edge of each row. Everything else holds still. It works like choosing a 12-hour or 24-hour clock. The display changes; the underlying time does not.</p>
-<h2>Why do calendars disagree about this?</h2>
+</section>
+<section class="article-section" aria-labelledby="section-2">
+  <h2 id="section-2">Why do calendars disagree about this?</h2>
 <p>The split is genuine and old. Roughly 67 countries start the week on Sunday and about 160 on Monday, so by population the world lands close to a coin flip. Most of the Americas read Sunday-first, while Europe and Oceania read Monday-first. In 1988 the international standard ISO 8601 settled on Monday as the first day of the week, and much of the world followed.</p>
 <p>Software does not guess at this. It reads your region. The Unicode CLDR project keeps a table that maps each territory to a first day of the week, and iOS uses that data to decide which column a calendar opens with. The United States and Korea are both listed as Sunday-first, which is why MiniCycle defaults to Sunday and then lets you override it.</p>
-<h2>Does changing the week start move my periods?</h2>
+</section>
+<section class="article-section" aria-labelledby="section-3">
+  <h2 id="section-3">Does changing the week start move my periods?</h2>
 <p>No, and this part is worth saying plainly. A period you logged on the 14th stays on the 14th. The cycle math, your next expected period, the ovulation estimate, and the fertile window all run on dates, not on which column a date happens to sit in. Switching from Sunday to Monday reflows the grid and changes nothing you recorded or predicted.</p>
 <p>So the reason to choose is readability, not accuracy. If you treat the weekend as the end of the week, a Monday start keeps Saturday and Sunday together at the right. If you grew up scanning Sunday-first calendars, that layout will read faster for you. Pick the arrangement your eyes already expect, and the month gets quicker to read.</p>
-<h2>Why the widget uses the same setting</h2>
+</section>
+<section class="article-section" aria-labelledby="section-4">
+  <h2 id="section-4">Why the widget uses the same setting</h2>
 <p>The home-screen widget reads the same week-start preference as the app. That matters more than it sounds. When a full calendar and a quick-glance widget draw the same month with different first columns, you stop trusting both of them. MiniCycle stores the preference once and hands it to both surfaces, so the first column always agrees.</p>
 <p>Behind the scenes it is a single calendar configuration applied in two places, shared between the app and the widget. Change the setting in the app and the widget&#x27;s grid follows. If it still shows the old layout, opening the app once prompts the widget to refresh.</p>
-<h2>What the week start cannot change</h2>
+</section>
+<section class="article-section" aria-labelledby="section-5">
+  <h2 id="section-5">What the week start cannot change</h2>
 <p>This is a layout preference, so its reach ends at layout. It will not make a 31-day month shorter, change which weekday a date falls on, or move an estimate by a single day. Those come from your records and the cycle calculation, and this setting touches neither.</p>
 <p>Like every date in MiniCycle, the calendar is reference information for planning, not medical advice, contraception, or a way to judge pregnancy. The week start only decides how that information is arranged on screen. If the grid has never quite matched the way you read a week, the fix is one tap in Settings.</p>
-<h2>A quick way to decide</h2>
+</section>
+<section class="article-section" aria-labelledby="section-6">
+  <h2 id="section-6">A quick way to decide</h2>
 <p>If you are unsure, look at what you already use. A paper planner or a work schedule that begins on Monday is a vote for a Monday start, since your phone will then match the calendar on your desk. A lifetime of Sunday-first wall calendars is a vote for Sunday. There is no accuracy cost either way, so comfort wins.</p>
 <p>The weekend is the other thing to weigh. A Monday start places Saturday and Sunday side by side at the end of the row, which makes a free weekend easy to spot at a glance. A Sunday start splits the weekend across the two ends of the row, a layout some people prefer and others find harder to scan.</p>
-<h2>Frequently asked questions</h2>
+</section>
+<section class="article-section" aria-labelledby="section-7">
+  <h2 id="section-7">Frequently asked questions</h2>
 <p>Will switching reorder or delete my records? No. Only the columns move. Every period, note, and mark stays on its real date, and the grid simply redraws around them.</p>
 <p>Does the week start affect cycle length or ovulation estimates? No. Those are calculated from your saved start dates and a cycle-length value, none of which depend on the first column of the calendar.</p>
 <p>The widget still shows the old start day. What now? Open the app once. MiniCycle refreshes the widget when the app appears, and the widget&#x27;s first column will line up with the app again.</p>
-<h2>Setting it once and moving on</h2>
+</section>
+<section class="article-section" aria-labelledby="section-8">
+  <h2 id="section-8">Setting it once and moving on</h2>
 <p>For most people this is a one-time decision. Pick the layout your eyes expect, glance at the home-screen widget to confirm it matches, and you are unlikely to touch the setting again. It does not need seasonal adjusting or second-guessing.</p>
 <p>The habit that actually makes the calendar more useful is the familiar one: log the start on the day it happens. The first column is a matter of taste. The start dates are what every estimate is built from.</p>
-                <div class="callout">
-                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
-                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="week-start-sunday-monday-period-calendar" onclick="trackAppStoreClick(this)">View on the App Store</a>
-                </div>
-                <h2>References</h2>
-                <ul class="references">
+</section>
+                    <section class="callout" aria-labelledby="try-minicycle">
+                      <img class="callout-mark" src="../../assets/minicycle-app-icon.png" alt="" width="42" height="42" loading="lazy">
+                      <div class="callout-copy">
+                        <p class="eyebrow">MiniCycle for iPhone</p>
+                        <h2 id="try-minicycle">Try MiniCycle</h2>
+                        <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                      </div>
+                      <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="week-start-sunday-monday-period-calendar" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                    </section>
+                    <section class="references-section" aria-labelledby="references-title">
+                      <p class="eyebrow">MiniCycle editorial</p>
+                      <h2 id="references-title">References</h2>
+                      <ul class="references">
         <li><a href="https://www.timeanddate.com/calendar/days/first-day-of-the-week.html">Time and Date. What Is the First Day of the Week?</a></li>
 <li><a href="https://www.unicode.org/reports/tr35/tr35-dates.html#Week_Data">Unicode CLDR. Locale Data Markup Language (LDML): Week Data.</a></li>
 <li><a href="https://developer.apple.com/documentation/foundation/calendar/firstweekday">Apple Developer. Calendar.firstWeekday.</a></li>
-                </ul>
+                      </ul>
+                    </section>
+                  </div>
+                  <aside class="article-sidebar">
+                    <nav class="article-toc" aria-label="On this page">
+                      <p class="toc-title">On this page</p>
+                      <ol>
+        <li><a href="#section-1">Where the setting lives, and what it changes</a></li>
+<li><a href="#section-2">Why do calendars disagree about this?</a></li>
+<li><a href="#section-3">Does changing the week start move my periods?</a></li>
+<li><a href="#section-4">Why the widget uses the same setting</a></li>
+<li><a href="#section-5">What the week start cannot change</a></li>
+<li><a href="#section-6">A quick way to decide</a></li>
+<li><a href="#section-7">Frequently asked questions</a></li>
+<li><a href="#section-8">Setting it once and moving on</a></li>
+                      </ol>
+                    </nav>
+                  </aside>
+                </div>
               </article>
+              <section class="related-section" aria-labelledby="related-title">
+                <div class="section-heading">
+                  <div>
+                    <p class="eyebrow">Keep exploring</p>
+                    <h2 id="related-title">More guides you may like</h2>
+                  </div>
+                  <a class="text-link section-link" href="../">All guides<span aria-hidden="true">&nbsp;&rarr;</span></a>
+                </div>
+                <div class="post-grid related-grid">
+        <article class="post-card related-card" data-guide-card data-search-value="settings how to reset minicycle and erase all your period records reset records wipes every period date, note, and activity mark in minicycle, and it cannot be undone. what it clears, what it keeps, and how to back up first.">
+  <div class="post-card-topline">
+    <p class="category-pill">Settings</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../reset-all-data-in-minicycle/">How to reset MiniCycle and erase all your period records</a></h3>
+  <p class="post-description">Reset records wipes every period date, note, and activity mark in MiniCycle, and it cannot be undone. What it clears, what it keeps, and how to back up first.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-14">2026.06.14</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="settings minicycle in english: change the app language and dark mode minicycle defaults to korean. how to switch the app to english in two taps, choose system, light, or dark appearance, and what the home-screen widget follows.">
+  <div class="post-card-topline">
+    <p class="category-pill">Settings</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../minicycle-dark-mode-app-language-settings/">MiniCycle in English: change the app language and dark mode</a></h3>
+  <p class="post-description">MiniCycle defaults to Korean. How to switch the app to English in two taps, choose System, Light, or Dark appearance, and what the home-screen widget follows.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-12">2026.06.12</time><span aria-hidden="true">&middot;</span>5 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="settings auto vs manual cycle and period length in minicycle minicycle can estimate your cycle and period length, or let you set them by hand (21–42 and 1–10 days). when auto fits, when manual fits, and why the estimate uses a median.">
+  <div class="post-card-topline">
+    <p class="category-pill">Settings</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../auto-vs-manual-cycle-length-period-length/">Auto vs manual cycle and period length in MiniCycle</a></h3>
+  <p class="post-description">MiniCycle can estimate your cycle and period length, or let you set them by hand (21–42 and 1–10 days). When auto fits, when manual fits, and why the estimate uses a median.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-10">2026.06.10</time><span aria-hidden="true">&middot;</span>5 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+                </div>
+              </section>
             </main>
+        <footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="../../">
+        <img class="brand-icon" src="../../assets/minicycle-app-icon.png" alt="" width="34" height="34" loading="lazy">
+        <span>MiniCycle</span>
+      </a>
+      <p>A quieter, more private way to understand your cycle.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="../../blog/">Blog</a>
+      <a href="../../support/">Support</a>
+      <a href="../../privacy/">Privacy</a>
+    </nav>
+    <p class="copyright">&copy; 2026 MiniCycle. Built thoughtfully for iPhone.</p>
+  </div>
+</footer>
           </body>
         </html>

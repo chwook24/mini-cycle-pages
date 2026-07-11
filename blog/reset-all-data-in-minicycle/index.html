@@ -3,6 +3,8 @@
                 <head>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1">
+          <meta name="color-scheme" content="light dark">
+          <meta name="theme-color" content="#fbf8fa" data-theme-color>
           <title>How to reset MiniCycle and erase all your period records</title>
           <meta name="description" content="Reset records wipes every period date, note, and activity mark in MiniCycle, and it cannot be undone. What it clears, what it keeps, and how to back up first.">
           <link rel="canonical" href="https://minicycle.net/blog/reset-all-data-in-minicycle/">
@@ -19,7 +21,75 @@
             <link rel="icon" href="../../favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
     <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
-          <link rel="stylesheet" href="../../styles.css">
+        <script>
+  (() => {
+    const storageKey = 'minicycle-theme';
+    const root = document.documentElement;
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+    root.classList.add('js');
+
+    function storedTheme() {
+      try {
+        const value = window.localStorage.getItem(storageKey);
+        return value === 'light' || value === 'dark' ? value : null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function currentTheme() {
+      return root.dataset.theme || (systemTheme.matches ? 'dark' : 'light');
+    }
+
+    function updateThemeUI() {
+      const dark = currentTheme() === 'dark';
+      const themeColor = document.querySelector('[data-theme-color]');
+      if (themeColor) themeColor.setAttribute('content', dark ? '#121014' : '#fbf8fa');
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      const label = dark
+        ? toggle.dataset.lightLabel
+        : toggle.dataset.darkLabel;
+      toggle.setAttribute('aria-label', label);
+      toggle.setAttribute('title', label);
+    }
+
+    const savedTheme = storedTheme();
+    if (savedTheme) root.dataset.theme = savedTheme;
+    updateThemeUI();
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      updateThemeUI();
+      toggle.addEventListener('click', () => {
+        const nextTheme = currentTheme() === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = nextTheme;
+        try {
+          window.localStorage.setItem(storageKey, nextTheme);
+        } catch (_) {
+          // The selected theme still applies for this page when storage is unavailable.
+        }
+        updateThemeUI();
+      });
+      if (typeof systemTheme.addEventListener === 'function') {
+        systemTheme.addEventListener('change', () => {
+          if (!root.dataset.theme) updateThemeUI();
+        });
+      }
+      window.addEventListener('storage', (event) => {
+        if (event.key !== storageKey) return;
+        if (event.newValue === 'light' || event.newValue === 'dark') {
+          root.dataset.theme = event.newValue;
+        } else {
+          delete root.dataset.theme;
+        }
+        updateThemeUI();
+      });
+    });
+  })();
+</script>
+          <link rel="stylesheet" href="../../styles.css?v=20260711-4">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -109,63 +179,197 @@
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"How to reset MiniCycle and erase all your period records","description":"Reset records wipes every period date, note, and activity mark in MiniCycle, and it cannot be undone. What it clears, what it keeps, and how to back up first.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-06-14","dateModified":"2026-06-14","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/reset-all-data-in-minicycle/"}}</script>
         </head>
-          <body>
-        <header class="site-header">
-  <a class="brand" href="../../">MiniCycle</a>
-  <nav aria-label="Primary navigation">
-    <a href="../../blog/">Blog</a>
-    <a href="../../support/">Support</a>
-    <a href="../../privacy/">Privacy</a>
-    <a href="../../ko/blog/reset-all-data-in-minicycle/">한국어</a>
-  </nav>
+          <body class="article-page">
+        <a class="skip-link" href="#main-content">Skip to content</a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="../../">
+      <img class="brand-icon" src="../../assets/minicycle-app-icon.png" alt="" width="34" height="34">
+      <span>MiniCycle</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="../../blog/">Blog</a>
+      <a href="../../support/">Support</a>
+      <a href="../../privacy/">Privacy</a>
+    </nav>
+    <div class="header-controls">
+      <button class="theme-toggle" type="button" data-theme-toggle data-light-label="Switch to light mode" data-dark-label="Switch to dark mode" aria-label="Toggle color theme">
+        <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
+        <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.1 15.4A8.2 8.2 0 0 1 8.6 3.9 8.2 8.2 0 1 0 20.1 15.4Z"></path></svg>
+      </button>
+      <a class="language-link" href="../../ko/blog/reset-all-data-in-minicycle/" lang="ko" hreflang="ko" aria-label="한국어">한국어</a>
+    </div>
+  </div>
 </header>
-            <main class="page">
+            <main class="page article-page-main" id="main-content">
               <article class="article" data-language="en" data-content-group="reset-all-data-in-minicycle" data-min-read-ms="90000">
-                <p class="eyebrow">Settings</p>
-                <h1>How to reset MiniCycle and erase all your period records</h1>
-                <p class="article-meta">Published June 14, 2026 by MiniCycle</p>
-                <p class="lead">There is a button at the bottom of MiniCycle&#x27;s settings, printed in red, that empties the app. Reset records does just that: every period date, every note, every activity mark, gone, and the calendar back to a blank page. It is the one action in the app you cannot take back, which is reason enough to know exactly what it clears before you tap it. People reach for it for ordinary reasons. Handing an old iPhone to someone else. Starting over with a clean baseline. Clearing months of trial entries in one go. The result is the same each time, and it is final.</p>
-                <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
-        <h2>What Reset records clears</h2>
+                <a class="back-link" href="../"><span aria-hidden="true">&larr;</span> All guides</a>
+                <header class="article-header">
+                  <div class="article-heading">
+                    <p class="category-pill">Settings</p>
+                    <h1>How to reset MiniCycle and erase all your period records</h1>
+                    <p class="article-meta"><time datetime="2026-06-14">Published June 14, 2026 by MiniCycle</time><span aria-hidden="true">&middot;</span><span>6 min read</span></p>
+                    <p class="lead">There is a button at the bottom of MiniCycle&#x27;s settings, printed in red, that empties the app. Reset records does just that: every period date, every note, every activity mark, gone, and the calendar back to a blank page. It is the one action in the app you cannot take back, which is reason enough to know exactly what it clears before you tap it. People reach for it for ordinary reasons. Handing an old iPhone to someone else. Starting over with a clean baseline. Clearing months of trial entries in one go. The result is the same each time, and it is final.</p>
+                  </div>
+                  <figure class="article-visual">
+                    <div class="article-visual-frame">
+                      <span class="visual-orbit visual-orbit-one" aria-hidden="true"></span>
+                      <span class="visual-orbit visual-orbit-two" aria-hidden="true"></span>
+                      <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
+                    </div>
+                    <figcaption>The MiniCycle calendar on iPhone</figcaption>
+                  </figure>
+                </header>
+                <div class="article-layout">
+                  <div class="article-body">
+        <section class="article-section" aria-labelledby="section-1">
+  <h2 id="section-1">What Reset records clears</h2>
 <p>Reset records wipes three things at once: every period start and end you have logged, every daily note attached to a date, and every sexual-activity mark. The privacy policy groups those three as your app records, and a reset takes all of them, not a selected month. When it finishes the calendar is blank, today is the selected day, and the home-screen widget reloads with nothing left to show.</p>
 <p>What it leaves alone is your setup. Your language, cycle length, period length, week-start day, and notification preferences stay exactly as you set them. The reset empties the records; it does not return the app to a factory state. So afterward you are looking at a clean calendar inside the same app you already configured, not a fresh install.</p>
-<h2>Where the button is, and the warning it shows</h2>
+</section>
+<section class="article-section" aria-labelledby="section-2">
+  <h2 id="section-2">Where the button is, and the warning it shows</h2>
 <p>Open Settings and scroll to the bottom. The last row, set apart in red with a trash icon, is Reset records. Tapping it does not act right away. A confirmation appears first, warning that all period records and memos will be deleted and that this cannot be undone, with a plain Cancel beside a red Reset. Nothing changes until you choose Reset.</p>
 <p>That two-step is deliberate. The red color, the trash icon, the separate confirmation: each is a small speed bump in front of an action with no recovery. If you opened the alert by accident, Cancel leaves every record precisely where it was.</p>
-<h2>Why there is no undo</h2>
+</section>
+<section class="article-section" aria-labelledby="section-3">
+  <h2 id="section-3">Why there is no undo</h2>
 <p>MiniCycle keeps your records on your device, with no account and no sync server of its own, as the privacy policy describes. That design is the reason a reset is final. There is no MiniCycle copy waiting on a server to pull back, because there was never a copy on a server to begin with. Once you confirm, the local records are cleared, and that is the end of them.</p>
 <p>The one wrinkle is iCloud Sync. If you turned it on, MiniCycle keeps a copy of your records in your own private iCloud through Apple CloudKit. A reset clears the local data and pushes that emptied state up, so the synced copy clears too rather than flowing back to refill the calendar. Either way, confirming the reset means the records are gone.</p>
-<h2>Back up first if there is any chance you want it later</h2>
+</section>
+<section class="article-section" aria-labelledby="section-4">
+  <h2 id="section-4">Back up first if there is any chance you want it later</h2>
 <p>Because the action is permanent, the moment to think about a backup is before you tap, not after. If the records hold any value for you, a year of dates you would hate to lose, a history you might want on a future phone, turn on iCloud Sync first so a copy lives in your iCloud, or move the records across by the method in the guide on switching iPhones. Then reset with the copy already safe.</p>
 <p>If you only need to fix one wrong entry, a reset is the wrong tool entirely. It clears everything to correct a single date. Editing that one period start or end leaves the rest of your history intact, and there is a separate guide for doing exactly that.</p>
-<h2>Reset records versus deleting the app</h2>
+</section>
+<section class="article-section" aria-labelledby="section-5">
+  <h2 id="section-5">Reset records versus deleting the app</h2>
 <p>These are two different erasures, and they get mixed up. Reset records empties your data but keeps MiniCycle installed and configured. Deleting the app is the opposite kind of clean: from the Home Screen it removes the app and the data it stored on the device together, in one step. You do not need to delete the app to clear your records, and that is the common mix-up. If all you wanted was a blank calendar, deleting the app is the heavier move.</p>
 <p>One caveat if you do delete the whole app. Apple notes that a copy of an app&#x27;s data can linger in an iCloud device backup even after the app is gone from your phone, until that backup is replaced or you turn the app off in your backup settings. Resetting inside the app is the cleaner way to be sure the records themselves are cleared, including the synced copy if you used iCloud Sync.</p>
-<h2>What the calendar looks like after, and when to use this</h2>
+</section>
+<section class="article-section" aria-labelledby="section-6">
+  <h2 id="section-6">What the calendar looks like after, and when to use this</h2>
 <p>With no history left, predictions fall back to the values MiniCycle uses when it has nothing to learn from: a 29-day cycle and a 5-day period. They are placeholders, the same rough defaults a brand-new install starts with, and they sharpen only as you log fresh start dates and the app can estimate from your real intervals again. Every predicted date is reference information drawn from your past cycles, never medical advice or a diagnosis, and after a reset there is simply no past to draw from yet.</p>
 <p>Used for the right reason, the button is straightforward: clearing a phone before it changes hands, wiping a stretch of test entries, starting over with a clean baseline. Used by reflex to fix a small mistake, it costs you everything to save a minute. Know which one you are doing before you confirm.</p>
-<h2>A 30-second checklist before you reset</h2>
+</section>
+<section class="article-section" aria-labelledby="section-7">
+  <h2 id="section-7">A 30-second checklist before you reset</h2>
 <p>Decide whether you want the data later. If you do, get a copy off the device first, with iCloud Sync turned on or the records moved to your next phone, and confirm the copy actually exists before going further.</p>
 <p>Then check that you want a full wipe and not an edit. A reset is for clearing all of it; a single wrong date is a job for editing that one entry. If a full wipe is right, open Settings, scroll to the red Reset records row, and confirm. The calendar returns to blank and the widget clears with it.</p>
-<h2>Frequently asked questions</h2>
+</section>
+<section class="article-section" aria-labelledby="section-8">
+  <h2 id="section-8">Frequently asked questions</h2>
 <p>Can I undo a reset? No. There is no recovery step, because the records live on your device with no MiniCycle server holding a copy. The confirmation that the action cannot be undone is literal.</p>
 <p>Does resetting also change my settings? No. Your language, cycle and period length, week start, and notification preferences stay as they were. Reset clears records and notes, not your setup.</p>
 <p>Will my reminders keep firing after a reset? No. With no period dates to predict from, there is nothing left to schedule notifications around. They resume once you log new dates.</p>
 <p>Do I have to delete the app to remove my data? No. Reset records clears your data while keeping the app installed. Deleting the app is a separate, heavier action that removes the app itself as well.</p>
-<h2>The one-line version</h2>
+</section>
+<section class="article-section" aria-labelledby="section-9">
+  <h2 id="section-9">The one-line version</h2>
 <p>Settings, scroll to the red Reset records row, confirm: every period date, note, and activity mark is erased, the calendar goes blank, and there is no undo because nothing is stored on a MiniCycle server.</p>
 <p>Back up first with iCloud Sync if you might want the data later, use editing rather than a reset to fix a single date, and remember that resetting keeps your app and settings while deleting the app removes both.</p>
-                <div class="callout">
-                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
-                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="reset-all-data-in-minicycle" onclick="trackAppStoreClick(this)">View on the App Store</a>
-                </div>
-                <h2>References</h2>
-                <ul class="references">
+</section>
+                    <section class="callout" aria-labelledby="try-minicycle">
+                      <img class="callout-mark" src="../../assets/minicycle-app-icon.png" alt="" width="42" height="42" loading="lazy">
+                      <div class="callout-copy">
+                        <p class="eyebrow">MiniCycle for iPhone</p>
+                        <h2 id="try-minicycle">Try MiniCycle</h2>
+                        <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                      </div>
+                      <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="reset-all-data-in-minicycle" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                    </section>
+                    <section class="references-section" aria-labelledby="references-title">
+                      <p class="eyebrow">MiniCycle editorial</p>
+                      <h2 id="references-title">References</h2>
+                      <ul class="references">
         <li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
 <li><a href="https://support.apple.com/en-us/101550">Apple Support. Delete apps on your iPhone or iPad.</a></li>
 <li><a href="https://support.apple.com/en-us/108922">Apple Support. Manage your iCloud storage on your Apple device.</a></li>
-                </ul>
+                      </ul>
+                    </section>
+                  </div>
+                  <aside class="article-sidebar">
+                    <nav class="article-toc" aria-label="On this page">
+                      <p class="toc-title">On this page</p>
+                      <ol>
+        <li><a href="#section-1">What Reset records clears</a></li>
+<li><a href="#section-2">Where the button is, and the warning it shows</a></li>
+<li><a href="#section-3">Why there is no undo</a></li>
+<li><a href="#section-4">Back up first if there is any chance you want it later</a></li>
+<li><a href="#section-5">Reset records versus deleting the app</a></li>
+<li><a href="#section-6">What the calendar looks like after, and when to use this</a></li>
+<li><a href="#section-7">A 30-second checklist before you reset</a></li>
+<li><a href="#section-8">Frequently asked questions</a></li>
+<li><a href="#section-9">The one-line version</a></li>
+                      </ol>
+                    </nav>
+                  </aside>
+                </div>
               </article>
+              <section class="related-section" aria-labelledby="related-title">
+                <div class="section-heading">
+                  <div>
+                    <p class="eyebrow">Keep exploring</p>
+                    <h2 id="related-title">More guides you may like</h2>
+                  </div>
+                  <a class="text-link section-link" href="../">All guides<span aria-hidden="true">&nbsp;&rarr;</span></a>
+                </div>
+                <div class="post-grid related-grid">
+        <article class="post-card related-card" data-guide-card data-search-value="settings minicycle in english: change the app language and dark mode minicycle defaults to korean. how to switch the app to english in two taps, choose system, light, or dark appearance, and what the home-screen widget follows.">
+  <div class="post-card-topline">
+    <p class="category-pill">Settings</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../minicycle-dark-mode-app-language-settings/">MiniCycle in English: change the app language and dark mode</a></h3>
+  <p class="post-description">MiniCycle defaults to Korean. How to switch the app to English in two taps, choose System, Light, or Dark appearance, and what the home-screen widget follows.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-12">2026.06.12</time><span aria-hidden="true">&middot;</span>5 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="settings auto vs manual cycle and period length in minicycle minicycle can estimate your cycle and period length, or let you set them by hand (21–42 and 1–10 days). when auto fits, when manual fits, and why the estimate uses a median.">
+  <div class="post-card-topline">
+    <p class="category-pill">Settings</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../auto-vs-manual-cycle-length-period-length/">Auto vs manual cycle and period length in MiniCycle</a></h3>
+  <p class="post-description">MiniCycle can estimate your cycle and period length, or let you set them by hand (21–42 and 1–10 days). When auto fits, when manual fits, and why the estimate uses a median.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-10">2026.06.10</time><span aria-hidden="true">&middot;</span>5 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="settings should a period calendar start on sunday or monday? minicycle&#x27;s calendar can start the week on sunday or monday. why calendars disagree, why the choice changes only the layout, and how the widget stays in sync.">
+  <div class="post-card-topline">
+    <p class="category-pill">Settings</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../week-start-sunday-monday-period-calendar/">Should a period calendar start on Sunday or Monday?</a></h3>
+  <p class="post-description">MiniCycle&#x27;s calendar can start the week on Sunday or Monday. Why calendars disagree, why the choice changes only the layout, and how the widget stays in sync.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-09">2026.06.09</time><span aria-hidden="true">&middot;</span>4 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+                </div>
+              </section>
             </main>
+        <footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="../../">
+        <img class="brand-icon" src="../../assets/minicycle-app-icon.png" alt="" width="34" height="34" loading="lazy">
+        <span>MiniCycle</span>
+      </a>
+      <p>A quieter, more private way to understand your cycle.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="../../blog/">Blog</a>
+      <a href="../../support/">Support</a>
+      <a href="../../privacy/">Privacy</a>
+    </nav>
+    <p class="copyright">&copy; 2026 MiniCycle. Built thoughtfully for iPhone.</p>
+  </div>
+</footer>
           </body>
         </html>

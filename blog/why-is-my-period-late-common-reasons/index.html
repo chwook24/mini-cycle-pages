@@ -3,6 +3,8 @@
                 <head>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1">
+          <meta name="color-scheme" content="light dark">
+          <meta name="theme-color" content="#fbf8fa" data-theme-color>
           <title>Why is my period late? Common non-pregnancy reasons</title>
           <meta name="description" content="A late period has many non-pregnancy explanations, from stress to travel and illness. Learn common reasons a period can be late and when to ask a clinician.">
           <link rel="canonical" href="https://minicycle.net/blog/why-is-my-period-late-common-reasons/">
@@ -19,7 +21,75 @@
             <link rel="icon" href="../../favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
     <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
-          <link rel="stylesheet" href="../../styles.css">
+        <script>
+  (() => {
+    const storageKey = 'minicycle-theme';
+    const root = document.documentElement;
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+    root.classList.add('js');
+
+    function storedTheme() {
+      try {
+        const value = window.localStorage.getItem(storageKey);
+        return value === 'light' || value === 'dark' ? value : null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function currentTheme() {
+      return root.dataset.theme || (systemTheme.matches ? 'dark' : 'light');
+    }
+
+    function updateThemeUI() {
+      const dark = currentTheme() === 'dark';
+      const themeColor = document.querySelector('[data-theme-color]');
+      if (themeColor) themeColor.setAttribute('content', dark ? '#121014' : '#fbf8fa');
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      const label = dark
+        ? toggle.dataset.lightLabel
+        : toggle.dataset.darkLabel;
+      toggle.setAttribute('aria-label', label);
+      toggle.setAttribute('title', label);
+    }
+
+    const savedTheme = storedTheme();
+    if (savedTheme) root.dataset.theme = savedTheme;
+    updateThemeUI();
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      updateThemeUI();
+      toggle.addEventListener('click', () => {
+        const nextTheme = currentTheme() === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = nextTheme;
+        try {
+          window.localStorage.setItem(storageKey, nextTheme);
+        } catch (_) {
+          // The selected theme still applies for this page when storage is unavailable.
+        }
+        updateThemeUI();
+      });
+      if (typeof systemTheme.addEventListener === 'function') {
+        systemTheme.addEventListener('change', () => {
+          if (!root.dataset.theme) updateThemeUI();
+        });
+      }
+      window.addEventListener('storage', (event) => {
+        if (event.key !== storageKey) return;
+        if (event.newValue === 'light' || event.newValue === 'dark') {
+          root.dataset.theme = event.newValue;
+        } else {
+          delete root.dataset.theme;
+        }
+        updateThemeUI();
+      });
+    });
+  })();
+</script>
+          <link rel="stylesheet" href="../../styles.css?v=20260711-4">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -109,64 +179,201 @@
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Why is my period late? Common non-pregnancy reasons","description":"A late period has many non-pregnancy explanations, from stress to travel and illness. Learn common reasons a period can be late and when to ask a clinician.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-06-04","dateModified":"2026-06-04","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/why-is-my-period-late-common-reasons/"}}</script>
         </head>
-          <body>
-        <header class="site-header">
-  <a class="brand" href="../../">MiniCycle</a>
-  <nav aria-label="Primary navigation">
-    <a href="../../blog/">Blog</a>
-    <a href="../../support/">Support</a>
-    <a href="../../privacy/">Privacy</a>
-    <a href="../../ko/blog/why-is-my-period-late-common-reasons/">한국어</a>
-  </nav>
+          <body class="article-page">
+        <a class="skip-link" href="#main-content">Skip to content</a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="../../">
+      <img class="brand-icon" src="../../assets/minicycle-app-icon.png" alt="" width="34" height="34">
+      <span>MiniCycle</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="../../blog/">Blog</a>
+      <a href="../../support/">Support</a>
+      <a href="../../privacy/">Privacy</a>
+    </nav>
+    <div class="header-controls">
+      <button class="theme-toggle" type="button" data-theme-toggle data-light-label="Switch to light mode" data-dark-label="Switch to dark mode" aria-label="Toggle color theme">
+        <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
+        <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.1 15.4A8.2 8.2 0 0 1 8.6 3.9 8.2 8.2 0 1 0 20.1 15.4Z"></path></svg>
+      </button>
+      <a class="language-link" href="../../ko/blog/why-is-my-period-late-common-reasons/" lang="ko" hreflang="ko" aria-label="한국어">한국어</a>
+    </div>
+  </div>
 </header>
-            <main class="page">
+            <main class="page article-page-main" id="main-content">
               <article class="article" data-language="en" data-content-group="why-is-my-period-late-common-reasons" data-min-read-ms="90000">
-                <p class="eyebrow">Cycle health</p>
-                <h1>Why is my period late? Common non-pregnancy reasons</h1>
-                <p class="article-meta">Published June 4, 2026 by MiniCycle</p>
-                <p class="lead">A late period is one of the most common reasons people open a cycle app, and it is rarely a reason to panic. Cycles shift for many ordinary reasons. The useful move is to notice the change, keep recording, and know the small number of situations that are worth a clinician&#x27;s attention.</p>
-                <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
-        <h2>First, the calm version</h2>
+                <a class="back-link" href="../"><span aria-hidden="true">&larr;</span> All guides</a>
+                <header class="article-header">
+                  <div class="article-heading">
+                    <p class="category-pill">Cycle health</p>
+                    <h1>Why is my period late? Common non-pregnancy reasons</h1>
+                    <p class="article-meta"><time datetime="2026-06-04">Published June 4, 2026 by MiniCycle</time><span aria-hidden="true">&middot;</span><span>5 min read</span></p>
+                    <p class="lead">A late period is one of the most common reasons people open a cycle app, and it is rarely a reason to panic. Cycles shift for many ordinary reasons. The useful move is to notice the change, keep recording, and know the small number of situations that are worth a clinician&#x27;s attention.</p>
+                  </div>
+                  <figure class="article-visual">
+                    <div class="article-visual-frame">
+                      <span class="visual-orbit visual-orbit-one" aria-hidden="true"></span>
+                      <span class="visual-orbit visual-orbit-two" aria-hidden="true"></span>
+                      <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
+                    </div>
+                    <figcaption>The MiniCycle calendar on iPhone</figcaption>
+                  </figure>
+                </header>
+                <div class="article-layout">
+                  <div class="article-body">
+        <section class="article-section" aria-labelledby="section-1">
+  <h2 id="section-1">First, the calm version</h2>
 <p>A period that arrives a few days later than expected is common, and a single off cycle is usually not a sign that something is wrong. The menstrual cycle responds to the rest of your life, so stress, sleep, travel, illness, and changes in weight or activity can all move a start date.</p>
 <p>Pregnancy is one possible reason a period is late, and a calendar app cannot rule it out. If pregnancy is possible and a period is missed, a test gives a clearer answer than any prediction. The rest of this guide focuses on common non-pregnancy explanations.</p>
-<h2>Stress, sleep, and schedule changes</h2>
+</section>
+<section class="article-section" aria-labelledby="section-2">
+  <h2 id="section-2">Stress, sleep, and schedule changes</h2>
 <p>Long or intense stress can affect the part of the brain that helps regulate the cycle, and ovulation can be delayed or skipped as a result. When ovulation moves, the next period moves with it. This is one reason a stressful month can end with a later period.</p>
 <p>Travel across time zones, irregular sleep, and shift work can have a similar effect. The body reads large changes in light and routine as a reason to adjust timing. Most of the time the cycle settles again once the routine does.</p>
-<h2>Illness, weight changes, and exercise</h2>
+</section>
+<section class="article-section" aria-labelledby="section-3">
+  <h2 id="section-3">Illness, weight changes, and exercise</h2>
 <p>A short illness or fever around the time of expected ovulation can push a period later that month. Larger changes matter more. Significant weight loss or gain, very low body fat, and heavy training loads can all interrupt regular cycles, sometimes pausing periods entirely.</p>
 <p>Eating patterns play a role too. Restrictive eating and eating disorders are recognized causes of missed periods, because the body lowers reproductive activity when energy is scarce. These changes are worth discussing with a clinician rather than waiting out.</p>
-<h2>Medication, contraception, and hormonal shifts</h2>
+</section>
+<section class="article-section" aria-labelledby="section-4">
+  <h2 id="section-4">Medication, contraception, and hormonal shifts</h2>
 <p>Some medications can change cycle timing, and starting, stopping, or switching hormonal birth control commonly shifts periods for a while. If a change lines up with a new prescription, that timing is a reasonable thing to mention to a pharmacist or clinician.</p>
 <p>Underlying conditions such as thyroid problems and polycystic ovary syndrome can also cause irregular or missed periods, and perimenopause makes cycles less predictable in the years before menopause. An app cannot diagnose any of these. It can only show you the dates that prompt a conversation.</p>
-<h2>How tracking separates a blip from a pattern</h2>
+</section>
+<section class="article-section" aria-labelledby="section-5">
+  <h2 id="section-5">How tracking separates a blip from a pattern</h2>
 <p>One late period is a single data point. A pattern is easier to read. MiniCycle estimates your typical cycle from your saved period start dates, using up to your latest 12 records. When there are at least 10 measured intervals, it drops one shortest and one longest interval and takes the median, which keeps a single unusual cycle from dragging the estimate around. With too little history, it falls back to a 29-day default.</p>
 <p>Because the estimate is built from your own recent records, a late period quietly becomes information rather than a surprise. If later cycles return to your usual length, the one late month stops standing out. If the change continues, the record makes that easier to see, and easier to describe later.</p>
-<h2>When a late period is worth a clinician&#x27;s time</h2>
+</section>
+<section class="article-section" aria-labelledby="section-6">
+  <h2 id="section-6">When a late period is worth a clinician&#x27;s time</h2>
 <p>General guidance from patient health resources is a useful reference here. Consider contacting a clinician if you have gone three months without a period and are not pregnant or breastfeeding, if regular cycles suddenly become irregular, if cycles are consistently shorter than about 21 days or longer than about 35 days, or if a late period comes with severe pain, very heavy bleeding, or other symptoms that concern you.</p>
 <p>These are reference signals, not a diagnosis. MiniCycle predictions are for planning and personal awareness only. They are not medical advice, contraception, or a pregnancy test, and they cannot explain why a particular cycle changed.</p>
-<h2>What counts as a late period?</h2>
+</section>
+<section class="article-section" aria-labelledby="section-7">
+  <h2 id="section-7">What counts as a late period?</h2>
 <p>&quot;Late&quot; only makes sense relative to your own typical cycle. Cycle length is counted from the first day of one period to the first day of the next, and the usual range is wide. Mayo Clinic describes roughly 21 to 35 days, while the U.S. Office on Women&#x27;s Health uses 24 to 38 days. Both reflect the same point: there is no single correct number, and a few days of movement can still be normal for you.</p>
 <p>This is why MiniCycle estimates from your records instead of assuming one fixed length for everyone. A date that looks late against a generic 28-day assumption might be right on time for a longer personal cycle. The app&#x27;s own estimate is usually a better reference than a textbook average.</p>
-<h2>Why one late cycle is usually not a trend</h2>
+</section>
+<section class="article-section" aria-labelledby="section-8">
+  <h2 id="section-8">Why one late cycle is usually not a trend</h2>
 <p>Real cycle data shows meaningful variation between people and from month to month, so an occasional long cycle is expected rather than alarming. A large analysis of more than 600,000 cycles found that cycle length commonly varies, which fits everyday experience: most people do not run like a clock.</p>
 <p>The practical approach is to watch the trend over several cycles instead of reacting to one. If a single month is long and the next few return to normal, that is ordinary variation. A direction that holds across cycles is the more useful signal, and it is exactly what a consistent record makes visible.</p>
-<h2>Frequently asked questions</h2>
+</section>
+<section class="article-section" aria-labelledby="section-9">
+  <h2 id="section-9">Frequently asked questions</h2>
 <p>Can stress by itself delay a period? Yes. Sustained or intense stress can delay or skip ovulation, which moves the next period. It is one of the more common non-pregnancy reasons a period runs late.</p>
 <p>Can MiniCycle tell me why my period is late? No. The app can show that a period is later than your usual pattern and keep an accurate record, but it cannot identify the cause. For that, a clinician, and a pregnancy test when pregnancy is possible, is the right step.</p>
-<h2>Using MiniCycle when a period is late</h2>
+</section>
+<section class="article-section" aria-labelledby="section-10">
+  <h2 id="section-10">Using MiniCycle when a period is late</h2>
 <p>When a period is later than expected, the most useful thing you can do in the app is keep the record honest. Log the period when it actually starts rather than when you predicted it, and leave past start dates as they happened. Accurate starts are what keep future estimates grounded, especially after an unusual month.</p>
 <p>It also helps to treat the predicted dates as a prompt, not a promise. If a start is approaching and nothing happens, that gap is simply information to watch. The app is built for that calm, low-pressure kind of tracking, and it intentionally leaves medical interpretation to you and a professional.</p>
-                <div class="callout">
-                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
-                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="why-is-my-period-late-common-reasons" onclick="trackAppStoreClick(this)">View on the App Store</a>
-                </div>
-                <h2>References</h2>
-                <ul class="references">
+</section>
+                    <section class="callout" aria-labelledby="try-minicycle">
+                      <img class="callout-mark" src="../../assets/minicycle-app-icon.png" alt="" width="42" height="42" loading="lazy">
+                      <div class="callout-copy">
+                        <p class="eyebrow">MiniCycle for iPhone</p>
+                        <h2 id="try-minicycle">Try MiniCycle</h2>
+                        <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                      </div>
+                      <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="why-is-my-period-late-common-reasons" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                    </section>
+                    <section class="references-section" aria-labelledby="references-title">
+                      <p class="eyebrow">MiniCycle editorial</p>
+                      <h2 id="references-title">References</h2>
+                      <ul class="references">
         <li><a href="https://www.mayoclinic.org/healthy-lifestyle/womens-health/in-depth/menstrual-cycle/art-20047186">Mayo Clinic. Menstrual cycle: What&#x27;s normal, what&#x27;s not.</a></li>
 <li><a href="https://womenshealth.gov/menstrual-cycle/period-problems">Office on Women&#x27;s Health. Period problems.</a></li>
 <li><a href="https://www.nature.com/articles/s41746-019-0152-7">Bull JR, Rowland SP, Scherwitzl EB, et al. Real-world menstrual cycle characteristics of more than 600,000 menstrual cycles. npj Digital Medicine. 2019.</a></li>
-                </ul>
+                      </ul>
+                    </section>
+                  </div>
+                  <aside class="article-sidebar">
+                    <nav class="article-toc" aria-label="On this page">
+                      <p class="toc-title">On this page</p>
+                      <ol>
+        <li><a href="#section-1">First, the calm version</a></li>
+<li><a href="#section-2">Stress, sleep, and schedule changes</a></li>
+<li><a href="#section-3">Illness, weight changes, and exercise</a></li>
+<li><a href="#section-4">Medication, contraception, and hormonal shifts</a></li>
+<li><a href="#section-5">How tracking separates a blip from a pattern</a></li>
+<li><a href="#section-6">When a late period is worth a clinician&#x27;s time</a></li>
+<li><a href="#section-7">What counts as a late period?</a></li>
+<li><a href="#section-8">Why one late cycle is usually not a trend</a></li>
+<li><a href="#section-9">Frequently asked questions</a></li>
+<li><a href="#section-10">Using MiniCycle when a period is late</a></li>
+                      </ol>
+                    </nav>
+                  </aside>
+                </div>
               </article>
+              <section class="related-section" aria-labelledby="related-title">
+                <div class="section-heading">
+                  <div>
+                    <p class="eyebrow">Keep exploring</p>
+                    <h2 id="related-title">More guides you may like</h2>
+                  </div>
+                  <a class="text-link section-link" href="../">All guides<span aria-hidden="true">&nbsp;&rarr;</span></a>
+                </div>
+                <div class="post-grid related-grid">
+        <article class="post-card related-card" data-guide-card data-search-value="cycle health ovulation pain (mittelschmerz): what that mid-cycle twinge is ovulation pain, or mittelschmerz, is a one-sided mid-cycle twinge that affects up to 40% of people who ovulate. what it feels like, why it happens, and when it isn&#x27;t ordinary.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle health</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../ovulation-pain-mittelschmerz-what-it-is/">Ovulation pain (mittelschmerz): what that mid-cycle twinge is</a></h3>
+  <p class="post-description">Ovulation pain, or mittelschmerz, is a one-sided mid-cycle twinge that affects up to 40% of people who ovulate. What it feels like, why it happens, and when it isn&#x27;t ordinary.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-03">2026.07.03</time><span aria-hidden="true">&middot;</span>4 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="cycle health can you get pregnant on your period? what&#x27;s actually possible getting pregnant on your period is unlikely but not impossible, mostly on short cycles with long periods. here is why it happens and why a calendar is not contraception.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle health</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../can-you-get-pregnant-on-your-period/">Can you get pregnant on your period? What&#x27;s actually possible</a></h3>
+  <p class="post-description">Getting pregnant on your period is unlikely but not impossible, mostly on short cycles with long periods. Here is why it happens and why a calendar is not contraception.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-24">2026.06.24</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="cycle health period blood color: what brown, dark, and bright red mean period blood color usually just reflects how long blood took to leave: pink, red, and brown are all normal. here is what the color means and what actually matters.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle health</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../period-blood-color-what-it-means/">Period blood color: what brown, dark, and bright red mean</a></h3>
+  <p class="post-description">Period blood color usually just reflects how long blood took to leave: pink, red, and brown are all normal. Here is what the color means and what actually matters.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-21">2026.06.21</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+                </div>
+              </section>
             </main>
+        <footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="../../">
+        <img class="brand-icon" src="../../assets/minicycle-app-icon.png" alt="" width="34" height="34" loading="lazy">
+        <span>MiniCycle</span>
+      </a>
+      <p>A quieter, more private way to understand your cycle.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="../../blog/">Blog</a>
+      <a href="../../support/">Support</a>
+      <a href="../../privacy/">Privacy</a>
+    </nav>
+    <p class="copyright">&copy; 2026 MiniCycle. Built thoughtfully for iPhone.</p>
+  </div>
+</footer>
           </body>
         </html>

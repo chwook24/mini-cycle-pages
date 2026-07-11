@@ -3,6 +3,8 @@
                 <head>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1">
+          <meta name="color-scheme" content="light dark">
+          <meta name="theme-color" content="#fbf8fa" data-theme-color>
           <title>월경전증후군(PMS) 증상과 시기, 어디까지가 정상일까</title>
           <meta name="description" content="PMS는 배란 뒤 황체기에 나타나 생리가 시작되면 며칠 안에 가라앉습니다. 흔한 증상과 시기, 정상으로 보는 범위, 그리고 병원에 가 볼 기준을 정리했습니다.">
           <link rel="canonical" href="https://minicycle.net/ko/blog/pms-symptoms-timing-what-is-normal/">
@@ -19,7 +21,75 @@
             <link rel="icon" href="../../../favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32x32.png">
     <link rel="apple-touch-icon" href="../../../apple-touch-icon.png">
-          <link rel="stylesheet" href="../../../styles.css">
+        <script>
+  (() => {
+    const storageKey = 'minicycle-theme';
+    const root = document.documentElement;
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+    root.classList.add('js');
+
+    function storedTheme() {
+      try {
+        const value = window.localStorage.getItem(storageKey);
+        return value === 'light' || value === 'dark' ? value : null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function currentTheme() {
+      return root.dataset.theme || (systemTheme.matches ? 'dark' : 'light');
+    }
+
+    function updateThemeUI() {
+      const dark = currentTheme() === 'dark';
+      const themeColor = document.querySelector('[data-theme-color]');
+      if (themeColor) themeColor.setAttribute('content', dark ? '#121014' : '#fbf8fa');
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      const label = dark
+        ? toggle.dataset.lightLabel
+        : toggle.dataset.darkLabel;
+      toggle.setAttribute('aria-label', label);
+      toggle.setAttribute('title', label);
+    }
+
+    const savedTheme = storedTheme();
+    if (savedTheme) root.dataset.theme = savedTheme;
+    updateThemeUI();
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      updateThemeUI();
+      toggle.addEventListener('click', () => {
+        const nextTheme = currentTheme() === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = nextTheme;
+        try {
+          window.localStorage.setItem(storageKey, nextTheme);
+        } catch (_) {
+          // The selected theme still applies for this page when storage is unavailable.
+        }
+        updateThemeUI();
+      });
+      if (typeof systemTheme.addEventListener === 'function') {
+        systemTheme.addEventListener('change', () => {
+          if (!root.dataset.theme) updateThemeUI();
+        });
+      }
+      window.addEventListener('storage', (event) => {
+        if (event.key !== storageKey) return;
+        if (event.newValue === 'light' || event.newValue === 'dark') {
+          root.dataset.theme = event.newValue;
+        } else {
+          delete root.dataset.theme;
+        }
+        updateThemeUI();
+      });
+    });
+  })();
+</script>
+          <link rel="stylesheet" href="../../../styles.css?v=20260711-4">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -109,67 +179,204 @@
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"월경전증후군(PMS) 증상과 시기, 어디까지가 정상일까","description":"PMS는 배란 뒤 황체기에 나타나 생리가 시작되면 며칠 안에 가라앉습니다. 흔한 증상과 시기, 정상으로 보는 범위, 그리고 병원에 가 볼 기준을 정리했습니다.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg","datePublished":"2026-06-18","dateModified":"2026-06-18","inLanguage":"ko","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/ko/blog/pms-symptoms-timing-what-is-normal/"}}</script>
         </head>
-          <body>
-        <header class="site-header">
-  <a class="brand" href="../../">MiniCycle</a>
-  <nav aria-label="Primary navigation">
-    <a href="../../blog/">블로그</a>
-    <a href="../../support/">지원</a>
-    <a href="../../privacy/">개인정보</a>
-    <a href="../../../blog/pms-symptoms-timing-what-is-normal/">English</a>
-  </nav>
+          <body class="article-page">
+        <a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="../../">
+      <img class="brand-icon" src="../../../assets/minicycle-app-icon.png" alt="" width="34" height="34">
+      <span>MiniCycle</span>
+    </a>
+    <nav class="site-nav" aria-label="주요 탐색">
+      <a href="../../blog/">블로그</a>
+      <a href="../../support/">지원</a>
+      <a href="../../privacy/">개인정보</a>
+    </nav>
+    <div class="header-controls">
+      <button class="theme-toggle" type="button" data-theme-toggle data-light-label="라이트 모드로 전환" data-dark-label="다크 모드로 전환" aria-label="화면 모드 전환">
+        <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
+        <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.1 15.4A8.2 8.2 0 0 1 8.6 3.9 8.2 8.2 0 1 0 20.1 15.4Z"></path></svg>
+      </button>
+      <a class="language-link" href="../../../blog/pms-symptoms-timing-what-is-normal/" lang="en" hreflang="en" aria-label="English">English</a>
+    </div>
+  </div>
 </header>
-            <main class="page">
+            <main class="page article-page-main" id="main-content">
               <article class="article" data-language="ko" data-content-group="pms-symptoms-timing-what-is-normal" data-min-read-ms="90000">
-                <p class="eyebrow">주기 건강</p>
-                <h1>월경전증후군(PMS) 증상과 시기, 어디까지가 정상일까</h1>
-                <p class="article-meta">2026년 6월 18일 MiniCycle 작성</p>
-                <p class="lead">생리를 사흘쯤 앞두고 아랫배가 더부룩하고, 가슴이 단단하게 뭉치고, 평소 같으면 넘겼을 일에 유독 날이 섭니다. 그러다 생리가 시작되면 하루 이틀 만에 스르륵 가라앉습니다. 이 흐름에 붙은 이름이 월경전증후군, PMS입니다. 생리를 하는 사람 넷 중 셋 정도가 어떤 형태로든 겪고, 대부분은 가볍게 지나갑니다. PMS인지 아닌지는 어느 한 증상이 얼마나 심한가보다, 언제 나타나서 언제 사라지는가로 갈립니다.</p>
-                <img class="article-hero" src="../../../assets/home-capture-iphone17-1118-ko-20260518.jpg" alt="MiniCycle 아이폰 실제 캡처 화면: 생리 캘린더와 위젯 경험" width="552" height="1200" loading="eager">
-        <h2>PMS가 정확히 무엇인지</h2>
+                <a class="back-link" href="../"><span aria-hidden="true">&larr;</span> 전체 글</a>
+                <header class="article-header">
+                  <div class="article-heading">
+                    <p class="category-pill">주기 건강</p>
+                    <h1>월경전증후군(PMS) 증상과 시기, 어디까지가 정상일까</h1>
+                    <p class="article-meta"><time datetime="2026-06-18">2026년 6월 18일 MiniCycle 작성</time><span aria-hidden="true">&middot;</span><span>약 3분 읽기</span></p>
+                    <p class="lead">생리를 사흘쯤 앞두고 아랫배가 더부룩하고, 가슴이 단단하게 뭉치고, 평소 같으면 넘겼을 일에 유독 날이 섭니다. 그러다 생리가 시작되면 하루 이틀 만에 스르륵 가라앉습니다. 이 흐름에 붙은 이름이 월경전증후군, PMS입니다. 생리를 하는 사람 넷 중 셋 정도가 어떤 형태로든 겪고, 대부분은 가볍게 지나갑니다. PMS인지 아닌지는 어느 한 증상이 얼마나 심한가보다, 언제 나타나서 언제 사라지는가로 갈립니다.</p>
+                  </div>
+                  <figure class="article-visual">
+                    <div class="article-visual-frame">
+                      <span class="visual-orbit visual-orbit-one" aria-hidden="true"></span>
+                      <span class="visual-orbit visual-orbit-two" aria-hidden="true"></span>
+                      <img class="article-hero" src="../../../assets/home-capture-iphone17-1118-ko-20260518.jpg" alt="MiniCycle 아이폰 실제 캡처 화면: 생리 캘린더와 위젯 경험" width="552" height="1200" loading="eager">
+                    </div>
+                    <figcaption>iPhone에서 보는 MiniCycle 캘린더</figcaption>
+                  </figure>
+                </header>
+                <div class="article-layout">
+                  <div class="article-body">
+        <section class="article-section" aria-labelledby="section-1">
+  <h2 id="section-1">PMS가 정확히 무엇인지</h2>
 <p>PMS는 배란이 끝난 뒤 나타났다가 생리가 시작되면 가라앉는 몸과 마음의 변화 묶음입니다. 미국 여성건강국(OWH)은 이 시기를 호르몬으로 설명합니다. 배란 뒤 임신이 되지 않으면 에스트로겐과 프로게스테론이 가파르게 떨어지고, 생리가 시작돼 호르몬이 다시 오르면 며칠 안에 증상이 누그러진다고요.</p>
 <p>그러니 어느 정도 겪는 건 자연스럽습니다. 같은 자료는 PMS가 생리가 멈추는 폐경 뒤에는 대개 사라지고, 출산 뒤에는 다른 모양으로 돌아오기도 한다고 덧붙입니다. 주기의 호르몬 출렁임에 묶여 있어서, 주기를 따라 그렇게 움직이는 거죠.</p>
-<h2>핵심은 증상보다 시기입니다</h2>
+</section>
+<section class="article-section" aria-labelledby="section-2">
+  <h2 id="section-2">핵심은 증상보다 시기입니다</h2>
 <p>세기는 사람마다 다르지만, 의료진이 실제로 보는 건 시기입니다. OWH는 그 양상을 이렇게 정리합니다. 생리 며칠 전부터 증상이 나타나 여러 주기에 걸쳐 되풀이되고, 생리가 시작되면 나흘 안에 끝나며, 일상에 지장을 준다고요. Mayo Clinic도 같은 말을 합니다. 증상은 예측 가능한 패턴으로 반복되고 보통 생리 시작 후 나흘 안에 사라진다고요.</p>
 <p>여기서 흔한 오해가 끼어듭니다. PMS는 한 달의 절반을 우울하게 보내는 것도, 딱 2주짜리로 정해진 것도 아닙니다. 배란과 다음 생리 사이, 곧 황체기에 속합니다. MiniCycle은 이 황체기를 고정 14일이 아니라 9–14일로 거꾸로 셉니다. 주기의 엉뚱한 시점에 찾아오거나 생리가 와도 가시지 않는 기분은 PMS의 패턴과 맞지 않습니다. 그 어긋남을 눈여겨볼 만합니다.</p>
-<h2>흔한 증상과 그 개수</h2>
+</section>
+<section class="article-section" aria-labelledby="section-3">
+  <h2 id="section-3">흔한 증상과 그 개수</h2>
 <p>목록은 길지만 대부분은 그중 몇 가지만 겪습니다. 몸으로는 더부룩함이나 가스 찬 느낌, 가슴이 붓거나 아픈 것, 두통이나 허리 통증, 피로, 아랫배 당김, 음식이 당기는 것이 있습니다. 마음으로는 짜증, 감정 기복, 불안이나 긴장, 가라앉는 기분이나 눈물, 집중이 안 됨, 너무 자거나 못 자는 잠, 줄어든 성욕이 있고요.</p>
 <p>몸 증상과 마음 증상이 섞여 나타나는 건 이상한 일이 아니라 흔한 일입니다. 마음 쪽 증상도 몸 쪽만큼 실재하고, 둘 다 같은 호르몬 변화에서 비롯됩니다.</p>
-<h2>PMS를 넘어설 때 — PMDD</h2>
+</section>
+<section class="article-section" aria-labelledby="section-4">
+  <h2 id="section-4">PMS를 넘어설 때 — PMDD</h2>
 <p>PMS에는 심한 형태가 따로 있습니다. 월경전불쾌장애, PMDD입니다. OWH는 가임기 여성의 5% 미만으로 봅니다. 차이는 새 증상이 생기는 게 아니라 강도입니다. PMDD의 증상은, 주로 기분과 관련된 것인데, 매달 일이나 학업, 관계를 무너뜨릴 만큼 심합니다.</p>
 <p>Mayo Clinic도 같은 틀로 설명합니다. 증상이 일상을 마비시킬 만큼 심한 소수가 있다고요. 생리 전 시기가 그저 귀찮은 정도를 넘어 매번 삶을 흔든다면, 한번 의료진과 이야기해 볼 일입니다.</p>
-<h2>PMS를 더 심하게 만드는 것들</h2>
+</section>
+<section class="article-section" aria-labelledby="section-5">
+  <h2 id="section-5">PMS를 더 심하게 만드는 것들</h2>
 <p>몇 가지가 더 심한 PMS와 함께 갑니다. OWH는 높은 스트레스, 그리고 본인이나 가족의 우울증 이력과 연관 짓고, 평균적으로 30대에 가장 흔하다고 봅니다. 30대 후반에서 40대로 들어서며 폐경이행기에 접어들면 호르몬이 더 들쭉날쭉해지면서 증상이 더 세질 수도 있습니다.</p>
 <p>겹쳐 오는 문제도 살펴야 합니다. PMS 완화를 원하는 사람의 절반쯤은 우울증, 불안장애, 과민대장증후군, 편두통처럼 생리 전에 악화되는 다른 문제를 함께 안고 있습니다. 그러면 PMS 자체가 전부가 아닌데도 생리 전 한 주가 더 힘들게 느껴질 수 있습니다.</p>
-<h2>언제 병원에 가 볼까</h2>
+</section>
+<section class="article-section" aria-labelledby="section-6">
+  <h2 id="section-6">언제 병원에 가 볼까</h2>
 <p>기준은 요란하지 않고 실용적입니다. Mayo Clinic은 생활 습관을 바꿔도 PMS가 다스려지지 않고 건강과 일상에 지장을 준다면 진료를 받으라고 합니다. PMS 자체에서 따질 건, 그것이 사는 방식을 방해하느냐입니다.</p>
 <p>진료 전 숙제는 OWH와 Mayo Clinic이 똑같이 권합니다. 적어도 두세 주기 동안 증상을 매일 적어 두라는 것. 그래야 기억에 기대지 않고 패턴을 함께 볼 수 있습니다.</p>
-<h2>기록으로 알 수 있는 것과 없는 것</h2>
+</section>
+<section class="article-section" aria-labelledby="section-7">
+  <h2 id="section-7">기록으로 알 수 있는 것과 없는 것</h2>
 <p>기록이 제 몫을 하는 대목이 여기입니다. 그날그날 기분을 달력에 적어 두면 시기가 눈에 들어옵니다. 증상이 황체기에 몰렸다가 생리가 오면 가시는 것이 PMS의 전형적인 모습이고, 그 패턴과 맞지 않는 흐름은 그 자체로 쓸모 있는 신호입니다. MiniCycle은 메모로 어느 날짜에든 기분이나 더부룩함, 잠을 적어 둘 수 있고, 황체기가 어디인지 보여 주는 배란일·가임기 표시도 함께 있습니다. 모두 기기 안에 저장되고요.</p>
 <p>메모가 못 하는 일은 무언가를 진단하는 것입니다. 시기와 빈도는 보여 주지만 원인은 알려 주지 못하고, 같은 시기에 악화되는 다른 문제와 PMS를 가려내지도 못합니다. 이 날짜들은 내 주기에서 뽑은 참고 정보일 뿐이고, 생리 전 시기가 계속 삶을 흔든다면 그건 참고 버틸 일이 아니라 물어볼 일입니다.</p>
-<h2>두세 주기로 패턴 보기</h2>
+</section>
+<section class="article-section" aria-labelledby="section-8">
+  <h2 id="section-8">두세 주기로 패턴 보기</h2>
 <p>전부 기록할 필요는 없습니다. 가장 거슬리는 증상 두세 개, 기분이든 더부룩함이든 가슴 통증이든 골라서, 며칠에 나타나는지를 두어 달 표시해 보세요. 보려는 건 모양입니다. 생리 전 일주일쯤에 몰리는지, 그리고 생리가 시작되면 가시는지요.</p>
 <p>예를 들어 어느 달엔 생리 닷새 전부터 기분이 가라앉고 가슴이 아프다가 생리 이틀째엔 둘 다 누그러집니다. 다음 달에도 같은 자리에 다시 줄을 섭니다. 황체기에 몰렸다가 곧 사라지는 이 되풀이가, 우연히 근처에 떨어진 일이 아니라 생리 전 증상임을 가리킵니다. 생리와 상관없이 이어지는 증상이라면 다른 이야기를 하고 있는 거고요.</p>
-<h2>자주 묻는 질문</h2>
+</section>
+<section class="article-section" aria-labelledby="section-9">
+  <h2 id="section-9">자주 묻는 질문</h2>
 <p>생리 전에 예민해지는 게 정상인가요? 생리 며칠 전에 더 짜증이 나고 불안하거나 눈물이 나는 건 가장 흔한 생리 전 변화 중 하나이고, 그 자체로는 문제가 아닙니다. 중요한 건 시기, 그리고 그게 일상을 흔드는지입니다. 감정이 드는 것 자체가 아니라요.</p>
 <p>왜 어떤 달은 PMS가 더 심할까요? 증상 세기는 주기마다 다르고, 스트레스나 부족한 잠, 생리 전에 악화되는 다른 문제가 그달에 보태질 수 있습니다. 힘든 달이 이어진다면, 특히 30대 후반에서 40대로 가는 길목이라면 적어 둘 만합니다.</p>
 <p>PMS와 PMDD는 같은 건가요? 아닙니다. PMDD는 가임기 여성의 5% 미만에게 오는 심한 형태로, 주로 기분 증상이 매달 일상을 마비시킬 정도입니다. 대부분의 PMS는 가벼운 데서 중간 정도에 머뭅니다.</p>
 <p>PMS는 언젠가 사라지나요? 생리가 멈추는 폐경 뒤에는 누그러지거나 멎습니다. 살면서 모양이 바뀌기도 하고, 출산 뒤에는 다른 형태로 돌아오기도 합니다.</p>
-<h2>한 줄로</h2>
+</section>
+<section class="article-section" aria-labelledby="section-10">
+  <h2 id="section-10">한 줄로</h2>
 <p>PMS는 배란 뒤 황체기에 나타나 생리가 시작되면 며칠 안에 가라앉는 몸과 마음 증상의 묶음입니다. 생리를 하는 사람 넷 중 셋 정도가 어떤 형태로든 겪고, 대부분은 가볍습니다. PMS를 가르는 건 어느 증상이 얼마나 심한가가 아니라 주기를 따르는 시기입니다.</p>
 <p>5% 미만은 심한 형태인 PMDD를 겪는데, 기분 증상이 매달 일상을 마비시킬 정도입니다. PMS가 일상에 지장을 주거나 생활 습관으로 다스려지지 않으면 진료를 받고, 그전에 두세 주기 동안 증상을 적어 패턴을 분명히 해 두세요. 진단이 아니라 참고 정보입니다.</p>
-                <div class="callout">
-                  <p>MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다.</p>
-                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="ko" data-placement="blog_article_callout" data-content-group="pms-symptoms-timing-what-is-normal" onclick="trackAppStoreClick(this)">App Store에서 받기</a>
+</section>
+                    <section class="callout" aria-labelledby="try-minicycle">
+                      <img class="callout-mark" src="../../../assets/minicycle-app-icon.png" alt="" width="42" height="42" loading="lazy">
+                      <div class="callout-copy">
+                        <p class="eyebrow">MiniCycle for iPhone</p>
+                        <h2 id="try-minicycle">MiniCycle 사용하기</h2>
+                        <p>MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다.</p>
+                      </div>
+                      <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="ko" data-placement="blog_article_callout" data-content-group="pms-symptoms-timing-what-is-normal" onclick="trackAppStoreClick(this)">App Store에서 받기</a>
+                    </section>
+                    <section class="references-section" aria-labelledby="references-title">
+                      <p class="eyebrow">MiniCycle editorial</p>
+                      <h2 id="references-title">참고 자료</h2>
+                      <ul class="references">
+        <li><a href="https://womenshealth.gov/menstrual-cycle/premenstrual-syndrome" lang="en">Office on Women&#x27;s Health. Premenstrual syndrome (PMS).</a></li>
+<li><a href="https://www.mayoclinic.org/diseases-conditions/premenstrual-syndrome/symptoms-causes/syc-20376780" lang="en">Mayo Clinic. Premenstrual syndrome (PMS): Symptoms &amp; causes.</a></li>
+<li><a href="https://www.acog.org/womens-health/faqs/premenstrual-syndrome" lang="en">ACOG. Premenstrual Syndrome (PMS).</a></li>
+<li><a href="https://minicycle.net/privacy/" lang="en">MiniCycle Privacy Policy.</a></li>
+                      </ul>
+                    </section>
+                  </div>
+                  <aside class="article-sidebar">
+                    <nav class="article-toc" aria-label="이 글에서 다루는 내용">
+                      <p class="toc-title">이 글에서 다루는 내용</p>
+                      <ol>
+        <li><a href="#section-1">PMS가 정확히 무엇인지</a></li>
+<li><a href="#section-2">핵심은 증상보다 시기입니다</a></li>
+<li><a href="#section-3">흔한 증상과 그 개수</a></li>
+<li><a href="#section-4">PMS를 넘어설 때 — PMDD</a></li>
+<li><a href="#section-5">PMS를 더 심하게 만드는 것들</a></li>
+<li><a href="#section-6">언제 병원에 가 볼까</a></li>
+<li><a href="#section-7">기록으로 알 수 있는 것과 없는 것</a></li>
+<li><a href="#section-8">두세 주기로 패턴 보기</a></li>
+<li><a href="#section-9">자주 묻는 질문</a></li>
+<li><a href="#section-10">한 줄로</a></li>
+                      </ol>
+                    </nav>
+                  </aside>
                 </div>
-                <h2>참고 자료</h2>
-                <ul class="references">
-        <li><a href="https://womenshealth.gov/menstrual-cycle/premenstrual-syndrome">Office on Women&#x27;s Health. Premenstrual syndrome (PMS).</a></li>
-<li><a href="https://www.mayoclinic.org/diseases-conditions/premenstrual-syndrome/symptoms-causes/syc-20376780">Mayo Clinic. Premenstrual syndrome (PMS): Symptoms &amp; causes.</a></li>
-<li><a href="https://www.acog.org/womens-health/faqs/premenstrual-syndrome">ACOG. Premenstrual Syndrome (PMS).</a></li>
-<li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
-                </ul>
               </article>
+              <section class="related-section" aria-labelledby="related-title">
+                <div class="section-heading">
+                  <div>
+                    <p class="eyebrow">이어서 읽기</p>
+                    <h2 id="related-title">함께 읽으면 좋은 글</h2>
+                  </div>
+                  <a class="text-link section-link" href="../">전체 글<span aria-hidden="true">&nbsp;&rarr;</span></a>
+                </div>
+                <div class="post-grid related-grid">
+        <article class="post-card related-card" data-guide-card data-search-value="주기 건강 배란통이 뭘까요? 배란기에 아랫배가 아픈 이유 배란 무렵 한쪽 아랫배가 콕콕 쑤시는 배란통은 배란하는 사람의 40%까지 겪습니다. 어떤 느낌인지, 왜 생기는지, 그리고 배란통이 아닐 때는 언제인지 정리했습니다.">
+  <div class="post-card-topline">
+    <p class="category-pill">주기 건강</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../ovulation-pain-mittelschmerz-what-it-is/">배란통이 뭘까요? 배란기에 아랫배가 아픈 이유</a></h3>
+  <p class="post-description">배란 무렵 한쪽 아랫배가 콕콕 쑤시는 배란통은 배란하는 사람의 40%까지 겪습니다. 어떤 느낌인지, 왜 생기는지, 그리고 배란통이 아닐 때는 언제인지 정리했습니다.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-03">2026.07.03</time><span aria-hidden="true">&middot;</span>약 3분</p>
+    <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="주기 건강 생리 중에도 임신이 될 수 있을까요 생리 중 임신은 드물지만 불가능하지 않습니다. 주기가 짧고 생리가 길 때 특히 그렇습니다. 왜 가능한지, 달력 예측이 왜 피임이 아닌지 정리했습니다.">
+  <div class="post-card-topline">
+    <p class="category-pill">주기 건강</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../can-you-get-pregnant-on-your-period/">생리 중에도 임신이 될 수 있을까요</a></h3>
+  <p class="post-description">생리 중 임신은 드물지만 불가능하지 않습니다. 주기가 짧고 생리가 길 때 특히 그렇습니다. 왜 가능한지, 달력 예측이 왜 피임이 아닌지 정리했습니다.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-24">2026.06.24</time><span aria-hidden="true">&middot;</span>약 3분</p>
+    <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="주기 건강 생리혈 색깔, 갈색이나 검은색도 정상일까요 생리혈이 갈색이나 검은색을 띠는 건 대개 피가 나오기까지 시간이 걸렸다는 뜻입니다. 분홍·빨강·갈색이 다 정상인 이유와, 색보다 정작 살펴야 할 것을 정리했습니다.">
+  <div class="post-card-topline">
+    <p class="category-pill">주기 건강</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../period-blood-color-what-it-means/">생리혈 색깔, 갈색이나 검은색도 정상일까요</a></h3>
+  <p class="post-description">생리혈이 갈색이나 검은색을 띠는 건 대개 피가 나오기까지 시간이 걸렸다는 뜻입니다. 분홍·빨강·갈색이 다 정상인 이유와, 색보다 정작 살펴야 할 것을 정리했습니다.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-21">2026.06.21</time><span aria-hidden="true">&middot;</span>약 3분</p>
+    <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+                </div>
+              </section>
             </main>
+        <footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="../../">
+        <img class="brand-icon" src="../../../assets/minicycle-app-icon.png" alt="" width="34" height="34" loading="lazy">
+        <span>MiniCycle</span>
+      </a>
+      <p>내 주기를 이해하는 더 조용하고 사적인 방법.</p>
+    </div>
+    <nav class="footer-nav" aria-label="하단 탐색">
+      <a href="../../blog/">블로그</a>
+      <a href="../../support/">지원</a>
+      <a href="../../privacy/">개인정보</a>
+    </nav>
+    <p class="copyright">&copy; 2026 MiniCycle. iPhone을 위해 세심하게 만들었습니다.</p>
+  </div>
+</footer>
           </body>
         </html>

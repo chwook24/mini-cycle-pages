@@ -3,6 +3,8 @@
                 <head>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1">
+          <meta name="color-scheme" content="light dark">
+          <meta name="theme-color" content="#fbf8fa" data-theme-color>
           <title>MiniCycle 다크 모드와 영어 화면, 설정에서 바꾸는 법</title>
           <meta name="description" content="MiniCycle 화면 모드는 시스템·라이트·다크 세 가지이고 기본은 시스템입니다. 밤마다 알아서 어두워지게 두는 법, 한국어·영어 전환, 위젯과 알림이 어느 설정을 따르는지 정리했습니다.">
           <link rel="canonical" href="https://minicycle.net/ko/blog/minicycle-dark-mode-app-language-settings/">
@@ -19,7 +21,75 @@
             <link rel="icon" href="../../../favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32x32.png">
     <link rel="apple-touch-icon" href="../../../apple-touch-icon.png">
-          <link rel="stylesheet" href="../../../styles.css">
+        <script>
+  (() => {
+    const storageKey = 'minicycle-theme';
+    const root = document.documentElement;
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+    root.classList.add('js');
+
+    function storedTheme() {
+      try {
+        const value = window.localStorage.getItem(storageKey);
+        return value === 'light' || value === 'dark' ? value : null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function currentTheme() {
+      return root.dataset.theme || (systemTheme.matches ? 'dark' : 'light');
+    }
+
+    function updateThemeUI() {
+      const dark = currentTheme() === 'dark';
+      const themeColor = document.querySelector('[data-theme-color]');
+      if (themeColor) themeColor.setAttribute('content', dark ? '#121014' : '#fbf8fa');
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      const label = dark
+        ? toggle.dataset.lightLabel
+        : toggle.dataset.darkLabel;
+      toggle.setAttribute('aria-label', label);
+      toggle.setAttribute('title', label);
+    }
+
+    const savedTheme = storedTheme();
+    if (savedTheme) root.dataset.theme = savedTheme;
+    updateThemeUI();
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      updateThemeUI();
+      toggle.addEventListener('click', () => {
+        const nextTheme = currentTheme() === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = nextTheme;
+        try {
+          window.localStorage.setItem(storageKey, nextTheme);
+        } catch (_) {
+          // The selected theme still applies for this page when storage is unavailable.
+        }
+        updateThemeUI();
+      });
+      if (typeof systemTheme.addEventListener === 'function') {
+        systemTheme.addEventListener('change', () => {
+          if (!root.dataset.theme) updateThemeUI();
+        });
+      }
+      window.addEventListener('storage', (event) => {
+        if (event.key !== storageKey) return;
+        if (event.newValue === 'light' || event.newValue === 'dark') {
+          root.dataset.theme = event.newValue;
+        } else {
+          delete root.dataset.theme;
+        }
+        updateThemeUI();
+      });
+    });
+  })();
+</script>
+          <link rel="stylesheet" href="../../../styles.css?v=20260711-4">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -109,62 +179,196 @@
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"MiniCycle 다크 모드와 영어 화면, 설정에서 바꾸는 법","description":"MiniCycle 화면 모드는 시스템·라이트·다크 세 가지이고 기본은 시스템입니다. 밤마다 알아서 어두워지게 두는 법, 한국어·영어 전환, 위젯과 알림이 어느 설정을 따르는지 정리했습니다.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg","datePublished":"2026-06-12","dateModified":"2026-06-12","inLanguage":"ko","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/ko/blog/minicycle-dark-mode-app-language-settings/"}}</script>
         </head>
-          <body>
-        <header class="site-header">
-  <a class="brand" href="../../">MiniCycle</a>
-  <nav aria-label="Primary navigation">
-    <a href="../../blog/">블로그</a>
-    <a href="../../support/">지원</a>
-    <a href="../../privacy/">개인정보</a>
-    <a href="../../../blog/minicycle-dark-mode-app-language-settings/">English</a>
-  </nav>
+          <body class="article-page">
+        <a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="../../">
+      <img class="brand-icon" src="../../../assets/minicycle-app-icon.png" alt="" width="34" height="34">
+      <span>MiniCycle</span>
+    </a>
+    <nav class="site-nav" aria-label="주요 탐색">
+      <a href="../../blog/">블로그</a>
+      <a href="../../support/">지원</a>
+      <a href="../../privacy/">개인정보</a>
+    </nav>
+    <div class="header-controls">
+      <button class="theme-toggle" type="button" data-theme-toggle data-light-label="라이트 모드로 전환" data-dark-label="다크 모드로 전환" aria-label="화면 모드 전환">
+        <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
+        <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.1 15.4A8.2 8.2 0 0 1 8.6 3.9 8.2 8.2 0 1 0 20.1 15.4Z"></path></svg>
+      </button>
+      <a class="language-link" href="../../../blog/minicycle-dark-mode-app-language-settings/" lang="en" hreflang="en" aria-label="English">English</a>
+    </div>
+  </div>
 </header>
-            <main class="page">
+            <main class="page article-page-main" id="main-content">
               <article class="article" data-language="ko" data-content-group="minicycle-dark-mode-app-language-settings" data-min-read-ms="81000">
-                <p class="eyebrow">설정</p>
-                <h1>MiniCycle 다크 모드와 영어 화면, 설정에서 바꾸는 법</h1>
-                <p class="article-meta">2026년 6월 12일 MiniCycle 작성</p>
-                <p class="lead">새벽에 생리가 시작돼 불 꺼진 방에서 앱을 열면, 기록보다 흰 화면이 먼저 눈에 들어옵니다. 기록은 3초면 끝나는데 눈은 한참 시립니다. MiniCycle 설정의 맨 위 두 묶음이 바로 이 문제를 다룹니다. 화면 모드 하나, 앱 언어 하나. 둘 다 누르는 즉시 적용되고, 어느 쪽도 기록에는 손대지 않습니다.</p>
-                <img class="article-hero" src="../../../assets/home-capture-iphone17-1118-ko-20260518.jpg" alt="MiniCycle 아이폰 실제 캡처 화면: 생리 캘린더와 위젯 경험" width="552" height="1200" loading="eager">
-        <h2>화면 모드는 세 가지, 기본은 시스템입니다</h2>
+                <a class="back-link" href="../"><span aria-hidden="true">&larr;</span> 전체 글</a>
+                <header class="article-header">
+                  <div class="article-heading">
+                    <p class="category-pill">설정</p>
+                    <h1>MiniCycle 다크 모드와 영어 화면, 설정에서 바꾸는 법</h1>
+                    <p class="article-meta"><time datetime="2026-06-12">2026년 6월 12일 MiniCycle 작성</time><span aria-hidden="true">&middot;</span><span>약 3분 읽기</span></p>
+                    <p class="lead">새벽에 생리가 시작돼 불 꺼진 방에서 앱을 열면, 기록보다 흰 화면이 먼저 눈에 들어옵니다. 기록은 3초면 끝나는데 눈은 한참 시립니다. MiniCycle 설정의 맨 위 두 묶음이 바로 이 문제를 다룹니다. 화면 모드 하나, 앱 언어 하나. 둘 다 누르는 즉시 적용되고, 어느 쪽도 기록에는 손대지 않습니다.</p>
+                  </div>
+                  <figure class="article-visual">
+                    <div class="article-visual-frame">
+                      <span class="visual-orbit visual-orbit-one" aria-hidden="true"></span>
+                      <span class="visual-orbit visual-orbit-two" aria-hidden="true"></span>
+                      <img class="article-hero" src="../../../assets/home-capture-iphone17-1118-ko-20260518.jpg" alt="MiniCycle 아이폰 실제 캡처 화면: 생리 캘린더와 위젯 경험" width="552" height="1200" loading="eager">
+                    </div>
+                    <figcaption>iPhone에서 보는 MiniCycle 캘린더</figcaption>
+                  </figure>
+                </header>
+                <div class="article-layout">
+                  <div class="article-body">
+        <section class="article-section" aria-labelledby="section-1">
+  <h2 id="section-1">화면 모드는 세 가지, 기본은 시스템입니다</h2>
 <p>홈 화면 오른쪽 위 톱니바퀴를 누르면 설정이 열립니다. 맨 위 &#x27;화면&#x27; 묶음에 달 모양 아이콘과 함께 화면 모드가 있고, 시스템·라이트·다크 세 칸 중 하나를 고르면 그 자리에서 바뀝니다. 기본값은 시스템입니다.</p>
 <p>시스템은 결정을 아이폰에 맡기는 선택입니다. 아이폰이 다크 모드로 바뀌면 앱도 따라 어두워집니다. 아이폰 설정의 디스플레이 및 밝기에서 자동 전환을 켜 두면 일몰부터 일출까지, 또는 직접 정한 시각에 맞춰 바뀌는데, 그 일정이 MiniCycle에도 그대로 적용됩니다. 매일 밤 달력이 알아서 어두워지길 바란다면 손댈 것 없이 시스템으로 두면 됩니다.</p>
-<h2>다크 모드에서 달력은 이렇게 바뀝니다</h2>
+</section>
+<section class="article-section" aria-labelledby="section-2">
+  <h2 id="section-2">다크 모드에서 달력은 이렇게 바뀝니다</h2>
 <p>배경은 순검정이 아니라 검정에 가까운 회색으로 깔리고, 날짜 카드와 패널은 그보다 한 단계 밝게 떠서 구분이 유지됩니다. 라이트 모드에서 카드 아래 깔리던 옅은 그림자는 다크 모드에서 빠집니다. 어두운 배경에서는 그림자가 구분에 보탬이 되지 않기 때문입니다.</p>
 <p>달력 표시 색은 그대로입니다. 분홍 생리일, 하늘색 가임기, 더 진한 하늘색 배란일, 보라색 성생활 기록, 회색 메모 점까지 같은 색으로 남고, 어두운 배경에서도 또렷하도록 칠해지는 농도만 조금 진해집니다. 라이트에서 익힌 범례를 다크에서 다시 외울 일은 없습니다.</p>
-<h2>위젯은 앱이 아니라 아이폰을 따라갑니다</h2>
+</section>
+<section class="article-section" aria-labelledby="section-3">
+  <h2 id="section-3">위젯은 앱이 아니라 아이폰을 따라갑니다</h2>
 <p>한 가지는 미리 알아 두는 편이 좋습니다. 앱에서 다크를 골라 고정해도 홈 화면 위젯은 어두워지지 않습니다. 위젯은 iOS가 그리는 화면이라 아이폰 자체의 모드를 따르기 때문입니다. Apple 문서도 다크 모드를 시스템 전체의 화면 설정으로 설명합니다.</p>
 <p>그래서 낮에는 밝은 홈 화면 위에 위젯도 밝게 뜨고, 열어 본 앱만 어두운 조합이 생길 수 있습니다. 앱과 위젯이 하루 종일 같은 얼굴이길 바란다면 화면 모드를 시스템으로 두는 것이 답입니다.</p>
-<h2>영어 화면이 필요한 순간</h2>
+</section>
+<section class="article-section" aria-labelledby="section-4">
+  <h2 id="section-4">영어 화면이 필요한 순간</h2>
 <p>화면 묶음 바로 아래가 언어입니다. 지구본 아이콘 옆 앱 언어에서 한국어와 English 중 하나를 고릅니다. 두 선택지는 항상 각자의 언어로 적혀 있어서, 화면이 어느 언어로 바뀌어 있든 돌아오는 길을 잃지 않습니다.</p>
 <p>전환은 그 자리에서 끝납니다. 재시작도 확인 창도 없이 달력, 통계, 설정의 모든 글자가 바뀌고 날짜 표기도 따라 바뀝니다. 2026년 6월이 Jun 2026으로, 6월 12일이 Jun 12로 표시되는 식입니다. 영어가 편한 사용자뿐 아니라, 한국어를 읽지 못하는 파트너와 화면을 같이 볼 때도 쓸 만한 스위치입니다.</p>
-<h2>언어를 바꾸면 알림과 위젯도 따라옵니다</h2>
+</section>
+<section class="article-section" aria-labelledby="section-5">
+  <h2 id="section-5">언어를 바꾸면 알림과 위젯도 따라옵니다</h2>
 <p>예약된 알림은 언어를 바꾸는 순간 새 언어로 다시 잡힙니다. &#x27;예상 생리일 2일 전&#x27;으로 올 알림이 Expected period in 2 days로 오게 되는 식이고, 알림 시각과 며칠 전 설정은 그대로 유지됩니다.</p>
 <p>홈 화면 위젯도 앱과 같은 언어 설정을 공유 저장소에서 읽기 때문에 앱을 따라 바뀝니다. 화면 모드와 달리 언어만큼은 앱과 위젯이 항상 같이 움직입니다.</p>
-<h2>바뀌는 것과 그대로인 것</h2>
+</section>
+<section class="article-section" aria-labelledby="section-6">
+  <h2 id="section-6">바뀌는 것과 그대로인 것</h2>
 <p>두 설정이 바꾸는 건 보이는 방식뿐입니다. 생리 기록, 메모, 주기 길이 설정, 예측 날짜 어느 것도 달라지지 않습니다. 라이트에서 다크로, 한국어에서 영어로 몇 번을 오가도 데이터는 같은 자리에 그대로 있습니다.</p>
 <p>달력 표시의 뜻도 어느 모드, 어느 언어에서나 같습니다. 예정일과 배란일, 가임기 표시는 기록에서 계산한 추정값이고, 참고 정보일 뿐 의료 조언이나 피임 수단은 아닙니다. 화면이 어두워져도 예측이 더 정확해지지는 않습니다. 다만 새벽 눈은 덜 부십니다.</p>
-<h2>어느 모드가 맞을까요</h2>
+</section>
+<section class="article-section" aria-labelledby="section-7">
+  <h2 id="section-7">어느 모드가 맞을까요</h2>
 <p>낮이든 밤이든 한결같은 화면이 편하다면 라이트나 다크로 고정하면 됩니다. 침대에서 달력을 여는 일이 잦다면 시스템으로 두고, 아이폰의 디스플레이 및 밝기에서 자동 전환을 켜 두는 조합이 가장 손이 덜 갑니다. 해가 지면 폰과 함께 앱도 어두워지고, 아침이면 함께 밝아집니다.</p>
 <p>위젯까지 생각하면 답은 더 분명해집니다. 위젯은 어차피 아이폰의 모드를 따르므로, 앱만 다크로 고정하면 홈 화면과 앱 사이에 밝기가 갈립니다. 둘을 맞추는 설정은 시스템 하나뿐입니다.</p>
-<h2>자주 묻는 질문</h2>
+</section>
+<section class="article-section" aria-labelledby="section-8">
+  <h2 id="section-8">자주 묻는 질문</h2>
 <p>다크 모드로 바꾸면 위젯도 어두워지나요? 앱에서 다크로 고정한 경우에는 아닙니다. 위젯은 아이폰의 모드를 따르므로, 아이폰 자체가 다크일 때만 위젯도 어둡습니다. 화면 모드를 시스템으로 두면 앱과 위젯이 늘 같이 움직입니다.</p>
 <p>언어를 바꾸면 기록이 사라지거나 초기화되나요? 아닙니다. 언어는 글자와 날짜 표기만 바꿉니다. 기록, 메모, 설정값, 알림 예약은 그대로이고 알림 문구만 새 언어로 다시 잡힙니다.</p>
 <p>아이폰 언어를 영어로 바꾸면 MiniCycle도 영어가 되나요? 아닙니다. MiniCycle은 자체 언어 설정만 따릅니다. 앱 안의 스위치가 유일한 길이고, 반대로 앱 언어를 바꿔도 아이폰 쪽에는 아무 영향이 없습니다.</p>
-<h2>한 줄로</h2>
+</section>
+<section class="article-section" aria-labelledby="section-9">
+  <h2 id="section-9">한 줄로</h2>
 <p>화면 모드는 설정 맨 위에서 시스템·라이트·다크 중 하나, 기본은 아이폰을 따라가는 시스템입니다. 언어는 그 아래에서 한국어와 English 중 하나이고, 바꾸는 즉시 알림 문구와 위젯까지 따라옵니다.</p>
 <p>위젯의 밝고 어두움만은 앱이 아니라 아이폰을 따릅니다. 그리고 어느 설정도 기록과 예측에는 손대지 않습니다. 바뀌는 건 보이는 방식뿐입니다.</p>
-                <div class="callout">
-                  <p>MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다.</p>
-                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="ko" data-placement="blog_article_callout" data-content-group="minicycle-dark-mode-app-language-settings" onclick="trackAppStoreClick(this)">App Store에서 받기</a>
+</section>
+                    <section class="callout" aria-labelledby="try-minicycle">
+                      <img class="callout-mark" src="../../../assets/minicycle-app-icon.png" alt="" width="42" height="42" loading="lazy">
+                      <div class="callout-copy">
+                        <p class="eyebrow">MiniCycle for iPhone</p>
+                        <h2 id="try-minicycle">MiniCycle 사용하기</h2>
+                        <p>MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다.</p>
+                      </div>
+                      <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="ko" data-placement="blog_article_callout" data-content-group="minicycle-dark-mode-app-language-settings" onclick="trackAppStoreClick(this)">App Store에서 받기</a>
+                    </section>
+                    <section class="references-section" aria-labelledby="references-title">
+                      <p class="eyebrow">MiniCycle editorial</p>
+                      <h2 id="references-title">참고 자료</h2>
+                      <ul class="references">
+        <li><a href="https://support.apple.com/en-us/108350" lang="en">Apple Support. Use Dark Mode on your iPhone and iPad.</a></li>
+<li><a href="https://developer.apple.com/design/human-interface-guidelines/dark-mode" lang="en">Apple Human Interface Guidelines. Dark Mode.</a></li>
+<li><a href="https://support.apple.com/en-us/109358" lang="en">Apple Support. Change the language on your iPhone or iPad.</a></li>
+                      </ul>
+                    </section>
+                  </div>
+                  <aside class="article-sidebar">
+                    <nav class="article-toc" aria-label="이 글에서 다루는 내용">
+                      <p class="toc-title">이 글에서 다루는 내용</p>
+                      <ol>
+        <li><a href="#section-1">화면 모드는 세 가지, 기본은 시스템입니다</a></li>
+<li><a href="#section-2">다크 모드에서 달력은 이렇게 바뀝니다</a></li>
+<li><a href="#section-3">위젯은 앱이 아니라 아이폰을 따라갑니다</a></li>
+<li><a href="#section-4">영어 화면이 필요한 순간</a></li>
+<li><a href="#section-5">언어를 바꾸면 알림과 위젯도 따라옵니다</a></li>
+<li><a href="#section-6">바뀌는 것과 그대로인 것</a></li>
+<li><a href="#section-7">어느 모드가 맞을까요</a></li>
+<li><a href="#section-8">자주 묻는 질문</a></li>
+<li><a href="#section-9">한 줄로</a></li>
+                      </ol>
+                    </nav>
+                  </aside>
                 </div>
-                <h2>참고 자료</h2>
-                <ul class="references">
-        <li><a href="https://support.apple.com/en-us/108350">Apple Support. Use Dark Mode on your iPhone and iPad.</a></li>
-<li><a href="https://developer.apple.com/design/human-interface-guidelines/dark-mode">Apple Human Interface Guidelines. Dark Mode.</a></li>
-<li><a href="https://support.apple.com/en-us/109358">Apple Support. Change the language on your iPhone or iPad.</a></li>
-                </ul>
               </article>
+              <section class="related-section" aria-labelledby="related-title">
+                <div class="section-heading">
+                  <div>
+                    <p class="eyebrow">이어서 읽기</p>
+                    <h2 id="related-title">함께 읽으면 좋은 글</h2>
+                  </div>
+                  <a class="text-link section-link" href="../">전체 글<span aria-hidden="true">&nbsp;&rarr;</span></a>
+                </div>
+                <div class="post-grid related-grid">
+        <article class="post-card related-card" data-guide-card data-search-value="설정 minicycle 기록 초기화: 무엇이 지워지고 무엇이 남나요 minicycle &#x27;기록 초기화&#x27;는 모든 생리 날짜와 메모, 성생활 기록을 한 번에 지웁니다. 되돌릴 수 없죠. 무엇이 사라지고 무엇이 남는지, 지우기 전 백업법, 앱 삭제와의 차이를 정리했습니다.">
+  <div class="post-card-topline">
+    <p class="category-pill">설정</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../reset-all-data-in-minicycle/">MiniCycle 기록 초기화: 무엇이 지워지고 무엇이 남나요</a></h3>
+  <p class="post-description">MiniCycle &#x27;기록 초기화&#x27;는 모든 생리 날짜와 메모, 성생활 기록을 한 번에 지웁니다. 되돌릴 수 없죠. 무엇이 사라지고 무엇이 남는지, 지우기 전 백업법, 앱 삭제와의 차이를 정리했습니다.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-14">2026.06.14</time><span aria-hidden="true">&middot;</span>약 3분</p>
+    <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="설정 주기 길이와 생리 기간, 자동과 수동 중 무엇으로 둘까요 minicycle은 주기 길이와 생리 기간을 자동으로 추정하거나 직접 설정할 수 있습니다(주기 21–42일, 기간 1–10일). 자동이 맞는 경우와 직접 설정이 나은 경우, 자동 추정이 중앙값을 쓰는 이유를 정리했습니다.">
+  <div class="post-card-topline">
+    <p class="category-pill">설정</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../auto-vs-manual-cycle-length-period-length/">주기 길이와 생리 기간, 자동과 수동 중 무엇으로 둘까요</a></h3>
+  <p class="post-description">MiniCycle은 주기 길이와 생리 기간을 자동으로 추정하거나 직접 설정할 수 있습니다(주기 21–42일, 기간 1–10일). 자동이 맞는 경우와 직접 설정이 나은 경우, 자동 추정이 중앙값을 쓰는 이유를 정리했습니다.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-10">2026.06.10</time><span aria-hidden="true">&middot;</span>약 3분</p>
+    <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="설정 생리 달력 시작 요일, 일요일과 월요일 중 무엇으로 할까요 minicycle 달력은 한 주를 일요일이나 월요일에 시작하도록 고를 수 있습니다. 나라마다 시작 요일이 다른 이유, 이 설정이 화면 배치만 바꾸고 기록과 예측은 그대로 두는 이유, 위젯이 앱과 같은 요일을 따르는 이유를 정리했습니다.">
+  <div class="post-card-topline">
+    <p class="category-pill">설정</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../week-start-sunday-monday-period-calendar/">생리 달력 시작 요일, 일요일과 월요일 중 무엇으로 할까요</a></h3>
+  <p class="post-description">MiniCycle 달력은 한 주를 일요일이나 월요일에 시작하도록 고를 수 있습니다. 나라마다 시작 요일이 다른 이유, 이 설정이 화면 배치만 바꾸고 기록과 예측은 그대로 두는 이유, 위젯이 앱과 같은 요일을 따르는 이유를 정리했습니다.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-09">2026.06.09</time><span aria-hidden="true">&middot;</span>약 3분</p>
+    <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+                </div>
+              </section>
             </main>
+        <footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="../../">
+        <img class="brand-icon" src="../../../assets/minicycle-app-icon.png" alt="" width="34" height="34" loading="lazy">
+        <span>MiniCycle</span>
+      </a>
+      <p>내 주기를 이해하는 더 조용하고 사적인 방법.</p>
+    </div>
+    <nav class="footer-nav" aria-label="하단 탐색">
+      <a href="../../blog/">블로그</a>
+      <a href="../../support/">지원</a>
+      <a href="../../privacy/">개인정보</a>
+    </nav>
+    <p class="copyright">&copy; 2026 MiniCycle. iPhone을 위해 세심하게 만들었습니다.</p>
+  </div>
+</footer>
           </body>
         </html>

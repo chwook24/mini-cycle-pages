@@ -3,6 +3,8 @@
                 <head>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1">
+          <meta name="color-scheme" content="light dark">
+          <meta name="theme-color" content="#fbf8fa" data-theme-color>
           <title>배란통이 뭘까요? 배란기에 아랫배가 아픈 이유</title>
           <meta name="description" content="배란 무렵 한쪽 아랫배가 콕콕 쑤시는 배란통은 배란하는 사람의 40%까지 겪습니다. 어떤 느낌인지, 왜 생기는지, 그리고 배란통이 아닐 때는 언제인지 정리했습니다.">
           <link rel="canonical" href="https://minicycle.net/ko/blog/ovulation-pain-mittelschmerz-what-it-is/">
@@ -19,7 +21,75 @@
             <link rel="icon" href="../../../favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32x32.png">
     <link rel="apple-touch-icon" href="../../../apple-touch-icon.png">
-          <link rel="stylesheet" href="../../../styles.css">
+        <script>
+  (() => {
+    const storageKey = 'minicycle-theme';
+    const root = document.documentElement;
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+    root.classList.add('js');
+
+    function storedTheme() {
+      try {
+        const value = window.localStorage.getItem(storageKey);
+        return value === 'light' || value === 'dark' ? value : null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function currentTheme() {
+      return root.dataset.theme || (systemTheme.matches ? 'dark' : 'light');
+    }
+
+    function updateThemeUI() {
+      const dark = currentTheme() === 'dark';
+      const themeColor = document.querySelector('[data-theme-color]');
+      if (themeColor) themeColor.setAttribute('content', dark ? '#121014' : '#fbf8fa');
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      const label = dark
+        ? toggle.dataset.lightLabel
+        : toggle.dataset.darkLabel;
+      toggle.setAttribute('aria-label', label);
+      toggle.setAttribute('title', label);
+    }
+
+    const savedTheme = storedTheme();
+    if (savedTheme) root.dataset.theme = savedTheme;
+    updateThemeUI();
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      updateThemeUI();
+      toggle.addEventListener('click', () => {
+        const nextTheme = currentTheme() === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = nextTheme;
+        try {
+          window.localStorage.setItem(storageKey, nextTheme);
+        } catch (_) {
+          // The selected theme still applies for this page when storage is unavailable.
+        }
+        updateThemeUI();
+      });
+      if (typeof systemTheme.addEventListener === 'function') {
+        systemTheme.addEventListener('change', () => {
+          if (!root.dataset.theme) updateThemeUI();
+        });
+      }
+      window.addEventListener('storage', (event) => {
+        if (event.key !== storageKey) return;
+        if (event.newValue === 'light' || event.newValue === 'dark') {
+          root.dataset.theme = event.newValue;
+        } else {
+          delete root.dataset.theme;
+        }
+        updateThemeUI();
+      });
+    });
+  })();
+</script>
+          <link rel="stylesheet" href="../../../styles.css?v=20260711-4">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -109,53 +179,178 @@
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"배란통이 뭘까요? 배란기에 아랫배가 아픈 이유","description":"배란 무렵 한쪽 아랫배가 콕콕 쑤시는 배란통은 배란하는 사람의 40%까지 겪습니다. 어떤 느낌인지, 왜 생기는지, 그리고 배란통이 아닐 때는 언제인지 정리했습니다.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg","datePublished":"2026-07-03","dateModified":"2026-07-03","inLanguage":"ko","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/ko/blog/ovulation-pain-mittelschmerz-what-it-is/"}}</script>
         </head>
-          <body>
-        <header class="site-header">
-  <a class="brand" href="../../">MiniCycle</a>
-  <nav aria-label="Primary navigation">
-    <a href="../../blog/">블로그</a>
-    <a href="../../support/">지원</a>
-    <a href="../../privacy/">개인정보</a>
-    <a href="../../../blog/ovulation-pain-mittelschmerz-what-it-is/">English</a>
-  </nav>
+          <body class="article-page">
+        <a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="../../">
+      <img class="brand-icon" src="../../../assets/minicycle-app-icon.png" alt="" width="34" height="34">
+      <span>MiniCycle</span>
+    </a>
+    <nav class="site-nav" aria-label="주요 탐색">
+      <a href="../../blog/">블로그</a>
+      <a href="../../support/">지원</a>
+      <a href="../../privacy/">개인정보</a>
+    </nav>
+    <div class="header-controls">
+      <button class="theme-toggle" type="button" data-theme-toggle data-light-label="라이트 모드로 전환" data-dark-label="다크 모드로 전환" aria-label="화면 모드 전환">
+        <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
+        <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.1 15.4A8.2 8.2 0 0 1 8.6 3.9 8.2 8.2 0 1 0 20.1 15.4Z"></path></svg>
+      </button>
+      <a class="language-link" href="../../../blog/ovulation-pain-mittelschmerz-what-it-is/" lang="en" hreflang="en" aria-label="English">English</a>
+    </div>
+  </div>
 </header>
-            <main class="page">
+            <main class="page article-page-main" id="main-content">
               <article class="article" data-language="ko" data-content-group="ovulation-pain-mittelschmerz-what-it-is" data-min-read-ms="69000">
-                <p class="eyebrow">주기 건강</p>
-                <h1>배란통이 뭘까요? 배란기에 아랫배가 아픈 이유</h1>
-                <p class="article-meta">2026년 7월 3일 MiniCycle 작성</p>
-                <p class="lead">지난 생리가 끝나고 열흘쯤 지난 어느 날, 한쪽 아랫배가 콕 하고 쑤십니다. 생리통이라기엔 이르고, 저녁이면 사라집니다. 많은 사람이 겪지만 아무도 미리 일러 주지 않는 몸의 일 중 하나입니다. 배란 무렵 한쪽에 찾아오는 이 통증에는 배란통이라는 이름이 있고, 대개는 걱정할 일이 아닙니다. 무엇인지, 그리고 드물게 한 번 더 살펴야 하는 때가 언제인지 알아 두면 막연한 불안이 줄어듭니다.</p>
-                <img class="article-hero" src="../../../assets/home-capture-iphone17-1118-ko-20260518.jpg" alt="MiniCycle 아이폰 실제 캡처 화면: 생리 캘린더와 위젯 경험" width="552" height="1200" loading="eager">
-        <h2>한쪽 아랫배가 쑤신다면</h2>
+                <a class="back-link" href="../"><span aria-hidden="true">&larr;</span> 전체 글</a>
+                <header class="article-header">
+                  <div class="article-heading">
+                    <p class="category-pill">주기 건강</p>
+                    <h1>배란통이 뭘까요? 배란기에 아랫배가 아픈 이유</h1>
+                    <p class="article-meta"><time datetime="2026-07-03">2026년 7월 3일 MiniCycle 작성</time><span aria-hidden="true">&middot;</span><span>약 3분 읽기</span></p>
+                    <p class="lead">지난 생리가 끝나고 열흘쯤 지난 어느 날, 한쪽 아랫배가 콕 하고 쑤십니다. 생리통이라기엔 이르고, 저녁이면 사라집니다. 많은 사람이 겪지만 아무도 미리 일러 주지 않는 몸의 일 중 하나입니다. 배란 무렵 한쪽에 찾아오는 이 통증에는 배란통이라는 이름이 있고, 대개는 걱정할 일이 아닙니다. 무엇인지, 그리고 드물게 한 번 더 살펴야 하는 때가 언제인지 알아 두면 막연한 불안이 줄어듭니다.</p>
+                  </div>
+                  <figure class="article-visual">
+                    <div class="article-visual-frame">
+                      <span class="visual-orbit visual-orbit-one" aria-hidden="true"></span>
+                      <span class="visual-orbit visual-orbit-two" aria-hidden="true"></span>
+                      <img class="article-hero" src="../../../assets/home-capture-iphone17-1118-ko-20260518.jpg" alt="MiniCycle 아이폰 실제 캡처 화면: 생리 캘린더와 위젯 경험" width="552" height="1200" loading="eager">
+                    </div>
+                    <figcaption>iPhone에서 보는 MiniCycle 캘린더</figcaption>
+                  </figure>
+                </header>
+                <div class="article-layout">
+                  <div class="article-body">
+        <section class="article-section" aria-labelledby="section-1">
+  <h2 id="section-1">한쪽 아랫배가 쑤신다면</h2>
 <p>배란통은 독일어로 ‘가운데 통증’을 뜻하는 미텔슈메르츠(Mittelschmerz)라고도 합니다. 이름 그대로 주기 한가운데, 난소가 난자를 내보내는 무렵에 한쪽 아랫배가 아픕니다. Mayo Clinic은 대략 다음 생리 2주 전쯤으로 봅니다. 흔한 일이기도 합니다. 클리블랜드 클리닉은 배란하는 사람의 40%까지 겪는다고 설명합니다.</p>
 <p>매달 느끼는 사람도 있고, 딱 한 번 느끼고는 다시 못 알아채는 사람도 있습니다. 둘 다 정상입니다. 통증은 그달 일하는 난소 쪽에 생기니, 이번 달은 오른쪽, 다음 달은 왼쪽으로 편이 바뀌기도 합니다.</p>
-<h2>어떤 느낌이고 얼마나 갈까요</h2>
+</section>
+<section class="article-section" aria-labelledby="section-2">
+  <h2 id="section-2">어떤 느낌이고 얼마나 갈까요</h2>
 <p>형태는 하나가 아닙니다. 가벼운 생리통처럼 묵직하게 아프기도 하고, 순간 콕 쑤셔 잠깐 멈칫하게 만드는 날카로운 통증이기도 합니다. 거의 늘 한쪽입니다. 같은 날 맑고 늘어나는, 달걀흰자 같은 분비물이나 약간의 출혈이 함께 오는 경우도 있습니다.</p>
 <p>오래가지는 않습니다. NHS와 Mayo Clinic은 몇 분에서 하루 이틀 사이로, 클리블랜드 클리닉은 보통 몇 시간, 길어야 48시간까지로 설명합니다. 배란기 통증이 이보다 훨씬 오래 끌거나 점점 심해진다면, 바로 그 지점이 평범한 배란통과 한 번 물어볼 만한 통증을 가릅니다.</p>
-<h2>왜 아플까요</h2>
+</section>
+<section class="article-section" aria-labelledby="section-3">
+  <h2 id="section-3">왜 아플까요</h2>
 <p>난자는 난포라는 액체 주머니 안에서 자랍니다. 배란이 가까워지면 난포가 부풀어 난소 표면을 늘리고, 이윽고 터지면서 난자를 내보냅니다. Mayo Clinic은 통증의 원인으로 두 가지를 꼽습니다. 표면이 늘어나는 것 자체, 그리고 터진 난포에서 나온 소량의 피와 액체가 가까운 복막을 자극하는 것입니다.</p>
 <p>정확한 기전은 아직 밝혀지지 않았고, 이 점이 흔한 오해 하나와 맞닿습니다. 표면이 늘어나는 건 난자가 나오기 전, 액체가 새는 건 나온 뒤라서, 통증은 난자가 정확히 언제 떨어졌는지 짚어 주는 초시계가 아닙니다. 배란의 언저리를 알릴 뿐, 정확한 그 순간은 아닙니다.</p>
-<h2>배란통이 있다고 더 잘 임신되는 건 아닙니다</h2>
+</section>
+<section class="article-section" aria-labelledby="section-4">
+  <h2 id="section-4">배란통이 있다고 더 잘 임신되는 건 아닙니다</h2>
 <p>배란통에는 오해 두 가지가 따라붙습니다. 하나는 통증을 느끼면 그만큼 임신이 잘 된다는 생각입니다. 클리블랜드 클리닉은 여기에 분명히 선을 긋습니다. 배란통은 가임력을 높이지 않고, 그 주기의 임신 확률도 바꾸지 않습니다. 그저 감각일 뿐 이점이 아닙니다.</p>
 <p>다른 하나는 그 날짜만 피하면 배란통을 피임에 쓸 수 있다는 생각입니다. 그렇게 기댈 수는 없습니다. 통증은 근사값이고, 가임기는 며칠에 걸쳐 있으며, 정자는 통증보다 오래 살아남습니다. 임신을 준비한다면 배란이 가깝다는 반가운 신호지만, 피하려는 목적이라면 피임법이 아닙니다.</p>
-<h2>이건 배란통이 아닐 수 있어요</h2>
+</section>
+<section class="article-section" aria-labelledby="section-5">
+  <h2 id="section-5">이건 배란통이 아닐 수 있어요</h2>
 <p>배란통은 대개 해롭지 않고 저절로 지나갑니다. 따뜻한 물에 몸을 담그거나 이부프로펜, 아세트아미노펜 같은 진통제면 충분한 경우가 많습니다. 다만 통증이 점점 심해지는 건 배란통답지 않습니다. Mayo Clinic은 새로 생긴 골반 통증이 심해지거나, 구역·발열을 동반하거나, 가시지 않으면 의료진에게 연락하라고 안내합니다.</p>
 <p>클리블랜드 클리닉은 몇 가지를 더 짚습니다. 38도(화씨 100.4도)가 넘는 열, 소변 볼 때의 통증, 구토, 생리 사이의 대량 출혈, 하루 넘게 이어지거나 매달 심하게 오는 배란기 통증입니다. 이걸 가볍게 넘기지 말라는 이유는 배란통이 위험해서가 아니라, 이를 흉내 내는 다른 문제들이 있기 때문입니다. 난소낭종, 난소꼬임, 충수염, 골반염, 자궁외임신이 그렇습니다. 갑작스럽고 심한 한쪽 통증은 기다리기보다 전화할 일입니다.</p>
-<h2>달력에 통증을 겹쳐 보기</h2>
+</section>
+<section class="article-section" aria-labelledby="section-6">
+  <h2 id="section-6">달력에 통증을 겹쳐 보기</h2>
 <p>Mayo Clinic과 클리블랜드 클리닉은 같은, 품이 적게 드는 방법을 권합니다. 몇 주기 동안 통증을 느낀 날을 적어 두는 것입니다. 주기 한가운데에 왔다가 저절로 사라진다면 배란통일 가능성이 큽니다. 몇 달치 날짜가 막연한 걱정을 눈에 보이는 패턴으로 바꿔 줍니다.</p>
 <p>기록 앱이 제 몫을 하는 지점이 여기입니다. MiniCycle에서는 통증이 온 날 메모를 남기고, 달력에서 진한 파란색으로 찍힌 예상 배란일 옆에 그 통증이 어떻게 놓이는지 볼 수 있습니다. 앱은 주기 길이에 따라 9–14일 사이에서 달라지는 황체기를 다음 예정일에서 거꾸로 세어 배란일을 추정합니다. 통증도, 추정도 같은 사건의 근사값이라 서로를 대략 확인해 주는 셈입니다. 메모는 계정 없이 기기 안에 남습니다. 이 무엇도 진단은 아닙니다. 다만 내 손으로 쌓은 기록이 있으면, 배란기 통증이 언젠가 평범해 보이지 않을 때 의료진과의 대화가 훨씬 빨라집니다.</p>
-                <div class="callout">
-                  <p>MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다.</p>
-                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="ko" data-placement="blog_article_callout" data-content-group="ovulation-pain-mittelschmerz-what-it-is" onclick="trackAppStoreClick(this)">App Store에서 받기</a>
+</section>
+                    <section class="callout" aria-labelledby="try-minicycle">
+                      <img class="callout-mark" src="../../../assets/minicycle-app-icon.png" alt="" width="42" height="42" loading="lazy">
+                      <div class="callout-copy">
+                        <p class="eyebrow">MiniCycle for iPhone</p>
+                        <h2 id="try-minicycle">MiniCycle 사용하기</h2>
+                        <p>MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다.</p>
+                      </div>
+                      <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="ko" data-placement="blog_article_callout" data-content-group="ovulation-pain-mittelschmerz-what-it-is" onclick="trackAppStoreClick(this)">App Store에서 받기</a>
+                    </section>
+                    <section class="references-section" aria-labelledby="references-title">
+                      <p class="eyebrow">MiniCycle editorial</p>
+                      <h2 id="references-title">참고 자료</h2>
+                      <ul class="references">
+        <li><a href="https://www.mayoclinic.org/diseases-conditions/mittelschmerz/symptoms-causes/syc-20375122" lang="en">Mayo Clinic. Mittelschmerz — Symptoms and causes.</a></li>
+<li><a href="https://my.clevelandclinic.org/health/diseases/9134-ovulation-pain-mittelschmerz" lang="en">Cleveland Clinic. Ovulation Pain (Mittelschmerz).</a></li>
+<li><a href="https://www.nhs.uk/symptoms/ovulation-pain/" lang="en">NHS. Ovulation pain.</a></li>
+<li><a href="https://minicycle.net/privacy/" lang="en">MiniCycle Privacy Policy.</a></li>
+                      </ul>
+                    </section>
+                  </div>
+                  <aside class="article-sidebar">
+                    <nav class="article-toc" aria-label="이 글에서 다루는 내용">
+                      <p class="toc-title">이 글에서 다루는 내용</p>
+                      <ol>
+        <li><a href="#section-1">한쪽 아랫배가 쑤신다면</a></li>
+<li><a href="#section-2">어떤 느낌이고 얼마나 갈까요</a></li>
+<li><a href="#section-3">왜 아플까요</a></li>
+<li><a href="#section-4">배란통이 있다고 더 잘 임신되는 건 아닙니다</a></li>
+<li><a href="#section-5">이건 배란통이 아닐 수 있어요</a></li>
+<li><a href="#section-6">달력에 통증을 겹쳐 보기</a></li>
+                      </ol>
+                    </nav>
+                  </aside>
                 </div>
-                <h2>참고 자료</h2>
-                <ul class="references">
-        <li><a href="https://www.mayoclinic.org/diseases-conditions/mittelschmerz/symptoms-causes/syc-20375122">Mayo Clinic. Mittelschmerz — Symptoms and causes.</a></li>
-<li><a href="https://my.clevelandclinic.org/health/diseases/9134-ovulation-pain-mittelschmerz">Cleveland Clinic. Ovulation Pain (Mittelschmerz).</a></li>
-<li><a href="https://www.nhs.uk/symptoms/ovulation-pain/">NHS. Ovulation pain.</a></li>
-<li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
-                </ul>
               </article>
+              <section class="related-section" aria-labelledby="related-title">
+                <div class="section-heading">
+                  <div>
+                    <p class="eyebrow">이어서 읽기</p>
+                    <h2 id="related-title">함께 읽으면 좋은 글</h2>
+                  </div>
+                  <a class="text-link section-link" href="../">전체 글<span aria-hidden="true">&nbsp;&rarr;</span></a>
+                </div>
+                <div class="post-grid related-grid">
+        <article class="post-card related-card" data-guide-card data-search-value="주기 건강 생리 중에도 임신이 될 수 있을까요 생리 중 임신은 드물지만 불가능하지 않습니다. 주기가 짧고 생리가 길 때 특히 그렇습니다. 왜 가능한지, 달력 예측이 왜 피임이 아닌지 정리했습니다.">
+  <div class="post-card-topline">
+    <p class="category-pill">주기 건강</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../can-you-get-pregnant-on-your-period/">생리 중에도 임신이 될 수 있을까요</a></h3>
+  <p class="post-description">생리 중 임신은 드물지만 불가능하지 않습니다. 주기가 짧고 생리가 길 때 특히 그렇습니다. 왜 가능한지, 달력 예측이 왜 피임이 아닌지 정리했습니다.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-24">2026.06.24</time><span aria-hidden="true">&middot;</span>약 3분</p>
+    <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="주기 건강 생리혈 색깔, 갈색이나 검은색도 정상일까요 생리혈이 갈색이나 검은색을 띠는 건 대개 피가 나오기까지 시간이 걸렸다는 뜻입니다. 분홍·빨강·갈색이 다 정상인 이유와, 색보다 정작 살펴야 할 것을 정리했습니다.">
+  <div class="post-card-topline">
+    <p class="category-pill">주기 건강</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../period-blood-color-what-it-means/">생리혈 색깔, 갈색이나 검은색도 정상일까요</a></h3>
+  <p class="post-description">생리혈이 갈색이나 검은색을 띠는 건 대개 피가 나오기까지 시간이 걸렸다는 뜻입니다. 분홍·빨강·갈색이 다 정상인 이유와, 색보다 정작 살펴야 할 것을 정리했습니다.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-21">2026.06.21</time><span aria-hidden="true">&middot;</span>약 3분</p>
+    <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="주기 건강 월경전증후군(pms) 증상과 시기, 어디까지가 정상일까 pms는 배란 뒤 황체기에 나타나 생리가 시작되면 며칠 안에 가라앉습니다. 흔한 증상과 시기, 정상으로 보는 범위, 그리고 병원에 가 볼 기준을 정리했습니다.">
+  <div class="post-card-topline">
+    <p class="category-pill">주기 건강</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../pms-symptoms-timing-what-is-normal/">월경전증후군(PMS) 증상과 시기, 어디까지가 정상일까</a></h3>
+  <p class="post-description">PMS는 배란 뒤 황체기에 나타나 생리가 시작되면 며칠 안에 가라앉습니다. 흔한 증상과 시기, 정상으로 보는 범위, 그리고 병원에 가 볼 기준을 정리했습니다.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-18">2026.06.18</time><span aria-hidden="true">&middot;</span>약 3분</p>
+    <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+                </div>
+              </section>
             </main>
+        <footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="../../">
+        <img class="brand-icon" src="../../../assets/minicycle-app-icon.png" alt="" width="34" height="34" loading="lazy">
+        <span>MiniCycle</span>
+      </a>
+      <p>내 주기를 이해하는 더 조용하고 사적인 방법.</p>
+    </div>
+    <nav class="footer-nav" aria-label="하단 탐색">
+      <a href="../../blog/">블로그</a>
+      <a href="../../support/">지원</a>
+      <a href="../../privacy/">개인정보</a>
+    </nav>
+    <p class="copyright">&copy; 2026 MiniCycle. iPhone을 위해 세심하게 만들었습니다.</p>
+  </div>
+</footer>
           </body>
         </html>

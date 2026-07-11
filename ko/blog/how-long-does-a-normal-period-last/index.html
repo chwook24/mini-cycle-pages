@@ -3,6 +3,8 @@
                 <head>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1">
+          <meta name="color-scheme" content="light dark">
+          <meta name="theme-color" content="#fbf8fa" data-theme-color>
           <title>생리는 며칠 하는 게 정상일까요</title>
           <meta name="description" content="생리 기간은 보통 2–7일, 대개 5일쯤입니다. 정해진 정답 일수가 아니라 내 몸의 꾸준한 패턴이 기준입니다. 정상 범위와, 변화가 병원 신호가 되는 때를 정리했습니다.">
           <link rel="canonical" href="https://minicycle.net/ko/blog/how-long-does-a-normal-period-last/">
@@ -19,7 +21,75 @@
             <link rel="icon" href="../../../favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32x32.png">
     <link rel="apple-touch-icon" href="../../../apple-touch-icon.png">
-          <link rel="stylesheet" href="../../../styles.css">
+        <script>
+  (() => {
+    const storageKey = 'minicycle-theme';
+    const root = document.documentElement;
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+    root.classList.add('js');
+
+    function storedTheme() {
+      try {
+        const value = window.localStorage.getItem(storageKey);
+        return value === 'light' || value === 'dark' ? value : null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function currentTheme() {
+      return root.dataset.theme || (systemTheme.matches ? 'dark' : 'light');
+    }
+
+    function updateThemeUI() {
+      const dark = currentTheme() === 'dark';
+      const themeColor = document.querySelector('[data-theme-color]');
+      if (themeColor) themeColor.setAttribute('content', dark ? '#121014' : '#fbf8fa');
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      const label = dark
+        ? toggle.dataset.lightLabel
+        : toggle.dataset.darkLabel;
+      toggle.setAttribute('aria-label', label);
+      toggle.setAttribute('title', label);
+    }
+
+    const savedTheme = storedTheme();
+    if (savedTheme) root.dataset.theme = savedTheme;
+    updateThemeUI();
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      updateThemeUI();
+      toggle.addEventListener('click', () => {
+        const nextTheme = currentTheme() === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = nextTheme;
+        try {
+          window.localStorage.setItem(storageKey, nextTheme);
+        } catch (_) {
+          // The selected theme still applies for this page when storage is unavailable.
+        }
+        updateThemeUI();
+      });
+      if (typeof systemTheme.addEventListener === 'function') {
+        systemTheme.addEventListener('change', () => {
+          if (!root.dataset.theme) updateThemeUI();
+        });
+      }
+      window.addEventListener('storage', (event) => {
+        if (event.key !== storageKey) return;
+        if (event.newValue === 'light' || event.newValue === 'dark') {
+          root.dataset.theme = event.newValue;
+        } else {
+          delete root.dataset.theme;
+        }
+        updateThemeUI();
+      });
+    });
+  })();
+</script>
+          <link rel="stylesheet" href="../../../styles.css?v=20260711-4">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -109,65 +179,199 @@
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"생리는 며칠 하는 게 정상일까요","description":"생리 기간은 보통 2–7일, 대개 5일쯤입니다. 정해진 정답 일수가 아니라 내 몸의 꾸준한 패턴이 기준입니다. 정상 범위와, 변화가 병원 신호가 되는 때를 정리했습니다.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg","datePublished":"2026-07-02","dateModified":"2026-07-02","inLanguage":"ko","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/ko/blog/how-long-does-a-normal-period-last/"}}</script>
         </head>
-          <body>
-        <header class="site-header">
-  <a class="brand" href="../../">MiniCycle</a>
-  <nav aria-label="Primary navigation">
-    <a href="../../blog/">블로그</a>
-    <a href="../../support/">지원</a>
-    <a href="../../privacy/">개인정보</a>
-    <a href="../../../blog/how-long-does-a-normal-period-last/">English</a>
-  </nav>
+          <body class="article-page">
+        <a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="../../">
+      <img class="brand-icon" src="../../../assets/minicycle-app-icon.png" alt="" width="34" height="34">
+      <span>MiniCycle</span>
+    </a>
+    <nav class="site-nav" aria-label="주요 탐색">
+      <a href="../../blog/">블로그</a>
+      <a href="../../support/">지원</a>
+      <a href="../../privacy/">개인정보</a>
+    </nav>
+    <div class="header-controls">
+      <button class="theme-toggle" type="button" data-theme-toggle data-light-label="라이트 모드로 전환" data-dark-label="다크 모드로 전환" aria-label="화면 모드 전환">
+        <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
+        <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.1 15.4A8.2 8.2 0 0 1 8.6 3.9 8.2 8.2 0 1 0 20.1 15.4Z"></path></svg>
+      </button>
+      <a class="language-link" href="../../../blog/how-long-does-a-normal-period-last/" lang="en" hreflang="en" aria-label="English">English</a>
+    </div>
+  </div>
 </header>
-            <main class="page">
+            <main class="page article-page-main" id="main-content">
               <article class="article" data-language="ko" data-content-group="how-long-does-a-normal-period-last" data-min-read-ms="90000">
-                <p class="eyebrow">주기 기초</p>
-                <h1>생리는 며칠 하는 게 정상일까요</h1>
-                <p class="article-meta">2026년 7월 2일 MiniCycle 작성</p>
-                <p class="lead">누구는 사흘, 누구는 일주일. 둘 다 정상 생리일 수 있습니다. 사람들이 실제로 궁금해하는 건 단순합니다. 생리는 대체 며칠 하는 게 맞을까. 답은 하나의 숫자가 아니라 범위입니다. 이 범위를 알고 나면 이번 달이 유난히 짧거나 길어도 굳이 문제로 여길 일이 아니게 됩니다.</p>
-                <img class="article-hero" src="../../../assets/home-capture-iphone17-1118-ko-20260518.jpg" alt="MiniCycle 아이폰 실제 캡처 화면: 생리 캘린더와 위젯 경험" width="552" height="1200" loading="eager">
-        <h2>짧게 답하면, 이삼일에서 일주일</h2>
+                <a class="back-link" href="../"><span aria-hidden="true">&larr;</span> 전체 글</a>
+                <header class="article-header">
+                  <div class="article-heading">
+                    <p class="category-pill">주기 기초</p>
+                    <h1>생리는 며칠 하는 게 정상일까요</h1>
+                    <p class="article-meta"><time datetime="2026-07-02">2026년 7월 2일 MiniCycle 작성</time><span aria-hidden="true">&middot;</span><span>약 3분 읽기</span></p>
+                    <p class="lead">누구는 사흘, 누구는 일주일. 둘 다 정상 생리일 수 있습니다. 사람들이 실제로 궁금해하는 건 단순합니다. 생리는 대체 며칠 하는 게 맞을까. 답은 하나의 숫자가 아니라 범위입니다. 이 범위를 알고 나면 이번 달이 유난히 짧거나 길어도 굳이 문제로 여길 일이 아니게 됩니다.</p>
+                  </div>
+                  <figure class="article-visual">
+                    <div class="article-visual-frame">
+                      <span class="visual-orbit visual-orbit-one" aria-hidden="true"></span>
+                      <span class="visual-orbit visual-orbit-two" aria-hidden="true"></span>
+                      <img class="article-hero" src="../../../assets/home-capture-iphone17-1118-ko-20260518.jpg" alt="MiniCycle 아이폰 실제 캡처 화면: 생리 캘린더와 위젯 경험" width="552" height="1200" loading="eager">
+                    </div>
+                    <figcaption>iPhone에서 보는 MiniCycle 캘린더</figcaption>
+                  </figure>
+                </header>
+                <div class="article-layout">
+                  <div class="article-body">
+        <section class="article-section" aria-labelledby="section-1">
+  <h2 id="section-1">짧게 답하면, 이삼일에서 일주일</h2>
 <p>대부분의 생리는 2–7일쯤 이어집니다. 영국 NHS는 보통 5일 정도로 보고, 첫 이틀에 양이 가장 많다고 안내합니다. 클리블랜드 클리닉도 같은 2–7일을 말하고, Mayo Clinic은 위쪽을 조금 더 넓혀 최대 8일까지 갈 수 있다고 봅니다. 세 곳 모두 범위의 한가운데는 5일 근처입니다.</p>
 <p>그러니 5일은 내 패턴을 알기 전에 가정해 둘 만한 값이지, 꼭 맞춰야 할 목표가 아닙니다. 사흘 생리도, 이레 생리도 평범한 범위 안입니다. 내 숫자를 정하는 건 평균이 아니라 내 몸입니다.</p>
-<h2>생리 기간과 주기는 다른 숫자입니다</h2>
+</section>
+<section class="article-section" aria-labelledby="section-2">
+  <h2 id="section-2">생리 기간과 주기는 다른 숫자입니다</h2>
 <p>이름이 비슷해서 헷갈리기 쉬운 두 길이가 있습니다. 생리 기간은 며칠 동안 피가 나오는가입니다. 주기는 한 생리의 첫날부터 다음 생리의 첫날까지의 간격이고, 기관들은 대략 21일에서 38일 사이로 봅니다. 29일 주기 안에 5일 생리가 들어 있는 식이죠. 생리는 출혈 부분, 주기는 한 바퀴 전체입니다.</p>
 <p>기록을 시작하면 이 구분이 쓸모 있어집니다. 하나가 바뀌었다고 다른 하나도 바뀐 건 아니거든요. 둘을 나눠 두면 &#x27;출혈이 길어졌다&#x27;와 &#x27;생리 간격이 좁아졌다&#x27;를 헷갈리지 않습니다. 물어볼 것도, 지켜볼 것도 다른 이야기입니다.</p>
-<h2>정답 일수는 없습니다</h2>
+</section>
+<section class="article-section" aria-labelledby="section-3">
+  <h2 id="section-3">정답 일수는 없습니다</h2>
 <p>가장 흔한 걱정은 생리가 딱 며칠이어야 정상이고 그 밖은 이상이라는 생각입니다. 그렇지 않습니다. 클리블랜드 클리닉의 에린 히긴스 산부인과 전문의는 정상을 개인의 것으로 설명합니다. 나에게 일반적인 것이 남에게는 아닐 수 있고, 중요한 건 내가 알아볼 수 있는 패턴이라는 거죠. 달마다 나흘쯤에서 안정적으로 도는 생리는, 친구 것이 엿새라도 제 할 일을 하고 있는 겁니다.</p>
 <p>내 패턴 안의 작은 움직임도 평범합니다. 히긴스는 사흘에서 나흘로 바뀌는 정도는 정상 변동이라고 콕 집어 말합니다. 매달 똑같지 않아도 됩니다. 봐야 할 건 고정된 일수가 아니라 대략적인 일관성입니다.</p>
-<h2>생리를 짧게 또는 길게 만드는 것들</h2>
+</section>
+<section class="article-section" aria-labelledby="section-4">
+  <h2 id="section-4">생리를 짧게 또는 길게 만드는 것들</h2>
 <p>숫자를 움직이는 평범한 이유가 몇 가지 있습니다. 대표적인 게 호르몬 피임입니다. 먹는 피임약, 패치, 링, 호르몬 자궁내 장치, 삽입형, 주사는 대개 생리를 짧고 가볍게 만들고, 방법에 따라 출혈이 아예 없기도 합니다. 피임을 시작한 뒤 생리가 짧아졌다면 보통은 그 방법이 설계대로 작동하는 것입니다.</p>
 <p>나이도 숫자를 바꿉니다. 초경 후 몇 년은 주기를 조절하는 몸의 체계가 자리를 잡는 동안 기간도 양도 들쭉날쭉할 수 있습니다. 폐경을 앞둔 시기에는 다시 달라지고요. Mayo Clinic은 나이가 들수록 주기가 짧아지고 더 규칙적으로 되는 경향이 있다고 설명합니다. 이 변화들은 그 자체로 문제가 아니라, 몸의 변화를 기간이 따라가는 것입니다.</p>
-<h2>MiniCycle은 생리 기간을 어떻게 다루나요</h2>
+</section>
+<section class="article-section" aria-labelledby="section-5">
+  <h2 id="section-5">MiniCycle은 생리 기간을 어떻게 다루나요</h2>
 <p>MiniCycle은 생리 기간을 주기와 별개의 설정으로 둡니다. 앱이 추정하게 두거나 직접 정할 수 있습니다. 자동이면 최근의 닫힌 생리, 곧 시작과 종료가 모두 기록된 생리를 최대 12개까지 읽어 평소 기간을 잡고, 참고할 게 없으면 5일로 가정합니다. 직접 정하면 1–10일 사이에서 내가 정한 값이 우선합니다.</p>
 <p>그래서 시작뿐 아니라 종료까지 찍어 두는 몇 초가 아깝지 않습니다. 종료일이 정확해야 추정이 나를 닮으니까요. 새 생리 시작을 표시하면 앱이 생리 기간 설정에 맞춰 종료일을 미리 채워 두고, 생리가 끝난 실제 날짜로 끌어다 고칠 수 있습니다. 모든 기록은 계정 없이 기기 안에 남습니다. 앱의 숫자가 기본값이 아니라 내 기간을 반영하길 바란다면, 종료일을 솔직하게 찍어 두는 게 요령의 거의 전부입니다.</p>
-<h2>기간 변화가 병원 신호가 될 때</h2>
+</section>
+<section class="article-section" aria-labelledby="section-6">
+  <h2 id="section-6">기간 변화가 병원 신호가 될 때</h2>
 <p>생리 기간은 하나의 단서입니다. 혼자 지켜보기보다 의료진에게 이야기해 볼 만한 패턴이 몇 가지 있습니다. Mayo Clinic은 출혈이 8일을 넘길 때, 규칙적이던 생리가 불규칙해질 때, 한두 시간마다 생리대나 탐폰을 갈아야 할 만큼 양이 많을 때를 꼽습니다. 클리블랜드 클리닉은 알기 쉬운 예를 더합니다. 사흘이던 생리가 엿새로 바뀌어 그대로 이어질 때입니다.</p>
 <p>핵심은 특정 일수를 못 맞춘 게 아니라, 내 평소에서 실제로, 그리고 계속 벗어난 변화입니다. 유난했던 한 달 하나가 아니고요. 기록이 있으면 이 대화가 빨라집니다. 몇 달치 시작일과 종료일이 기억보다 변화를 잘 보여주니까요. 분명히 해 둘 한계 하나. 앱은 며칠 출혈했는지 기록할 수 있어도, 그 길이가 왜 변했는지는 진단하지 못합니다. 날짜는 나를 위한, 그리고 뭔가 이상할 때 의료진을 위한 참고 정보입니다.</p>
-<h2>둘 다 정상인 두 생리</h2>
+</section>
+<section class="article-section" aria-labelledby="section-7">
+  <h2 id="section-7">둘 다 정상인 두 생리</h2>
 <p>친구 둘을 그려 봅니다. 한 명은 기억하는 한 늘 사흘 만에 딱 끝나고, 다른 한 명은 어김없이 엿새를 갑니다. 둘 다 고칠 문제가 없습니다. 각자 안정적인 패턴이 있고, 그 안정성이 일수보다 중요한 신호입니다. 사흘이던 친구가 갑자기 매달 엿새씩 흘린다면, 엿새가 틀려서가 아니라 그에게 새로운 변화라서 한번 이야기해 볼 만합니다.</p>
 <p>남과 생리 기간을 비교해서 얻을 게 별로 없는 이유이기도 합니다. 내 평소 일수와 남의 일수가 며칠 달라도 둘 다 평범할 수 있습니다. 견줄 만한 건 내 최근 몇 달이고, 기록이 있으면 바로 그걸 할 수 있습니다.</p>
-<h2>자주 묻는 질문</h2>
+</section>
+<section class="article-section" aria-labelledby="section-8">
+  <h2 id="section-8">자주 묻는 질문</h2>
 <p>생리는 며칠이 정상인가요? 대개 2–7일, 보통 5일쯤입니다. 위쪽을 8일까지 보는 곳도 있습니다. 범위의 짧은 쪽이든 긴 쪽이든, 나에게 꾸준하다면 정상일 수 있습니다.</p>
 <p>이틀이면 너무 짧은가요? 그 자체로는 아닙니다. 짧은 생리가 내 패턴일 수 있고, 호르몬 피임은 흔히 생리를 짧게 만듭니다. 평소보다 갑자기 훨씬 짧아졌다면 그 변화를 한번 이야기해 볼 만합니다.</p>
 <p>7일이면 문제인가요? 아니요. 7일은 평범한 범위 안입니다. 8일쯤을 넘겨 이어지거나, 눈에 띄게 길어져 그대로 굳은 생리를 Mayo Clinic은 확인해 보라고 안내합니다.</p>
 <p>생리가 왜 짧아졌을까요? 호르몬 피임을 시작했거나 나이가 드는 것이 흔한 이유입니다. 주기는 나이에 따라 짧아지곤 하니까요. 갑작스럽고 설명되지 않는 변화라면 의료진과 상의하세요.</p>
 <p>생리 기간으로 주기나 가임력을 알 수 있나요? 그렇지는 않습니다. 생리 기간은 출혈한 날수이고, 주기의 길이와 날짜가 가임 관련 질문에는 더 쓸모 있습니다. 두 숫자는 서로 다른 것을 따라갑니다.</p>
-<h2>한 줄로</h2>
+</section>
+<section class="article-section" aria-labelledby="section-9">
+  <h2 id="section-9">한 줄로</h2>
 <p>정상 생리 기간은 대개 2–7일, 보통 5일쯤이고 첫 이틀에 양이 가장 많습니다. 위쪽을 8일까지 보기도 합니다. 정해진 정답 일수는 없고 내 몸의 꾸준한 패턴이 기준이라, 사흘 생리도 이레 생리도 괜찮을 수 있습니다. 생리 기간(출혈한 날수)과 주기(생리 시작 사이의 간격)는 서로 다른 숫자입니다.</p>
 <p>호르몬 피임이나 나이 같은 평범한 이유로 생리는 짧아지거나 길어질 수 있습니다. 병원에 이야기할 변화는 실제로 꾸준히 이어지는 변화입니다. 8일쯤을 넘기는 출혈, 한두 시간마다 생리대를 적실 만큼 많은 양, 바뀐 채 굳어 버린 기간이 그렇습니다. MiniCycle은 생리 기간을 별개 설정으로 두고(직접 1–10일, 또는 최근 닫힌 생리 12개까지에서의 추정, 기본값 5일) 모두 기기 안에서 다룹니다. 며칠 출혈했는지는 기록해도 왜 변했는지는 진단하지 않습니다.</p>
-                <div class="callout">
-                  <p>MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다.</p>
-                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="ko" data-placement="blog_article_callout" data-content-group="how-long-does-a-normal-period-last" onclick="trackAppStoreClick(this)">App Store에서 받기</a>
+</section>
+                    <section class="callout" aria-labelledby="try-minicycle">
+                      <img class="callout-mark" src="../../../assets/minicycle-app-icon.png" alt="" width="42" height="42" loading="lazy">
+                      <div class="callout-copy">
+                        <p class="eyebrow">MiniCycle for iPhone</p>
+                        <h2 id="try-minicycle">MiniCycle 사용하기</h2>
+                        <p>MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다.</p>
+                      </div>
+                      <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="ko" data-placement="blog_article_callout" data-content-group="how-long-does-a-normal-period-last" onclick="trackAppStoreClick(this)">App Store에서 받기</a>
+                    </section>
+                    <section class="references-section" aria-labelledby="references-title">
+                      <p class="eyebrow">MiniCycle editorial</p>
+                      <h2 id="references-title">참고 자료</h2>
+                      <ul class="references">
+        <li><a href="https://www.nhs.uk/conditions/periods/" lang="en">NHS. Periods.</a></li>
+<li><a href="https://health.clevelandclinic.org/how-long-should-your-period-last" lang="en">Cleveland Clinic. How Long Should Your Period Last?</a></li>
+<li><a href="https://www.mayoclinic.org/healthy-lifestyle/womens-health/in-depth/menstrual-cycle/art-20047186" lang="en">Mayo Clinic. Menstrual cycle: What&#x27;s normal, what&#x27;s not.</a></li>
+<li><a href="https://minicycle.net/privacy/" lang="en">MiniCycle Privacy Policy.</a></li>
+                      </ul>
+                    </section>
+                  </div>
+                  <aside class="article-sidebar">
+                    <nav class="article-toc" aria-label="이 글에서 다루는 내용">
+                      <p class="toc-title">이 글에서 다루는 내용</p>
+                      <ol>
+        <li><a href="#section-1">짧게 답하면, 이삼일에서 일주일</a></li>
+<li><a href="#section-2">생리 기간과 주기는 다른 숫자입니다</a></li>
+<li><a href="#section-3">정답 일수는 없습니다</a></li>
+<li><a href="#section-4">생리를 짧게 또는 길게 만드는 것들</a></li>
+<li><a href="#section-5">MiniCycle은 생리 기간을 어떻게 다루나요</a></li>
+<li><a href="#section-6">기간 변화가 병원 신호가 될 때</a></li>
+<li><a href="#section-7">둘 다 정상인 두 생리</a></li>
+<li><a href="#section-8">자주 묻는 질문</a></li>
+<li><a href="#section-9">한 줄로</a></li>
+                      </ol>
+                    </nav>
+                  </aside>
                 </div>
-                <h2>참고 자료</h2>
-                <ul class="references">
-        <li><a href="https://www.nhs.uk/conditions/periods/">NHS. Periods.</a></li>
-<li><a href="https://health.clevelandclinic.org/how-long-should-your-period-last">Cleveland Clinic. How Long Should Your Period Last?</a></li>
-<li><a href="https://www.mayoclinic.org/healthy-lifestyle/womens-health/in-depth/menstrual-cycle/art-20047186">Mayo Clinic. Menstrual cycle: What&#x27;s normal, what&#x27;s not.</a></li>
-<li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
-                </ul>
               </article>
+              <section class="related-section" aria-labelledby="related-title">
+                <div class="section-heading">
+                  <div>
+                    <p class="eyebrow">이어서 읽기</p>
+                    <h2 id="related-title">함께 읽으면 좋은 글</h2>
+                  </div>
+                  <a class="text-link section-link" href="../">전체 글<span aria-hidden="true">&nbsp;&rarr;</span></a>
+                </div>
+                <div class="post-grid related-grid">
+        <article class="post-card related-card" data-guide-card data-search-value="주기 기초 배란일은 어떻게 알 수 있나요? 배란 신호와 기초체온 배란이 다가오면 몸이 신호를 보냅니다. 배란 전 맑아지는 분비물, 배란 뒤 0.3도쯤 오르는 기초체온, 배란테스트기가 각각 무엇을 알려주고 무엇은 못 알려주는지 정리했습니다.">
+  <div class="post-card-topline">
+    <p class="category-pill">주기 기초</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../ovulation-signs-basal-body-temperature/">배란일은 어떻게 알 수 있나요? 배란 신호와 기초체온</a></h3>
+  <p class="post-description">배란이 다가오면 몸이 신호를 보냅니다. 배란 전 맑아지는 분비물, 배란 뒤 0.3도쯤 오르는 기초체온, 배란테스트기가 각각 무엇을 알려주고 무엇은 못 알려주는지 정리했습니다.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-08">2026.06.08</time><span aria-hidden="true">&middot;</span>약 3분</p>
+    <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="주기 기초 생리 주기는 며칠이 정상일까요 생리 주기는 정확히 28일이 아니어도 괜찮습니다. 기관들이 정상으로 안내하는 24–38일 범위와 달마다 생기는 변동, 병원에 가볼 만한 신호를 정리했습니다.">
+  <div class="post-card-topline">
+    <p class="category-pill">주기 기초</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../normal-menstrual-cycle-length-variation/">생리 주기는 며칠이 정상일까요</a></h3>
+  <p class="post-description">생리 주기는 정확히 28일이 아니어도 괜찮습니다. 기관들이 정상으로 안내하는 24–38일 범위와 달마다 생기는 변동, 병원에 가볼 만한 신호를 정리했습니다.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-07">2026.06.07</time><span aria-hidden="true">&middot;</span>약 3분</p>
+    <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="주기 기초 생리 주기 단계별로 몸에서 일어나는 일 생리 주기는 월경기, 난포기, 배란, 황체기로 이어집니다. 각 단계에서 몸이 하는 일과 단계 길이가 사람마다 다른 이유, minicycle이 이 구조를 달력에 옮기는 방식을 정리했습니다.">
+  <div class="post-card-topline">
+    <p class="category-pill">주기 기초</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../menstrual-cycle-phases-explained/">생리 주기 단계별로 몸에서 일어나는 일</a></h3>
+  <p class="post-description">생리 주기는 월경기, 난포기, 배란, 황체기로 이어집니다. 각 단계에서 몸이 하는 일과 단계 길이가 사람마다 다른 이유, MiniCycle이 이 구조를 달력에 옮기는 방식을 정리했습니다.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-06">2026.06.06</time><span aria-hidden="true">&middot;</span>약 3분</p>
+    <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+                </div>
+              </section>
             </main>
+        <footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="../../">
+        <img class="brand-icon" src="../../../assets/minicycle-app-icon.png" alt="" width="34" height="34" loading="lazy">
+        <span>MiniCycle</span>
+      </a>
+      <p>내 주기를 이해하는 더 조용하고 사적인 방법.</p>
+    </div>
+    <nav class="footer-nav" aria-label="하단 탐색">
+      <a href="../../blog/">블로그</a>
+      <a href="../../support/">지원</a>
+      <a href="../../privacy/">개인정보</a>
+    </nav>
+    <p class="copyright">&copy; 2026 MiniCycle. iPhone을 위해 세심하게 만들었습니다.</p>
+  </div>
+</footer>
           </body>
         </html>

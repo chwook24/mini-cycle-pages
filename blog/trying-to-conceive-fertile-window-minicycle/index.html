@@ -3,6 +3,8 @@
                 <head>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1">
+          <meta name="color-scheme" content="light dark">
+          <meta name="theme-color" content="#fbf8fa" data-theme-color>
           <title>Using MiniCycle&#x27;s fertile window when trying to conceive</title>
           <meta name="description" content="MiniCycle marks a six-day fertile window and estimated ovulation from your logged periods. How to use them when trying to conceive, and where the estimate stops.">
           <link rel="canonical" href="https://minicycle.net/blog/trying-to-conceive-fertile-window-minicycle/">
@@ -19,7 +21,75 @@
             <link rel="icon" href="../../favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
     <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
-          <link rel="stylesheet" href="../../styles.css">
+        <script>
+  (() => {
+    const storageKey = 'minicycle-theme';
+    const root = document.documentElement;
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+    root.classList.add('js');
+
+    function storedTheme() {
+      try {
+        const value = window.localStorage.getItem(storageKey);
+        return value === 'light' || value === 'dark' ? value : null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function currentTheme() {
+      return root.dataset.theme || (systemTheme.matches ? 'dark' : 'light');
+    }
+
+    function updateThemeUI() {
+      const dark = currentTheme() === 'dark';
+      const themeColor = document.querySelector('[data-theme-color]');
+      if (themeColor) themeColor.setAttribute('content', dark ? '#121014' : '#fbf8fa');
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      const label = dark
+        ? toggle.dataset.lightLabel
+        : toggle.dataset.darkLabel;
+      toggle.setAttribute('aria-label', label);
+      toggle.setAttribute('title', label);
+    }
+
+    const savedTheme = storedTheme();
+    if (savedTheme) root.dataset.theme = savedTheme;
+    updateThemeUI();
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      updateThemeUI();
+      toggle.addEventListener('click', () => {
+        const nextTheme = currentTheme() === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = nextTheme;
+        try {
+          window.localStorage.setItem(storageKey, nextTheme);
+        } catch (_) {
+          // The selected theme still applies for this page when storage is unavailable.
+        }
+        updateThemeUI();
+      });
+      if (typeof systemTheme.addEventListener === 'function') {
+        systemTheme.addEventListener('change', () => {
+          if (!root.dataset.theme) updateThemeUI();
+        });
+      }
+      window.addEventListener('storage', (event) => {
+        if (event.key !== storageKey) return;
+        if (event.newValue === 'light' || event.newValue === 'dark') {
+          root.dataset.theme = event.newValue;
+        } else {
+          delete root.dataset.theme;
+        }
+        updateThemeUI();
+      });
+    });
+  })();
+</script>
+          <link rel="stylesheet" href="../../styles.css?v=20260711-4">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -109,53 +179,178 @@
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Using MiniCycle's fertile window when trying to conceive","description":"MiniCycle marks a six-day fertile window and estimated ovulation from your logged periods. How to use them when trying to conceive, and where the estimate stops.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-06-28","dateModified":"2026-06-28","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/trying-to-conceive-fertile-window-minicycle/"}}</script>
         </head>
-          <body>
-        <header class="site-header">
-  <a class="brand" href="../../">MiniCycle</a>
-  <nav aria-label="Primary navigation">
-    <a href="../../blog/">Blog</a>
-    <a href="../../support/">Support</a>
-    <a href="../../privacy/">Privacy</a>
-    <a href="../../ko/blog/trying-to-conceive-fertile-window-minicycle/">한국어</a>
-  </nav>
+          <body class="article-page">
+        <a class="skip-link" href="#main-content">Skip to content</a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="../../">
+      <img class="brand-icon" src="../../assets/minicycle-app-icon.png" alt="" width="34" height="34">
+      <span>MiniCycle</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="../../blog/">Blog</a>
+      <a href="../../support/">Support</a>
+      <a href="../../privacy/">Privacy</a>
+    </nav>
+    <div class="header-controls">
+      <button class="theme-toggle" type="button" data-theme-toggle data-light-label="Switch to light mode" data-dark-label="Switch to dark mode" aria-label="Toggle color theme">
+        <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
+        <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.1 15.4A8.2 8.2 0 0 1 8.6 3.9 8.2 8.2 0 1 0 20.1 15.4Z"></path></svg>
+      </button>
+      <a class="language-link" href="../../ko/blog/trying-to-conceive-fertile-window-minicycle/" lang="ko" hreflang="ko" aria-label="한국어">한국어</a>
+    </div>
+  </div>
 </header>
-            <main class="page">
+            <main class="page article-page-main" id="main-content">
               <article class="article" data-language="en" data-content-group="trying-to-conceive-fertile-window-minicycle" data-min-read-ms="90000">
-                <p class="eyebrow">Trying to conceive</p>
-                <h1>Using MiniCycle&#x27;s fertile window when trying to conceive</h1>
-                <p class="article-meta">Published June 28, 2026 by MiniCycle</p>
-                <p class="lead">You decide you want to get pregnant, and the calendar starts to matter in a way it never did before. The good news is that MiniCycle already does most of the work: it marks a fertile window and an estimated ovulation day from the periods you have logged. What is left is knowing how to read those marks, what to do with them, and when to stop leaning on them. One assumption gets in the way more than any other, the belief that there is a single perfect day to aim for. There is not. The fertile stretch runs about six days, and once you see why, the way you use the app changes.</p>
-                <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
-        <h2>Find the window the app already draws</h2>
+                <a class="back-link" href="../"><span aria-hidden="true">&larr;</span> All guides</a>
+                <header class="article-header">
+                  <div class="article-heading">
+                    <p class="category-pill">Trying to conceive</p>
+                    <h1>Using MiniCycle&#x27;s fertile window when trying to conceive</h1>
+                    <p class="article-meta"><time datetime="2026-06-28">Published June 28, 2026 by MiniCycle</time><span aria-hidden="true">&middot;</span><span>4 min read</span></p>
+                    <p class="lead">You decide you want to get pregnant, and the calendar starts to matter in a way it never did before. The good news is that MiniCycle already does most of the work: it marks a fertile window and an estimated ovulation day from the periods you have logged. What is left is knowing how to read those marks, what to do with them, and when to stop leaning on them. One assumption gets in the way more than any other, the belief that there is a single perfect day to aim for. There is not. The fertile stretch runs about six days, and once you see why, the way you use the app changes.</p>
+                  </div>
+                  <figure class="article-visual">
+                    <div class="article-visual-frame">
+                      <span class="visual-orbit visual-orbit-one" aria-hidden="true"></span>
+                      <span class="visual-orbit visual-orbit-two" aria-hidden="true"></span>
+                      <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
+                    </div>
+                    <figcaption>The MiniCycle calendar on iPhone</figcaption>
+                  </figure>
+                </header>
+                <div class="article-layout">
+                  <div class="article-body">
+        <section class="article-section" aria-labelledby="section-1">
+  <h2 id="section-1">Find the window the app already draws</h2>
 <p>Open the calendar and the fertile days are already there, shaded sky blue, with the estimated ovulation day marked in a deeper blue inside them. MiniCycle builds both from your saved period start dates, the same dates that drive every other prediction. You do not switch on a separate fertility mode. Logging your periods is what puts the window on the screen.</p>
 <p>The window is six days wide: the five days before the estimated ovulation day, through the day after it. That span is not arbitrary. The American College of Obstetricians and Gynecologists puts the fertile window at about six days for the same biological reason, since sperm can survive up to five days while an egg lasts only about 12 to 24 hours after it is released. The app&#x27;s sky-blue band and the textbook fertile window describe the same thing.</p>
-<h2>Aim for the window, not one day</h2>
+</section>
+<section class="article-section" aria-labelledby="section-2">
+  <h2 id="section-2">Aim for the window, not one day</h2>
 <p>Here is where the perfect-day idea quietly costs people. Because sperm live for days, the useful time to have sex is the stretch leading up to ovulation, not only the ovulation day itself. ACOG&#x27;s advice is plain: have sex every day or every other day across the six-day window. Mayo Clinic frames it as sex from three or four days before ovulation through the day after. Either way, the days before the estimated ovulation mark carry more of the chance than the day after it, when the egg is already near the end of its short life.</p>
 <p>Read practically, that means the sky-blue days are the ones to act on, with the deeper-blue ovulation day sitting toward the back of the window rather than at its center. If having sex every day feels like pressure, every other day across those six days covers the same ground without it.</p>
-<h2>Log intimacy and check it against the window</h2>
+</section>
+<section class="article-section" aria-labelledby="section-3">
+  <h2 id="section-3">Log intimacy and check it against the window</h2>
 <p>MiniCycle can record sexual activity as a small purple mark on a date, tapped on or off from the day panel. For someone tracking a cycle in general, this is just context. When you are trying to conceive, it turns into feedback. Logged next to the sky-blue band, the purple marks show at a glance whether the days you had sex actually fell inside the fertile window or drifted to its edges.</p>
 <p>A month where the marks sit outside the window is not a failure. It is information for the next one. The two sets of marks live on the same calendar precisely so you can see them together, without doing the counting in your head.</p>
-<h2>Use daily notes for the signs the app can&#x27;t see</h2>
+</section>
+<section class="article-section" aria-labelledby="section-4">
+  <h2 id="section-4">Use daily notes for the signs the app can&#x27;t see</h2>
 <p>The window MiniCycle draws is an estimate from dates. Your body shows ovulation in ways a calendar cannot. The most useful sign to watch, by both ACOG and Mayo Clinic, is cervical mucus: in the day or two before ovulation it turns clear, thin, and stretchy. A small rise in basal body temperature, taken each morning before you get out of bed, tends to confirm ovulation just after it happens.</p>
 <p>MiniCycle gives each date a daily note. Jotting down a mucus change or a temperature reading there lets you line up what your body did against what the app predicted. When the signs and the sky-blue band agree, the estimate has earned more trust. When they pull apart, your own signs are the better guide for that month.</p>
-<h2>Set the fertile-window reminder</h2>
+</section>
+<section class="article-section" aria-labelledby="section-5">
+  <h2 id="section-5">Set the fertile-window reminder</h2>
 <p>You should not have to open the app every morning to check where you are. MiniCycle can send a reminder for the start of the fertile window, on the day itself or up to three days ahead, at a time you choose. Set it a day or two early and you get a quiet heads-up before the window opens, instead of realizing afterward that it already passed.</p>
 <p>The ovulation-day reminder works the same way, if you would rather be nudged near the midpoint. The reminders are scheduled on your phone and move automatically when a new period shifts the prediction, so they keep pointing at the right days as your cycle data fills in.</p>
-<h2>Where the estimate stops, and when to ask for help</h2>
+</section>
+<section class="article-section" aria-labelledby="section-6">
+  <h2 id="section-6">Where the estimate stops, and when to ask for help</h2>
 <p>An app window cannot confirm that you ovulated, and it cannot tell you that a cycle ended in pregnancy. It is reference information drawn from your past dates, on the assumption that the next cycle resembles them. If your periods are highly irregular, ACOG notes that home prediction is unreliable, and the better move is to talk with a clinician rather than chase a date.</p>
 <p>Timing matters for that conversation too. More than half of healthy couples conceive within six months, and most within a year. ACOG and Mayo Clinic suggest seeing a clinician after a year of trying if you are under 35, after six months if you are 35 or older, and sooner if you already know of something like endometriosis or PCOS. One smaller comfort while you track: your records stay on your device, with no account, which is worth knowing given that period apps are not covered by medical privacy law. MiniCycle is there to point at the likely days. The rest is yours and, when you need it, your clinician&#x27;s.</p>
-                <div class="callout">
-                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
-                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="trying-to-conceive-fertile-window-minicycle" onclick="trackAppStoreClick(this)">View on the App Store</a>
-                </div>
-                <h2>References</h2>
-                <ul class="references">
+</section>
+                    <section class="callout" aria-labelledby="try-minicycle">
+                      <img class="callout-mark" src="../../assets/minicycle-app-icon.png" alt="" width="42" height="42" loading="lazy">
+                      <div class="callout-copy">
+                        <p class="eyebrow">MiniCycle for iPhone</p>
+                        <h2 id="try-minicycle">Try MiniCycle</h2>
+                        <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                      </div>
+                      <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="trying-to-conceive-fertile-window-minicycle" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                    </section>
+                    <section class="references-section" aria-labelledby="references-title">
+                      <p class="eyebrow">MiniCycle editorial</p>
+                      <h2 id="references-title">References</h2>
+                      <ul class="references">
         <li><a href="https://www.acog.org/womens-health/experts-and-stories/the-latest/trying-to-get-pregnant-heres-when-to-have-sex">ACOG. Trying to Get Pregnant? Here&#x27;s When to Have Sex.</a></li>
 <li><a href="https://www.mayoclinic.org/healthy-lifestyle/getting-pregnant/in-depth/how-to-get-pregnant/art-20047611">Mayo Clinic. How to get pregnant.</a></li>
 <li><a href="https://www.acog.org/womens-health/faqs/fertility-awareness-based-methods-of-family-planning">ACOG. Fertility Awareness-Based Methods of Family Planning.</a></li>
 <li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
-                </ul>
+                      </ul>
+                    </section>
+                  </div>
+                  <aside class="article-sidebar">
+                    <nav class="article-toc" aria-label="On this page">
+                      <p class="toc-title">On this page</p>
+                      <ol>
+        <li><a href="#section-1">Find the window the app already draws</a></li>
+<li><a href="#section-2">Aim for the window, not one day</a></li>
+<li><a href="#section-3">Log intimacy and check it against the window</a></li>
+<li><a href="#section-4">Use daily notes for the signs the app can&#x27;t see</a></li>
+<li><a href="#section-5">Set the fertile-window reminder</a></li>
+<li><a href="#section-6">Where the estimate stops, and when to ask for help</a></li>
+                      </ol>
+                    </nav>
+                  </aside>
+                </div>
               </article>
+              <section class="related-section" aria-labelledby="related-title">
+                <div class="section-heading">
+                  <div>
+                    <p class="eyebrow">Keep exploring</p>
+                    <h2 id="related-title">More guides you may like</h2>
+                  </div>
+                  <a class="text-link section-link" href="../">All guides<span aria-hidden="true">&nbsp;&rarr;</span></a>
+                </div>
+                <div class="post-grid related-grid">
+        <article class="post-card related-card" data-guide-card data-search-value="widget why the minicycle widget isn&#x27;t updating, and how it refreshes the minicycle home-screen widget updates on ios&#x27;s schedule, not the instant you log a period. here is how widgetkit refreshes it and what to check when it looks stale.">
+  <div class="post-card-topline">
+    <p class="category-pill">Widget</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../minicycle-widget-not-updating-refresh/">Why the MiniCycle widget isn&#x27;t updating, and how it refreshes</a></h3>
+  <p class="post-description">The MiniCycle home-screen widget updates on iOS&#x27;s schedule, not the instant you log a period. Here is how WidgetKit refreshes it and what to check when it looks stale.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-04">2026.07.04</time><span aria-hidden="true">&middot;</span>5 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="cycle health ovulation pain (mittelschmerz): what that mid-cycle twinge is ovulation pain, or mittelschmerz, is a one-sided mid-cycle twinge that affects up to 40% of people who ovulate. what it feels like, why it happens, and when it isn&#x27;t ordinary.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle health</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../ovulation-pain-mittelschmerz-what-it-is/">Ovulation pain (mittelschmerz): what that mid-cycle twinge is</a></h3>
+  <p class="post-description">Ovulation pain, or mittelschmerz, is a one-sided mid-cycle twinge that affects up to 40% of people who ovulate. What it feels like, why it happens, and when it isn&#x27;t ordinary.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-03">2026.07.03</time><span aria-hidden="true">&middot;</span>4 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="predictions why minicycle&#x27;s predicted period date keeps changing minicycle re-estimates your next period every time your saved dates change, so the predicted date can move. here is what shifts, when, and why a moving estimate is the app working.">
+  <div class="post-card-topline">
+    <p class="category-pill">Predictions</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../why-minicycle-predicted-period-date-changes/">Why MiniCycle&#x27;s predicted period date keeps changing</a></h3>
+  <p class="post-description">MiniCycle re-estimates your next period every time your saved dates change, so the predicted date can move. Here is what shifts, when, and why a moving estimate is the app working.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-02">2026.07.02</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+                </div>
+              </section>
             </main>
+        <footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="../../">
+        <img class="brand-icon" src="../../assets/minicycle-app-icon.png" alt="" width="34" height="34" loading="lazy">
+        <span>MiniCycle</span>
+      </a>
+      <p>A quieter, more private way to understand your cycle.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="../../blog/">Blog</a>
+      <a href="../../support/">Support</a>
+      <a href="../../privacy/">Privacy</a>
+    </nav>
+    <p class="copyright">&copy; 2026 MiniCycle. Built thoughtfully for iPhone.</p>
+  </div>
+</footer>
           </body>
         </html>

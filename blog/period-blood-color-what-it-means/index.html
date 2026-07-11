@@ -3,6 +3,8 @@
                 <head>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1">
+          <meta name="color-scheme" content="light dark">
+          <meta name="theme-color" content="#fbf8fa" data-theme-color>
           <title>Period blood color: what brown, dark, and bright red mean</title>
           <meta name="description" content="Period blood color usually just reflects how long blood took to leave: pink, red, and brown are all normal. Here is what the color means and what actually matters.">
           <link rel="canonical" href="https://minicycle.net/blog/period-blood-color-what-it-means/">
@@ -19,7 +21,75 @@
             <link rel="icon" href="../../favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
     <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
-          <link rel="stylesheet" href="../../styles.css">
+        <script>
+  (() => {
+    const storageKey = 'minicycle-theme';
+    const root = document.documentElement;
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+    root.classList.add('js');
+
+    function storedTheme() {
+      try {
+        const value = window.localStorage.getItem(storageKey);
+        return value === 'light' || value === 'dark' ? value : null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function currentTheme() {
+      return root.dataset.theme || (systemTheme.matches ? 'dark' : 'light');
+    }
+
+    function updateThemeUI() {
+      const dark = currentTheme() === 'dark';
+      const themeColor = document.querySelector('[data-theme-color]');
+      if (themeColor) themeColor.setAttribute('content', dark ? '#121014' : '#fbf8fa');
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      const label = dark
+        ? toggle.dataset.lightLabel
+        : toggle.dataset.darkLabel;
+      toggle.setAttribute('aria-label', label);
+      toggle.setAttribute('title', label);
+    }
+
+    const savedTheme = storedTheme();
+    if (savedTheme) root.dataset.theme = savedTheme;
+    updateThemeUI();
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      updateThemeUI();
+      toggle.addEventListener('click', () => {
+        const nextTheme = currentTheme() === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = nextTheme;
+        try {
+          window.localStorage.setItem(storageKey, nextTheme);
+        } catch (_) {
+          // The selected theme still applies for this page when storage is unavailable.
+        }
+        updateThemeUI();
+      });
+      if (typeof systemTheme.addEventListener === 'function') {
+        systemTheme.addEventListener('change', () => {
+          if (!root.dataset.theme) updateThemeUI();
+        });
+      }
+      window.addEventListener('storage', (event) => {
+        if (event.key !== storageKey) return;
+        if (event.newValue === 'light' || event.newValue === 'dark') {
+          root.dataset.theme = event.newValue;
+        } else {
+          delete root.dataset.theme;
+        }
+        updateThemeUI();
+      });
+    });
+  })();
+</script>
+          <link rel="stylesheet" href="../../styles.css?v=20260711-4">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -109,65 +179,199 @@
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Period blood color: what brown, dark, and bright red mean","description":"Period blood color usually just reflects how long blood took to leave: pink, red, and brown are all normal. Here is what the color means and what actually matters.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-06-21","dateModified":"2026-06-21","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/period-blood-color-what-it-means/"}}</script>
         </head>
-          <body>
-        <header class="site-header">
-  <a class="brand" href="../../">MiniCycle</a>
-  <nav aria-label="Primary navigation">
-    <a href="../../blog/">Blog</a>
-    <a href="../../support/">Support</a>
-    <a href="../../privacy/">Privacy</a>
-    <a href="../../ko/blog/period-blood-color-what-it-means/">한국어</a>
-  </nav>
+          <body class="article-page">
+        <a class="skip-link" href="#main-content">Skip to content</a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="../../">
+      <img class="brand-icon" src="../../assets/minicycle-app-icon.png" alt="" width="34" height="34">
+      <span>MiniCycle</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="../../blog/">Blog</a>
+      <a href="../../support/">Support</a>
+      <a href="../../privacy/">Privacy</a>
+    </nav>
+    <div class="header-controls">
+      <button class="theme-toggle" type="button" data-theme-toggle data-light-label="Switch to light mode" data-dark-label="Switch to dark mode" aria-label="Toggle color theme">
+        <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
+        <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.1 15.4A8.2 8.2 0 0 1 8.6 3.9 8.2 8.2 0 1 0 20.1 15.4Z"></path></svg>
+      </button>
+      <a class="language-link" href="../../ko/blog/period-blood-color-what-it-means/" lang="ko" hreflang="ko" aria-label="한국어">한국어</a>
+    </div>
+  </div>
 </header>
-            <main class="page">
+            <main class="page article-page-main" id="main-content">
               <article class="article" data-language="en" data-content-group="period-blood-color-what-it-means" data-min-read-ms="90000">
-                <p class="eyebrow">Cycle health</p>
-                <h1>Period blood color: what brown, dark, and bright red mean</h1>
-                <p class="article-meta">Published June 21, 2026 by MiniCycle</p>
-                <p class="lead">You change a pad, glance down, and the blood is brown, almost rusty. Or one morning it runs pink and watery, and by the third day it has gone dark, with a small clot or two. A quick worry follows: is some color a warning? Almost always, no. Period blood shifts color for a plain reason that has little to do with your health, and the shade you are squinting at is usually the least useful thing about your period.</p>
-                <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
-        <h2>Why your period changes color</h2>
+                <a class="back-link" href="../"><span aria-hidden="true">&larr;</span> All guides</a>
+                <header class="article-header">
+                  <div class="article-heading">
+                    <p class="category-pill">Cycle health</p>
+                    <h1>Period blood color: what brown, dark, and bright red mean</h1>
+                    <p class="article-meta"><time datetime="2026-06-21">Published June 21, 2026 by MiniCycle</time><span aria-hidden="true">&middot;</span><span>6 min read</span></p>
+                    <p class="lead">You change a pad, glance down, and the blood is brown, almost rusty. Or one morning it runs pink and watery, and by the third day it has gone dark, with a small clot or two. A quick worry follows: is some color a warning? Almost always, no. Period blood shifts color for a plain reason that has little to do with your health, and the shade you are squinting at is usually the least useful thing about your period.</p>
+                  </div>
+                  <figure class="article-visual">
+                    <div class="article-visual-frame">
+                      <span class="visual-orbit visual-orbit-one" aria-hidden="true"></span>
+                      <span class="visual-orbit visual-orbit-two" aria-hidden="true"></span>
+                      <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
+                    </div>
+                    <figcaption>The MiniCycle calendar on iPhone</figcaption>
+                  </figure>
+                </header>
+                <div class="article-layout">
+                  <div class="article-body">
+        <section class="article-section" aria-labelledby="section-1">
+  <h2 id="section-1">Why your period changes color</h2>
 <p>The color comes down to time and air. “The color of period blood depends on how long the blood stays in the uterus and vagina,” says Cleveland Clinic ob/gyn Swapna Kollikonda. “The longer it sits, the darker it gets.” Blood that leaves quickly looks bright; blood that lingers oxidizes, reacting with oxygen until it turns dark red, then brown.</p>
 <p>So a dark shade is not a sign that something is wrong. It is older blood that took its time on the way out. That one fact explains most of what you see across a period, and it is why the color tends to march from light to dark as the days pass.</p>
-<h2>Pink, red, dark red, brown: the usual arc</h2>
+</section>
+<section class="article-section" aria-labelledby="section-2">
+  <h2 id="section-2">Pink, red, dark red, brown: the usual arc</h2>
 <p>Cleveland Clinic lays out the common run of shades. Pink often shows up on the first day or when flow is light, as a little fresh blood mixes with clear or milky discharge. Bright red usually follows early on, when the uterus is contracting and pushing blood out fast, before it has had time to oxidize.</p>
 <p>A few days in, dark red is common: blood that pooled and sat a while before leaving, sometimes thicker or carrying small clots. By the last days, brown is typical, the most oxidized blood finishing up. Pink, red, dark red, then brown across a single period is an ordinary sequence, not a puzzle to solve.</p>
-<h2>The color isn&#x27;t the signal people think it is</h2>
+</section>
+<section class="article-section" aria-labelledby="section-3">
+  <h2 id="section-3">The color isn&#x27;t the signal people think it is</h2>
 <p>Here is the part that gets lost. There is a popular idea that period color is a code for your health or your hormones, that brown means something is off or that a certain red is somehow cleaner. Clinicians do not read it that way. “Ob/Gyns are rarely concerned about the different colors of period blood,” says Dr. Kollikonda, who notes that the color does not tell them very much about your gynecological or reproductive health.</p>
 <p>Period blood is not a detox either, and its shade is not a verdict on how pure a cycle was. The color mostly records how long blood took to leave, which shifts with your flow that day and even your activity and position. Reading meaning into the shade alone is reading the wrong gauge.</p>
-<h2>What actually matters: amount, length, timing, clots</h2>
+</section>
+<section class="article-section" aria-labelledby="section-4">
+  <h2 id="section-4">What actually matters: amount, length, timing, clots</h2>
 <p>The useful signals are about quantity and timing, not color. Cleveland Clinic, Mayo Clinic, and ACOG point to a similar short list worth raising with a clinician: soaking through a pad or tampon every hour for two or more hours in a row, bleeding longer than seven days, passing clots the size of a quarter or larger, or a sudden change in the size or number of clots.</p>
 <p>Timing carries weight too. Mayo Clinic suggests talking to a provider if your periods come less than 21 or more than 35 days apart, if they stop for more than 90 days when you are not pregnant, if you bleed between periods, or if you have any bleeding after menopause. Feeling tired or short of breath alongside heavy periods can point to iron-deficiency anemia, which ACOG names as a real risk of ongoing heavy flow. Each of these is about how much and when, not what shade.</p>
-<h2>When is a color actually worth mentioning?</h2>
+</section>
+<section class="article-section" aria-labelledby="section-5">
+  <h2 id="section-5">When is a color actually worth mentioning?</h2>
 <p>Color earns attention mostly when it arrives with other symptoms. A shade you have never seen before, paired with an unusual or foul smell, itching, or a fever, is really a flag about those symptoms rather than the color itself, and it is worth a call. Mayo Clinic specifically lists a sudden fever and feeling sick after using tampons as a reason to seek care.</p>
 <p>On its own, though, a brown start, a dark middle, or a brown finish is routine. If you are unsure, describing the pattern, when it shows up, how heavy it is, how long it lasts, tells a clinician far more than the color name does.</p>
-<h2>What tracking can and can&#x27;t tell you</h2>
+</section>
+<section class="article-section" aria-labelledby="section-6">
+  <h2 id="section-6">What tracking can and can&#x27;t tell you</h2>
 <p>This is where a record helps, and it is the point all three sources agree on: bring dates, not impressions. ACOG suggests using a calendar or a period-tracking app before a visit, noting when your period started, how long the bleeding lasted, and the amount of flow. Mayo Clinic adds flow heaviness, clots, and any bleeding between periods to that list. In MiniCycle you log period start and end, with period length defaulting to five days, and the daily notes let you jot how heavy a day was or anything you noticed, all kept on your device.</p>
 <p>What a record cannot do is diagnose. It captures how much, how long, and how often, which is exactly what a clinician can use, and it leaves the color where it belongs: usually interesting, rarely important. A lasting change in your flow or timing is a reason to ask, not a shade to decode.</p>
-<h2>Brown blood at the start or end of a period</h2>
+</section>
+<section class="article-section" aria-labelledby="section-7">
+  <h2 id="section-7">Brown blood at the start or end of a period</h2>
 <p>Two of the most-searched period questions are about brown blood at the edges. At the very start, a day of brown can simply be a slow beginning: a little older blood that was already there, oxidized, leaving first before the fresh flow picks up. At the end, brown is the tail of the period, the last and most oxidized blood clearing out.</p>
 <p>Neither is a problem by default. Cleveland Clinic frames brown as exactly this, blood that has been in the body longer and darkened. What would change the picture is brown spotting that keeps appearing between periods, or well after a period should have ended. That is about timing, not color, and timing is the part worth tracking and, if it persists, raising.</p>
-<h2>Frequently asked questions</h2>
+</section>
+<section class="article-section" aria-labelledby="section-8">
+  <h2 id="section-8">Frequently asked questions</h2>
 <p>Is brown period blood normal? Yes. Brown is older, oxidized blood, common at the very start or the last days of a period when flow is slower. On its own it is not a sign of a problem.</p>
 <p>Does dark or near-black period blood mean something is wrong? Usually not. Very dark blood is the most oxidized, blood that sat longest before leaving. The amount, the length, and any quarter-sized clots matter more than how dark it looks.</p>
 <p>Can period color tell me about my hormones or fertility? No. Color mainly reflects how long blood took to leave, not your hormone levels. For cycle and fertility questions, the dates and length of your cycles are far more informative.</p>
 <p>What color is not normal? A shade you have never seen, arriving with an unusual smell, itching, or fever, points to a possible infection and is worth a check. It is the extra symptoms, not the color alone, that matter.</p>
 <p>Should I track the color? You can note it if you like, but dates, flow, and clots are what help a clinician. Color is more for your own curiosity than for diagnosis.</p>
-<h2>The one-line version</h2>
+</section>
+<section class="article-section" aria-labelledby="section-9">
+  <h2 id="section-9">The one-line version</h2>
 <p>Period blood ranges from pink to bright red to dark red to brown, and the shade mostly reflects how long the blood took to leave: fresh blood looks bright, blood that sat and oxidized turns darker, so a period commonly runs light to dark from the first day to the last. Clinicians rarely read health into the color itself.</p>
 <p>What is worth attention is amount and timing, not shade: soaking a pad or tampon every hour for two or more hours, bleeding longer than seven days, quarter-sized or larger clots, bleeding between periods or after menopause, or cycles shorter than 21 or longer than 35 days. A new color with smell, itching, or fever is about those symptoms. Tracking dates, flow, and clots helps a clinician, and this is reference information, not a diagnosis.</p>
-                <div class="callout">
-                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
-                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="period-blood-color-what-it-means" onclick="trackAppStoreClick(this)">View on the App Store</a>
-                </div>
-                <h2>References</h2>
-                <ul class="references">
+</section>
+                    <section class="callout" aria-labelledby="try-minicycle">
+                      <img class="callout-mark" src="../../assets/minicycle-app-icon.png" alt="" width="42" height="42" loading="lazy">
+                      <div class="callout-copy">
+                        <p class="eyebrow">MiniCycle for iPhone</p>
+                        <h2 id="try-minicycle">Try MiniCycle</h2>
+                        <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                      </div>
+                      <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="period-blood-color-what-it-means" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                    </section>
+                    <section class="references-section" aria-labelledby="references-title">
+                      <p class="eyebrow">MiniCycle editorial</p>
+                      <h2 id="references-title">References</h2>
+                      <ul class="references">
         <li><a href="https://health.clevelandclinic.org/what-does-the-color-of-your-period-mean">Cleveland Clinic. Period Blood Comes in Different Colors: Here&#x27;s What They Mean.</a></li>
 <li><a href="https://www.mayoclinic.org/healthy-lifestyle/womens-health/in-depth/menstrual-cycle/art-20047186">Mayo Clinic. Menstrual cycle: What&#x27;s normal, what&#x27;s not.</a></li>
 <li><a href="https://www.acog.org/womens-health/faqs/heavy-menstrual-bleeding">ACOG. Heavy Menstrual Bleeding.</a></li>
 <li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
-                </ul>
+                      </ul>
+                    </section>
+                  </div>
+                  <aside class="article-sidebar">
+                    <nav class="article-toc" aria-label="On this page">
+                      <p class="toc-title">On this page</p>
+                      <ol>
+        <li><a href="#section-1">Why your period changes color</a></li>
+<li><a href="#section-2">Pink, red, dark red, brown: the usual arc</a></li>
+<li><a href="#section-3">The color isn&#x27;t the signal people think it is</a></li>
+<li><a href="#section-4">What actually matters: amount, length, timing, clots</a></li>
+<li><a href="#section-5">When is a color actually worth mentioning?</a></li>
+<li><a href="#section-6">What tracking can and can&#x27;t tell you</a></li>
+<li><a href="#section-7">Brown blood at the start or end of a period</a></li>
+<li><a href="#section-8">Frequently asked questions</a></li>
+<li><a href="#section-9">The one-line version</a></li>
+                      </ol>
+                    </nav>
+                  </aside>
+                </div>
               </article>
+              <section class="related-section" aria-labelledby="related-title">
+                <div class="section-heading">
+                  <div>
+                    <p class="eyebrow">Keep exploring</p>
+                    <h2 id="related-title">More guides you may like</h2>
+                  </div>
+                  <a class="text-link section-link" href="../">All guides<span aria-hidden="true">&nbsp;&rarr;</span></a>
+                </div>
+                <div class="post-grid related-grid">
+        <article class="post-card related-card" data-guide-card data-search-value="cycle health ovulation pain (mittelschmerz): what that mid-cycle twinge is ovulation pain, or mittelschmerz, is a one-sided mid-cycle twinge that affects up to 40% of people who ovulate. what it feels like, why it happens, and when it isn&#x27;t ordinary.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle health</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../ovulation-pain-mittelschmerz-what-it-is/">Ovulation pain (mittelschmerz): what that mid-cycle twinge is</a></h3>
+  <p class="post-description">Ovulation pain, or mittelschmerz, is a one-sided mid-cycle twinge that affects up to 40% of people who ovulate. What it feels like, why it happens, and when it isn&#x27;t ordinary.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-03">2026.07.03</time><span aria-hidden="true">&middot;</span>4 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="cycle health can you get pregnant on your period? what&#x27;s actually possible getting pregnant on your period is unlikely but not impossible, mostly on short cycles with long periods. here is why it happens and why a calendar is not contraception.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle health</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../can-you-get-pregnant-on-your-period/">Can you get pregnant on your period? What&#x27;s actually possible</a></h3>
+  <p class="post-description">Getting pregnant on your period is unlikely but not impossible, mostly on short cycles with long periods. Here is why it happens and why a calendar is not contraception.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-24">2026.06.24</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="cycle health pms symptoms and timing: what&#x27;s normal before a period pms shows up after ovulation and fades within a few days of your period. here is what counts as normal premenstrual change, what doesn&#x27;t, and when to see a doctor.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle health</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../pms-symptoms-timing-what-is-normal/">PMS symptoms and timing: what&#x27;s normal before a period</a></h3>
+  <p class="post-description">PMS shows up after ovulation and fades within a few days of your period. Here is what counts as normal premenstrual change, what doesn&#x27;t, and when to see a doctor.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-18">2026.06.18</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+                </div>
+              </section>
             </main>
+        <footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="../../">
+        <img class="brand-icon" src="../../assets/minicycle-app-icon.png" alt="" width="34" height="34" loading="lazy">
+        <span>MiniCycle</span>
+      </a>
+      <p>A quieter, more private way to understand your cycle.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="../../blog/">Blog</a>
+      <a href="../../support/">Support</a>
+      <a href="../../privacy/">Privacy</a>
+    </nav>
+    <p class="copyright">&copy; 2026 MiniCycle. Built thoughtfully for iPhone.</p>
+  </div>
+</footer>
           </body>
         </html>

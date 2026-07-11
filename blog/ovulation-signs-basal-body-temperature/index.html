@@ -3,6 +3,8 @@
                 <head>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1">
+          <meta name="color-scheme" content="light dark">
+          <meta name="theme-color" content="#fbf8fa" data-theme-color>
           <title>Ovulation signs and basal body temperature: the basics</title>
           <meta name="description" content="Ovulation signs explained: the cervical fluid change before ovulation, the basal body temperature rise of about 0.3°C after it, and what ovulation tests show.">
           <link rel="canonical" href="https://minicycle.net/blog/ovulation-signs-basal-body-temperature/">
@@ -19,7 +21,75 @@
             <link rel="icon" href="../../favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
     <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
-          <link rel="stylesheet" href="../../styles.css">
+        <script>
+  (() => {
+    const storageKey = 'minicycle-theme';
+    const root = document.documentElement;
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+    root.classList.add('js');
+
+    function storedTheme() {
+      try {
+        const value = window.localStorage.getItem(storageKey);
+        return value === 'light' || value === 'dark' ? value : null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function currentTheme() {
+      return root.dataset.theme || (systemTheme.matches ? 'dark' : 'light');
+    }
+
+    function updateThemeUI() {
+      const dark = currentTheme() === 'dark';
+      const themeColor = document.querySelector('[data-theme-color]');
+      if (themeColor) themeColor.setAttribute('content', dark ? '#121014' : '#fbf8fa');
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      const label = dark
+        ? toggle.dataset.lightLabel
+        : toggle.dataset.darkLabel;
+      toggle.setAttribute('aria-label', label);
+      toggle.setAttribute('title', label);
+    }
+
+    const savedTheme = storedTheme();
+    if (savedTheme) root.dataset.theme = savedTheme;
+    updateThemeUI();
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      updateThemeUI();
+      toggle.addEventListener('click', () => {
+        const nextTheme = currentTheme() === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = nextTheme;
+        try {
+          window.localStorage.setItem(storageKey, nextTheme);
+        } catch (_) {
+          // The selected theme still applies for this page when storage is unavailable.
+        }
+        updateThemeUI();
+      });
+      if (typeof systemTheme.addEventListener === 'function') {
+        systemTheme.addEventListener('change', () => {
+          if (!root.dataset.theme) updateThemeUI();
+        });
+      }
+      window.addEventListener('storage', (event) => {
+        if (event.key !== storageKey) return;
+        if (event.newValue === 'light' || event.newValue === 'dark') {
+          root.dataset.theme = event.newValue;
+        } else {
+          delete root.dataset.theme;
+        }
+        updateThemeUI();
+      });
+    });
+  })();
+</script>
+          <link rel="stylesheet" href="../../styles.css?v=20260711-4">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -109,63 +179,197 @@
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Ovulation signs and basal body temperature: the basics","description":"Ovulation signs explained: the cervical fluid change before ovulation, the basal body temperature rise of about 0.3°C after it, and what ovulation tests show.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-06-08","dateModified":"2026-06-08","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/ovulation-signs-basal-body-temperature/"}}</script>
         </head>
-          <body>
-        <header class="site-header">
-  <a class="brand" href="../../">MiniCycle</a>
-  <nav aria-label="Primary navigation">
-    <a href="../../blog/">Blog</a>
-    <a href="../../support/">Support</a>
-    <a href="../../privacy/">Privacy</a>
-    <a href="../../ko/blog/ovulation-signs-basal-body-temperature/">한국어</a>
-  </nav>
+          <body class="article-page">
+        <a class="skip-link" href="#main-content">Skip to content</a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="../../">
+      <img class="brand-icon" src="../../assets/minicycle-app-icon.png" alt="" width="34" height="34">
+      <span>MiniCycle</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="../../blog/">Blog</a>
+      <a href="../../support/">Support</a>
+      <a href="../../privacy/">Privacy</a>
+    </nav>
+    <div class="header-controls">
+      <button class="theme-toggle" type="button" data-theme-toggle data-light-label="Switch to light mode" data-dark-label="Switch to dark mode" aria-label="Toggle color theme">
+        <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
+        <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.1 15.4A8.2 8.2 0 0 1 8.6 3.9 8.2 8.2 0 1 0 20.1 15.4Z"></path></svg>
+      </button>
+      <a class="language-link" href="../../ko/blog/ovulation-signs-basal-body-temperature/" lang="ko" hreflang="ko" aria-label="한국어">한국어</a>
+    </div>
+  </div>
 </header>
-            <main class="page">
+            <main class="page article-page-main" id="main-content">
               <article class="article" data-language="en" data-content-group="ovulation-signs-basal-body-temperature" data-min-read-ms="90000">
-                <p class="eyebrow">Cycle basics</p>
-                <h1>Ovulation signs and basal body temperature: the basics</h1>
-                <p class="article-meta">Published June 8, 2026 by MiniCycle</p>
-                <p class="lead">The common picture is tidy: ovulation lands on day 14, halfway through the cycle. Real bodies keep looser time. Among women with regular cycles in one classic study, only about 10% with a 28-day cycle ovulated exactly 14 days before their next period, and the gap from ovulation to that period ranged from 7 to 19 days. A calendar can estimate ovulation from your dates. Your body gives off signs closer to the event itself. Here is what those signs are, what the basal body temperature rise actually tells you, and where each one stops being reliable.</p>
-                <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
-        <h2>The three signs a body actually gives</h2>
+                <a class="back-link" href="../"><span aria-hidden="true">&larr;</span> All guides</a>
+                <header class="article-header">
+                  <div class="article-heading">
+                    <p class="category-pill">Cycle basics</p>
+                    <h1>Ovulation signs and basal body temperature: the basics</h1>
+                    <p class="article-meta"><time datetime="2026-06-08">Published June 8, 2026 by MiniCycle</time><span aria-hidden="true">&middot;</span><span>6 min read</span></p>
+                    <p class="lead">The common picture is tidy: ovulation lands on day 14, halfway through the cycle. Real bodies keep looser time. Among women with regular cycles in one classic study, only about 10% with a 28-day cycle ovulated exactly 14 days before their next period, and the gap from ovulation to that period ranged from 7 to 19 days. A calendar can estimate ovulation from your dates. Your body gives off signs closer to the event itself. Here is what those signs are, what the basal body temperature rise actually tells you, and where each one stops being reliable.</p>
+                  </div>
+                  <figure class="article-visual">
+                    <div class="article-visual-frame">
+                      <span class="visual-orbit visual-orbit-one" aria-hidden="true"></span>
+                      <span class="visual-orbit visual-orbit-two" aria-hidden="true"></span>
+                      <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
+                    </div>
+                    <figcaption>The MiniCycle calendar on iPhone</figcaption>
+                  </figure>
+                </header>
+                <div class="article-layout">
+                  <div class="article-body">
+        <section class="article-section" aria-labelledby="section-1">
+  <h2 id="section-1">The three signs a body actually gives</h2>
 <p>Set the calendar aside for a moment. Independent of any app, the body offers three observable cues around ovulation: a change in cervical fluid, a small rise in basal body temperature, and the hormone surge that ovulation tests detect. Each points at a slightly different moment, and each has a blind spot.</p>
 <p>Two of them look ahead. The fluid change and the hormone surge tend to appear before the egg is released. The third, body temperature, looks back: it confirms ovulation after it has happened. Knowing which sign points which way is most of what makes them useful.</p>
-<h2>Cervical fluid changes before ovulation</h2>
+</section>
+<section class="article-section" aria-labelledby="section-2">
+  <h2 id="section-2">Cervical fluid changes before ovulation</h2>
 <p>In the days before ovulation, many people notice more cervical fluid, and it turns thin, clear, and slippery, often compared to raw egg white. Mayo Clinic describes the shift plainly: more thin, clear, slippery fluid just before ovulation, then less fluid that becomes thicker just after. It is the one sign you can read without a thermometer or a test strip.</p>
 <p>Because the change comes before ovulation, it points forward, which is what makes it useful for timing. It is also subjective. Fluid varies with hydration, arousal, and infection, so reading it well takes a few cycles of attention, and even then it marks an approaching window rather than an exact day.</p>
-<h2>What does the basal body temperature rise tell you?</h2>
+</section>
+<section class="article-section" aria-labelledby="section-3">
+  <h2 id="section-3">What does the basal body temperature rise tell you?</h2>
 <p>Basal body temperature is your temperature fully at rest, taken first thing in the morning before getting up. After ovulation, the hormone progesterone nudges it up, typically by less than half a degree Fahrenheit, about 0.3°C. The shift is small enough that you need a sensitive thermometer and a steady routine to catch it on a chart.</p>
 <p>Here is the catch worth understanding. The rise appears after ovulation, and Mayo Clinic counts ovulation as likely only once the higher temperature holds for three days or more. So basal body temperature confirms that ovulation happened; it does not warn you that it is about to. The most fertile days are the two to three days before the rise, which the temperature itself cannot flag in advance.</p>
-<h2>Ovulation tests look for the hormone surge</h2>
+</section>
+<section class="article-section" aria-labelledby="section-4">
+  <h2 id="section-4">Ovulation tests look for the hormone surge</h2>
 <p>Home ovulation tests, sold without a prescription, read luteinizing hormone in urine. That hormone surges shortly before the ovary releases an egg, so a positive result points to the next day or so, earlier than the temperature shift can. For planning around the fertile window, that head start is the appeal.</p>
 <p>A positive test is still a signal, not a stopwatch. It marks the hormone surge that comes before release, not the release itself, and it cannot pin the exact hour ovulation follows. Tests also say nothing about cervical fluid or temperature, which is why fertility-awareness methods rarely lean on one sign alone.</p>
-<h2>Why the signs and the calendar disagree</h2>
+</section>
+<section class="article-section" aria-labelledby="section-5">
+  <h2 id="section-5">Why the signs and the calendar disagree</h2>
 <p>The signs track a moving event, and a calendar can only guess where it will land. The fertile window itself is short: research by Wilcox and colleagues defined it as the five days before ovulation plus the day of ovulation, because sperm can survive several days in the body while the egg lasts only about 12 to 24 hours. Miss the window by much and a tidy prediction has little left to say.</p>
 <p>Most of the movement comes from ovulation timing. An analysis of more than 600,000 cycles found that variation in cycle length is driven largely by when ovulation happens, not by a fixed countdown. MiniCycle works with that reality rather than against it: it estimates ovulation by counting a luteal phase of 9–14 days, scaled to your cycle length, backward from your next expected period, instead of pinning it to a flat 14 days. The estimate is arithmetic from your saved dates, not a reading of your body.</p>
-<h2>What these signs cannot do</h2>
+</section>
+<section class="article-section" aria-labelledby="section-6">
+  <h2 id="section-6">What these signs cannot do</h2>
 <p>None of the three is a contraceptive on its own. Mayo Clinic notes that the temperature method alone may not give enough warning to prevent pregnancy, and that as many as 1 in 4 people relying on fertility-awareness methods conceive within a year of typical use. Basal body temperature is also easily nudged by illness, broken sleep, alcohol, shift work, and travel, any of which can blur the very shift you are watching for.</p>
 <p>The signs describe fertility timing; they do not diagnose anything. If the pattern is confusing, if cycles change suddenly, or if you are weighing pregnancy or contraception decisions, those belong with a clinician rather than a chart. MiniCycle marks an estimated fertile window and ovulation day from your dates, and reading that estimate alongside what your body actually shows is more informative than treating either as the last word.</p>
-<h2>Combining the signs: the symptothermal method</h2>
+</section>
+<section class="article-section" aria-labelledby="section-7">
+  <h2 id="section-7">Combining the signs: the symptothermal method</h2>
 <p>Because each sign has a gap, people who track closely tend to combine them. Pairing cervical fluid with basal body temperature, sometimes adding an ovulation test, is known as the symptothermal method, and Mayo Clinic notes the combination is more reliable than temperature alone. Fluid points to the window opening; the temperature rise confirms it has closed.</p>
 <p>Combining signs takes daily attention and a few cycles of practice before the pattern reads clearly. It is worth being honest about the effort: a method that depends on a morning temperature taken at the same time after at least three hours of sleep works only as well as the routine behind it.</p>
-<h2>Frequently asked questions</h2>
+</section>
+<section class="article-section" aria-labelledby="section-8">
+  <h2 id="section-8">Frequently asked questions</h2>
 <p>Can a period app detect ovulation? Not directly. An app like MiniCycle estimates an ovulation day from your saved period dates and a cycle-length calculation, but it does not measure hormones, temperature, or fluid. It is a calendar estimate, and the body signs are a separate, more immediate source.</p>
 <p>If my temperature never clearly rises, did I not ovulate? Not necessarily. The shift is small, and illness, broken sleep, alcohol, or an inconsistent measuring time can hide it. A chart that is hard to read is a reason to look at other signs or talk to a clinician, not a diagnosis on its own.</p>
 <p>Is the fertile window the same every cycle? No. Because ovulation timing moves, the window moves with it. That is the core reason a calendar estimate is a starting point rather than a guarantee, and why observed signs add information a date alone cannot.</p>
-<h2>Reading the signs in order</h2>
+</section>
+<section class="article-section" aria-labelledby="section-9">
+  <h2 id="section-9">Reading the signs in order</h2>
 <p>Cervical fluid turning clear and slippery suggests the window is opening. An ovulation test catching the hormone surge suggests it is near its peak. A basal body temperature that rises and holds for three days says the window has closed and ovulation has passed. Read in that order, the three signs roughly bracket the fertile days from both ends.</p>
 <p>A calendar cannot see any of that; it can only estimate. Use MiniCycle&#x27;s fertile-window and ovulation marks for planning, and let what your body shows refine the picture in the moment.</p>
-                <div class="callout">
-                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
-                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="ovulation-signs-basal-body-temperature" onclick="trackAppStoreClick(this)">View on the App Store</a>
-                </div>
-                <h2>References</h2>
-                <ul class="references">
+</section>
+                    <section class="callout" aria-labelledby="try-minicycle">
+                      <img class="callout-mark" src="../../assets/minicycle-app-icon.png" alt="" width="42" height="42" loading="lazy">
+                      <div class="callout-copy">
+                        <p class="eyebrow">MiniCycle for iPhone</p>
+                        <h2 id="try-minicycle">Try MiniCycle</h2>
+                        <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                      </div>
+                      <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="ovulation-signs-basal-body-temperature" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                    </section>
+                    <section class="references-section" aria-labelledby="references-title">
+                      <p class="eyebrow">MiniCycle editorial</p>
+                      <h2 id="references-title">References</h2>
+                      <ul class="references">
         <li><a href="https://www.mayoclinic.org/healthy-lifestyle/getting-pregnant/expert-answers/ovulation-signs/faq-20058000">Mayo Clinic. Signs you&#x27;re ovulating (besides taking a test).</a></li>
 <li><a href="https://www.mayoclinic.org/tests-procedures/basal-body-temperature/about/pac-20393026">Mayo Clinic. Basal body temperature for natural family planning.</a></li>
 <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC27529/">Wilcox AJ, Dunson D, Baird DD. The timing of the fertile window in the menstrual cycle. BMJ. 2000.</a></li>
 <li><a href="https://www.nature.com/articles/s41746-019-0152-7">Bull JR, Rowland SP, Scherwitzl EB, et al. Real-world menstrual cycle characteristics of more than 600,000 menstrual cycles. npj Digital Medicine. 2019.</a></li>
-                </ul>
+                      </ul>
+                    </section>
+                  </div>
+                  <aside class="article-sidebar">
+                    <nav class="article-toc" aria-label="On this page">
+                      <p class="toc-title">On this page</p>
+                      <ol>
+        <li><a href="#section-1">The three signs a body actually gives</a></li>
+<li><a href="#section-2">Cervical fluid changes before ovulation</a></li>
+<li><a href="#section-3">What does the basal body temperature rise tell you?</a></li>
+<li><a href="#section-4">Ovulation tests look for the hormone surge</a></li>
+<li><a href="#section-5">Why the signs and the calendar disagree</a></li>
+<li><a href="#section-6">What these signs cannot do</a></li>
+<li><a href="#section-7">Combining the signs: the symptothermal method</a></li>
+<li><a href="#section-8">Frequently asked questions</a></li>
+<li><a href="#section-9">Reading the signs in order</a></li>
+                      </ol>
+                    </nav>
+                  </aside>
+                </div>
               </article>
+              <section class="related-section" aria-labelledby="related-title">
+                <div class="section-heading">
+                  <div>
+                    <p class="eyebrow">Keep exploring</p>
+                    <h2 id="related-title">More guides you may like</h2>
+                  </div>
+                  <a class="text-link section-link" href="../">All guides<span aria-hidden="true">&nbsp;&rarr;</span></a>
+                </div>
+                <div class="post-grid related-grid">
+        <article class="post-card related-card" data-guide-card data-search-value="cycle basics how long should a period last? what&#x27;s a normal length a normal period lasts about 2 to 7 days, usually around 5. what counts as normal is your own steady pattern. here is the range, and when a change is worth a check.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle basics</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../how-long-does-a-normal-period-last/">How long should a period last? What&#x27;s a normal length</a></h3>
+  <p class="post-description">A normal period lasts about 2 to 7 days, usually around 5. What counts as normal is your own steady pattern. Here is the range, and when a change is worth a check.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-02">2026.07.02</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="cycle basics what is a normal menstrual cycle length? it&#x27;s a range a normal menstrual cycle length is a range, not a single number. see the 24–38 day guideline, how much variation is common, and when to ask a clinician.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle basics</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../normal-menstrual-cycle-length-variation/">What is a normal menstrual cycle length? It&#x27;s a range</a></h3>
+  <p class="post-description">A normal menstrual cycle length is a range, not a single number. See the 24–38 day guideline, how much variation is common, and when to ask a clinician.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-07">2026.06.07</time><span aria-hidden="true">&middot;</span>5 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="cycle basics the menstrual cycle phases: follicular, ovulation, luteal learn the menstrual cycle phases: menstruation, the follicular phase, ovulation, and the luteal phase, what each one does, and why their lengths vary.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle basics</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../menstrual-cycle-phases-explained/">The menstrual cycle phases: follicular, ovulation, luteal</a></h3>
+  <p class="post-description">Learn the menstrual cycle phases: menstruation, the follicular phase, ovulation, and the luteal phase, what each one does, and why their lengths vary.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-06">2026.06.06</time><span aria-hidden="true">&middot;</span>5 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+                </div>
+              </section>
             </main>
+        <footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="../../">
+        <img class="brand-icon" src="../../assets/minicycle-app-icon.png" alt="" width="34" height="34" loading="lazy">
+        <span>MiniCycle</span>
+      </a>
+      <p>A quieter, more private way to understand your cycle.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="../../blog/">Blog</a>
+      <a href="../../support/">Support</a>
+      <a href="../../privacy/">Privacy</a>
+    </nav>
+    <p class="copyright">&copy; 2026 MiniCycle. Built thoughtfully for iPhone.</p>
+  </div>
+</footer>
           </body>
         </html>

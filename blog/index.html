@@ -3,6 +3,8 @@
                 <head>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1">
+          <meta name="color-scheme" content="light dark">
+          <meta name="theme-color" content="#fbf8fa" data-theme-color>
           <title>MiniCycle Blog | Period Calendar Guides</title>
           <meta name="description" content="MiniCycle blog posts about period calendar design, cycle prediction, ovulation estimates, fertile windows, privacy, and private menstrual tracking.">
           <link rel="canonical" href="https://minicycle.net/blog/">
@@ -19,7 +21,75 @@
             <link rel="icon" href="../favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
     <link rel="apple-touch-icon" href="../apple-touch-icon.png">
-          <link rel="stylesheet" href="../styles.css">
+        <script>
+  (() => {
+    const storageKey = 'minicycle-theme';
+    const root = document.documentElement;
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+    root.classList.add('js');
+
+    function storedTheme() {
+      try {
+        const value = window.localStorage.getItem(storageKey);
+        return value === 'light' || value === 'dark' ? value : null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function currentTheme() {
+      return root.dataset.theme || (systemTheme.matches ? 'dark' : 'light');
+    }
+
+    function updateThemeUI() {
+      const dark = currentTheme() === 'dark';
+      const themeColor = document.querySelector('[data-theme-color]');
+      if (themeColor) themeColor.setAttribute('content', dark ? '#121014' : '#fbf8fa');
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      const label = dark
+        ? toggle.dataset.lightLabel
+        : toggle.dataset.darkLabel;
+      toggle.setAttribute('aria-label', label);
+      toggle.setAttribute('title', label);
+    }
+
+    const savedTheme = storedTheme();
+    if (savedTheme) root.dataset.theme = savedTheme;
+    updateThemeUI();
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      updateThemeUI();
+      toggle.addEventListener('click', () => {
+        const nextTheme = currentTheme() === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = nextTheme;
+        try {
+          window.localStorage.setItem(storageKey, nextTheme);
+        } catch (_) {
+          // The selected theme still applies for this page when storage is unavailable.
+        }
+        updateThemeUI();
+      });
+      if (typeof systemTheme.addEventListener === 'function') {
+        systemTheme.addEventListener('change', () => {
+          if (!root.dataset.theme) updateThemeUI();
+        });
+      }
+      window.addEventListener('storage', (event) => {
+        if (event.key !== storageKey) return;
+        if (event.newValue === 'light' || event.newValue === 'dark') {
+          root.dataset.theme = event.newValue;
+        } else {
+          delete root.dataset.theme;
+        }
+        updateThemeUI();
+      });
+    });
+  })();
+</script>
+          <link rel="stylesheet" href="../styles.css?v=20260711-4">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -109,235 +179,628 @@
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","name":"MiniCycle Blog | Period Calendar Guides","description":"MiniCycle blog posts about period calendar design, cycle prediction, ovulation estimates, fertile windows, privacy, and private menstrual tracking.","url":"https://minicycle.net/blog/","inLanguage":"en"}</script>
         </head>
-          <body>
-        <header class="site-header">
-  <a class="brand" href="../">MiniCycle</a>
-  <nav aria-label="Primary navigation">
-    <a href="../blog/">Blog</a>
-    <a href="../support/">Support</a>
-    <a href="../privacy/">Privacy</a>
-    <a href="../ko/blog/">한국어</a>
-  </nav>
+          <body class="blog-index-page">
+        <a class="skip-link" href="#main-content">Skip to content</a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="../">
+      <img class="brand-icon" src="../assets/minicycle-app-icon.png" alt="" width="34" height="34">
+      <span>MiniCycle</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="../blog/" aria-current="page">Blog</a>
+      <a href="../support/">Support</a>
+      <a href="../privacy/">Privacy</a>
+    </nav>
+    <div class="header-controls">
+      <button class="theme-toggle" type="button" data-theme-toggle data-light-label="Switch to light mode" data-dark-label="Switch to dark mode" aria-label="Toggle color theme">
+        <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
+        <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.1 15.4A8.2 8.2 0 0 1 8.6 3.9 8.2 8.2 0 1 0 20.1 15.4Z"></path></svg>
+      </button>
+      <a class="language-link" href="../ko/blog/" lang="ko" hreflang="ko" aria-label="한국어">한국어</a>
+    </div>
+  </div>
 </header>
-            <main class="page">
-              <section class="hero compact">
-                <p class="eyebrow">MiniCycle Blog</p>
-                <h1>Period calendar guides grounded in practical cycle science.</h1>
-                <p class="lead">Notes on cycle prediction, ovulation estimates, privacy, widgets, and the product decisions behind MiniCycle.</p>
+            <main class="page blog-page" id="main-content">
+              <section class="blog-hero" aria-labelledby="blog-title">
+                <div class="blog-hero-copy">
+                  <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>MiniCycle Blog</p>
+                  <h1 id="blog-title">Period calendar guides grounded in practical cycle science.</h1>
+                  <p class="lead">Notes on cycle prediction, ovulation estimates, privacy, widgets, and the product decisions behind MiniCycle.</p>
+                  <p class="guide-count"><strong>42</strong> guides in English and Korean</p>
+                </div>
+                <div class="cycle-illustration" aria-hidden="true">
+                  <span class="cycle-orbit cycle-orbit-one"></span>
+                  <span class="cycle-orbit cycle-orbit-two"></span>
+                  <span class="orbit-dot orbit-dot-pink"></span>
+                  <span class="orbit-dot orbit-dot-blue"></span>
+                  <div class="mini-calendar">
+                    <div class="mini-calendar-heading"><span>MiniCycle</span><strong>28</strong></div>
+                    <div class="mini-calendar-grid">
+                      <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                      <span></span><span class="period-day"></span><span class="period-day today"></span><span class="period-day"></span><span></span><span></span><span></span>
+                      <span></span><span></span><span></span><span class="fertile-day"></span><span class="fertile-day ovulation-day"></span><span class="fertile-day"></span><span></span>
+                    </div>
+                  </div>
+                </div>
               </section>
-              <section class="post-grid">
-        <article class="post-card">
-  <p class="eyebrow">Widget</p>
+
+              <section class="featured-section" aria-labelledby="featured-title">
+                <div class="featured-copy">
+                  <p class="eyebrow">Latest guide</p>
+                  <p class="category-pill">Widget</p>
+                  <h2 id="featured-title"><a href="minicycle-widget-not-updating-refresh/">Why the MiniCycle widget isn&#x27;t updating, and how it refreshes</a></h2>
+                  <p>The MiniCycle home-screen widget updates on iOS&#x27;s schedule, not the instant you log a period. Here is how WidgetKit refreshes it and what to check when it looks stale.</p>
+                  <p class="post-meta"><time datetime="2026-07-04">2026.07.04</time><span aria-hidden="true">&middot;</span>5 min read</p>
+                  <span class="featured-link" aria-hidden="true">Read the latest guide<span>&nbsp;&rarr;</span></span>
+                </div>
+                <figure class="featured-visual">
+                  <div class="featured-phone-glow" aria-hidden="true"></div>
+                  <img src="../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="" width="552" height="1200" loading="eager">
+                </figure>
+              </section>
+
+              <section class="library-section" aria-labelledby="library-title">
+                <div class="section-heading library-heading">
+                  <div>
+                    <p class="eyebrow">The library</p>
+                    <h2 id="library-title">Browse every guide</h2>
+                    <p>Search cycle science, app tips, privacy, widgets, and more.</p>
+                  </div>
+                  <label class="blog-search" for="blog-search-input">
+                    <span class="sr-only">Search guides</span>
+                    <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><path d="m21 21-4.35-4.35m2.35-5.15a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"/></svg>
+                    <input id="blog-search-input" type="search" placeholder="Try “widget” or “cycle length”" autocomplete="off" data-result-suffix="guides" data-result-separator=" ">
+                  </label>
+                </div>
+                <p class="search-status" id="blog-search-status" aria-live="polite">42 guides</p>
+                <div class="post-grid" id="guide-grid">
+        <article class="post-card" data-guide-card data-search-value="widget why the minicycle widget isn&#x27;t updating, and how it refreshes the minicycle home-screen widget updates on ios&#x27;s schedule, not the instant you log a period. here is how widgetkit refreshes it and what to check when it looks stale.">
+  <div class="post-card-topline">
+    <p class="category-pill">Widget</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
   <h2><a href="minicycle-widget-not-updating-refresh/">Why the MiniCycle widget isn&#x27;t updating, and how it refreshes</a></h2>
-  <p>The MiniCycle home-screen widget updates on iOS&#x27;s schedule, not the instant you log a period. Here is how WidgetKit refreshes it and what to check when it looks stale.</p>
-  <a class="text-link" href="minicycle-widget-not-updating-refresh/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Cycle health</p>
-  <h2><a href="ovulation-pain-mittelschmerz-what-it-is/">Ovulation pain (mittelschmerz): what that mid-cycle twinge is</a></h2>
-  <p>Ovulation pain, or mittelschmerz, is a one-sided mid-cycle twinge that affects up to 40% of people who ovulate. What it feels like, why it happens, and when it isn&#x27;t ordinary.</p>
-  <a class="text-link" href="ovulation-pain-mittelschmerz-what-it-is/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Predictions</p>
-  <h2><a href="why-minicycle-predicted-period-date-changes/">Why MiniCycle&#x27;s predicted period date keeps changing</a></h2>
-  <p>MiniCycle re-estimates your next period every time your saved dates change, so the predicted date can move. Here is what shifts, when, and why a moving estimate is the app working.</p>
-  <a class="text-link" href="why-minicycle-predicted-period-date-changes/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Cycle basics</p>
-  <h2><a href="how-long-does-a-normal-period-last/">How long should a period last? What&#x27;s a normal length</a></h2>
-  <p>A normal period lasts about 2 to 7 days, usually around 5. What counts as normal is your own steady pattern. Here is the range, and when a change is worth a check.</p>
-  <a class="text-link" href="how-long-does-a-normal-period-last/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Trying to conceive</p>
-  <h2><a href="trying-to-conceive-fertile-window-minicycle/">Using MiniCycle&#x27;s fertile window when trying to conceive</a></h2>
-  <p>MiniCycle marks a six-day fertile window and estimated ovulation from your logged periods. How to use them when trying to conceive, and where the estimate stops.</p>
-  <a class="text-link" href="trying-to-conceive-fertile-window-minicycle/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Cycle health</p>
-  <h2><a href="can-you-get-pregnant-on-your-period/">Can you get pregnant on your period? What&#x27;s actually possible</a></h2>
-  <p>Getting pregnant on your period is unlikely but not impossible, mostly on short cycles with long periods. Here is why it happens and why a calendar is not contraception.</p>
-  <a class="text-link" href="can-you-get-pregnant-on-your-period/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Cycle statistics</p>
-  <h2><a href="minicycle-statistics-tab-recent-cycles/">What the MiniCycle statistics tab shows about your cycles</a></h2>
-  <p>MiniCycle&#x27;s statistics tab summarizes your recent cycle length and period length from saved dates, and shows up to 24 recent data points. Here is how to read it.</p>
-  <a class="text-link" href="minicycle-statistics-tab-recent-cycles/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Cycle health</p>
-  <h2><a href="period-blood-color-what-it-means/">Period blood color: what brown, dark, and bright red mean</a></h2>
-  <p>Period blood color usually just reflects how long blood took to leave: pink, red, and brown are all normal. Here is what the color means and what actually matters.</p>
-  <a class="text-link" href="period-blood-color-what-it-means/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">How it works</p>
-  <h2><a href="use-minicycle-period-tracker-offline/">Does MiniCycle work offline? Period tracking with no signal</a></h2>
-  <p>MiniCycle logs periods, predicts ovulation, and sends reminders entirely on your phone, so it works offline. Here is what needs a connection and what doesn&#x27;t.</p>
-  <a class="text-link" href="use-minicycle-period-tracker-offline/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Cycle health</p>
-  <h2><a href="pms-symptoms-timing-what-is-normal/">PMS symptoms and timing: what&#x27;s normal before a period</a></h2>
-  <p>PMS shows up after ovulation and fades within a few days of your period. Here is what counts as normal premenstrual change, what doesn&#x27;t, and when to see a doctor.</p>
-  <a class="text-link" href="pms-symptoms-timing-what-is-normal/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Privacy</p>
-  <h2><a href="what-data-minicycle-collects/">What data MiniCycle collects, and what stays on your phone</a></h2>
-  <p>MiniCycle keeps your period dates and notes on the device, while its Firebase Analytics logs only usage events like screen views, never your cycle data. Here is the exact split.</p>
-  <a class="text-link" href="what-data-minicycle-collects/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Cycle health</p>
-  <h2><a href="what-counts-as-a-heavy-period/">What counts as a heavy period, and what&#x27;s normal flow</a></h2>
-  <p>Most periods lose only about two to three tablespoons of blood over several days. Here is what counts as a heavy period, the practical signs to watch for, and when to see a doctor.</p>
-  <a class="text-link" href="what-counts-as-a-heavy-period/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Cycle prediction</p>
-  <h2><a href="minicycle-past-cycles-vs-future-predictions/">Past cycles vs future predictions in MiniCycle&#x27;s calendar</a></h2>
-  <p>MiniCycle places past fertile windows from the real gaps you logged and the next one from a forward estimate. Why the two differ, and how each is worked out.</p>
-  <a class="text-link" href="minicycle-past-cycles-vs-future-predictions/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Cycle health</p>
-  <h2><a href="how-sleep-stress-travel-shift-your-cycle/">How sleep, stress, and travel can shift your cycle</a></h2>
-  <p>A stressful month or a long trip can move your period. How stress, sleep, and travel shift the cycle, why a delay usually means ovulation moved, and what&#x27;s normal.</p>
-  <a class="text-link" href="how-sleep-stress-travel-shift-your-cycle/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Logging</p>
-  <h2><a href="log-period-start-end-minicycle/">How to log a period start and end date in MiniCycle</a></h2>
-  <p>Tap a date, pick period start, and MiniCycle fills the end with your period length. How logging start and end works, the seven-day replace rule, and the 14-day cap.</p>
-  <a class="text-link" href="log-period-start-end-minicycle/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Cycle health</p>
-  <h2><a href="what-to-tell-doctor-about-your-period/">What to tell your doctor about your period: a tracking guide</a></h2>
-  <p>Heading to a period appointment? What to track in the weeks before, which dates and symptoms are worth bringing, and how a clear record makes the visit faster.</p>
-  <a class="text-link" href="what-to-tell-doctor-about-your-period/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Widget</p>
-  <h2><a href="add-minicycle-widget-iphone-home-screen/">How to add the MiniCycle widget to your iPhone home screen</a></h2>
-  <p>Add the MiniCycle period widget to your iPhone home screen in about five taps. What the widget shows, why it matches the app, and what to check if it looks empty.</p>
-  <a class="text-link" href="add-minicycle-widget-iphone-home-screen/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Cycle health</p>
-  <h2><a href="menstrual-cramps-whats-normal-period-pain/">Menstrual cramps: what&#x27;s normal period pain, and what&#x27;s not</a></h2>
-  <p>More than half of people who menstruate get period pain. What normal menstrual cramps feel like, what eases them, and when cramps are worth a doctor&#x27;s visit.</p>
-  <a class="text-link" href="menstrual-cramps-whats-normal-period-pain/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Settings</p>
-  <h2><a href="reset-all-data-in-minicycle/">How to reset MiniCycle and erase all your period records</a></h2>
-  <p>Reset records wipes every period date, note, and activity mark in MiniCycle, and it cannot be undone. What it clears, what it keeps, and how to back up first.</p>
-  <a class="text-link" href="reset-all-data-in-minicycle/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Getting started</p>
-  <h2><a href="how-to-start-tracking-your-cycle/">How to start tracking your period: a beginner&#x27;s guide</a></h2>
-  <p>New to tracking? What to write down from day one, how a cycle is counted, why your first months of predictions stay rough, and the few changes worth a doctor&#x27;s note.</p>
-  <a class="text-link" href="how-to-start-tracking-your-cycle/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Notes</p>
-  <h2><a href="minicycle-daily-notes-track-symptoms/">Daily notes in MiniCycle: jot symptoms on any calendar day</a></h2>
-  <p>Tap any date in MiniCycle to add a daily note: symptoms, flow, pain, mood, up to 999 characters. Notes stay on your device by default and never appear on the widget.</p>
-  <a class="text-link" href="minicycle-daily-notes-track-symptoms/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Cycle health</p>
-  <h2><a href="fertile-window-explained-why-calendar-estimates-approximate/">The fertile window: six days, and why apps estimate it</a></h2>
-  <p>The fertile window is about six days: five before ovulation, one after. Why the window exists, and why any calendar estimate of it stays approximate.</p>
-  <a class="text-link" href="fertile-window-explained-why-calendar-estimates-approximate/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Settings</p>
-  <h2><a href="minicycle-dark-mode-app-language-settings/">MiniCycle in English: change the app language and dark mode</a></h2>
-  <p>MiniCycle defaults to Korean. How to switch the app to English in two taps, choose System, Light, or Dark appearance, and what the home-screen widget follows.</p>
-  <a class="text-link" href="minicycle-dark-mode-app-language-settings/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Cycle health</p>
-  <h2><a href="perimenopause-period-changes-what-to-expect/">Perimenopause period changes: what&#x27;s normal and what&#x27;s not</a></h2>
-  <p>Cycles in perimenopause can shift by a week, skip months, or run heavier. Which period changes are expected before menopause, and which ones need a doctor.</p>
-  <a class="text-link" href="perimenopause-period-changes-what-to-expect/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Privacy</p>
-  <h2><a href="hide-sexual-activity-period-tracker-face-id/">Hide sexual activity in your period tracker with Face ID</a></h2>
-  <p>MiniCycle logs sexual activity as a purple dot on the calendar. One switch hides every trace, and showing it again takes Face ID. What hiding does and doesn&#x27;t do.</p>
-  <a class="text-link" href="hide-sexual-activity-period-tracker-face-id/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Cycle health</p>
-  <h2><a href="irregular-periods-what-counts-when-to-see-doctor/">What counts as an irregular period, and when to see a doctor</a></h2>
-  <p>Irregular periods usually have ordinary causes, but some patterns deserve a clinician. What counts as irregular, when to see a doctor, and how tracking actually helps.</p>
-  <a class="text-link" href="irregular-periods-what-counts-when-to-see-doctor/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Settings</p>
-  <h2><a href="auto-vs-manual-cycle-length-period-length/">Auto vs manual cycle and period length in MiniCycle</a></h2>
-  <p>MiniCycle can estimate your cycle and period length, or let you set them by hand (21–42 and 1–10 days). When auto fits, when manual fits, and why the estimate uses a median.</p>
-  <a class="text-link" href="auto-vs-manual-cycle-length-period-length/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Cycle health</p>
-  <h2><a href="spotting-between-periods-common-causes/">What causes spotting between periods? Common reasons</a></h2>
-  <p>Spotting between periods has many ordinary explanations, from ovulation to new birth control. Learn what is common, when to see a clinician, and how to track it.</p>
-  <a class="text-link" href="spotting-between-periods-common-causes/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Settings</p>
-  <h2><a href="week-start-sunday-monday-period-calendar/">Should a period calendar start on Sunday or Monday?</a></h2>
-  <p>MiniCycle&#x27;s calendar can start the week on Sunday or Monday. Why calendars disagree, why the choice changes only the layout, and how the widget stays in sync.</p>
-  <a class="text-link" href="week-start-sunday-monday-period-calendar/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Cycle basics</p>
-  <h2><a href="ovulation-signs-basal-body-temperature/">Ovulation signs and basal body temperature: the basics</a></h2>
-  <p>Ovulation signs explained: the cervical fluid change before ovulation, the basal body temperature rise of about 0.3°C after it, and what ovulation tests show.</p>
-  <a class="text-link" href="ovulation-signs-basal-body-temperature/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Calendar</p>
-  <h2><a href="minicycle-calendar-colors-legend/">What each color means on the MiniCycle period calendar</a></h2>
-  <p>What the MiniCycle calendar colors mean: solid pink records, striped expected periods, the sky-blue fertile window, and the small marks under each date.</p>
-  <a class="text-link" href="minicycle-calendar-colors-legend/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Cycle basics</p>
-  <h2><a href="normal-menstrual-cycle-length-variation/">What is a normal menstrual cycle length? It&#x27;s a range</a></h2>
-  <p>A normal menstrual cycle length is a range, not a single number. See the 24–38 day guideline, how much variation is common, and when to ask a clinician.</p>
-  <a class="text-link" href="normal-menstrual-cycle-length-variation/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Recording</p>
-  <h2><a href="fix-wrong-period-date-in-minicycle/">How to edit or fix a wrong period date in MiniCycle</a></h2>
-  <p>Logged a period on the wrong day? Learn how to edit period dates in MiniCycle: move a start, adjust an end, delete a record, and what happens to predictions.</p>
-  <a class="text-link" href="fix-wrong-period-date-in-minicycle/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Cycle basics</p>
-  <h2><a href="menstrual-cycle-phases-explained/">The menstrual cycle phases: follicular, ovulation, luteal</a></h2>
-  <p>Learn the menstrual cycle phases: menstruation, the follicular phase, ovulation, and the luteal phase, what each one does, and why their lengths vary.</p>
-  <a class="text-link" href="menstrual-cycle-phases-explained/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Reminders</p>
-  <h2><a href="set-up-period-and-ovulation-reminders/">How to set up period and ovulation reminders in MiniCycle</a></h2>
-  <p>MiniCycle can remind you 0–3 days before an expected period, the fertile window, or ovulation day. Learn how to set up period reminders and pick a time.</p>
-  <a class="text-link" href="set-up-period-and-ovulation-reminders/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Cycle health</p>
-  <h2><a href="why-is-my-period-late-common-reasons/">Why is my period late? Common non-pregnancy reasons</a></h2>
-  <p>A late period has many non-pregnancy explanations, from stress to travel and illness. Learn common reasons a period can be late and when to ask a clinician.</p>
-  <a class="text-link" href="why-is-my-period-late-common-reasons/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Backup</p>
-  <h2><a href="move-period-tracker-records-to-new-iphone/">How to keep your period tracker records when moving to a new iPhone</a></h2>
-  <p>MiniCycle stores records locally by default and offers optional iCloud Sync. Learn what to check before moving to a new iPhone.</p>
-  <a class="text-link" href="move-period-tracker-records-to-new-iphone/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Cycle prediction</p>
-  <h2><a href="how-minicycle-estimates-periods-ovulation-fertile-window/">How MiniCycle estimates periods, ovulation, and the fertile window</a></h2>
-  <p>Learn how MiniCycle estimates period dates, ovulation, and the fertile window using recent cycle records, median-based calculations, and published menstrual cycle research.</p>
-  <a class="text-link" href="how-minicycle-estimates-periods-ovulation-fertile-window/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Widget</p>
-  <h2><a href="period-calendar-widget-iphone-home-screen/">What a period calendar widget should show on the iPhone home screen</a></h2>
-  <p>A practical guide to period calendar widgets, including glanceable cycle status, prediction labels, and why MiniCycle keeps its iPhone widget simple.</p>
-  <a class="text-link" href="period-calendar-widget-iphone-home-screen/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Privacy</p>
-  <h2><a href="private-period-tracking-without-account/">Private period tracking without an account: why MiniCycle stores records locally</a></h2>
-  <p>MiniCycle keeps records local by default, offers optional iCloud Sync, and does not require a MiniCycle account.</p>
-  <a class="text-link" href="private-period-tracking-without-account/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Cycle statistics</p>
-  <h2><a href="cycle-length-period-length-statistics/">Cycle length and period length: how to read simple period statistics</a></h2>
-  <p>Understand cycle length, period length, recent averages, and why MiniCycle shows simple statistics instead of turning every cycle into a score.</p>
-  <a class="text-link" href="cycle-length-period-length-statistics/">Read the guide</a>
-</article><article class="post-card">
-  <p class="eyebrow">Prediction limits</p>
-  <h2><a href="period-tracker-prediction-limits/">When period tracker predictions are useful, and when they are not</a></h2>
-  <p>Period tracker predictions can help with planning, but they are not medical advice, contraception, or a pregnancy test. Learn the limits MiniCycle makes explicit.</p>
-  <a class="text-link" href="period-tracker-prediction-limits/">Read the guide</a>
+  <p class="post-description">The MiniCycle home-screen widget updates on iOS&#x27;s schedule, not the instant you log a period. Here is how WidgetKit refreshes it and what to check when it looks stale.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-04">2026.07.04</time><span aria-hidden="true">&middot;</span>5 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
 </article>
+<article class="post-card" data-guide-card data-search-value="cycle health ovulation pain (mittelschmerz): what that mid-cycle twinge is ovulation pain, or mittelschmerz, is a one-sided mid-cycle twinge that affects up to 40% of people who ovulate. what it feels like, why it happens, and when it isn&#x27;t ordinary.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle health</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="ovulation-pain-mittelschmerz-what-it-is/">Ovulation pain (mittelschmerz): what that mid-cycle twinge is</a></h2>
+  <p class="post-description">Ovulation pain, or mittelschmerz, is a one-sided mid-cycle twinge that affects up to 40% of people who ovulate. What it feels like, why it happens, and when it isn&#x27;t ordinary.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-03">2026.07.03</time><span aria-hidden="true">&middot;</span>4 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="predictions why minicycle&#x27;s predicted period date keeps changing minicycle re-estimates your next period every time your saved dates change, so the predicted date can move. here is what shifts, when, and why a moving estimate is the app working.">
+  <div class="post-card-topline">
+    <p class="category-pill">Predictions</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="why-minicycle-predicted-period-date-changes/">Why MiniCycle&#x27;s predicted period date keeps changing</a></h2>
+  <p class="post-description">MiniCycle re-estimates your next period every time your saved dates change, so the predicted date can move. Here is what shifts, when, and why a moving estimate is the app working.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-02">2026.07.02</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="cycle basics how long should a period last? what&#x27;s a normal length a normal period lasts about 2 to 7 days, usually around 5. what counts as normal is your own steady pattern. here is the range, and when a change is worth a check.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle basics</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="how-long-does-a-normal-period-last/">How long should a period last? What&#x27;s a normal length</a></h2>
+  <p class="post-description">A normal period lasts about 2 to 7 days, usually around 5. What counts as normal is your own steady pattern. Here is the range, and when a change is worth a check.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-02">2026.07.02</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="trying to conceive using minicycle&#x27;s fertile window when trying to conceive minicycle marks a six-day fertile window and estimated ovulation from your logged periods. how to use them when trying to conceive, and where the estimate stops.">
+  <div class="post-card-topline">
+    <p class="category-pill">Trying to conceive</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="trying-to-conceive-fertile-window-minicycle/">Using MiniCycle&#x27;s fertile window when trying to conceive</a></h2>
+  <p class="post-description">MiniCycle marks a six-day fertile window and estimated ovulation from your logged periods. How to use them when trying to conceive, and where the estimate stops.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-28">2026.06.28</time><span aria-hidden="true">&middot;</span>4 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="cycle health can you get pregnant on your period? what&#x27;s actually possible getting pregnant on your period is unlikely but not impossible, mostly on short cycles with long periods. here is why it happens and why a calendar is not contraception.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle health</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="can-you-get-pregnant-on-your-period/">Can you get pregnant on your period? What&#x27;s actually possible</a></h2>
+  <p class="post-description">Getting pregnant on your period is unlikely but not impossible, mostly on short cycles with long periods. Here is why it happens and why a calendar is not contraception.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-24">2026.06.24</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="cycle statistics what the minicycle statistics tab shows about your cycles minicycle&#x27;s statistics tab summarizes your recent cycle length and period length from saved dates, and shows up to 24 recent data points. here is how to read it.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle statistics</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="minicycle-statistics-tab-recent-cycles/">What the MiniCycle statistics tab shows about your cycles</a></h2>
+  <p class="post-description">MiniCycle&#x27;s statistics tab summarizes your recent cycle length and period length from saved dates, and shows up to 24 recent data points. Here is how to read it.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-22">2026.06.22</time><span aria-hidden="true">&middot;</span>7 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="cycle health period blood color: what brown, dark, and bright red mean period blood color usually just reflects how long blood took to leave: pink, red, and brown are all normal. here is what the color means and what actually matters.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle health</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="period-blood-color-what-it-means/">Period blood color: what brown, dark, and bright red mean</a></h2>
+  <p class="post-description">Period blood color usually just reflects how long blood took to leave: pink, red, and brown are all normal. Here is what the color means and what actually matters.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-21">2026.06.21</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="how it works does minicycle work offline? period tracking with no signal minicycle logs periods, predicts ovulation, and sends reminders entirely on your phone, so it works offline. here is what needs a connection and what doesn&#x27;t.">
+  <div class="post-card-topline">
+    <p class="category-pill">How it works</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="use-minicycle-period-tracker-offline/">Does MiniCycle work offline? Period tracking with no signal</a></h2>
+  <p class="post-description">MiniCycle logs periods, predicts ovulation, and sends reminders entirely on your phone, so it works offline. Here is what needs a connection and what doesn&#x27;t.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-21">2026.06.21</time><span aria-hidden="true">&middot;</span>5 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="cycle health pms symptoms and timing: what&#x27;s normal before a period pms shows up after ovulation and fades within a few days of your period. here is what counts as normal premenstrual change, what doesn&#x27;t, and when to see a doctor.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle health</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="pms-symptoms-timing-what-is-normal/">PMS symptoms and timing: what&#x27;s normal before a period</a></h2>
+  <p class="post-description">PMS shows up after ovulation and fades within a few days of your period. Here is what counts as normal premenstrual change, what doesn&#x27;t, and when to see a doctor.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-18">2026.06.18</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="privacy what data minicycle collects, and what stays on your phone minicycle keeps your period dates and notes on the device, while its firebase analytics logs only usage events like screen views, never your cycle data. here is the exact split.">
+  <div class="post-card-topline">
+    <p class="category-pill">Privacy</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="what-data-minicycle-collects/">What data MiniCycle collects, and what stays on your phone</a></h2>
+  <p class="post-description">MiniCycle keeps your period dates and notes on the device, while its Firebase Analytics logs only usage events like screen views, never your cycle data. Here is the exact split.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-18">2026.06.18</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="cycle health what counts as a heavy period, and what&#x27;s normal flow most periods lose only about two to three tablespoons of blood over several days. here is what counts as a heavy period, the practical signs to watch for, and when to see a doctor.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle health</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="what-counts-as-a-heavy-period/">What counts as a heavy period, and what&#x27;s normal flow</a></h2>
+  <p class="post-description">Most periods lose only about two to three tablespoons of blood over several days. Here is what counts as a heavy period, the practical signs to watch for, and when to see a doctor.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-17">2026.06.17</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="cycle prediction past cycles vs future predictions in minicycle&#x27;s calendar minicycle places past fertile windows from the real gaps you logged and the next one from a forward estimate. why the two differ, and how each is worked out.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle prediction</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="minicycle-past-cycles-vs-future-predictions/">Past cycles vs future predictions in MiniCycle&#x27;s calendar</a></h2>
+  <p class="post-description">MiniCycle places past fertile windows from the real gaps you logged and the next one from a forward estimate. Why the two differ, and how each is worked out.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-17">2026.06.17</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="cycle health how sleep, stress, and travel can shift your cycle a stressful month or a long trip can move your period. how stress, sleep, and travel shift the cycle, why a delay usually means ovulation moved, and what&#x27;s normal.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle health</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="how-sleep-stress-travel-shift-your-cycle/">How sleep, stress, and travel can shift your cycle</a></h2>
+  <p class="post-description">A stressful month or a long trip can move your period. How stress, sleep, and travel shift the cycle, why a delay usually means ovulation moved, and what&#x27;s normal.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-16">2026.06.16</time><span aria-hidden="true">&middot;</span>7 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="logging how to log a period start and end date in minicycle tap a date, pick period start, and minicycle fills the end with your period length. how logging start and end works, the seven-day replace rule, and the 14-day cap.">
+  <div class="post-card-topline">
+    <p class="category-pill">Logging</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="log-period-start-end-minicycle/">How to log a period start and end date in MiniCycle</a></h2>
+  <p class="post-description">Tap a date, pick period start, and MiniCycle fills the end with your period length. How logging start and end works, the seven-day replace rule, and the 14-day cap.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-16">2026.06.16</time><span aria-hidden="true">&middot;</span>5 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="cycle health what to tell your doctor about your period: a tracking guide heading to a period appointment? what to track in the weeks before, which dates and symptoms are worth bringing, and how a clear record makes the visit faster.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle health</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="what-to-tell-doctor-about-your-period/">What to tell your doctor about your period: a tracking guide</a></h2>
+  <p class="post-description">Heading to a period appointment? What to track in the weeks before, which dates and symptoms are worth bringing, and how a clear record makes the visit faster.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-15">2026.06.15</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="widget how to add the minicycle widget to your iphone home screen add the minicycle period widget to your iphone home screen in about five taps. what the widget shows, why it matches the app, and what to check if it looks empty.">
+  <div class="post-card-topline">
+    <p class="category-pill">Widget</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="add-minicycle-widget-iphone-home-screen/">How to add the MiniCycle widget to your iPhone home screen</a></h2>
+  <p class="post-description">Add the MiniCycle period widget to your iPhone home screen in about five taps. What the widget shows, why it matches the app, and what to check if it looks empty.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-15">2026.06.15</time><span aria-hidden="true">&middot;</span>5 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="cycle health menstrual cramps: what&#x27;s normal period pain, and what&#x27;s not more than half of people who menstruate get period pain. what normal menstrual cramps feel like, what eases them, and when cramps are worth a doctor&#x27;s visit.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle health</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="menstrual-cramps-whats-normal-period-pain/">Menstrual cramps: what&#x27;s normal period pain, and what&#x27;s not</a></h2>
+  <p class="post-description">More than half of people who menstruate get period pain. What normal menstrual cramps feel like, what eases them, and when cramps are worth a doctor&#x27;s visit.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-14">2026.06.14</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="settings how to reset minicycle and erase all your period records reset records wipes every period date, note, and activity mark in minicycle, and it cannot be undone. what it clears, what it keeps, and how to back up first.">
+  <div class="post-card-topline">
+    <p class="category-pill">Settings</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="reset-all-data-in-minicycle/">How to reset MiniCycle and erase all your period records</a></h2>
+  <p class="post-description">Reset records wipes every period date, note, and activity mark in MiniCycle, and it cannot be undone. What it clears, what it keeps, and how to back up first.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-14">2026.06.14</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="getting started how to start tracking your period: a beginner&#x27;s guide new to tracking? what to write down from day one, how a cycle is counted, why your first months of predictions stay rough, and the few changes worth a doctor&#x27;s note.">
+  <div class="post-card-topline">
+    <p class="category-pill">Getting started</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="how-to-start-tracking-your-cycle/">How to start tracking your period: a beginner&#x27;s guide</a></h2>
+  <p class="post-description">New to tracking? What to write down from day one, how a cycle is counted, why your first months of predictions stay rough, and the few changes worth a doctor&#x27;s note.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-13">2026.06.13</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="notes daily notes in minicycle: jot symptoms on any calendar day tap any date in minicycle to add a daily note: symptoms, flow, pain, mood, up to 999 characters. notes stay on your device by default and never appear on the widget.">
+  <div class="post-card-topline">
+    <p class="category-pill">Notes</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="minicycle-daily-notes-track-symptoms/">Daily notes in MiniCycle: jot symptoms on any calendar day</a></h2>
+  <p class="post-description">Tap any date in MiniCycle to add a daily note: symptoms, flow, pain, mood, up to 999 characters. Notes stay on your device by default and never appear on the widget.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-13">2026.06.13</time><span aria-hidden="true">&middot;</span>5 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="cycle health the fertile window: six days, and why apps estimate it the fertile window is about six days: five before ovulation, one after. why the window exists, and why any calendar estimate of it stays approximate.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle health</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="fertile-window-explained-why-calendar-estimates-approximate/">The fertile window: six days, and why apps estimate it</a></h2>
+  <p class="post-description">The fertile window is about six days: five before ovulation, one after. Why the window exists, and why any calendar estimate of it stays approximate.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-13">2026.06.13</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="settings minicycle in english: change the app language and dark mode minicycle defaults to korean. how to switch the app to english in two taps, choose system, light, or dark appearance, and what the home-screen widget follows.">
+  <div class="post-card-topline">
+    <p class="category-pill">Settings</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="minicycle-dark-mode-app-language-settings/">MiniCycle in English: change the app language and dark mode</a></h2>
+  <p class="post-description">MiniCycle defaults to Korean. How to switch the app to English in two taps, choose System, Light, or Dark appearance, and what the home-screen widget follows.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-12">2026.06.12</time><span aria-hidden="true">&middot;</span>5 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="cycle health perimenopause period changes: what&#x27;s normal and what&#x27;s not cycles in perimenopause can shift by a week, skip months, or run heavier. which period changes are expected before menopause, and which ones need a doctor.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle health</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="perimenopause-period-changes-what-to-expect/">Perimenopause period changes: what&#x27;s normal and what&#x27;s not</a></h2>
+  <p class="post-description">Cycles in perimenopause can shift by a week, skip months, or run heavier. Which period changes are expected before menopause, and which ones need a doctor.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-11">2026.06.11</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="privacy hide sexual activity in your period tracker with face id minicycle logs sexual activity as a purple dot on the calendar. one switch hides every trace, and showing it again takes face id. what hiding does and doesn&#x27;t do.">
+  <div class="post-card-topline">
+    <p class="category-pill">Privacy</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="hide-sexual-activity-period-tracker-face-id/">Hide sexual activity in your period tracker with Face ID</a></h2>
+  <p class="post-description">MiniCycle logs sexual activity as a purple dot on the calendar. One switch hides every trace, and showing it again takes Face ID. What hiding does and doesn&#x27;t do.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-11">2026.06.11</time><span aria-hidden="true">&middot;</span>5 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="cycle health what counts as an irregular period, and when to see a doctor irregular periods usually have ordinary causes, but some patterns deserve a clinician. what counts as irregular, when to see a doctor, and how tracking actually helps.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle health</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="irregular-periods-what-counts-when-to-see-doctor/">What counts as an irregular period, and when to see a doctor</a></h2>
+  <p class="post-description">Irregular periods usually have ordinary causes, but some patterns deserve a clinician. What counts as irregular, when to see a doctor, and how tracking actually helps.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-10">2026.06.10</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="settings auto vs manual cycle and period length in minicycle minicycle can estimate your cycle and period length, or let you set them by hand (21–42 and 1–10 days). when auto fits, when manual fits, and why the estimate uses a median.">
+  <div class="post-card-topline">
+    <p class="category-pill">Settings</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="auto-vs-manual-cycle-length-period-length/">Auto vs manual cycle and period length in MiniCycle</a></h2>
+  <p class="post-description">MiniCycle can estimate your cycle and period length, or let you set them by hand (21–42 and 1–10 days). When auto fits, when manual fits, and why the estimate uses a median.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-10">2026.06.10</time><span aria-hidden="true">&middot;</span>5 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="cycle health what causes spotting between periods? common reasons spotting between periods has many ordinary explanations, from ovulation to new birth control. learn what is common, when to see a clinician, and how to track it.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle health</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="spotting-between-periods-common-causes/">What causes spotting between periods? Common reasons</a></h2>
+  <p class="post-description">Spotting between periods has many ordinary explanations, from ovulation to new birth control. Learn what is common, when to see a clinician, and how to track it.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-09">2026.06.09</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="settings should a period calendar start on sunday or monday? minicycle&#x27;s calendar can start the week on sunday or monday. why calendars disagree, why the choice changes only the layout, and how the widget stays in sync.">
+  <div class="post-card-topline">
+    <p class="category-pill">Settings</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="week-start-sunday-monday-period-calendar/">Should a period calendar start on Sunday or Monday?</a></h2>
+  <p class="post-description">MiniCycle&#x27;s calendar can start the week on Sunday or Monday. Why calendars disagree, why the choice changes only the layout, and how the widget stays in sync.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-09">2026.06.09</time><span aria-hidden="true">&middot;</span>4 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="cycle basics ovulation signs and basal body temperature: the basics ovulation signs explained: the cervical fluid change before ovulation, the basal body temperature rise of about 0.3°c after it, and what ovulation tests show.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle basics</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="ovulation-signs-basal-body-temperature/">Ovulation signs and basal body temperature: the basics</a></h2>
+  <p class="post-description">Ovulation signs explained: the cervical fluid change before ovulation, the basal body temperature rise of about 0.3°C after it, and what ovulation tests show.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-08">2026.06.08</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="calendar what each color means on the minicycle period calendar what the minicycle calendar colors mean: solid pink records, striped expected periods, the sky-blue fertile window, and the small marks under each date.">
+  <div class="post-card-topline">
+    <p class="category-pill">Calendar</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="minicycle-calendar-colors-legend/">What each color means on the MiniCycle period calendar</a></h2>
+  <p class="post-description">What the MiniCycle calendar colors mean: solid pink records, striped expected periods, the sky-blue fertile window, and the small marks under each date.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-08">2026.06.08</time><span aria-hidden="true">&middot;</span>5 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="cycle basics what is a normal menstrual cycle length? it&#x27;s a range a normal menstrual cycle length is a range, not a single number. see the 24–38 day guideline, how much variation is common, and when to ask a clinician.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle basics</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="normal-menstrual-cycle-length-variation/">What is a normal menstrual cycle length? It&#x27;s a range</a></h2>
+  <p class="post-description">A normal menstrual cycle length is a range, not a single number. See the 24–38 day guideline, how much variation is common, and when to ask a clinician.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-07">2026.06.07</time><span aria-hidden="true">&middot;</span>5 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="recording how to edit or fix a wrong period date in minicycle logged a period on the wrong day? learn how to edit period dates in minicycle: move a start, adjust an end, delete a record, and what happens to predictions.">
+  <div class="post-card-topline">
+    <p class="category-pill">Recording</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="fix-wrong-period-date-in-minicycle/">How to edit or fix a wrong period date in MiniCycle</a></h2>
+  <p class="post-description">Logged a period on the wrong day? Learn how to edit period dates in MiniCycle: move a start, adjust an end, delete a record, and what happens to predictions.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-07">2026.06.07</time><span aria-hidden="true">&middot;</span>5 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="cycle basics the menstrual cycle phases: follicular, ovulation, luteal learn the menstrual cycle phases: menstruation, the follicular phase, ovulation, and the luteal phase, what each one does, and why their lengths vary.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle basics</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="menstrual-cycle-phases-explained/">The menstrual cycle phases: follicular, ovulation, luteal</a></h2>
+  <p class="post-description">Learn the menstrual cycle phases: menstruation, the follicular phase, ovulation, and the luteal phase, what each one does, and why their lengths vary.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-06">2026.06.06</time><span aria-hidden="true">&middot;</span>5 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="reminders how to set up period and ovulation reminders in minicycle minicycle can remind you 0–3 days before an expected period, the fertile window, or ovulation day. learn how to set up period reminders and pick a time.">
+  <div class="post-card-topline">
+    <p class="category-pill">Reminders</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="set-up-period-and-ovulation-reminders/">How to set up period and ovulation reminders in MiniCycle</a></h2>
+  <p class="post-description">MiniCycle can remind you 0–3 days before an expected period, the fertile window, or ovulation day. Learn how to set up period reminders and pick a time.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-05">2026.06.05</time><span aria-hidden="true">&middot;</span>4 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="cycle health why is my period late? common non-pregnancy reasons a late period has many non-pregnancy explanations, from stress to travel and illness. learn common reasons a period can be late and when to ask a clinician.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle health</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="why-is-my-period-late-common-reasons/">Why is my period late? Common non-pregnancy reasons</a></h2>
+  <p class="post-description">A late period has many non-pregnancy explanations, from stress to travel and illness. Learn common reasons a period can be late and when to ask a clinician.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-04">2026.06.04</time><span aria-hidden="true">&middot;</span>5 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="backup how to keep your period tracker records when moving to a new iphone minicycle stores records locally by default and offers optional icloud sync. learn what to check before moving to a new iphone.">
+  <div class="post-card-topline">
+    <p class="category-pill">Backup</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="move-period-tracker-records-to-new-iphone/">How to keep your period tracker records when moving to a new iPhone</a></h2>
+  <p class="post-description">MiniCycle stores records locally by default and offers optional iCloud Sync. Learn what to check before moving to a new iPhone.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-05-23">2026.05.23</time><span aria-hidden="true">&middot;</span>3 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="cycle prediction how minicycle estimates periods, ovulation, and the fertile window learn how minicycle estimates period dates, ovulation, and the fertile window using recent cycle records, median-based calculations, and published menstrual cycle research.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle prediction</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="how-minicycle-estimates-periods-ovulation-fertile-window/">How MiniCycle estimates periods, ovulation, and the fertile window</a></h2>
+  <p class="post-description">Learn how MiniCycle estimates period dates, ovulation, and the fertile window using recent cycle records, median-based calculations, and published menstrual cycle research.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-05-16">2026.05.16</time><span aria-hidden="true">&middot;</span>4 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="widget what a period calendar widget should show on the iphone home screen a practical guide to period calendar widgets, including glanceable cycle status, prediction labels, and why minicycle keeps its iphone widget simple.">
+  <div class="post-card-topline">
+    <p class="category-pill">Widget</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="period-calendar-widget-iphone-home-screen/">What a period calendar widget should show on the iPhone home screen</a></h2>
+  <p class="post-description">A practical guide to period calendar widgets, including glanceable cycle status, prediction labels, and why MiniCycle keeps its iPhone widget simple.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-05-16">2026.05.16</time><span aria-hidden="true">&middot;</span>3 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="privacy private period tracking without an account: why minicycle stores records locally minicycle keeps records local by default, offers optional icloud sync, and does not require a minicycle account.">
+  <div class="post-card-topline">
+    <p class="category-pill">Privacy</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="private-period-tracking-without-account/">Private period tracking without an account: why MiniCycle stores records locally</a></h2>
+  <p class="post-description">MiniCycle keeps records local by default, offers optional iCloud Sync, and does not require a MiniCycle account.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-05-16">2026.05.16</time><span aria-hidden="true">&middot;</span>3 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="cycle statistics cycle length and period length: how to read simple period statistics understand cycle length, period length, recent averages, and why minicycle shows simple statistics instead of turning every cycle into a score.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle statistics</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="cycle-length-period-length-statistics/">Cycle length and period length: how to read simple period statistics</a></h2>
+  <p class="post-description">Understand cycle length, period length, recent averages, and why MiniCycle shows simple statistics instead of turning every cycle into a score.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-05-16">2026.05.16</time><span aria-hidden="true">&middot;</span>3 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card" data-guide-card data-search-value="prediction limits when period tracker predictions are useful, and when they are not period tracker predictions can help with planning, but they are not medical advice, contraception, or a pregnancy test. learn the limits minicycle makes explicit.">
+  <div class="post-card-topline">
+    <p class="category-pill">Prediction limits</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h2><a href="period-tracker-prediction-limits/">When period tracker predictions are useful, and when they are not</a></h2>
+  <p class="post-description">Period tracker predictions can help with planning, but they are not medical advice, contraception, or a pregnancy test. Learn the limits MiniCycle makes explicit.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-05-16">2026.05.16</time><span aria-hidden="true">&middot;</span>3 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+                </div>
+                <p class="no-results" id="blog-no-results" hidden>No guides match that search yet.</p>
               </section>
             </main>
+        <footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="../">
+        <img class="brand-icon" src="../assets/minicycle-app-icon.png" alt="" width="34" height="34" loading="lazy">
+        <span>MiniCycle</span>
+      </a>
+      <p>A quieter, more private way to understand your cycle.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="../blog/">Blog</a>
+      <a href="../support/">Support</a>
+      <a href="../privacy/">Privacy</a>
+    </nav>
+    <p class="copyright">&copy; 2026 MiniCycle. Built thoughtfully for iPhone.</p>
+  </div>
+</footer>
+            <script>
+              (() => {
+                const input = document.querySelector('#blog-search-input');
+                const grid = document.querySelector('#guide-grid');
+                const status = document.querySelector('#blog-search-status');
+                const empty = document.querySelector('#blog-no-results');
+                if (!input || !grid || !status || !empty) return;
+                const cards = Array.from(grid.querySelectorAll('[data-guide-card]'));
+                const update = () => {
+                  const query = input.value.trim().toLowerCase();
+                  let visible = 0;
+                  cards.forEach((card) => {
+                    const matches = !query || card.dataset.searchValue.includes(query);
+                    card.hidden = !matches;
+                    if (matches) visible += 1;
+                  });
+                  status.textContent = `${visible}${input.dataset.resultSeparator}${input.dataset.resultSuffix}`;
+                  empty.hidden = visible !== 0;
+                };
+                input.addEventListener('input', update);
+              })();
+            </script>
           </body>
         </html>

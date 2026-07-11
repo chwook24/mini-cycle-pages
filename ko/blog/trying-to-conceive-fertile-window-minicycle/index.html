@@ -3,6 +3,8 @@
                 <head>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1">
+          <meta name="color-scheme" content="light dark">
+          <meta name="theme-color" content="#fbf8fa" data-theme-color>
           <title>임신 준비할 때 MiniCycle 가임기·배란일 활용법</title>
           <meta name="description" content="MiniCycle은 기록한 생리에서 6일짜리 가임기와 예상 배란일을 표시합니다. 임신을 준비할 때 이 표시를 어떻게 읽고 타이밍을 잡는지, 어디까지 믿어야 하는지 정리했습니다.">
           <link rel="canonical" href="https://minicycle.net/ko/blog/trying-to-conceive-fertile-window-minicycle/">
@@ -19,7 +21,75 @@
             <link rel="icon" href="../../../favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32x32.png">
     <link rel="apple-touch-icon" href="../../../apple-touch-icon.png">
-          <link rel="stylesheet" href="../../../styles.css">
+        <script>
+  (() => {
+    const storageKey = 'minicycle-theme';
+    const root = document.documentElement;
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+    root.classList.add('js');
+
+    function storedTheme() {
+      try {
+        const value = window.localStorage.getItem(storageKey);
+        return value === 'light' || value === 'dark' ? value : null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function currentTheme() {
+      return root.dataset.theme || (systemTheme.matches ? 'dark' : 'light');
+    }
+
+    function updateThemeUI() {
+      const dark = currentTheme() === 'dark';
+      const themeColor = document.querySelector('[data-theme-color]');
+      if (themeColor) themeColor.setAttribute('content', dark ? '#121014' : '#fbf8fa');
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      const label = dark
+        ? toggle.dataset.lightLabel
+        : toggle.dataset.darkLabel;
+      toggle.setAttribute('aria-label', label);
+      toggle.setAttribute('title', label);
+    }
+
+    const savedTheme = storedTheme();
+    if (savedTheme) root.dataset.theme = savedTheme;
+    updateThemeUI();
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      updateThemeUI();
+      toggle.addEventListener('click', () => {
+        const nextTheme = currentTheme() === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = nextTheme;
+        try {
+          window.localStorage.setItem(storageKey, nextTheme);
+        } catch (_) {
+          // The selected theme still applies for this page when storage is unavailable.
+        }
+        updateThemeUI();
+      });
+      if (typeof systemTheme.addEventListener === 'function') {
+        systemTheme.addEventListener('change', () => {
+          if (!root.dataset.theme) updateThemeUI();
+        });
+      }
+      window.addEventListener('storage', (event) => {
+        if (event.key !== storageKey) return;
+        if (event.newValue === 'light' || event.newValue === 'dark') {
+          root.dataset.theme = event.newValue;
+        } else {
+          delete root.dataset.theme;
+        }
+        updateThemeUI();
+      });
+    });
+  })();
+</script>
+          <link rel="stylesheet" href="../../../styles.css?v=20260711-4">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -109,53 +179,178 @@
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"임신 준비할 때 MiniCycle 가임기·배란일 활용법","description":"MiniCycle은 기록한 생리에서 6일짜리 가임기와 예상 배란일을 표시합니다. 임신을 준비할 때 이 표시를 어떻게 읽고 타이밍을 잡는지, 어디까지 믿어야 하는지 정리했습니다.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg","datePublished":"2026-06-28","dateModified":"2026-06-28","inLanguage":"ko","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/ko/blog/trying-to-conceive-fertile-window-minicycle/"}}</script>
         </head>
-          <body>
-        <header class="site-header">
-  <a class="brand" href="../../">MiniCycle</a>
-  <nav aria-label="Primary navigation">
-    <a href="../../blog/">블로그</a>
-    <a href="../../support/">지원</a>
-    <a href="../../privacy/">개인정보</a>
-    <a href="../../../blog/trying-to-conceive-fertile-window-minicycle/">English</a>
-  </nav>
+          <body class="article-page">
+        <a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="../../">
+      <img class="brand-icon" src="../../../assets/minicycle-app-icon.png" alt="" width="34" height="34">
+      <span>MiniCycle</span>
+    </a>
+    <nav class="site-nav" aria-label="주요 탐색">
+      <a href="../../blog/">블로그</a>
+      <a href="../../support/">지원</a>
+      <a href="../../privacy/">개인정보</a>
+    </nav>
+    <div class="header-controls">
+      <button class="theme-toggle" type="button" data-theme-toggle data-light-label="라이트 모드로 전환" data-dark-label="다크 모드로 전환" aria-label="화면 모드 전환">
+        <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
+        <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.1 15.4A8.2 8.2 0 0 1 8.6 3.9 8.2 8.2 0 1 0 20.1 15.4Z"></path></svg>
+      </button>
+      <a class="language-link" href="../../../blog/trying-to-conceive-fertile-window-minicycle/" lang="en" hreflang="en" aria-label="English">English</a>
+    </div>
+  </div>
 </header>
-            <main class="page">
+            <main class="page article-page-main" id="main-content">
               <article class="article" data-language="ko" data-content-group="trying-to-conceive-fertile-window-minicycle" data-min-read-ms="70000">
-                <p class="eyebrow">임신 준비</p>
-                <h1>임신 준비할 때 MiniCycle 가임기·배란일 활용법</h1>
-                <p class="article-meta">2026년 6월 28일 MiniCycle 작성</p>
-                <p class="lead">임신을 마음먹는 순간, 달력이 갑자기 중요해집니다. 다행히 MiniCycle은 큰일을 이미 해 둡니다. 기록해 둔 생리에서 가임기와 예상 배란일을 달력에 그려 주거든요. 남은 건 그 표시를 어떻게 읽고, 무엇을 하고, 어디서 그만 믿어야 하는지입니다. 가장 흔한 오해 하나가 발목을 잡습니다. 딱 하루, 완벽한 날을 맞혀야 한다는 생각이죠. 그렇지 않습니다. 가임기는 엿새쯤 이어지고, 그 이유를 알면 앱을 쓰는 방식이 달라집니다.</p>
-                <img class="article-hero" src="../../../assets/home-capture-iphone17-1118-ko-20260518.jpg" alt="MiniCycle 아이폰 실제 캡처 화면: 생리 캘린더와 위젯 경험" width="552" height="1200" loading="eager">
-        <h2>앱이 이미 그려 둔 가임기 찾기</h2>
+                <a class="back-link" href="../"><span aria-hidden="true">&larr;</span> 전체 글</a>
+                <header class="article-header">
+                  <div class="article-heading">
+                    <p class="category-pill">임신 준비</p>
+                    <h1>임신 준비할 때 MiniCycle 가임기·배란일 활용법</h1>
+                    <p class="article-meta"><time datetime="2026-06-28">2026년 6월 28일 MiniCycle 작성</time><span aria-hidden="true">&middot;</span><span>약 3분 읽기</span></p>
+                    <p class="lead">임신을 마음먹는 순간, 달력이 갑자기 중요해집니다. 다행히 MiniCycle은 큰일을 이미 해 둡니다. 기록해 둔 생리에서 가임기와 예상 배란일을 달력에 그려 주거든요. 남은 건 그 표시를 어떻게 읽고, 무엇을 하고, 어디서 그만 믿어야 하는지입니다. 가장 흔한 오해 하나가 발목을 잡습니다. 딱 하루, 완벽한 날을 맞혀야 한다는 생각이죠. 그렇지 않습니다. 가임기는 엿새쯤 이어지고, 그 이유를 알면 앱을 쓰는 방식이 달라집니다.</p>
+                  </div>
+                  <figure class="article-visual">
+                    <div class="article-visual-frame">
+                      <span class="visual-orbit visual-orbit-one" aria-hidden="true"></span>
+                      <span class="visual-orbit visual-orbit-two" aria-hidden="true"></span>
+                      <img class="article-hero" src="../../../assets/home-capture-iphone17-1118-ko-20260518.jpg" alt="MiniCycle 아이폰 실제 캡처 화면: 생리 캘린더와 위젯 경험" width="552" height="1200" loading="eager">
+                    </div>
+                    <figcaption>iPhone에서 보는 MiniCycle 캘린더</figcaption>
+                  </figure>
+                </header>
+                <div class="article-layout">
+                  <div class="article-body">
+        <section class="article-section" aria-labelledby="section-1">
+  <h2 id="section-1">앱이 이미 그려 둔 가임기 찾기</h2>
 <p>달력을 열면 가임기가 이미 하늘색으로 칠해져 있고, 그 안에 예상 배란일이 더 진한 파란색으로 찍혀 있습니다. 둘 다 저장된 생리 시작일에서 나옵니다. 다른 예측을 움직이는 그 날짜요. 따로 임신 준비 모드를 켤 필요는 없습니다. 생리를 기록하는 것만으로 가임기가 화면에 올라옵니다.</p>
 <p>가임기는 엿새입니다. 예상 배란일 5일 전부터 다음 날까지요. 이 폭은 임의로 정한 게 아닙니다. 미국산부인과학회(ACOG)도 같은 생물학적 이유로 가임기를 약 6일로 봅니다. 정자는 최대 5일까지 살고, 난자는 배란 뒤 약 12–24시간만 버티거든요. 앱의 하늘색 띠와 교과서 속 가임기는 같은 것을 가리킵니다.</p>
-<h2>하루가 아니라 기간을 노립니다</h2>
+</section>
+<section class="article-section" aria-labelledby="section-2">
+  <h2 id="section-2">하루가 아니라 기간을 노립니다</h2>
 <p>완벽한 하루라는 생각이 조용히 손해를 끼치는 지점이 여기입니다. 정자가 며칠을 사는 덕에, 관계를 가질 쓸모 있는 시간은 배란 당일 하나가 아니라 배란으로 다가가는 며칠입니다. ACOG의 권고는 단순합니다. 엿새 가임기 동안 매일 또는 하루 걸러 관계를 가지라는 것. Mayo Clinic은 배란 3–4일 전부터 다음 날까지로 표현합니다.</p>
 <p>그러니 배란 당일보다 배란 추정일로 다가가는 며칠이 임신 확률을 더 많이 쥐고 있습니다. 난자가 이미 짧은 수명의 끝자락이라서요. 실제로는 하늘색 날들이 움직일 때이고, 진한 파란색 배란일은 그 기간의 가운데가 아니라 뒤쪽에 가깝습니다. 매일이 부담이면, 그 엿새 동안 하루 걸러로도 같은 범위를 덮습니다.</p>
-<h2>성생활을 기록해 가임기와 견줘 보기</h2>
+</section>
+<section class="article-section" aria-labelledby="section-3">
+  <h2 id="section-3">성생활을 기록해 가임기와 견줘 보기</h2>
 <p>MiniCycle은 날짜 패널에서 하트 버튼을 눌러 성생활을 작은 보라색 점으로 남길 수 있습니다. 평소 주기를 기록할 때는 그냥 맥락이지만, 임신을 준비할 때는 피드백이 됩니다. 하늘색 띠 옆에 보라색 점이 찍히면, 관계한 날이 가임기 안에 들었는지 가장자리로 비껴갔는지 한눈에 보입니다.</p>
 <p>점이 가임기 밖에 있던 달은 실패가 아니라 다음 달을 위한 정보입니다. 두 표시가 같은 달력에 있는 건, 머릿속으로 날짜를 세지 않고도 함께 보라는 뜻입니다.</p>
-<h2>앱이 못 보는 신호는 메모에</h2>
+</section>
+<section class="article-section" aria-labelledby="section-4">
+  <h2 id="section-4">앱이 못 보는 신호는 메모에</h2>
 <p>앱이 그리는 가임기는 날짜에서 나온 추정입니다. 몸은 배란을 달력이 못 보는 방식으로 알려 줍니다. ACOG와 Mayo Clinic이 함께 꼽는 가장 쓸모 있는 신호는 자궁경부 점액입니다. 배란 하루 이틀 전이면 맑고 묽고 늘어나는 형태로 바뀝니다. 아침에 일어나기 전 재는 기초체온이 살짝 오르면, 배란이 막 지났다는 확인이 됩니다.</p>
 <p>MiniCycle은 날짜마다 메모를 붙일 수 있습니다. 점액 변화나 체온을 거기 적어 두면, 몸이 한 일과 앱의 예측을 나란히 맞춰 볼 수 있습니다. 신호와 하늘색 띠가 맞아떨어지면 그 추정은 더 믿을 만하고, 어긋나면 그달은 내 신호가 더 나은 길잡이입니다.</p>
-<h2>가임기 알림을 켜 두기</h2>
+</section>
+<section class="article-section" aria-labelledby="section-5">
+  <h2 id="section-5">가임기 알림을 켜 두기</h2>
 <p>위치를 확인하려고 매일 아침 앱을 열 필요는 없습니다. MiniCycle은 가임기 시작 알림을 당일 또는 최대 3일 전에, 원하는 시간에 보내 줍니다. 하루 이틀 일찍 맞춰 두면 가임기가 열리기 전에 미리 귀띔을 받습니다. 지나고 나서야 알아차리는 대신에요.</p>
 <p>가운데쯤에 알림을 받고 싶다면 배란일 알림도 같은 방식으로 켜면 됩니다. 알림은 휴대폰 안에서 예약되고, 새 생리로 예측이 바뀌면 함께 옮겨 가서 늘 맞는 날을 가리킵니다.</p>
-<h2>추정이 멈추는 곳, 그리고 병원에 갈 때</h2>
+</section>
+<section class="article-section" aria-labelledby="section-6">
+  <h2 id="section-6">추정이 멈추는 곳, 그리고 병원에 갈 때</h2>
 <p>앱의 가임기는 배란을 확인해 주지 못하고, 어떤 주기가 임신으로 이어졌는지도 알려 주지 못합니다. 지난 날짜에서 뽑은 참고 정보일 뿐이고, 다음 주기가 비슷할 거라는 가정 위에 있습니다. 생리가 많이 불규칙하면 ACOG는 집에서 하는 예측이 믿기 어렵다고 말합니다. 그럴 땐 날짜를 좇기보다 의료진과 상의하는 편이 낫습니다.</p>
 <p>타이밍도 그 상담의 일부입니다. 건강한 부부의 절반 이상이 6개월 안에, 대부분은 1년 안에 임신합니다. ACOG와 Mayo Clinic은 35세 미만이면 1년, 35세 이상이면 6개월 시도 뒤에도 소식이 없을 때, 자궁내막증이나 다낭성난소증후군처럼 아는 사정이 있으면 더 일찍 진료를 권합니다. 기록하는 동안의 작은 안심 하나. 생리 앱은 의료 정보 보호법의 적용을 받지 않는데, MiniCycle의 기록은 계정 없이 기기 안에 머뭅니다. 앱은 가능성 높은 날을 가리킬 뿐, 나머지는 나의, 그리고 필요할 때 의료진의 몫입니다.</p>
-                <div class="callout">
-                  <p>MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다.</p>
-                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="ko" data-placement="blog_article_callout" data-content-group="trying-to-conceive-fertile-window-minicycle" onclick="trackAppStoreClick(this)">App Store에서 받기</a>
+</section>
+                    <section class="callout" aria-labelledby="try-minicycle">
+                      <img class="callout-mark" src="../../../assets/minicycle-app-icon.png" alt="" width="42" height="42" loading="lazy">
+                      <div class="callout-copy">
+                        <p class="eyebrow">MiniCycle for iPhone</p>
+                        <h2 id="try-minicycle">MiniCycle 사용하기</h2>
+                        <p>MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다.</p>
+                      </div>
+                      <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="ko" data-placement="blog_article_callout" data-content-group="trying-to-conceive-fertile-window-minicycle" onclick="trackAppStoreClick(this)">App Store에서 받기</a>
+                    </section>
+                    <section class="references-section" aria-labelledby="references-title">
+                      <p class="eyebrow">MiniCycle editorial</p>
+                      <h2 id="references-title">참고 자료</h2>
+                      <ul class="references">
+        <li><a href="https://www.acog.org/womens-health/experts-and-stories/the-latest/trying-to-get-pregnant-heres-when-to-have-sex" lang="en">ACOG. Trying to Get Pregnant? Here&#x27;s When to Have Sex.</a></li>
+<li><a href="https://www.mayoclinic.org/healthy-lifestyle/getting-pregnant/in-depth/how-to-get-pregnant/art-20047611" lang="en">Mayo Clinic. How to get pregnant.</a></li>
+<li><a href="https://www.acog.org/womens-health/faqs/fertility-awareness-based-methods-of-family-planning" lang="en">ACOG. Fertility Awareness-Based Methods of Family Planning.</a></li>
+<li><a href="https://minicycle.net/privacy/" lang="en">MiniCycle Privacy Policy.</a></li>
+                      </ul>
+                    </section>
+                  </div>
+                  <aside class="article-sidebar">
+                    <nav class="article-toc" aria-label="이 글에서 다루는 내용">
+                      <p class="toc-title">이 글에서 다루는 내용</p>
+                      <ol>
+        <li><a href="#section-1">앱이 이미 그려 둔 가임기 찾기</a></li>
+<li><a href="#section-2">하루가 아니라 기간을 노립니다</a></li>
+<li><a href="#section-3">성생활을 기록해 가임기와 견줘 보기</a></li>
+<li><a href="#section-4">앱이 못 보는 신호는 메모에</a></li>
+<li><a href="#section-5">가임기 알림을 켜 두기</a></li>
+<li><a href="#section-6">추정이 멈추는 곳, 그리고 병원에 갈 때</a></li>
+                      </ol>
+                    </nav>
+                  </aside>
                 </div>
-                <h2>참고 자료</h2>
-                <ul class="references">
-        <li><a href="https://www.acog.org/womens-health/experts-and-stories/the-latest/trying-to-get-pregnant-heres-when-to-have-sex">ACOG. Trying to Get Pregnant? Here&#x27;s When to Have Sex.</a></li>
-<li><a href="https://www.mayoclinic.org/healthy-lifestyle/getting-pregnant/in-depth/how-to-get-pregnant/art-20047611">Mayo Clinic. How to get pregnant.</a></li>
-<li><a href="https://www.acog.org/womens-health/faqs/fertility-awareness-based-methods-of-family-planning">ACOG. Fertility Awareness-Based Methods of Family Planning.</a></li>
-<li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
-                </ul>
               </article>
+              <section class="related-section" aria-labelledby="related-title">
+                <div class="section-heading">
+                  <div>
+                    <p class="eyebrow">이어서 읽기</p>
+                    <h2 id="related-title">함께 읽으면 좋은 글</h2>
+                  </div>
+                  <a class="text-link section-link" href="../">전체 글<span aria-hidden="true">&nbsp;&rarr;</span></a>
+                </div>
+                <div class="post-grid related-grid">
+        <article class="post-card related-card" data-guide-card data-search-value="위젯 minicycle 위젯이 안 바뀔 때, 새로 고침은 어떻게 되나요 minicycle 홈 화면 위젯은 실시간이 아니라 ios가 정한 시점에 갱신됩니다. 위젯이 어떻게 새로 고쳐지는지, 오래된 상태로 보일 때 무엇을 확인하면 되는지 정리했습니다.">
+  <div class="post-card-topline">
+    <p class="category-pill">위젯</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../minicycle-widget-not-updating-refresh/">MiniCycle 위젯이 안 바뀔 때, 새로 고침은 어떻게 되나요</a></h3>
+  <p class="post-description">MiniCycle 홈 화면 위젯은 실시간이 아니라 iOS가 정한 시점에 갱신됩니다. 위젯이 어떻게 새로 고쳐지는지, 오래된 상태로 보일 때 무엇을 확인하면 되는지 정리했습니다.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-04">2026.07.04</time><span aria-hidden="true">&middot;</span>약 3분</p>
+    <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="주기 건강 배란통이 뭘까요? 배란기에 아랫배가 아픈 이유 배란 무렵 한쪽 아랫배가 콕콕 쑤시는 배란통은 배란하는 사람의 40%까지 겪습니다. 어떤 느낌인지, 왜 생기는지, 그리고 배란통이 아닐 때는 언제인지 정리했습니다.">
+  <div class="post-card-topline">
+    <p class="category-pill">주기 건강</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../ovulation-pain-mittelschmerz-what-it-is/">배란통이 뭘까요? 배란기에 아랫배가 아픈 이유</a></h3>
+  <p class="post-description">배란 무렵 한쪽 아랫배가 콕콕 쑤시는 배란통은 배란하는 사람의 40%까지 겪습니다. 어떤 느낌인지, 왜 생기는지, 그리고 배란통이 아닐 때는 언제인지 정리했습니다.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-03">2026.07.03</time><span aria-hidden="true">&middot;</span>약 3분</p>
+    <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="예측 minicycle 생리 예정일이 자꾸 바뀌는 이유 생리를 새로 기록할 때마다 minicycle이 다음 예정일을 다시 계산해 날짜가 옮겨갑니다. 예정일이 바뀌는 건 오류가 아니라 최신 기록에 맞춰 정확해지는 과정이라는 점을 계산 방식과 함께 정리했습니다.">
+  <div class="post-card-topline">
+    <p class="category-pill">예측</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../why-minicycle-predicted-period-date-changes/">MiniCycle 생리 예정일이 자꾸 바뀌는 이유</a></h3>
+  <p class="post-description">생리를 새로 기록할 때마다 MiniCycle이 다음 예정일을 다시 계산해 날짜가 옮겨갑니다. 예정일이 바뀌는 건 오류가 아니라 최신 기록에 맞춰 정확해지는 과정이라는 점을 계산 방식과 함께 정리했습니다.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-02">2026.07.02</time><span aria-hidden="true">&middot;</span>약 3분</p>
+    <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+                </div>
+              </section>
             </main>
+        <footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="../../">
+        <img class="brand-icon" src="../../../assets/minicycle-app-icon.png" alt="" width="34" height="34" loading="lazy">
+        <span>MiniCycle</span>
+      </a>
+      <p>내 주기를 이해하는 더 조용하고 사적인 방법.</p>
+    </div>
+    <nav class="footer-nav" aria-label="하단 탐색">
+      <a href="../../blog/">블로그</a>
+      <a href="../../support/">지원</a>
+      <a href="../../privacy/">개인정보</a>
+    </nav>
+    <p class="copyright">&copy; 2026 MiniCycle. iPhone을 위해 세심하게 만들었습니다.</p>
+  </div>
+</footer>
           </body>
         </html>

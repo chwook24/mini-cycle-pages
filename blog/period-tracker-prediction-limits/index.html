@@ -3,6 +3,8 @@
                 <head>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1">
+          <meta name="color-scheme" content="light dark">
+          <meta name="theme-color" content="#fbf8fa" data-theme-color>
           <title>When period tracker predictions are useful, and when they are not</title>
           <meta name="description" content="Period tracker predictions can help with planning, but they are not medical advice, contraception, or a pregnancy test. Learn the limits MiniCycle makes explicit.">
           <link rel="canonical" href="https://minicycle.net/blog/period-tracker-prediction-limits/">
@@ -19,7 +21,75 @@
             <link rel="icon" href="../../favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
     <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
-          <link rel="stylesheet" href="../../styles.css">
+        <script>
+  (() => {
+    const storageKey = 'minicycle-theme';
+    const root = document.documentElement;
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+    root.classList.add('js');
+
+    function storedTheme() {
+      try {
+        const value = window.localStorage.getItem(storageKey);
+        return value === 'light' || value === 'dark' ? value : null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function currentTheme() {
+      return root.dataset.theme || (systemTheme.matches ? 'dark' : 'light');
+    }
+
+    function updateThemeUI() {
+      const dark = currentTheme() === 'dark';
+      const themeColor = document.querySelector('[data-theme-color]');
+      if (themeColor) themeColor.setAttribute('content', dark ? '#121014' : '#fbf8fa');
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      const label = dark
+        ? toggle.dataset.lightLabel
+        : toggle.dataset.darkLabel;
+      toggle.setAttribute('aria-label', label);
+      toggle.setAttribute('title', label);
+    }
+
+    const savedTheme = storedTheme();
+    if (savedTheme) root.dataset.theme = savedTheme;
+    updateThemeUI();
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      updateThemeUI();
+      toggle.addEventListener('click', () => {
+        const nextTheme = currentTheme() === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = nextTheme;
+        try {
+          window.localStorage.setItem(storageKey, nextTheme);
+        } catch (_) {
+          // The selected theme still applies for this page when storage is unavailable.
+        }
+        updateThemeUI();
+      });
+      if (typeof systemTheme.addEventListener === 'function') {
+        systemTheme.addEventListener('change', () => {
+          if (!root.dataset.theme) updateThemeUI();
+        });
+      }
+      window.addEventListener('storage', (event) => {
+        if (event.key !== storageKey) return;
+        if (event.newValue === 'light' || event.newValue === 'dark') {
+          root.dataset.theme = event.newValue;
+        } else {
+          delete root.dataset.theme;
+        }
+        updateThemeUI();
+      });
+    });
+  })();
+</script>
+          <link rel="stylesheet" href="../../styles.css?v=20260711-4">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -109,57 +179,194 @@
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"When period tracker predictions are useful, and when they are not","description":"Period tracker predictions can help with planning, but they are not medical advice, contraception, or a pregnancy test. Learn the limits MiniCycle makes explicit.","image":"https://minicycle.net/assets/stats-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-05-16","dateModified":"2026-05-18","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/period-tracker-prediction-limits/"}}</script>
         </head>
-          <body>
-        <header class="site-header">
-  <a class="brand" href="../../">MiniCycle</a>
-  <nav aria-label="Primary navigation">
-    <a href="../../blog/">Blog</a>
-    <a href="../../support/">Support</a>
-    <a href="../../privacy/">Privacy</a>
-    <a href="../../ko/blog/period-tracker-prediction-limits/">한국어</a>
-  </nav>
+          <body class="article-page">
+        <a class="skip-link" href="#main-content">Skip to content</a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="../../">
+      <img class="brand-icon" src="../../assets/minicycle-app-icon.png" alt="" width="34" height="34">
+      <span>MiniCycle</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="../../blog/">Blog</a>
+      <a href="../../support/">Support</a>
+      <a href="../../privacy/">Privacy</a>
+    </nav>
+    <div class="header-controls">
+      <button class="theme-toggle" type="button" data-theme-toggle data-light-label="Switch to light mode" data-dark-label="Switch to dark mode" aria-label="Toggle color theme">
+        <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
+        <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.1 15.4A8.2 8.2 0 0 1 8.6 3.9 8.2 8.2 0 1 0 20.1 15.4Z"></path></svg>
+      </button>
+      <a class="language-link" href="../../ko/blog/period-tracker-prediction-limits/" lang="ko" hreflang="ko" aria-label="한국어">한국어</a>
+    </div>
+  </div>
 </header>
-            <main class="page">
+            <main class="page article-page-main" id="main-content">
               <article class="article" data-language="en" data-content-group="period-tracker-prediction-limits" data-min-read-ms="90000">
-                <p class="eyebrow">Prediction limits</p>
-                <h1>When period tracker predictions are useful, and when they are not</h1>
-                <p class="article-meta">Published May 16, 2026 by MiniCycle</p>
-                <p class="lead">A calendar estimate can be useful without being certain. MiniCycle is designed to show helpful dates while making the limits visible.</p>
-                <img class="article-hero" src="../../assets/stats-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
-        <h2>Useful for planning</h2>
+                <a class="back-link" href="../"><span aria-hidden="true">&larr;</span> All guides</a>
+                <header class="article-header">
+                  <div class="article-heading">
+                    <p class="category-pill">Prediction limits</p>
+                    <h1>When period tracker predictions are useful, and when they are not</h1>
+                    <p class="article-meta"><time datetime="2026-05-16">Published May 16, 2026 by MiniCycle</time><span aria-hidden="true">&middot;</span><span>3 min read</span></p>
+                    <p class="lead">A calendar estimate can be useful without being certain. MiniCycle is designed to show helpful dates while making the limits visible.</p>
+                  </div>
+                  <figure class="article-visual">
+                    <div class="article-visual-frame">
+                      <span class="visual-orbit visual-orbit-one" aria-hidden="true"></span>
+                      <span class="visual-orbit visual-orbit-two" aria-hidden="true"></span>
+                      <img class="article-hero" src="../../assets/stats-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
+                    </div>
+                    <figcaption>The MiniCycle calendar on iPhone</figcaption>
+                  </figure>
+                </header>
+                <div class="article-layout">
+                  <div class="article-body">
+        <section class="article-section" aria-labelledby="section-1">
+  <h2 id="section-1">Useful for planning</h2>
 <p>Period predictions can help you prepare for an expected period, notice when a cycle is drifting, and keep a simple memory of past start dates. For many people, that planning value is the main reason to use a period calendar.</p>
-<h2>Not useful as contraception</h2>
+</section>
+<section class="article-section" aria-labelledby="section-2">
+  <h2 id="section-2">Not useful as contraception</h2>
 <p>Calendar estimates should not be treated as contraception. Fertility awareness methods require specific rules, consistent observation, and often barrier protection or abstinence during fertile days when avoiding pregnancy. MiniCycle does not replace that kind of method.</p>
-<h2>Not a diagnosis</h2>
+</section>
+<section class="article-section" aria-labelledby="section-3">
+  <h2 id="section-3">Not a diagnosis</h2>
 <p>Late, early, painful, heavy, or unusual bleeding can have many explanations. A period tracker can help you bring dates to a healthcare visit, but it cannot diagnose the reason behind a change.</p>
-<h2>Why MiniCycle labels estimates clearly</h2>
+</section>
+<section class="article-section" aria-labelledby="section-4">
+  <h2 id="section-4">Why MiniCycle labels estimates clearly</h2>
 <p>MiniCycle separates recorded period days from predicted period days and fertile window highlights. The visual distinction matters because a recorded fact and a future estimate should not look the same.</p>
-<h2>The safest way to use predictions</h2>
+</section>
+<section class="article-section" aria-labelledby="section-5">
+  <h2 id="section-5">The safest way to use predictions</h2>
 <p>Use predictions as planning cues. Keep recording actual period starts and ends. If a change is important for your health, pregnancy plans, contraception decisions, or symptoms, rely on professional medical guidance rather than an app estimate.</p>
-<h2>Planning information versus health decisions</h2>
+</section>
+<section class="article-section" aria-labelledby="section-6">
+  <h2 id="section-6">Planning information versus health decisions</h2>
 <p>A prediction can help with ordinary planning: packing supplies, checking whether a trip overlaps with an expected period, or noticing that a period has not started when expected. Those are planning uses. They are different from health decisions such as diagnosing a condition, choosing contraception, or deciding whether a symptom is safe to ignore.</p>
 <p>MiniCycle&#x27;s interface is intentionally conservative because the same date can be read in different ways. A predicted period date might be useful for preparation, but it should not be treated as a promise from the app or as evidence that nothing else is happening.</p>
-<h2>Why uncertainty should be visible</h2>
+</section>
+<section class="article-section" aria-labelledby="section-7">
+  <h2 id="section-7">Why uncertainty should be visible</h2>
 <p>Some health apps try to make predictions feel exact. That can look polished, but it can also hide uncertainty. MiniCycle uses labels and different visual styles so estimated dates remain visibly different from saved records.</p>
 <p>Visible uncertainty is not a weakness in a period tracker. It is a more honest match for the data. Period records can support useful estimates, but they do not give the app direct knowledge of hormones, ovulation tests, ultrasound findings, medication effects, or symptoms.</p>
-<h2>When to stop relying on the calendar</h2>
+</section>
+<section class="article-section" aria-labelledby="section-8">
+  <h2 id="section-8">When to stop relying on the calendar</h2>
 <p>If bleeding is unusually heavy, pain is severe, cycles change suddenly, a period is missed and pregnancy is possible, or contraception decisions are involved, the calendar should become supporting context rather than the main source of judgment. In those cases, bring the dates to a qualified healthcare professional or use clinically appropriate tests and guidance.</p>
-<h2>Examples of safe and unsafe interpretation</h2>
+</section>
+<section class="article-section" aria-labelledby="section-9">
+  <h2 id="section-9">Examples of safe and unsafe interpretation</h2>
 <p>A safe interpretation is: the app expects a period around this date, so I might prepare supplies or keep an eye on whether the date changes. An unsafe interpretation is: the app did not highlight today, so pregnancy is impossible, contraception is unnecessary, or a symptom can be ignored. MiniCycle is designed for the first kind of interpretation only.</p>
 <p>The same applies to ovulation and fertile window estimates. They can be useful labels on a calendar, especially for understanding the app&#x27;s predicted cycle structure. They should not be treated as proof of ovulation or as a substitute for clinically appropriate fertility awareness instruction.</p>
-<h2>Why a simpler app can be safer</h2>
+</section>
+<section class="article-section" aria-labelledby="section-10">
+  <h2 id="section-10">Why a simpler app can be safer</h2>
 <p>A product with fewer claims can be easier to use responsibly. MiniCycle does not try to combine every possible reproductive health feature into one screen. By focusing on period dates, estimates, local records, widgets, and simple statistics, the app leaves less room for overconfident interpretation.</p>
-                <div class="callout">
-                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
-                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="period-tracker-prediction-limits" onclick="trackAppStoreClick(this)">View on the App Store</a>
-                </div>
-                <h2>References</h2>
-                <ul class="references">
+</section>
+                    <section class="callout" aria-labelledby="try-minicycle">
+                      <img class="callout-mark" src="../../assets/minicycle-app-icon.png" alt="" width="42" height="42" loading="lazy">
+                      <div class="callout-copy">
+                        <p class="eyebrow">MiniCycle for iPhone</p>
+                        <h2 id="try-minicycle">Try MiniCycle</h2>
+                        <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                      </div>
+                      <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="period-tracker-prediction-limits" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                    </section>
+                    <section class="references-section" aria-labelledby="references-title">
+                      <p class="eyebrow">MiniCycle editorial</p>
+                      <h2 id="references-title">References</h2>
+                      <ul class="references">
         <li><a href="https://www.acog.org/womens-health/faqs/fertility-awareness-based-methods-of-family-planning">ACOG. Fertility Awareness-Based Methods of Family Planning.</a></li>
 <li><a href="https://www.cdc.gov/contraception/hcp/usmec/fertility-awareness-based-methods.html">CDC. Fertility Awareness-Based Methods.</a></li>
 <li><a href="https://www.hopkinsmedicine.org/health/wellness-and-prevention/calculating-your-monthly-fertility-window">Johns Hopkins Medicine. Calculating Your Monthly Fertility Window.</a></li>
-                </ul>
+                      </ul>
+                    </section>
+                  </div>
+                  <aside class="article-sidebar">
+                    <nav class="article-toc" aria-label="On this page">
+                      <p class="toc-title">On this page</p>
+                      <ol>
+        <li><a href="#section-1">Useful for planning</a></li>
+<li><a href="#section-2">Not useful as contraception</a></li>
+<li><a href="#section-3">Not a diagnosis</a></li>
+<li><a href="#section-4">Why MiniCycle labels estimates clearly</a></li>
+<li><a href="#section-5">The safest way to use predictions</a></li>
+<li><a href="#section-6">Planning information versus health decisions</a></li>
+<li><a href="#section-7">Why uncertainty should be visible</a></li>
+<li><a href="#section-8">When to stop relying on the calendar</a></li>
+<li><a href="#section-9">Examples of safe and unsafe interpretation</a></li>
+<li><a href="#section-10">Why a simpler app can be safer</a></li>
+                      </ol>
+                    </nav>
+                  </aside>
+                </div>
               </article>
+              <section class="related-section" aria-labelledby="related-title">
+                <div class="section-heading">
+                  <div>
+                    <p class="eyebrow">Keep exploring</p>
+                    <h2 id="related-title">More guides you may like</h2>
+                  </div>
+                  <a class="text-link section-link" href="../">All guides<span aria-hidden="true">&nbsp;&rarr;</span></a>
+                </div>
+                <div class="post-grid related-grid">
+        <article class="post-card related-card" data-guide-card data-search-value="widget why the minicycle widget isn&#x27;t updating, and how it refreshes the minicycle home-screen widget updates on ios&#x27;s schedule, not the instant you log a period. here is how widgetkit refreshes it and what to check when it looks stale.">
+  <div class="post-card-topline">
+    <p class="category-pill">Widget</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../minicycle-widget-not-updating-refresh/">Why the MiniCycle widget isn&#x27;t updating, and how it refreshes</a></h3>
+  <p class="post-description">The MiniCycle home-screen widget updates on iOS&#x27;s schedule, not the instant you log a period. Here is how WidgetKit refreshes it and what to check when it looks stale.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-04">2026.07.04</time><span aria-hidden="true">&middot;</span>5 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="cycle health ovulation pain (mittelschmerz): what that mid-cycle twinge is ovulation pain, or mittelschmerz, is a one-sided mid-cycle twinge that affects up to 40% of people who ovulate. what it feels like, why it happens, and when it isn&#x27;t ordinary.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle health</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../ovulation-pain-mittelschmerz-what-it-is/">Ovulation pain (mittelschmerz): what that mid-cycle twinge is</a></h3>
+  <p class="post-description">Ovulation pain, or mittelschmerz, is a one-sided mid-cycle twinge that affects up to 40% of people who ovulate. What it feels like, why it happens, and when it isn&#x27;t ordinary.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-03">2026.07.03</time><span aria-hidden="true">&middot;</span>4 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="predictions why minicycle&#x27;s predicted period date keeps changing minicycle re-estimates your next period every time your saved dates change, so the predicted date can move. here is what shifts, when, and why a moving estimate is the app working.">
+  <div class="post-card-topline">
+    <p class="category-pill">Predictions</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../why-minicycle-predicted-period-date-changes/">Why MiniCycle&#x27;s predicted period date keeps changing</a></h3>
+  <p class="post-description">MiniCycle re-estimates your next period every time your saved dates change, so the predicted date can move. Here is what shifts, when, and why a moving estimate is the app working.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-02">2026.07.02</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+                </div>
+              </section>
             </main>
+        <footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="../../">
+        <img class="brand-icon" src="../../assets/minicycle-app-icon.png" alt="" width="34" height="34" loading="lazy">
+        <span>MiniCycle</span>
+      </a>
+      <p>A quieter, more private way to understand your cycle.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="../../blog/">Blog</a>
+      <a href="../../support/">Support</a>
+      <a href="../../privacy/">Privacy</a>
+    </nav>
+    <p class="copyright">&copy; 2026 MiniCycle. Built thoughtfully for iPhone.</p>
+  </div>
+</footer>
           </body>
         </html>

@@ -3,6 +3,8 @@
                 <head>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1">
+          <meta name="color-scheme" content="light dark">
+          <meta name="theme-color" content="#fbf8fa" data-theme-color>
           <title>How to start tracking your period: a beginner&#x27;s guide</title>
           <meta name="description" content="New to tracking? What to write down from day one, how a cycle is counted, why your first months of predictions stay rough, and the few changes worth a doctor&#x27;s note.">
           <link rel="canonical" href="https://minicycle.net/blog/how-to-start-tracking-your-cycle/">
@@ -19,7 +21,75 @@
             <link rel="icon" href="../../favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
     <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
-          <link rel="stylesheet" href="../../styles.css">
+        <script>
+  (() => {
+    const storageKey = 'minicycle-theme';
+    const root = document.documentElement;
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+    root.classList.add('js');
+
+    function storedTheme() {
+      try {
+        const value = window.localStorage.getItem(storageKey);
+        return value === 'light' || value === 'dark' ? value : null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function currentTheme() {
+      return root.dataset.theme || (systemTheme.matches ? 'dark' : 'light');
+    }
+
+    function updateThemeUI() {
+      const dark = currentTheme() === 'dark';
+      const themeColor = document.querySelector('[data-theme-color]');
+      if (themeColor) themeColor.setAttribute('content', dark ? '#121014' : '#fbf8fa');
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      const label = dark
+        ? toggle.dataset.lightLabel
+        : toggle.dataset.darkLabel;
+      toggle.setAttribute('aria-label', label);
+      toggle.setAttribute('title', label);
+    }
+
+    const savedTheme = storedTheme();
+    if (savedTheme) root.dataset.theme = savedTheme;
+    updateThemeUI();
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      updateThemeUI();
+      toggle.addEventListener('click', () => {
+        const nextTheme = currentTheme() === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = nextTheme;
+        try {
+          window.localStorage.setItem(storageKey, nextTheme);
+        } catch (_) {
+          // The selected theme still applies for this page when storage is unavailable.
+        }
+        updateThemeUI();
+      });
+      if (typeof systemTheme.addEventListener === 'function') {
+        systemTheme.addEventListener('change', () => {
+          if (!root.dataset.theme) updateThemeUI();
+        });
+      }
+      window.addEventListener('storage', (event) => {
+        if (event.key !== storageKey) return;
+        if (event.newValue === 'light' || event.newValue === 'dark') {
+          root.dataset.theme = event.newValue;
+        } else {
+          delete root.dataset.theme;
+        }
+        updateThemeUI();
+      });
+    });
+  })();
+</script>
+          <link rel="stylesheet" href="../../styles.css?v=20260711-4">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -109,64 +179,198 @@
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"How to start tracking your period: a beginner's guide","description":"New to tracking? What to write down from day one, how a cycle is counted, why your first months of predictions stay rough, and the few changes worth a doctor's note.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-06-13","dateModified":"2026-06-13","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/how-to-start-tracking-your-cycle/"}}</script>
         </head>
-          <body>
-        <header class="site-header">
-  <a class="brand" href="../../">MiniCycle</a>
-  <nav aria-label="Primary navigation">
-    <a href="../../blog/">Blog</a>
-    <a href="../../support/">Support</a>
-    <a href="../../privacy/">Privacy</a>
-    <a href="../../ko/blog/how-to-start-tracking-your-cycle/">한국어</a>
-  </nav>
+          <body class="article-page">
+        <a class="skip-link" href="#main-content">Skip to content</a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="../../">
+      <img class="brand-icon" src="../../assets/minicycle-app-icon.png" alt="" width="34" height="34">
+      <span>MiniCycle</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="../../blog/">Blog</a>
+      <a href="../../support/">Support</a>
+      <a href="../../privacy/">Privacy</a>
+    </nav>
+    <div class="header-controls">
+      <button class="theme-toggle" type="button" data-theme-toggle data-light-label="Switch to light mode" data-dark-label="Switch to dark mode" aria-label="Toggle color theme">
+        <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
+        <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.1 15.4A8.2 8.2 0 0 1 8.6 3.9 8.2 8.2 0 1 0 20.1 15.4Z"></path></svg>
+      </button>
+      <a class="language-link" href="../../ko/blog/how-to-start-tracking-your-cycle/" lang="ko" hreflang="ko" aria-label="한국어">한국어</a>
+    </div>
+  </div>
 </header>
-            <main class="page">
+            <main class="page article-page-main" id="main-content">
               <article class="article" data-language="en" data-content-group="how-to-start-tracking-your-cycle" data-min-read-ms="90000">
-                <p class="eyebrow">Getting started</p>
-                <h1>How to start tracking your period: a beginner&#x27;s guide</h1>
-                <p class="article-meta">Published June 13, 2026 by MiniCycle</p>
-                <p class="lead">The honest place to begin is a blank. Someone asks when your last period started, and the best you have is a shrug and a rough guess at the week. Tracking closes that gap, and it asks less than most people fear. One date, written the day it happens. Everything a period app shows you later, the next predicted period, the fertile window, the small statistics, is built on that single habit. Get the dates down and the rest follows.</p>
-                <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
-        <h2>Start with one date</h2>
+                <a class="back-link" href="../"><span aria-hidden="true">&larr;</span> All guides</a>
+                <header class="article-header">
+                  <div class="article-heading">
+                    <p class="category-pill">Getting started</p>
+                    <h1>How to start tracking your period: a beginner&#x27;s guide</h1>
+                    <p class="article-meta"><time datetime="2026-06-13">Published June 13, 2026 by MiniCycle</time><span aria-hidden="true">&middot;</span><span>6 min read</span></p>
+                    <p class="lead">The honest place to begin is a blank. Someone asks when your last period started, and the best you have is a shrug and a rough guess at the week. Tracking closes that gap, and it asks less than most people fear. One date, written the day it happens. Everything a period app shows you later, the next predicted period, the fertile window, the small statistics, is built on that single habit. Get the dates down and the rest follows.</p>
+                  </div>
+                  <figure class="article-visual">
+                    <div class="article-visual-frame">
+                      <span class="visual-orbit visual-orbit-one" aria-hidden="true"></span>
+                      <span class="visual-orbit visual-orbit-two" aria-hidden="true"></span>
+                      <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
+                    </div>
+                    <figcaption>The MiniCycle calendar on iPhone</figcaption>
+                  </figure>
+                </header>
+                <div class="article-layout">
+                  <div class="article-body">
+        <section class="article-section" aria-labelledby="section-1">
+  <h2 id="section-1">Start with one date</h2>
 <p>The one entry that matters from day one is the day bleeding starts. Not the day you notice spotting beforehand, not the day it tapers off: the first day of real flow. The American College of Obstetricians and Gynecologists describes the whole method in a sentence. Mark the first day of bleeding with an X, and count that X as day one. That is the anchor everything else hangs on.</p>
 <p>There is a practical reason apps lean on the start rather than the end. A period&#x27;s start is a clear event you can place to the day, while its end blurs across a tapering day or two. MiniCycle works the same way: you log a period start, and the app fills in a likely end for you. The start is the fact; the rest is estimate. So if you only ever record one thing, record the day flow begins.</p>
-<h2>How a cycle is counted</h2>
+</section>
+<section class="article-section" aria-labelledby="section-2">
+  <h2 id="section-2">How a cycle is counted</h2>
 <p>A cycle is measured from the first day of one period to the first day of the next, not from the day a period ends. Mayo Clinic counts it the same way. This trips up almost everyone at first, because the gap between periods, the stretch with no bleeding, feels like the cycle, when the bleeding days belong to the count too.</p>
 <p>So a 30-day cycle means 30 days from one start to the next, bleeding days included. Once you have two start dates, you have your first cycle length: count the days from the earlier X to the later one. Two more starts and you can see whether that number holds or drifts. The pattern, not any single month, is the thing you are actually tracking.</p>
-<h2>What a normal cycle actually looks like</h2>
+</section>
+<section class="article-section" aria-labelledby="section-3">
+  <h2 id="section-3">What a normal cycle actually looks like</h2>
 <p>The 28-day cycle is the most quietly misleading number in this whole subject. It is a textbook average, not a rule, and real bodies scatter widely around it. When researchers analyzed 612,613 cycles logged in a tracking app and published the results in npj Digital Medicine, only 13% of those cycles were exactly 28 days long. The rest were some other length, and most of them were perfectly normal.</p>
 <p>Mayo Clinic describes typical menstrual bleeding as arriving every 21 to 35 days and lasting 2 to 7 days, then adds the line worth taping to a mirror: within a broad range, typical is what&#x27;s typical for you. If you have just started tracking and your cycles run 26, then 31, then 29, you are not broken. Cycles also tend to be longer and less even in the first years after periods begin, and they usually settle with time. The reason to write the numbers down is not to drag them toward 28. It is to learn your own range.</p>
-<h2>What&#x27;s worth recording besides the date</h2>
+</section>
+<section class="article-section" aria-labelledby="section-4">
+  <h2 id="section-4">What&#x27;s worth recording besides the date</h2>
 <p>Dates alone carry you a long way. When you want more, the next useful layer is anything that departs from your normal. Mayo Clinic&#x27;s short list is a good guide: how heavy the flow was, whether the pain was worse than usual, any bleeding between periods, and shifts in mood or sleep. None of it has to be written as more than a few words.</p>
 <p>Life outside the cycle earns a line too, because it explains the odd months later. A bad flu, a week of short sleep, a long flight across time zones, a stressful stretch, a new medication. Any of these can nudge a cycle, and a note from the month it happened is what lets you connect the two instead of worrying. In MiniCycle that goes in the daily note attached to a date; on a paper calendar a scribble in the margin does the same job.</p>
-<h2>Why your first months of predictions will be rough</h2>
+</section>
+<section class="article-section" aria-labelledby="section-5">
+  <h2 id="section-5">Why your first months of predictions will be rough</h2>
 <p>A tracker cannot forecast a pattern it has not seen yet. With little history, MiniCycle falls back to a default cycle length of 29 days and a default period of 5 days, which is a reasonable guess and not much more. The predicted dates in your first month or two are placeholders, and it is normal for them to miss.</p>
 <p>They sharpen as records pile up. MiniCycle estimates your cycle length from the gaps between your recent start dates, using up to your latest 12, and it takes the median rather than the average so one strange month carries less weight; once there are at least ten gaps it also drops the single shortest and single longest before settling on a number. Ovulation is placed by counting back from the next expected period using a luteal phase that flexes between 9 and 14 days with your cycle length, not a flat 14. The fertile window then runs from five days before that estimated ovulation through the day after. None of it works on month one. By month three or four it has something real to work with. Your dates stay on your device by default, as the privacy policy describes.</p>
-<h2>What tracking can&#x27;t tell you</h2>
+</section>
+<section class="article-section" aria-labelledby="section-6">
+  <h2 id="section-6">What tracking can&#x27;t tell you</h2>
 <p>Tracking shows you your pattern. It does not diagnose anything, it is not contraception, and a predicted fertile window cannot confirm that a given cycle released an egg at all. Every date an app projects is reference information drawn from your past cycles, on the assumption that the next one resembles them. Useful, often right, never a guarantee.</p>
 <p>What a good record does is make the next conversation a real one. If your periods stop for more than 90 days without a pregnancy, swing from regular to irregular, last longer than 7 days, soak through a pad or tampon every hour or two, come less than 21 or more than 35 days apart, or bring bleeding between periods or severe pain, Mayo Clinic counts those among the reasons to see a clinician. Walking in able to say here are my last eight start dates, instead of I think it has been a while, is the whole point of starting.</p>
-<h2>A simple first-month routine</h2>
+</section>
+<section class="article-section" aria-labelledby="section-7">
+  <h2 id="section-7">A simple first-month routine</h2>
 <p>Pick where the date lives and use only that one place. An app on your phone, a wall calendar, a notes file: any of them works, and splitting records across two of them is how dates get lost. On the day flow starts, mark it. That is the whole daily task.</p>
 <p>At the end of the first month you will have one or two start dates and not much else, and that is exactly right. Tracking pays out on a delay. The value turns up around the third month, when you can look back at real dates instead of reaching for a memory.</p>
-<h2>Frequently asked questions</h2>
+</section>
+<section class="article-section" aria-labelledby="section-8">
+  <h2 id="section-8">Frequently asked questions</h2>
 <p>Which day is day one? The first day of real menstrual bleeding, not the spotting that sometimes comes before it. ACOG&#x27;s method is to mark that day with an X and count it as day one.</p>
 <p>Do I have to track symptoms, or just dates? Just dates, to start. Start dates alone drive the predictions and reveal your cycle length. Flow, pain, and mood notes are a useful second layer when you want them, not a requirement.</p>
 <p>My cycles aren&#x27;t 28 days. Is something wrong? Probably not. In a study of more than 600,000 cycles, only 13% were exactly 28 days. A range that stays roughly steady for you matters more than the number 28.</p>
 <p>How long until predictions get accurate? Plan on two or three cycles. Early on the app leans on default lengths; it tightens as it learns the gaps between your real start dates.</p>
-<h2>The one-line version</h2>
+</section>
+<section class="article-section" aria-labelledby="section-9">
+  <h2 id="section-9">The one-line version</h2>
 <p>Record the first day of bleeding as day one, count from one start to the next, and give it two or three cycles before the predictions mean much. A typical cycle is a range, not 28 days flat: only about 13% of cycles actually are.</p>
 <p>Dates first, symptoms later if you want them. Predictions are reference information, not a diagnosis or contraception, and a tracked record is the most useful thing to bring to a doctor if something seems off.</p>
-                <div class="callout">
-                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
-                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="how-to-start-tracking-your-cycle" onclick="trackAppStoreClick(this)">View on the App Store</a>
-                </div>
-                <h2>References</h2>
-                <ul class="references">
+</section>
+                    <section class="callout" aria-labelledby="try-minicycle">
+                      <img class="callout-mark" src="../../assets/minicycle-app-icon.png" alt="" width="42" height="42" loading="lazy">
+                      <div class="callout-copy">
+                        <p class="eyebrow">MiniCycle for iPhone</p>
+                        <h2 id="try-minicycle">Try MiniCycle</h2>
+                        <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                      </div>
+                      <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="how-to-start-tracking-your-cycle" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                    </section>
+                    <section class="references-section" aria-labelledby="references-title">
+                      <p class="eyebrow">MiniCycle editorial</p>
+                      <h2 id="references-title">References</h2>
+                      <ul class="references">
         <li><a href="https://www.acog.org/womens-health/faqs/your-first-period">American College of Obstetricians and Gynecologists. Your First Period (FAQ).</a></li>
 <li><a href="https://www.mayoclinic.org/healthy-lifestyle/womens-health/in-depth/menstrual-cycle/art-20047186">Mayo Clinic. Menstrual cycle: What&#x27;s normal, what&#x27;s not.</a></li>
 <li><a href="https://www.nature.com/articles/s41746-019-0152-7">Bull, J. R. et al. Real-world menstrual cycle characteristics of more than 600,000 menstrual cycles. npj Digital Medicine (2019).</a></li>
 <li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
-                </ul>
+                      </ul>
+                    </section>
+                  </div>
+                  <aside class="article-sidebar">
+                    <nav class="article-toc" aria-label="On this page">
+                      <p class="toc-title">On this page</p>
+                      <ol>
+        <li><a href="#section-1">Start with one date</a></li>
+<li><a href="#section-2">How a cycle is counted</a></li>
+<li><a href="#section-3">What a normal cycle actually looks like</a></li>
+<li><a href="#section-4">What&#x27;s worth recording besides the date</a></li>
+<li><a href="#section-5">Why your first months of predictions will be rough</a></li>
+<li><a href="#section-6">What tracking can&#x27;t tell you</a></li>
+<li><a href="#section-7">A simple first-month routine</a></li>
+<li><a href="#section-8">Frequently asked questions</a></li>
+<li><a href="#section-9">The one-line version</a></li>
+                      </ol>
+                    </nav>
+                  </aside>
+                </div>
               </article>
+              <section class="related-section" aria-labelledby="related-title">
+                <div class="section-heading">
+                  <div>
+                    <p class="eyebrow">Keep exploring</p>
+                    <h2 id="related-title">More guides you may like</h2>
+                  </div>
+                  <a class="text-link section-link" href="../">All guides<span aria-hidden="true">&nbsp;&rarr;</span></a>
+                </div>
+                <div class="post-grid related-grid">
+        <article class="post-card related-card" data-guide-card data-search-value="widget why the minicycle widget isn&#x27;t updating, and how it refreshes the minicycle home-screen widget updates on ios&#x27;s schedule, not the instant you log a period. here is how widgetkit refreshes it and what to check when it looks stale.">
+  <div class="post-card-topline">
+    <p class="category-pill">Widget</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../minicycle-widget-not-updating-refresh/">Why the MiniCycle widget isn&#x27;t updating, and how it refreshes</a></h3>
+  <p class="post-description">The MiniCycle home-screen widget updates on iOS&#x27;s schedule, not the instant you log a period. Here is how WidgetKit refreshes it and what to check when it looks stale.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-04">2026.07.04</time><span aria-hidden="true">&middot;</span>5 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="cycle health ovulation pain (mittelschmerz): what that mid-cycle twinge is ovulation pain, or mittelschmerz, is a one-sided mid-cycle twinge that affects up to 40% of people who ovulate. what it feels like, why it happens, and when it isn&#x27;t ordinary.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle health</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../ovulation-pain-mittelschmerz-what-it-is/">Ovulation pain (mittelschmerz): what that mid-cycle twinge is</a></h3>
+  <p class="post-description">Ovulation pain, or mittelschmerz, is a one-sided mid-cycle twinge that affects up to 40% of people who ovulate. What it feels like, why it happens, and when it isn&#x27;t ordinary.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-03">2026.07.03</time><span aria-hidden="true">&middot;</span>4 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="predictions why minicycle&#x27;s predicted period date keeps changing minicycle re-estimates your next period every time your saved dates change, so the predicted date can move. here is what shifts, when, and why a moving estimate is the app working.">
+  <div class="post-card-topline">
+    <p class="category-pill">Predictions</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../why-minicycle-predicted-period-date-changes/">Why MiniCycle&#x27;s predicted period date keeps changing</a></h3>
+  <p class="post-description">MiniCycle re-estimates your next period every time your saved dates change, so the predicted date can move. Here is what shifts, when, and why a moving estimate is the app working.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-02">2026.07.02</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+                </div>
+              </section>
             </main>
+        <footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="../../">
+        <img class="brand-icon" src="../../assets/minicycle-app-icon.png" alt="" width="34" height="34" loading="lazy">
+        <span>MiniCycle</span>
+      </a>
+      <p>A quieter, more private way to understand your cycle.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="../../blog/">Blog</a>
+      <a href="../../support/">Support</a>
+      <a href="../../privacy/">Privacy</a>
+    </nav>
+    <p class="copyright">&copy; 2026 MiniCycle. Built thoughtfully for iPhone.</p>
+  </div>
+</footer>
           </body>
         </html>

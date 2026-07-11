@@ -3,6 +3,8 @@
                 <head>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1">
+          <meta name="color-scheme" content="light dark">
+          <meta name="theme-color" content="#fbf8fa" data-theme-color>
           <title>The menstrual cycle phases: follicular, ovulation, luteal</title>
           <meta name="description" content="Learn the menstrual cycle phases: menstruation, the follicular phase, ovulation, and the luteal phase, what each one does, and why their lengths vary.">
           <link rel="canonical" href="https://minicycle.net/blog/menstrual-cycle-phases-explained/">
@@ -19,7 +21,75 @@
             <link rel="icon" href="../../favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
     <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
-          <link rel="stylesheet" href="../../styles.css">
+        <script>
+  (() => {
+    const storageKey = 'minicycle-theme';
+    const root = document.documentElement;
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+    root.classList.add('js');
+
+    function storedTheme() {
+      try {
+        const value = window.localStorage.getItem(storageKey);
+        return value === 'light' || value === 'dark' ? value : null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function currentTheme() {
+      return root.dataset.theme || (systemTheme.matches ? 'dark' : 'light');
+    }
+
+    function updateThemeUI() {
+      const dark = currentTheme() === 'dark';
+      const themeColor = document.querySelector('[data-theme-color]');
+      if (themeColor) themeColor.setAttribute('content', dark ? '#121014' : '#fbf8fa');
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      const label = dark
+        ? toggle.dataset.lightLabel
+        : toggle.dataset.darkLabel;
+      toggle.setAttribute('aria-label', label);
+      toggle.setAttribute('title', label);
+    }
+
+    const savedTheme = storedTheme();
+    if (savedTheme) root.dataset.theme = savedTheme;
+    updateThemeUI();
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      updateThemeUI();
+      toggle.addEventListener('click', () => {
+        const nextTheme = currentTheme() === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = nextTheme;
+        try {
+          window.localStorage.setItem(storageKey, nextTheme);
+        } catch (_) {
+          // The selected theme still applies for this page when storage is unavailable.
+        }
+        updateThemeUI();
+      });
+      if (typeof systemTheme.addEventListener === 'function') {
+        systemTheme.addEventListener('change', () => {
+          if (!root.dataset.theme) updateThemeUI();
+        });
+      }
+      window.addEventListener('storage', (event) => {
+        if (event.key !== storageKey) return;
+        if (event.newValue === 'light' || event.newValue === 'dark') {
+          root.dataset.theme = event.newValue;
+        } else {
+          delete root.dataset.theme;
+        }
+        updateThemeUI();
+      });
+    });
+  })();
+</script>
+          <link rel="stylesheet" href="../../styles.css?v=20260711-4">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -109,61 +179,195 @@
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"The menstrual cycle phases: follicular, ovulation, luteal","description":"Learn the menstrual cycle phases: menstruation, the follicular phase, ovulation, and the luteal phase, what each one does, and why their lengths vary.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-06-06","dateModified":"2026-06-06","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/menstrual-cycle-phases-explained/"}}</script>
         </head>
-          <body>
-        <header class="site-header">
-  <a class="brand" href="../../">MiniCycle</a>
-  <nav aria-label="Primary navigation">
-    <a href="../../blog/">Blog</a>
-    <a href="../../support/">Support</a>
-    <a href="../../privacy/">Privacy</a>
-    <a href="../../ko/blog/menstrual-cycle-phases-explained/">한국어</a>
-  </nav>
+          <body class="article-page">
+        <a class="skip-link" href="#main-content">Skip to content</a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="../../">
+      <img class="brand-icon" src="../../assets/minicycle-app-icon.png" alt="" width="34" height="34">
+      <span>MiniCycle</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="../../blog/">Blog</a>
+      <a href="../../support/">Support</a>
+      <a href="../../privacy/">Privacy</a>
+    </nav>
+    <div class="header-controls">
+      <button class="theme-toggle" type="button" data-theme-toggle data-light-label="Switch to light mode" data-dark-label="Switch to dark mode" aria-label="Toggle color theme">
+        <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
+        <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.1 15.4A8.2 8.2 0 0 1 8.6 3.9 8.2 8.2 0 1 0 20.1 15.4Z"></path></svg>
+      </button>
+      <a class="language-link" href="../../ko/blog/menstrual-cycle-phases-explained/" lang="ko" hreflang="ko" aria-label="한국어">한국어</a>
+    </div>
+  </div>
 </header>
-            <main class="page">
+            <main class="page article-page-main" id="main-content">
               <article class="article" data-language="en" data-content-group="menstrual-cycle-phases-explained" data-min-read-ms="90000">
-                <p class="eyebrow">Cycle basics</p>
-                <h1>The menstrual cycle phases: follicular, ovulation, luteal</h1>
-                <p class="article-meta">Published June 6, 2026 by MiniCycle</p>
-                <p class="lead">A menstrual cycle is not one event. It is a sequence: a period, a follicular phase, ovulation, and a luteal phase, each driven by changing hormone levels. Knowing roughly what each phase does makes a cycle calendar much easier to read, because most of the dates an app shows are tied to one of these phases. Here is the structure, and how MiniCycle maps it onto your calendar.</p>
-                <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
-        <h2>One cycle, four phases</h2>
+                <a class="back-link" href="../"><span aria-hidden="true">&larr;</span> All guides</a>
+                <header class="article-header">
+                  <div class="article-heading">
+                    <p class="category-pill">Cycle basics</p>
+                    <h1>The menstrual cycle phases: follicular, ovulation, luteal</h1>
+                    <p class="article-meta"><time datetime="2026-06-06">Published June 6, 2026 by MiniCycle</time><span aria-hidden="true">&middot;</span><span>5 min read</span></p>
+                    <p class="lead">A menstrual cycle is not one event. It is a sequence: a period, a follicular phase, ovulation, and a luteal phase, each driven by changing hormone levels. Knowing roughly what each phase does makes a cycle calendar much easier to read, because most of the dates an app shows are tied to one of these phases. Here is the structure, and how MiniCycle maps it onto your calendar.</p>
+                  </div>
+                  <figure class="article-visual">
+                    <div class="article-visual-frame">
+                      <span class="visual-orbit visual-orbit-one" aria-hidden="true"></span>
+                      <span class="visual-orbit visual-orbit-two" aria-hidden="true"></span>
+                      <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
+                    </div>
+                    <figcaption>The MiniCycle calendar on iPhone</figcaption>
+                  </figure>
+                </header>
+                <div class="article-layout">
+                  <div class="article-body">
+        <section class="article-section" aria-labelledby="section-1">
+  <h2 id="section-1">One cycle, four phases</h2>
 <p>A cycle is counted from the first day of one period to the first day of the next. The U.S. Office on Women&#x27;s Health describes a regular cycle as one that arrives every 24 to 38 days. Inside that span, the body moves through four phases: menstruation, the follicular phase, ovulation, and the luteal phase.</p>
 <p>The phases are driven by hormones, mainly estrogen and progesterone, that rise and fall in a set order. The order is the same for everyone. The timing is not. Two people with healthy cycles can have different phase lengths, and the same person can shift from month to month.</p>
-<h2>Menstruation: day 1 is the anchor</h2>
+</section>
+<section class="article-section" aria-labelledby="section-2">
+  <h2 id="section-2">Menstruation: day 1 is the anchor</h2>
 <p>Day 1 of a cycle is the first day of bleeding. The uterus sheds the lining it built up over the previous cycle, which typically takes a few days. This is the only phase you can observe directly, and that is exactly why period apps anchor everything to it.</p>
 <p>MiniCycle measures cycle length from one recorded start date to the next, so the start date is the single most useful thing to log. Period length is estimated from your recent closed period ranges, with a 5-day default until there is enough data, and a manual setting always takes priority.</p>
-<h2>The follicular phase does most of the varying</h2>
+</section>
+<section class="article-section" aria-labelledby="section-3">
+  <h2 id="section-3">The follicular phase does most of the varying</h2>
 <p>The follicular phase runs from day 1 until ovulation. The brain signals the ovaries, a follicle matures, and rising estrogen rebuilds the uterine lining. None of this is fixed to a date. A follicle can mature quickly one month and slowly the next.</p>
 <p>This phase absorbs most of a cycle&#x27;s variation. When stress, illness, or travel delays a cycle, what usually gets delayed is ovulation, and the follicular phase stretches to match. The luteal phase that follows varies much less. That asymmetry is the main reason predicting a cycle from its start date is hard.</p>
-<h2>Ovulation is a day, not a window</h2>
+</section>
+<section class="article-section" aria-labelledby="section-4">
+  <h2 id="section-4">Ovulation is a day, not a window</h2>
 <p>At ovulation, the ovary releases an egg. The egg itself can be fertilized for roughly 12 to 24 hours. Sperm can survive in the body for several days, which is why the days before ovulation matter for conception even though ovulation is a single event.</p>
 <p>Research by Wilcox and colleagues defined the fertile window as the five days before ovulation plus the day itself. MiniCycle marks the window from 5 days before the estimated ovulation day through 1 day after it, a deliberately generous calendar cue rather than a claim of day-level accuracy.</p>
-<h2>The luteal phase: steadier, but not a fixed 14 days</h2>
+</section>
+<section class="article-section" aria-labelledby="section-5">
+  <h2 id="section-5">The luteal phase: steadier, but not a fixed 14 days</h2>
 <p>After ovulation, the follicle that released the egg becomes the corpus luteum and produces progesterone. If no pregnancy begins, progesterone falls and the next period starts. Textbooks often quote this phase as 14 days, but measured data disagrees. In the Wilcox study, the time from ovulation to the next period ranged from 7 to 19 days, and even among 28-day cycles, only about 10% ovulated exactly 14 days before the next period.</p>
 <p>MiniCycle therefore avoids the fixed 14-day assumption. It estimates the luteal phase from your cycle length, clamped between 9 and 14 days, and counts backward from the next expected period to place the ovulation estimate.</p>
-<h2>How MiniCycle maps the phases onto a calendar</h2>
+</section>
+<section class="article-section" aria-labelledby="section-6">
+  <h2 id="section-6">How MiniCycle maps the phases onto a calendar</h2>
 <p>The app never measures hormones. It works from saved period start dates, using up to your latest 12 records. Once there are at least 10 measured intervals, it drops one shortest and one longest interval and takes the median. With little history, it starts from a 29-day default. The next period, the ovulation estimate, and the fertile window all hang off that one number.</p>
 <p>Everything the calendar shows about phases is an inference from dates. That is why the dates are reference information for planning, not medical advice, contraception, or diagnosis. A phase estimate cannot tell you whether ovulation actually happened in a given month.</p>
-<h2>How much do the phases vary between people?</h2>
+</section>
+<section class="article-section" aria-labelledby="section-7">
+  <h2 id="section-7">How much do the phases vary between people?</h2>
 <p>More than the textbook 28-day picture suggests. An analysis of more than 600,000 real-world cycles published in npj Digital Medicine found a mean follicular phase of 16.9 days and a mean luteal phase of 12.4 days, with wide ranges around both. The same study attributes most cycle length variation to the timing of ovulation, which is another way of saying the follicular phase moves the most.</p>
 <p>That variation is one reason MiniCycle re-estimates from recent records instead of locking onto one number. A median of your own recent intervals tracks your actual rhythm more closely than a population average can.</p>
-<h2>Frequently asked questions</h2>
+</section>
+<section class="article-section" aria-labelledby="section-8">
+  <h2 id="section-8">Frequently asked questions</h2>
 <p>Can an app tell me which phase I am in today? Only as an estimate. The phase boundaries on the calendar are inferred from your start dates and an estimated ovulation day, not from hormone measurements, so they can be off by days in either direction.</p>
 <p>Does a short luteal phase mean something is wrong? Not by itself. Measured luteal phases vary across a wide range. If your cycles change suddenly, or the question matters for pregnancy plans, a clinician can measure what an app can only estimate.</p>
-<h2>Reading the phases in MiniCycle</h2>
+</section>
+<section class="article-section" aria-labelledby="section-9">
+  <h2 id="section-9">Reading the phases in MiniCycle</h2>
 <p>On the calendar, recorded period days, predicted period days, the fertile window, and the ovulation estimate each have their own visual treatment. Pink marks the period, sky blue the fertile window, and a deeper blue the estimated ovulation day. The phases in between are the unmarked stretches: follicular after the period ends, luteal after the ovulation mark.</p>
 <p>The estimates improve the same way everything in the app does: by logging period starts when they happen. Each saved start date re-anchors the phase structure for the months ahead.</p>
-                <div class="callout">
-                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
-                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="menstrual-cycle-phases-explained" onclick="trackAppStoreClick(this)">View on the App Store</a>
-                </div>
-                <h2>References</h2>
-                <ul class="references">
+</section>
+                    <section class="callout" aria-labelledby="try-minicycle">
+                      <img class="callout-mark" src="../../assets/minicycle-app-icon.png" alt="" width="42" height="42" loading="lazy">
+                      <div class="callout-copy">
+                        <p class="eyebrow">MiniCycle for iPhone</p>
+                        <h2 id="try-minicycle">Try MiniCycle</h2>
+                        <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                      </div>
+                      <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="menstrual-cycle-phases-explained" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                    </section>
+                    <section class="references-section" aria-labelledby="references-title">
+                      <p class="eyebrow">MiniCycle editorial</p>
+                      <h2 id="references-title">References</h2>
+                      <ul class="references">
         <li><a href="https://womenshealth.gov/menstrual-cycle/your-menstrual-cycle">Office on Women&#x27;s Health. Your menstrual cycle.</a></li>
 <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC27529/">Wilcox AJ, Dunson D, Baird DD. The timing of the fertile window in the menstrual cycle. BMJ. 2000.</a></li>
 <li><a href="https://www.nature.com/articles/s41746-019-0152-7">Bull JR, Rowland SP, Scherwitzl EB, et al. Real-world menstrual cycle characteristics of more than 600,000 menstrual cycles. npj Digital Medicine. 2019.</a></li>
-                </ul>
+                      </ul>
+                    </section>
+                  </div>
+                  <aside class="article-sidebar">
+                    <nav class="article-toc" aria-label="On this page">
+                      <p class="toc-title">On this page</p>
+                      <ol>
+        <li><a href="#section-1">One cycle, four phases</a></li>
+<li><a href="#section-2">Menstruation: day 1 is the anchor</a></li>
+<li><a href="#section-3">The follicular phase does most of the varying</a></li>
+<li><a href="#section-4">Ovulation is a day, not a window</a></li>
+<li><a href="#section-5">The luteal phase: steadier, but not a fixed 14 days</a></li>
+<li><a href="#section-6">How MiniCycle maps the phases onto a calendar</a></li>
+<li><a href="#section-7">How much do the phases vary between people?</a></li>
+<li><a href="#section-8">Frequently asked questions</a></li>
+<li><a href="#section-9">Reading the phases in MiniCycle</a></li>
+                      </ol>
+                    </nav>
+                  </aside>
+                </div>
               </article>
+              <section class="related-section" aria-labelledby="related-title">
+                <div class="section-heading">
+                  <div>
+                    <p class="eyebrow">Keep exploring</p>
+                    <h2 id="related-title">More guides you may like</h2>
+                  </div>
+                  <a class="text-link section-link" href="../">All guides<span aria-hidden="true">&nbsp;&rarr;</span></a>
+                </div>
+                <div class="post-grid related-grid">
+        <article class="post-card related-card" data-guide-card data-search-value="cycle basics how long should a period last? what&#x27;s a normal length a normal period lasts about 2 to 7 days, usually around 5. what counts as normal is your own steady pattern. here is the range, and when a change is worth a check.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle basics</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../how-long-does-a-normal-period-last/">How long should a period last? What&#x27;s a normal length</a></h3>
+  <p class="post-description">A normal period lasts about 2 to 7 days, usually around 5. What counts as normal is your own steady pattern. Here is the range, and when a change is worth a check.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-02">2026.07.02</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="cycle basics ovulation signs and basal body temperature: the basics ovulation signs explained: the cervical fluid change before ovulation, the basal body temperature rise of about 0.3°c after it, and what ovulation tests show.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle basics</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../ovulation-signs-basal-body-temperature/">Ovulation signs and basal body temperature: the basics</a></h3>
+  <p class="post-description">Ovulation signs explained: the cervical fluid change before ovulation, the basal body temperature rise of about 0.3°C after it, and what ovulation tests show.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-08">2026.06.08</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="cycle basics what is a normal menstrual cycle length? it&#x27;s a range a normal menstrual cycle length is a range, not a single number. see the 24–38 day guideline, how much variation is common, and when to ask a clinician.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle basics</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../normal-menstrual-cycle-length-variation/">What is a normal menstrual cycle length? It&#x27;s a range</a></h3>
+  <p class="post-description">A normal menstrual cycle length is a range, not a single number. See the 24–38 day guideline, how much variation is common, and when to ask a clinician.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-07">2026.06.07</time><span aria-hidden="true">&middot;</span>5 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+                </div>
+              </section>
             </main>
+        <footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="../../">
+        <img class="brand-icon" src="../../assets/minicycle-app-icon.png" alt="" width="34" height="34" loading="lazy">
+        <span>MiniCycle</span>
+      </a>
+      <p>A quieter, more private way to understand your cycle.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="../../blog/">Blog</a>
+      <a href="../../support/">Support</a>
+      <a href="../../privacy/">Privacy</a>
+    </nav>
+    <p class="copyright">&copy; 2026 MiniCycle. Built thoughtfully for iPhone.</p>
+  </div>
+</footer>
           </body>
         </html>

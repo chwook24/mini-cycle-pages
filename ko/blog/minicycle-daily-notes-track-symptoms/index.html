@@ -3,6 +3,8 @@
                 <head>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1">
+          <meta name="color-scheme" content="light dark">
+          <meta name="theme-color" content="#fbf8fa" data-theme-color>
           <title>MiniCycle 달력에 그날 증상과 메모를 남기는 법</title>
           <meta name="description" content="MiniCycle은 날짜를 누르면 그날 메모를 적을 수 있습니다. 증상, 양, 통증, 기분까지 999자 안에서요. 메모는 기본적으로 기기에 저장되고 위젯에는 나타나지 않습니다.">
           <link rel="canonical" href="https://minicycle.net/ko/blog/minicycle-daily-notes-track-symptoms/">
@@ -19,7 +21,75 @@
             <link rel="icon" href="../../../favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32x32.png">
     <link rel="apple-touch-icon" href="../../../apple-touch-icon.png">
-          <link rel="stylesheet" href="../../../styles.css">
+        <script>
+  (() => {
+    const storageKey = 'minicycle-theme';
+    const root = document.documentElement;
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+    root.classList.add('js');
+
+    function storedTheme() {
+      try {
+        const value = window.localStorage.getItem(storageKey);
+        return value === 'light' || value === 'dark' ? value : null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function currentTheme() {
+      return root.dataset.theme || (systemTheme.matches ? 'dark' : 'light');
+    }
+
+    function updateThemeUI() {
+      const dark = currentTheme() === 'dark';
+      const themeColor = document.querySelector('[data-theme-color]');
+      if (themeColor) themeColor.setAttribute('content', dark ? '#121014' : '#fbf8fa');
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      const label = dark
+        ? toggle.dataset.lightLabel
+        : toggle.dataset.darkLabel;
+      toggle.setAttribute('aria-label', label);
+      toggle.setAttribute('title', label);
+    }
+
+    const savedTheme = storedTheme();
+    if (savedTheme) root.dataset.theme = savedTheme;
+    updateThemeUI();
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      updateThemeUI();
+      toggle.addEventListener('click', () => {
+        const nextTheme = currentTheme() === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = nextTheme;
+        try {
+          window.localStorage.setItem(storageKey, nextTheme);
+        } catch (_) {
+          // The selected theme still applies for this page when storage is unavailable.
+        }
+        updateThemeUI();
+      });
+      if (typeof systemTheme.addEventListener === 'function') {
+        systemTheme.addEventListener('change', () => {
+          if (!root.dataset.theme) updateThemeUI();
+        });
+      }
+      window.addEventListener('storage', (event) => {
+        if (event.key !== storageKey) return;
+        if (event.newValue === 'light' || event.newValue === 'dark') {
+          root.dataset.theme = event.newValue;
+        } else {
+          delete root.dataset.theme;
+        }
+        updateThemeUI();
+      });
+    });
+  })();
+</script>
+          <link rel="stylesheet" href="../../../styles.css?v=20260711-4">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -109,63 +179,197 @@
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"MiniCycle 달력에 그날 증상과 메모를 남기는 법","description":"MiniCycle은 날짜를 누르면 그날 메모를 적을 수 있습니다. 증상, 양, 통증, 기분까지 999자 안에서요. 메모는 기본적으로 기기에 저장되고 위젯에는 나타나지 않습니다.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg","datePublished":"2026-06-13","dateModified":"2026-06-13","inLanguage":"ko","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/ko/blog/minicycle-daily-notes-track-symptoms/"}}</script>
         </head>
-          <body>
-        <header class="site-header">
-  <a class="brand" href="../../">MiniCycle</a>
-  <nav aria-label="Primary navigation">
-    <a href="../../blog/">블로그</a>
-    <a href="../../support/">지원</a>
-    <a href="../../privacy/">개인정보</a>
-    <a href="../../../blog/minicycle-daily-notes-track-symptoms/">English</a>
-  </nav>
+          <body class="article-page">
+        <a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="../../">
+      <img class="brand-icon" src="../../../assets/minicycle-app-icon.png" alt="" width="34" height="34">
+      <span>MiniCycle</span>
+    </a>
+    <nav class="site-nav" aria-label="주요 탐색">
+      <a href="../../blog/">블로그</a>
+      <a href="../../support/">지원</a>
+      <a href="../../privacy/">개인정보</a>
+    </nav>
+    <div class="header-controls">
+      <button class="theme-toggle" type="button" data-theme-toggle data-light-label="라이트 모드로 전환" data-dark-label="다크 모드로 전환" aria-label="화면 모드 전환">
+        <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
+        <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.1 15.4A8.2 8.2 0 0 1 8.6 3.9 8.2 8.2 0 1 0 20.1 15.4Z"></path></svg>
+      </button>
+      <a class="language-link" href="../../../blog/minicycle-daily-notes-track-symptoms/" lang="en" hreflang="en" aria-label="English">English</a>
+    </div>
+  </div>
 </header>
-            <main class="page">
+            <main class="page article-page-main" id="main-content">
               <article class="article" data-language="ko" data-content-group="minicycle-daily-notes-track-symptoms" data-min-read-ms="90000">
-                <p class="eyebrow">메모</p>
-                <h1>MiniCycle 달력에 그날 증상과 메모를 남기는 법</h1>
-                <p class="article-meta">2026년 6월 13일 MiniCycle 작성</p>
-                <p class="lead">6주가 지나 &#x27;지난 생리가 좀 힘들었어&#x27;는 의사에게도, 사실 나에게도 별 도움이 안 됩니다. 통증이 첫날 심했는지 둘째 날 심했는지, 두통이 출혈 전이었는지 후였는지, 기억은 그 모서리를 다 뭉개 버립니다. 그날 적어 둔 한 줄은 그러지 않습니다. MiniCycle은 달력의 어떤 날짜에든 짧은 메모를 붙일 수 있게 해 두었습니다. 구체적인 것을, 아직 구체적일 때 붙잡아 두자는 겁니다.</p>
-                <img class="article-hero" src="../../../assets/home-capture-iphone17-1118-ko-20260518.jpg" alt="MiniCycle 아이폰 실제 캡처 화면: 생리 캘린더와 위젯 경험" width="552" height="1200" loading="eager">
-        <h2>메모에는 무엇을 적나요</h2>
+                <a class="back-link" href="../"><span aria-hidden="true">&larr;</span> 전체 글</a>
+                <header class="article-header">
+                  <div class="article-heading">
+                    <p class="category-pill">메모</p>
+                    <h1>MiniCycle 달력에 그날 증상과 메모를 남기는 법</h1>
+                    <p class="article-meta"><time datetime="2026-06-13">2026년 6월 13일 MiniCycle 작성</time><span aria-hidden="true">&middot;</span><span>약 3분 읽기</span></p>
+                    <p class="lead">6주가 지나 &#x27;지난 생리가 좀 힘들었어&#x27;는 의사에게도, 사실 나에게도 별 도움이 안 됩니다. 통증이 첫날 심했는지 둘째 날 심했는지, 두통이 출혈 전이었는지 후였는지, 기억은 그 모서리를 다 뭉개 버립니다. 그날 적어 둔 한 줄은 그러지 않습니다. MiniCycle은 달력의 어떤 날짜에든 짧은 메모를 붙일 수 있게 해 두었습니다. 구체적인 것을, 아직 구체적일 때 붙잡아 두자는 겁니다.</p>
+                  </div>
+                  <figure class="article-visual">
+                    <div class="article-visual-frame">
+                      <span class="visual-orbit visual-orbit-one" aria-hidden="true"></span>
+                      <span class="visual-orbit visual-orbit-two" aria-hidden="true"></span>
+                      <img class="article-hero" src="../../../assets/home-capture-iphone17-1118-ko-20260518.jpg" alt="MiniCycle 아이폰 실제 캡처 화면: 생리 캘린더와 위젯 경험" width="552" height="1200" loading="eager">
+                    </div>
+                    <figcaption>iPhone에서 보는 MiniCycle 캘린더</figcaption>
+                  </figure>
+                </header>
+                <div class="article-layout">
+                  <div class="article-body">
+        <section class="article-section" aria-labelledby="section-1">
+  <h2 id="section-1">메모에는 무엇을 적나요</h2>
 <p>메모는 체크리스트가 아니라 빈칸입니다. 무엇을 적을지는 사용자가 정합니다. Mayo Clinic은 주기를 기록하는 법을 설명하면서 날짜 말고도 적어 둘 만한 것을 꼽습니다. 양이 평소보다 많았는지 적었는지, 통증이 더 심했는지, 생리 사이에 출혈이 있었는지, 기분이나 행동의 변화, 그 무렵 새로 생긴 일. 그런 것들이 들어가는 칸입니다.</p>
 <p>실제로는 짧고 담백한 문장이면 됩니다. &#x27;오전 내내 생리통, 9시에 진통제.&#x27; &#x27;연한 갈색 점혈.&#x27; &#x27;둘째 날 편두통.&#x27; &#x27;오늘부터 새 약 시작.&#x27; 적는 날엔 쓸모가 없어 보입니다. 쓸모는 나중에 옵니다. 몇 달치 메모가 쌓여, 한 줄로는 보이지 않던 패턴이 드러날 때입니다.</p>
-<h2>메모 적는 법</h2>
+</section>
+<section class="article-section" aria-labelledby="section-2">
+  <h2 id="section-2">메모 적는 법</h2>
 <p>달력에서 날짜를 누르면 그날 정보 패널이 열립니다. 아래쪽에 연필 아이콘과 &#x27;메모 추가&#x27;라고 적힌 줄이 메모 자리입니다. 누르면 &#x27;메모&#x27;라는 제목의 작은 편집 창이 올라오고, &#x27;간단한 메모를 입력하세요.&#x27;라는 안내와 입력칸, 취소·완료 버튼이 있습니다. 적고 완료를 누르면 그 날짜에 저장됩니다.</p>
 <p>메모는 999자까지, 여러 줄로도 쓸 수 있습니다. 세 단어든 한 문단이든 들어갑니다. 빈칸으로 완료를 누르면 저장되지 않고, 써 둔 메모를 지우고 완료하면 그 메모는 사라집니다.</p>
-<h2>달력의 회색 표시</h2>
+</section>
+<section class="article-section" aria-labelledby="section-3">
+  <h2 id="section-3">달력의 회색 표시</h2>
 <p>저장하면 그날 숫자 아래에 작은 회색 막대가 붙습니다. 다른 색들과 구분됩니다. 분홍 생리일, 하늘색 가임기, 더 진한 하늘색 배란일, 보라색 성생활 점과 따로 노는 표시죠. 회색은 &#x27;여기 적어 둔 게 있다&#x27;는 뜻입니다.</p>
 <p>한 달을 훑으면 어느 날에 메모가 있는지 회색 표시로 한눈에 보입니다. 표시된 날짜를 누르면 패널에 메모 첫 줄이 뜨고, 그 줄을 누르면 전체가 열립니다. 한 가지 예외는 오늘 칸입니다. 오늘은 메모를 저장해도 칸에 회색 표시가 뜨지 않으니, 오늘 메모는 막대가 아니라 패널을 열어 확인합니다.</p>
-<h2>메모는 어디에 저장되나요</h2>
+</section>
+<section class="article-section" aria-labelledby="section-4">
+  <h2 id="section-4">메모는 어디에 저장되나요</h2>
 <p>메모는 생리 날짜, 설정과 함께 기본적으로 기기 안에 저장됩니다(개인정보 처리방침). 앱 분석은 메모 글자를 담지 않도록 만들어져 있어서, 입력한 내용이 분석 이벤트로 빠져나가지 않습니다. 그날에 대해 적은 말은 그날에 머뭅니다.</p>
 <p>iCloud 동기화를 켜면 메모를 포함한 기록 사본이 본인 iCloud에 Apple CloudKit으로 저장되어 새 아이폰에서 복원됩니다. 메모가 절대 나타나지 않는 곳이 하나 있는데, 홈 화면 위젯입니다. 위젯은 생리와 주기 정보만 보여줍니다. 흘깃 봐도 보이면 곤란한 메모가 홈 화면에 올라갈 일은 없습니다.</p>
-<h2>메모로 할 수 없는 일</h2>
+</section>
+<section class="article-section" aria-labelledby="section-5">
+  <h2 id="section-5">메모로 할 수 없는 일</h2>
 <p>메모는 기록이지 계산의 입력값이 아닙니다. &#x27;생리 올 것 같다&#x27;고 적어도 예측 날짜는 한 칸도 움직이지 않습니다. 예보를 바꾸는 건 실제 생리 시작일을 기록하는 일뿐입니다. 메모는 예측 옆에 나란히 있을 뿐 예측을 건드리지 않습니다.</p>
 <p>예정일과 배란일, 가임기 표시는 시작일에서 뽑은 추정입니다. 최근 기록 12개까지의 중앙값으로 주기 길이를 잡고, 황체기는 14일로 고정하지 않고 9–14일 사이에서 정합니다. 참고 정보일 뿐 의료 조언이 아닙니다. 메모는 앱이 짐작할 몫이 아니라 내가 본 것을 적는 칸입니다. 메모에 걱정스러운 게 자꾸 적힌다면, 생리 사이 출혈이나 평소보다 심한 통증, 멈추거나 크게 들쭉날쭉한 주기 같은 것이라면, Mayo Clinic의 목록이 그 메모를 진료실로 가져갈 신호입니다.</p>
-<h2>결국은 습관입니다</h2>
+</section>
+<section class="article-section" aria-labelledby="section-6">
+  <h2 id="section-6">결국은 습관입니다</h2>
 <p>어려운 건 기능이 아니라 적는 걸 기억하는 일입니다. 가장 쉬운 방법은 이미 하는 일에 메모를 붙이는 겁니다. 같은 패널에서 생리 시작을 기록할 때, 기억이 생생한 김에 몇 초만 더 들이면 됩니다.</p>
 <p>첫 달엔 보람 없는 수고처럼 느껴집니다. 석 달째는 다릅니다. &#x27;두통이 늘 둘째 날이었나?&#x27;를 짐작 대신 거슬러 넘겨보며 답할 수 있을 때, 하루 몇 초는 이미 제값을 한 셈입니다.</p>
-<h2>무엇을 적어 두면 좋을까요</h2>
+</section>
+<section class="article-section" aria-labelledby="section-7">
+  <h2 id="section-7">무엇을 적어 두면 좋을까요</h2>
 <p>날짜 말고 나중에 값을 하는 건 대개 &#x27;변화&#x27;에 관한 메모입니다. 평소보다 많거나 적은 양, 평소 패턴에서 벗어난 통증, 생리 사이의 점혈, 눈에 띄는 기분이나 수면의 변화. Mayo Clinic도 주기에서 뭔가 이상하다 싶을 때 기록할 것으로 이런 항목을 꼽습니다.</p>
 <p>주기 바깥의 맥락도 한 줄 가치가 있습니다. 독한 감기, 잠을 설친 한 주, 시차 큰 여행, 스트레스가 길었던 기간, 약을 거른 날, 새로 시작한 약. 모두 주기를 흔들 수 있는 일들이라, 그달에 적어 둔 메모가 나중에 둘을 잇게 해 줍니다. 짐작이 아니라요.</p>
-<h2>자주 묻는 질문</h2>
+</section>
+<section class="article-section" aria-labelledby="section-8">
+  <h2 id="section-8">자주 묻는 질문</h2>
 <p>메모는 얼마나 길게 쓸 수 있나요? 999자까지, 원하는 만큼 여러 줄로 쓸 수 있습니다. 한도에 닿으면 더 입력되지 않습니다. 하루에 한 문장이나 짧은 문단을 적기에는 넉넉합니다.</p>
 <p>메모가 홈 화면 위젯에 보이나요? 아니요. 위젯은 생리와 주기 정보만 보여줍니다. 메모에 무엇을 적든 위젯에는 나타나지 않습니다.</p>
 <p>메모도 어딘가에 백업되나요? 기본적으로는 다른 기록과 함께 기기에 남습니다. iCloud 동기화를 켜면 사본이 Apple CloudKit으로 본인 iCloud에 저장됩니다. 어느 경우든 앱 분석은 메모 글자를 담지 않도록 설계되어 있습니다.</p>
 <p>메모를 적으면 예측이 바뀌나요? 아니요. 예측은 실제 생리 시작일을 기록할 때만 움직입니다. 메모는 일어난 일을 적을 뿐 예보에 반영되지 않습니다.</p>
-<h2>한 줄로</h2>
+</section>
+<section class="article-section" aria-labelledby="section-9">
+  <h2 id="section-9">한 줄로</h2>
 <p>날짜를 누르고 &#x27;메모 추가&#x27;를 눌러, &#x27;메모&#x27; 창에 999자까지 적고 완료를 누르면 됩니다. 그날 작은 회색 막대가 메모가 있다는 걸 알리고, 패널에는 첫 줄이 미리 보입니다.</p>
 <p>메모는 기본적으로 기기에 저장되고, 위젯에 나타나지 않으며, 예측을 바꾸지 않습니다. 다음 주기를 예보하는 칸이 아니라, 그날 본 것을 적어 두는 칸입니다.</p>
-                <div class="callout">
-                  <p>MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다.</p>
-                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="ko" data-placement="blog_article_callout" data-content-group="minicycle-daily-notes-track-symptoms" onclick="trackAppStoreClick(this)">App Store에서 받기</a>
+</section>
+                    <section class="callout" aria-labelledby="try-minicycle">
+                      <img class="callout-mark" src="../../../assets/minicycle-app-icon.png" alt="" width="42" height="42" loading="lazy">
+                      <div class="callout-copy">
+                        <p class="eyebrow">MiniCycle for iPhone</p>
+                        <h2 id="try-minicycle">MiniCycle 사용하기</h2>
+                        <p>MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다.</p>
+                      </div>
+                      <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="ko" data-placement="blog_article_callout" data-content-group="minicycle-daily-notes-track-symptoms" onclick="trackAppStoreClick(this)">App Store에서 받기</a>
+                    </section>
+                    <section class="references-section" aria-labelledby="references-title">
+                      <p class="eyebrow">MiniCycle editorial</p>
+                      <h2 id="references-title">참고 자료</h2>
+                      <ul class="references">
+        <li><a href="https://www.mayoclinic.org/healthy-lifestyle/womens-health/in-depth/menstrual-cycle/art-20047186" lang="en">Mayo Clinic. Menstrual cycle: What&#x27;s normal, what&#x27;s not.</a></li>
+<li><a href="https://www.nature.com/articles/s41746-019-0152-7" lang="en">Bull, J. R. et al. Real-world menstrual cycle characteristics of more than 600,000 menstrual cycles. npj Digital Medicine (2019).</a></li>
+<li><a href="https://minicycle.net/privacy/" lang="en">MiniCycle Privacy Policy.</a></li>
+                      </ul>
+                    </section>
+                  </div>
+                  <aside class="article-sidebar">
+                    <nav class="article-toc" aria-label="이 글에서 다루는 내용">
+                      <p class="toc-title">이 글에서 다루는 내용</p>
+                      <ol>
+        <li><a href="#section-1">메모에는 무엇을 적나요</a></li>
+<li><a href="#section-2">메모 적는 법</a></li>
+<li><a href="#section-3">달력의 회색 표시</a></li>
+<li><a href="#section-4">메모는 어디에 저장되나요</a></li>
+<li><a href="#section-5">메모로 할 수 없는 일</a></li>
+<li><a href="#section-6">결국은 습관입니다</a></li>
+<li><a href="#section-7">무엇을 적어 두면 좋을까요</a></li>
+<li><a href="#section-8">자주 묻는 질문</a></li>
+<li><a href="#section-9">한 줄로</a></li>
+                      </ol>
+                    </nav>
+                  </aside>
                 </div>
-                <h2>참고 자료</h2>
-                <ul class="references">
-        <li><a href="https://www.mayoclinic.org/healthy-lifestyle/womens-health/in-depth/menstrual-cycle/art-20047186">Mayo Clinic. Menstrual cycle: What&#x27;s normal, what&#x27;s not.</a></li>
-<li><a href="https://www.nature.com/articles/s41746-019-0152-7">Bull, J. R. et al. Real-world menstrual cycle characteristics of more than 600,000 menstrual cycles. npj Digital Medicine (2019).</a></li>
-<li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
-                </ul>
               </article>
+              <section class="related-section" aria-labelledby="related-title">
+                <div class="section-heading">
+                  <div>
+                    <p class="eyebrow">이어서 읽기</p>
+                    <h2 id="related-title">함께 읽으면 좋은 글</h2>
+                  </div>
+                  <a class="text-link section-link" href="../">전체 글<span aria-hidden="true">&nbsp;&rarr;</span></a>
+                </div>
+                <div class="post-grid related-grid">
+        <article class="post-card related-card" data-guide-card data-search-value="위젯 minicycle 위젯이 안 바뀔 때, 새로 고침은 어떻게 되나요 minicycle 홈 화면 위젯은 실시간이 아니라 ios가 정한 시점에 갱신됩니다. 위젯이 어떻게 새로 고쳐지는지, 오래된 상태로 보일 때 무엇을 확인하면 되는지 정리했습니다.">
+  <div class="post-card-topline">
+    <p class="category-pill">위젯</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../minicycle-widget-not-updating-refresh/">MiniCycle 위젯이 안 바뀔 때, 새로 고침은 어떻게 되나요</a></h3>
+  <p class="post-description">MiniCycle 홈 화면 위젯은 실시간이 아니라 iOS가 정한 시점에 갱신됩니다. 위젯이 어떻게 새로 고쳐지는지, 오래된 상태로 보일 때 무엇을 확인하면 되는지 정리했습니다.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-04">2026.07.04</time><span aria-hidden="true">&middot;</span>약 3분</p>
+    <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="주기 건강 배란통이 뭘까요? 배란기에 아랫배가 아픈 이유 배란 무렵 한쪽 아랫배가 콕콕 쑤시는 배란통은 배란하는 사람의 40%까지 겪습니다. 어떤 느낌인지, 왜 생기는지, 그리고 배란통이 아닐 때는 언제인지 정리했습니다.">
+  <div class="post-card-topline">
+    <p class="category-pill">주기 건강</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../ovulation-pain-mittelschmerz-what-it-is/">배란통이 뭘까요? 배란기에 아랫배가 아픈 이유</a></h3>
+  <p class="post-description">배란 무렵 한쪽 아랫배가 콕콕 쑤시는 배란통은 배란하는 사람의 40%까지 겪습니다. 어떤 느낌인지, 왜 생기는지, 그리고 배란통이 아닐 때는 언제인지 정리했습니다.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-03">2026.07.03</time><span aria-hidden="true">&middot;</span>약 3분</p>
+    <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="예측 minicycle 생리 예정일이 자꾸 바뀌는 이유 생리를 새로 기록할 때마다 minicycle이 다음 예정일을 다시 계산해 날짜가 옮겨갑니다. 예정일이 바뀌는 건 오류가 아니라 최신 기록에 맞춰 정확해지는 과정이라는 점을 계산 방식과 함께 정리했습니다.">
+  <div class="post-card-topline">
+    <p class="category-pill">예측</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../why-minicycle-predicted-period-date-changes/">MiniCycle 생리 예정일이 자꾸 바뀌는 이유</a></h3>
+  <p class="post-description">생리를 새로 기록할 때마다 MiniCycle이 다음 예정일을 다시 계산해 날짜가 옮겨갑니다. 예정일이 바뀌는 건 오류가 아니라 최신 기록에 맞춰 정확해지는 과정이라는 점을 계산 방식과 함께 정리했습니다.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-02">2026.07.02</time><span aria-hidden="true">&middot;</span>약 3분</p>
+    <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+                </div>
+              </section>
             </main>
+        <footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="../../">
+        <img class="brand-icon" src="../../../assets/minicycle-app-icon.png" alt="" width="34" height="34" loading="lazy">
+        <span>MiniCycle</span>
+      </a>
+      <p>내 주기를 이해하는 더 조용하고 사적인 방법.</p>
+    </div>
+    <nav class="footer-nav" aria-label="하단 탐색">
+      <a href="../../blog/">블로그</a>
+      <a href="../../support/">지원</a>
+      <a href="../../privacy/">개인정보</a>
+    </nav>
+    <p class="copyright">&copy; 2026 MiniCycle. iPhone을 위해 세심하게 만들었습니다.</p>
+  </div>
+</footer>
           </body>
         </html>

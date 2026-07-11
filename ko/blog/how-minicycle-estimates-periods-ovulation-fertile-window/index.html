@@ -3,6 +3,8 @@
                 <head>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1">
+          <meta name="color-scheme" content="light dark">
+          <meta name="theme-color" content="#fbf8fa" data-theme-color>
           <title>MiniCycle은 생리 예정일, 배란일, 가임기를 어떻게 예측하나요</title>
           <meta name="description" content="MiniCycle이 최근 생리 기록, 중앙값 기반 계산, 공개 월경 주기 연구를 바탕으로 생리 예정일과 배란일, 가임기를 표시하는 방식을 설명합니다.">
           <link rel="canonical" href="https://minicycle.net/ko/blog/how-minicycle-estimates-periods-ovulation-fertile-window/">
@@ -19,7 +21,75 @@
             <link rel="icon" href="../../../favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32x32.png">
     <link rel="apple-touch-icon" href="../../../apple-touch-icon.png">
-          <link rel="stylesheet" href="../../../styles.css">
+        <script>
+  (() => {
+    const storageKey = 'minicycle-theme';
+    const root = document.documentElement;
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+    root.classList.add('js');
+
+    function storedTheme() {
+      try {
+        const value = window.localStorage.getItem(storageKey);
+        return value === 'light' || value === 'dark' ? value : null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function currentTheme() {
+      return root.dataset.theme || (systemTheme.matches ? 'dark' : 'light');
+    }
+
+    function updateThemeUI() {
+      const dark = currentTheme() === 'dark';
+      const themeColor = document.querySelector('[data-theme-color]');
+      if (themeColor) themeColor.setAttribute('content', dark ? '#121014' : '#fbf8fa');
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      const label = dark
+        ? toggle.dataset.lightLabel
+        : toggle.dataset.darkLabel;
+      toggle.setAttribute('aria-label', label);
+      toggle.setAttribute('title', label);
+    }
+
+    const savedTheme = storedTheme();
+    if (savedTheme) root.dataset.theme = savedTheme;
+    updateThemeUI();
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      updateThemeUI();
+      toggle.addEventListener('click', () => {
+        const nextTheme = currentTheme() === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = nextTheme;
+        try {
+          window.localStorage.setItem(storageKey, nextTheme);
+        } catch (_) {
+          // The selected theme still applies for this page when storage is unavailable.
+        }
+        updateThemeUI();
+      });
+      if (typeof systemTheme.addEventListener === 'function') {
+        systemTheme.addEventListener('change', () => {
+          if (!root.dataset.theme) updateThemeUI();
+        });
+      }
+      window.addEventListener('storage', (event) => {
+        if (event.key !== storageKey) return;
+        if (event.newValue === 'light' || event.newValue === 'dark') {
+          root.dataset.theme = event.newValue;
+        } else {
+          delete root.dataset.theme;
+        }
+        updateThemeUI();
+      });
+    });
+  })();
+</script>
+          <link rel="stylesheet" href="../../../styles.css?v=20260711-4">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -109,59 +179,193 @@
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"MiniCycle은 생리 예정일, 배란일, 가임기를 어떻게 예측하나요","description":"MiniCycle이 최근 생리 기록, 중앙값 기반 계산, 공개 월경 주기 연구를 바탕으로 생리 예정일과 배란일, 가임기를 표시하는 방식을 설명합니다.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg","datePublished":"2026-05-16","dateModified":"2026-05-18","inLanguage":"ko","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/ko/blog/how-minicycle-estimates-periods-ovulation-fertile-window/"}}</script>
         </head>
-          <body>
-        <header class="site-header">
-  <a class="brand" href="../../">MiniCycle</a>
-  <nav aria-label="Primary navigation">
-    <a href="../../blog/">블로그</a>
-    <a href="../../support/">지원</a>
-    <a href="../../privacy/">개인정보</a>
-    <a href="../../../blog/how-minicycle-estimates-periods-ovulation-fertile-window/">English</a>
-  </nav>
+          <body class="article-page">
+        <a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="../../">
+      <img class="brand-icon" src="../../../assets/minicycle-app-icon.png" alt="" width="34" height="34">
+      <span>MiniCycle</span>
+    </a>
+    <nav class="site-nav" aria-label="주요 탐색">
+      <a href="../../blog/">블로그</a>
+      <a href="../../support/">지원</a>
+      <a href="../../privacy/">개인정보</a>
+    </nav>
+    <div class="header-controls">
+      <button class="theme-toggle" type="button" data-theme-toggle data-light-label="라이트 모드로 전환" data-dark-label="다크 모드로 전환" aria-label="화면 모드 전환">
+        <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
+        <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.1 15.4A8.2 8.2 0 0 1 8.6 3.9 8.2 8.2 0 1 0 20.1 15.4Z"></path></svg>
+      </button>
+      <a class="language-link" href="../../../blog/how-minicycle-estimates-periods-ovulation-fertile-window/" lang="en" hreflang="en" aria-label="English">English</a>
+    </div>
+  </div>
 </header>
-            <main class="page">
+            <main class="page article-page-main" id="main-content">
               <article class="article" data-language="ko" data-content-group="how-minicycle-estimates-periods-ovulation-fertile-window" data-min-read-ms="71000">
-                <p class="eyebrow">주기 예측</p>
-                <h1>MiniCycle은 생리 예정일, 배란일, 가임기를 어떻게 예측하나요</h1>
-                <p class="article-meta">2026년 5월 16일 MiniCycle 작성</p>
-                <p class="lead">MiniCycle은 무거운 대시보드 없이 빠르게 주기를 확인하고 싶은 사람을 위한 간단한 생리 캘린더입니다. 알고리즘은 일부러 단순하게 만들었습니다. 사용자가 남긴 최근 기록과 공개된 주기 연구를 바탕으로 날짜를 계산하고, 그 결과를 의학적 사실이 아니라 참고용 예측으로 보여줍니다.</p>
-                <img class="article-hero" src="../../../assets/home-capture-iphone17-1118-ko-20260518.jpg" alt="MiniCycle 아이폰 실제 캡처 화면: 생리 캘린더와 위젯 경험" width="552" height="1200" loading="eager">
-        <h2>짧게 요약하면</h2>
+                <a class="back-link" href="../"><span aria-hidden="true">&larr;</span> 전체 글</a>
+                <header class="article-header">
+                  <div class="article-heading">
+                    <p class="category-pill">주기 예측</p>
+                    <h1>MiniCycle은 생리 예정일, 배란일, 가임기를 어떻게 예측하나요</h1>
+                    <p class="article-meta"><time datetime="2026-05-16">2026년 5월 16일 MiniCycle 작성</time><span aria-hidden="true">&middot;</span><span>약 3분 읽기</span></p>
+                    <p class="lead">MiniCycle은 무거운 대시보드 없이 빠르게 주기를 확인하고 싶은 사람을 위한 간단한 생리 캘린더입니다. 알고리즘은 일부러 단순하게 만들었습니다. 사용자가 남긴 최근 기록과 공개된 주기 연구를 바탕으로 날짜를 계산하고, 그 결과를 의학적 사실이 아니라 참고용 예측으로 보여줍니다.</p>
+                  </div>
+                  <figure class="article-visual">
+                    <div class="article-visual-frame">
+                      <span class="visual-orbit visual-orbit-one" aria-hidden="true"></span>
+                      <span class="visual-orbit visual-orbit-two" aria-hidden="true"></span>
+                      <img class="article-hero" src="../../../assets/home-capture-iphone17-1118-ko-20260518.jpg" alt="MiniCycle 아이폰 실제 캡처 화면: 생리 캘린더와 위젯 경험" width="552" height="1200" loading="eager">
+                    </div>
+                    <figcaption>iPhone에서 보는 MiniCycle 캘린더</figcaption>
+                  </figure>
+                </header>
+                <div class="article-layout">
+                  <div class="article-body">
+        <section class="article-section" aria-labelledby="section-1">
+  <h2 id="section-1">짧게 요약하면</h2>
 <p>MiniCycle은 사용자가 저장한 생리 시작일을 기준으로 다음 생리 예정일을 계산합니다. 기록이 충분하면 최근 주기 간격에서 중앙값에 가까운 값을 쓰고, 기록이 부족하면 기본 주기 길이를 사용합니다. 그 다음 예상 생리 시작일에서 역산해 배란일을 추정하고, 그 주변을 가임기로 표시합니다.</p>
-<h2>최근 기록을 우선하는 이유</h2>
+</section>
+<section class="article-section" aria-labelledby="section-2">
+  <h2 id="section-2">최근 기록을 우선하는 이유</h2>
 <p>생리 주기는 완전히 고정된 값이 아닙니다. 수십만 건의 주기를 분석한 연구에서도 주기 길이는 사람마다 다르고, 같은 사람이라도 달마다 달라지는 것으로 나타났습니다. 그래서 MiniCycle은 오래된 전체 평균보다 최근 저장 기록을 더 중요하게 봅니다.</p>
 <p>앱은 최근 최대 12개의 생리 기록을 사용합니다. 측정된 주기 간격이 10개 이상이면 가장 짧은 값 1개와 가장 긴 값 1개를 제외한 뒤 중앙값을 계산합니다. 스트레스, 질병, 여행, 약물 변화, 기록 누락 같은 예외적인 주기의 영향을 줄이기 위한 방식입니다.</p>
-<h2>다음 생리 예정일 계산</h2>
+</section>
+<section class="article-section" aria-labelledby="section-3">
+  <h2 id="section-3">다음 생리 예정일 계산</h2>
 <p>주기 길이는 한 생리 시작일부터 다음 생리 시작일까지의 일수입니다. 사용자가 주기 길이를 직접 설정했다면 그 값을 우선합니다. 직접 설정이 없다면 최근 기록으로 추정하고, 기록이 부족하면 29일을 기본값으로 사용합니다.</p>
 <p>생리 기간도 비슷합니다. 직접 설정이 있으면 그 값을 우선하고, 없으면 최근 종료된 생리 기간을 바탕으로 계산합니다. 데이터가 충분하지 않을 때는 5일을 기본값으로 사용합니다.</p>
-<h2>배란일과 가임기 표시</h2>
+</section>
+<section class="article-section" aria-labelledby="section-4">
+  <h2 id="section-4">배란일과 가임기 표시</h2>
 <p>배란일은 다음 생리 예정일에서 황체기 추정치를 거꾸로 세어 표시합니다. MiniCycle은 하나의 고정 숫자만 쓰지 않고, 9–14일 범위 안에서 주기 길이에 따라 조정된 황체기 추정치를 사용합니다.</p>
 <p>가임기는 추정 배란일 5일 전부터 배란일 다음 날까지 표시합니다. 달력에서 참고할 수 있게 넉넉히 잡은 범위일 뿐, 특정 날짜의 임신 가능성을 확정하는 표시는 아닙니다.</p>
-<h2>예측이 할 수 없는 것</h2>
+</section>
+<section class="article-section" aria-labelledby="section-5">
+  <h2 id="section-5">예측이 할 수 없는 것</h2>
 <p>MiniCycle의 예측은 개인 참고용입니다. 의료 조언, 피임, 난임 치료, 진단, 임신 가능성 판단을 대체하지 않습니다. 갑작스럽거나 통증이 있거나 지속적인 변화가 있으면 전문 의료진과 상담하는 것이 좋습니다.</p>
-<h2>기록이 몇 개쯤 쌓이면 더 유용해질까요</h2>
+</section>
+<section class="article-section" aria-labelledby="section-6">
+  <h2 id="section-6">기록이 몇 개쯤 쌓이면 더 유용해질까요</h2>
 <p>생리 시작일이 한두 개뿐이면 앱이 할 수 있는 일은 대략적인 달력 알림에 가깝습니다. 몇 개월의 기록이 이어지면 기본값에만 의존하지 않고 실제 주기 간격을 비교할 수 있어 예측이 더 실용적이 됩니다. 그래도 스트레스, 질병, 여행, 약물 변화, 출산 후 변화처럼 갑자기 생기는 요인은 앱이 미리 알 수 없습니다.</p>
 <p>생리 앱을 비교할 때 중요한 질문은 얼마나 많은 날짜를 예측한다고 말하는지가 아닙니다. 그 날짜가 어떻게 만들어지는지 설명할 수 있는지가 더 중요합니다. MiniCycle은 계산 방식을 작게 유지해서 사용자가 각 표시를 어느 정도로 믿어야 할지 판단할 수 있게 합니다.</p>
-<h2>기록일과 예측일을 구분하는 이유</h2>
+</section>
+<section class="article-section" aria-labelledby="section-7">
+  <h2 id="section-7">기록일과 예측일을 구분하는 이유</h2>
 <p>사용자가 저장한 생리일과 앞으로 예상되는 생리일은 같은 의미가 아닙니다. MiniCycle은 실제 기록, 예상 생리일, 가임기, 배란일 표시를 서로 다르게 보여줍니다. 특히 위젯처럼 설명을 길게 넣기 어려운 화면에서는 이 구분이 중요합니다.</p>
 <p>이 구분은 지난 달을 다시 볼 때도 도움이 됩니다. 과거의 실제 기록은 다음 예측의 재료가 되고, 미래의 예측일은 계속 계획용 정보로 남습니다. 덕분에 예측을 이미 기록된 건강 정보처럼 오해할 가능성을 줄일 수 있습니다.</p>
-<h2>자주 묻는 질문</h2>
+</section>
+<section class="article-section" aria-labelledby="section-8">
+  <h2 id="section-8">자주 묻는 질문</h2>
 <p>MiniCycle이 정확한 배란일을 알려줄 수 있나요? 아닙니다. 생리 기록과 주기 가정을 바탕으로 배란일을 추정할 수는 있지만, 실제 생리적 타이밍은 달라질 수 있습니다. 임상적 측정이 아니라 달력 참고용으로 보는 것이 맞습니다.</p>
 <p>실제 가임기가 표시된 날짜와 다를 수 있나요? 그럴 수 있습니다. 표시된 가임기는 예측값입니다. 임신 계획, 피임, 불규칙 출혈, 증상 판단이 중요하다면 앱의 달력 예측만 보지 말고 전문 의료 조언을 기준으로 삼아야 합니다.</p>
-<h2>앱에서 이 글을 활용하는 방법</h2>
+</section>
+<section class="article-section" aria-labelledby="section-9">
+  <h2 id="section-9">앱에서 이 글을 활용하는 방법</h2>
 <p>MiniCycle을 처음 설정한다면 비교적 확실하게 기억하는 생리 시작일부터 입력하는 것이 좋습니다. 과거 종료일도 도움이 되지만, 주기 길이를 계산할 때 가장 중요한 값은 시작일입니다. 그 다음에는 캘린더를 검토 화면처럼 사용하세요. 예상 생리일과 실제 시작일을 비교하고 기록을 계속 갱신하면 됩니다.</p>
 <p>이 글은 캘린더 표시가 어떤 제품 로직으로 만들어지는지 설명하기 위한 글입니다. 의료 교육을 대신하지 않으며, 앱을 쓰기 위해 증상, 성생활, 민감한 맥락을 반드시 입력하라고 요구하지도 않습니다. MiniCycle은 날짜, 라벨, 간단한 주기 리듬에 집중하도록 의도적으로 좁게 만들었습니다.</p>
-                <div class="callout">
-                  <p>MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다.</p>
-                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="ko" data-placement="blog_article_callout" data-content-group="how-minicycle-estimates-periods-ovulation-fertile-window" onclick="trackAppStoreClick(this)">App Store에서 받기</a>
+</section>
+                    <section class="callout" aria-labelledby="try-minicycle">
+                      <img class="callout-mark" src="../../../assets/minicycle-app-icon.png" alt="" width="42" height="42" loading="lazy">
+                      <div class="callout-copy">
+                        <p class="eyebrow">MiniCycle for iPhone</p>
+                        <h2 id="try-minicycle">MiniCycle 사용하기</h2>
+                        <p>MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다.</p>
+                      </div>
+                      <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="ko" data-placement="blog_article_callout" data-content-group="how-minicycle-estimates-periods-ovulation-fertile-window" onclick="trackAppStoreClick(this)">App Store에서 받기</a>
+                    </section>
+                    <section class="references-section" aria-labelledby="references-title">
+                      <p class="eyebrow">MiniCycle editorial</p>
+                      <h2 id="references-title">참고 자료</h2>
+                      <ul class="references">
+        <li><a href="https://www.nature.com/articles/s41746-019-0152-7" lang="en">Bull JR, Rowland SP, Scherwitzl EB, et al. Real-world menstrual cycle characteristics of more than 600,000 menstrual cycles. npj Digital Medicine. 2019.</a></li>
+<li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC27529/" lang="en">Wilcox AJ, Dunson D, Baird DD. The timing of the fertile window in the menstrual cycle. BMJ. 2000.</a></li>
+<li><a href="https://www.acog.org/womens-health/faqs/your-first-period" lang="en">ACOG. Your First Period.</a></li>
+                      </ul>
+                    </section>
+                  </div>
+                  <aside class="article-sidebar">
+                    <nav class="article-toc" aria-label="이 글에서 다루는 내용">
+                      <p class="toc-title">이 글에서 다루는 내용</p>
+                      <ol>
+        <li><a href="#section-1">짧게 요약하면</a></li>
+<li><a href="#section-2">최근 기록을 우선하는 이유</a></li>
+<li><a href="#section-3">다음 생리 예정일 계산</a></li>
+<li><a href="#section-4">배란일과 가임기 표시</a></li>
+<li><a href="#section-5">예측이 할 수 없는 것</a></li>
+<li><a href="#section-6">기록이 몇 개쯤 쌓이면 더 유용해질까요</a></li>
+<li><a href="#section-7">기록일과 예측일을 구분하는 이유</a></li>
+<li><a href="#section-8">자주 묻는 질문</a></li>
+<li><a href="#section-9">앱에서 이 글을 활용하는 방법</a></li>
+                      </ol>
+                    </nav>
+                  </aside>
                 </div>
-                <h2>참고 자료</h2>
-                <ul class="references">
-        <li><a href="https://www.nature.com/articles/s41746-019-0152-7">Bull JR, Rowland SP, Scherwitzl EB, et al. Real-world menstrual cycle characteristics of more than 600,000 menstrual cycles. npj Digital Medicine. 2019.</a></li>
-<li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC27529/">Wilcox AJ, Dunson D, Baird DD. The timing of the fertile window in the menstrual cycle. BMJ. 2000.</a></li>
-<li><a href="https://www.acog.org/womens-health/faqs/your-first-period">ACOG. Your First Period.</a></li>
-                </ul>
               </article>
+              <section class="related-section" aria-labelledby="related-title">
+                <div class="section-heading">
+                  <div>
+                    <p class="eyebrow">이어서 읽기</p>
+                    <h2 id="related-title">함께 읽으면 좋은 글</h2>
+                  </div>
+                  <a class="text-link section-link" href="../">전체 글<span aria-hidden="true">&nbsp;&rarr;</span></a>
+                </div>
+                <div class="post-grid related-grid">
+        <article class="post-card related-card" data-guide-card data-search-value="주기 예측 minicycle 달력, 지난 가임기와 앞으로의 예측은 왜 다를까 minicycle은 지난 가임기를 실제로 찍은 간격에서, 다음 가임기는 마지막 시작일을 기준으로 한 추정에서 그립니다. 둘이 왜 다르고 어떻게 계산되는지 정리했습니다.">
+  <div class="post-card-topline">
+    <p class="category-pill">주기 예측</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../minicycle-past-cycles-vs-future-predictions/">MiniCycle 달력, 지난 가임기와 앞으로의 예측은 왜 다를까</a></h3>
+  <p class="post-description">MiniCycle은 지난 가임기를 실제로 찍은 간격에서, 다음 가임기는 마지막 시작일을 기준으로 한 추정에서 그립니다. 둘이 왜 다르고 어떻게 계산되는지 정리했습니다.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-17">2026.06.17</time><span aria-hidden="true">&middot;</span>약 3분</p>
+    <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="위젯 minicycle 위젯이 안 바뀔 때, 새로 고침은 어떻게 되나요 minicycle 홈 화면 위젯은 실시간이 아니라 ios가 정한 시점에 갱신됩니다. 위젯이 어떻게 새로 고쳐지는지, 오래된 상태로 보일 때 무엇을 확인하면 되는지 정리했습니다.">
+  <div class="post-card-topline">
+    <p class="category-pill">위젯</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../minicycle-widget-not-updating-refresh/">MiniCycle 위젯이 안 바뀔 때, 새로 고침은 어떻게 되나요</a></h3>
+  <p class="post-description">MiniCycle 홈 화면 위젯은 실시간이 아니라 iOS가 정한 시점에 갱신됩니다. 위젯이 어떻게 새로 고쳐지는지, 오래된 상태로 보일 때 무엇을 확인하면 되는지 정리했습니다.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-04">2026.07.04</time><span aria-hidden="true">&middot;</span>약 3분</p>
+    <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="주기 건강 배란통이 뭘까요? 배란기에 아랫배가 아픈 이유 배란 무렵 한쪽 아랫배가 콕콕 쑤시는 배란통은 배란하는 사람의 40%까지 겪습니다. 어떤 느낌인지, 왜 생기는지, 그리고 배란통이 아닐 때는 언제인지 정리했습니다.">
+  <div class="post-card-topline">
+    <p class="category-pill">주기 건강</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../ovulation-pain-mittelschmerz-what-it-is/">배란통이 뭘까요? 배란기에 아랫배가 아픈 이유</a></h3>
+  <p class="post-description">배란 무렵 한쪽 아랫배가 콕콕 쑤시는 배란통은 배란하는 사람의 40%까지 겪습니다. 어떤 느낌인지, 왜 생기는지, 그리고 배란통이 아닐 때는 언제인지 정리했습니다.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-03">2026.07.03</time><span aria-hidden="true">&middot;</span>약 3분</p>
+    <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+                </div>
+              </section>
             </main>
+        <footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="../../">
+        <img class="brand-icon" src="../../../assets/minicycle-app-icon.png" alt="" width="34" height="34" loading="lazy">
+        <span>MiniCycle</span>
+      </a>
+      <p>내 주기를 이해하는 더 조용하고 사적인 방법.</p>
+    </div>
+    <nav class="footer-nav" aria-label="하단 탐색">
+      <a href="../../blog/">블로그</a>
+      <a href="../../support/">지원</a>
+      <a href="../../privacy/">개인정보</a>
+    </nav>
+    <p class="copyright">&copy; 2026 MiniCycle. iPhone을 위해 세심하게 만들었습니다.</p>
+  </div>
+</footer>
           </body>
         </html>

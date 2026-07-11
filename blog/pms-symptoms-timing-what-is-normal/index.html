@@ -3,6 +3,8 @@
                 <head>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1">
+          <meta name="color-scheme" content="light dark">
+          <meta name="theme-color" content="#fbf8fa" data-theme-color>
           <title>PMS symptoms and timing: what&#x27;s normal before a period</title>
           <meta name="description" content="PMS shows up after ovulation and fades within a few days of your period. Here is what counts as normal premenstrual change, what doesn&#x27;t, and when to see a doctor.">
           <link rel="canonical" href="https://minicycle.net/blog/pms-symptoms-timing-what-is-normal/">
@@ -19,7 +21,75 @@
             <link rel="icon" href="../../favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
     <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
-          <link rel="stylesheet" href="../../styles.css">
+        <script>
+  (() => {
+    const storageKey = 'minicycle-theme';
+    const root = document.documentElement;
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+    root.classList.add('js');
+
+    function storedTheme() {
+      try {
+        const value = window.localStorage.getItem(storageKey);
+        return value === 'light' || value === 'dark' ? value : null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function currentTheme() {
+      return root.dataset.theme || (systemTheme.matches ? 'dark' : 'light');
+    }
+
+    function updateThemeUI() {
+      const dark = currentTheme() === 'dark';
+      const themeColor = document.querySelector('[data-theme-color]');
+      if (themeColor) themeColor.setAttribute('content', dark ? '#121014' : '#fbf8fa');
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      const label = dark
+        ? toggle.dataset.lightLabel
+        : toggle.dataset.darkLabel;
+      toggle.setAttribute('aria-label', label);
+      toggle.setAttribute('title', label);
+    }
+
+    const savedTheme = storedTheme();
+    if (savedTheme) root.dataset.theme = savedTheme;
+    updateThemeUI();
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      updateThemeUI();
+      toggle.addEventListener('click', () => {
+        const nextTheme = currentTheme() === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = nextTheme;
+        try {
+          window.localStorage.setItem(storageKey, nextTheme);
+        } catch (_) {
+          // The selected theme still applies for this page when storage is unavailable.
+        }
+        updateThemeUI();
+      });
+      if (typeof systemTheme.addEventListener === 'function') {
+        systemTheme.addEventListener('change', () => {
+          if (!root.dataset.theme) updateThemeUI();
+        });
+      }
+      window.addEventListener('storage', (event) => {
+        if (event.key !== storageKey) return;
+        if (event.newValue === 'light' || event.newValue === 'dark') {
+          root.dataset.theme = event.newValue;
+        } else {
+          delete root.dataset.theme;
+        }
+        updateThemeUI();
+      });
+    });
+  })();
+</script>
+          <link rel="stylesheet" href="../../styles.css?v=20260711-4">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -109,67 +179,204 @@
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"PMS symptoms and timing: what's normal before a period","description":"PMS shows up after ovulation and fades within a few days of your period. Here is what counts as normal premenstrual change, what doesn't, and when to see a doctor.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-06-18","dateModified":"2026-06-18","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/pms-symptoms-timing-what-is-normal/"}}</script>
         </head>
-          <body>
-        <header class="site-header">
-  <a class="brand" href="../../">MiniCycle</a>
-  <nav aria-label="Primary navigation">
-    <a href="../../blog/">Blog</a>
-    <a href="../../support/">Support</a>
-    <a href="../../privacy/">Privacy</a>
-    <a href="../../ko/blog/pms-symptoms-timing-what-is-normal/">한국어</a>
-  </nav>
+          <body class="article-page">
+        <a class="skip-link" href="#main-content">Skip to content</a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="../../">
+      <img class="brand-icon" src="../../assets/minicycle-app-icon.png" alt="" width="34" height="34">
+      <span>MiniCycle</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="../../blog/">Blog</a>
+      <a href="../../support/">Support</a>
+      <a href="../../privacy/">Privacy</a>
+    </nav>
+    <div class="header-controls">
+      <button class="theme-toggle" type="button" data-theme-toggle data-light-label="Switch to light mode" data-dark-label="Switch to dark mode" aria-label="Toggle color theme">
+        <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
+        <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.1 15.4A8.2 8.2 0 0 1 8.6 3.9 8.2 8.2 0 1 0 20.1 15.4Z"></path></svg>
+      </button>
+      <a class="language-link" href="../../ko/blog/pms-symptoms-timing-what-is-normal/" lang="ko" hreflang="ko" aria-label="한국어">한국어</a>
+    </div>
+  </div>
 </header>
-            <main class="page">
+            <main class="page article-page-main" id="main-content">
               <article class="article" data-language="en" data-content-group="pms-symptoms-timing-what-is-normal" data-min-read-ms="90000">
-                <p class="eyebrow">Cycle health</p>
-                <h1>PMS symptoms and timing: what&#x27;s normal before a period</h1>
-                <p class="article-meta">Published June 18, 2026 by MiniCycle</p>
-                <p class="lead">Three or four days before your period, your jeans feel tight, your chest is sore, and small things land harder than they should. Then your period starts and within a day or two it lifts. That arc has a name: premenstrual syndrome. As many as three in four people who menstruate notice some version of it, and for most it stays mild. What makes it PMS is not how dramatic any one symptom is. It is when the symptoms show up, and when they leave.</p>
-                <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
-        <h2>What PMS actually is</h2>
+                <a class="back-link" href="../"><span aria-hidden="true">&larr;</span> All guides</a>
+                <header class="article-header">
+                  <div class="article-heading">
+                    <p class="category-pill">Cycle health</p>
+                    <h1>PMS symptoms and timing: what&#x27;s normal before a period</h1>
+                    <p class="article-meta"><time datetime="2026-06-18">Published June 18, 2026 by MiniCycle</time><span aria-hidden="true">&middot;</span><span>6 min read</span></p>
+                    <p class="lead">Three or four days before your period, your jeans feel tight, your chest is sore, and small things land harder than they should. Then your period starts and within a day or two it lifts. That arc has a name: premenstrual syndrome. As many as three in four people who menstruate notice some version of it, and for most it stays mild. What makes it PMS is not how dramatic any one symptom is. It is when the symptoms show up, and when they leave.</p>
+                  </div>
+                  <figure class="article-visual">
+                    <div class="article-visual-frame">
+                      <span class="visual-orbit visual-orbit-one" aria-hidden="true"></span>
+                      <span class="visual-orbit visual-orbit-two" aria-hidden="true"></span>
+                      <img class="article-hero" src="../../assets/home-capture-iphone17-1118-en-20260518.jpg" alt="Actual MiniCycle iPhone screenshot showing the period calendar and widget experience" width="552" height="1200" loading="eager">
+                    </div>
+                    <figcaption>The MiniCycle calendar on iPhone</figcaption>
+                  </figure>
+                </header>
+                <div class="article-layout">
+                  <div class="article-body">
+        <section class="article-section" aria-labelledby="section-1">
+  <h2 id="section-1">What PMS actually is</h2>
 <p>PMS is a cluster of physical and emotional changes that arrive after ovulation and fade once bleeding begins. The Office on Women&#x27;s Health ties the timing to hormones: in the days after ovulation, if no pregnancy happens, estrogen and progesterone drop sharply, and symptoms ease within a few days of your period starting as those levels climb again.</p>
 <p>So feeling some of this is ordinary. The same source notes that PMS usually eases or stops after menopause, when periods stop, and can return in a different shape after a pregnancy. It is tied to the hormonal swing of a cycle, which is why it tracks the cycle so closely.</p>
-<h2>The timing is the real tell</h2>
+</section>
+<section class="article-section" aria-labelledby="section-2">
+  <h2 id="section-2">The timing is the real tell</h2>
 <p>Severity varies, but timing is what clinicians actually look at. The Office on Women&#x27;s Health describes the pattern as symptoms that appear in the days before your period, repeat for several cycles in a row, end within about four days of bleeding starting, and get in the way of normal activities. Mayo Clinic makes the same point: the signs recur in a predictable pattern and generally clear within four days of the period beginning.</p>
 <p>This is where a common misread creeps in. PMS is not feeling low for half the month, and it is not a fixed two-week event. It belongs to the luteal phase, the stretch between ovulation and your next period, which MiniCycle counts back as 9 to 14 days rather than a flat 14. A bad mood that lands at a random point in your cycle, or one that never lifts when your period comes, does not fit the PMS pattern, and that mismatch is worth noticing.</p>
-<h2>Common symptoms, and how many to expect</h2>
+</section>
+<section class="article-section" aria-labelledby="section-3">
+  <h2 id="section-3">Common symptoms, and how many to expect</h2>
 <p>The list is long, but most people get only a few. On the physical side: bloating or a gassy feeling, tender or swollen breasts, headache or backache, fatigue, cramping, and food cravings. On the emotional side: irritability, mood swings, anxiety or tension, low mood or crying spells, trouble concentrating, sleep that runs too long or too short, and less interest in sex.</p>
 <p>Mixing physical and emotional symptoms is typical, not a sign that something is unusual. The emotional ones are as real as the physical ones, and both trace back to the same hormonal shift.</p>
-<h2>When it is more than PMS</h2>
+</section>
+<section class="article-section" aria-labelledby="section-4">
+  <h2 id="section-4">When it is more than PMS</h2>
 <p>There is a severe form called premenstrual dysphoric disorder, or PMDD. The Office on Women&#x27;s Health puts it at fewer than 5% of people of childbearing age. The difference is not a new symptom so much as scale: PMDD symptoms, often the mood ones, are disabling enough to disrupt work, school, or relationships every month.</p>
 <p>Mayo Clinic frames it the same way, as a small number of people whose premenstrual symptoms are disabling. If your premenstrual stretch reliably derails your life rather than just annoying you, that is the kind of thing worth raising with a clinician.</p>
-<h2>What can make PMS feel worse</h2>
+</section>
+<section class="article-section" aria-labelledby="section-5">
+  <h2 id="section-5">What can make PMS feel worse</h2>
 <p>A few things track with heavier PMS. The Office on Women&#x27;s Health links it to high stress and to a personal or family history of depression, and notes that, on average, people in their 30s are most likely to report it. Symptoms can also intensify in the late 30s and 40s heading into perimenopause, when hormone levels swing less predictably.</p>
 <p>There is overlap to watch for too. About half of those who seek relief from PMS have another condition, such as depression, anxiety, irritable bowel syndrome, or migraine, that flares in the days before a period. That can make a premenstrual week feel worse without PMS itself being the whole story.</p>
-<h2>When is it worth seeing a doctor?</h2>
+</section>
+<section class="article-section" aria-labelledby="section-6">
+  <h2 id="section-6">When is it worth seeing a doctor?</h2>
 <p>The threshold is practical, not dramatic. Mayo Clinic&#x27;s guidance is to see a doctor if you cannot manage PMS with lifestyle changes and the symptoms are affecting your health and daily life. For PMS itself, the question is simply whether it is interfering with how you live.</p>
 <p>Before that visit, the Office on Women&#x27;s Health and Mayo Clinic suggest the same homework: write your symptoms down each day for at least two or three cycles, so you and the clinician can see the pattern instead of relying on memory.</p>
-<h2>What tracking can and can&#x27;t tell you</h2>
+</section>
+<section class="article-section" aria-labelledby="section-7">
+  <h2 id="section-7">What tracking can and can&#x27;t tell you</h2>
 <p>This is where a record earns its place. If you note how you feel on the calendar each day, the timing becomes visible: symptoms clustering in the luteal phase and lifting when your period arrives is the PMS signature, and a pattern that does not match is its own useful signal. In MiniCycle the daily notes let you jot mood, bloating, or sleep on any date, next to the ovulation and fertile-window marks that show where your luteal phase falls, all kept on your device.</p>
 <p>What the notes cannot do is diagnose anything. They show timing and frequency, not cause, and they cannot separate PMS from a condition that happens to flare on the same schedule. The dates are reference information drawn from your own cycles, and a premenstrual stretch that keeps disrupting your life is a reason to ask, not to wait it out.</p>
-<h2>Seeing the pattern across a few cycles</h2>
+</section>
+<section class="article-section" aria-labelledby="section-8">
+  <h2 id="section-8">Seeing the pattern across a few cycles</h2>
 <p>You do not need to track everything. Pick the two or three symptoms that bother you most, mood, bloating, sore breasts, whatever they are, and mark which days they show up for a couple of months. What you are looking for is shape: do they cluster in the week or so before your period, and do they fade once it starts?</p>
 <p>Say one month your mood dips and your breasts ache from about five days before your period, then both ease by the second day of bleeding. The next month the same thing lines up again. That repetition, in the luteal phase and gone soon after, is what marks it as premenstrual rather than something that happened to land nearby. A symptom that ignores your period entirely is telling you something different.</p>
-<h2>Frequently asked questions</h2>
+</section>
+<section class="article-section" aria-labelledby="section-9">
+  <h2 id="section-9">Frequently asked questions</h2>
 <p>Is it normal to feel emotional before my period? Feeling more irritable, anxious, or tearful in the days before a period is one of the most common premenstrual changes, and on its own it is not a problem. The timing, and whether it disrupts your life, is what matters, not the feeling itself.</p>
 <p>Why is my PMS worse some months than others? Symptom intensity varies cycle to cycle, and stress, poor sleep, and other conditions that flare premenstrually can each add to a given month. A run of harder months is worth noting, especially heading into your late 30s and 40s.</p>
 <p>Is PMS the same as PMDD? No. PMDD is a severe form affecting fewer than 5% of people of childbearing age, where the symptoms, usually mood ones, are disabling every month. For most people PMS stays mild to moderate.</p>
 <p>Does PMS ever go away? It eases or stops after menopause, when periods stop. It can also change over your life, and after a pregnancy it may return in a different form.</p>
-<h2>The one-line version</h2>
+</section>
+<section class="article-section" aria-labelledby="section-10">
+  <h2 id="section-10">The one-line version</h2>
 <p>PMS is a mix of physical and emotional symptoms that arrive after ovulation, in the luteal phase, and fade within a few days of your period starting. As many as three in four menstruating people get some version, and for most it stays mild. What defines it is the cyclical timing, not the severity of any one symptom.</p>
 <p>Fewer than 5% have the severe form, PMDD, where mood symptoms are disabling every month. See a doctor if PMS is affecting your daily life or you cannot manage it with lifestyle changes, and track your symptoms for two or three cycles first so the pattern is clear. This is reference information, not a diagnosis.</p>
-                <div class="callout">
-                  <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
-                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="pms-symptoms-timing-what-is-normal" onclick="trackAppStoreClick(this)">View on the App Store</a>
-                </div>
-                <h2>References</h2>
-                <ul class="references">
+</section>
+                    <section class="callout" aria-labelledby="try-minicycle">
+                      <img class="callout-mark" src="../../assets/minicycle-app-icon.png" alt="" width="42" height="42" loading="lazy">
+                      <div class="callout-copy">
+                        <p class="eyebrow">MiniCycle for iPhone</p>
+                        <h2 id="try-minicycle">Try MiniCycle</h2>
+                        <p>MiniCycle is built for a clean iPhone period calendar, local records, simple statistics, and a home screen widget.</p>
+                      </div>
+                      <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="en" data-placement="blog_article_callout" data-content-group="pms-symptoms-timing-what-is-normal" onclick="trackAppStoreClick(this)">View on the App Store</a>
+                    </section>
+                    <section class="references-section" aria-labelledby="references-title">
+                      <p class="eyebrow">MiniCycle editorial</p>
+                      <h2 id="references-title">References</h2>
+                      <ul class="references">
         <li><a href="https://womenshealth.gov/menstrual-cycle/premenstrual-syndrome">Office on Women&#x27;s Health. Premenstrual syndrome (PMS).</a></li>
 <li><a href="https://www.mayoclinic.org/diseases-conditions/premenstrual-syndrome/symptoms-causes/syc-20376780">Mayo Clinic. Premenstrual syndrome (PMS): Symptoms &amp; causes.</a></li>
 <li><a href="https://www.acog.org/womens-health/faqs/premenstrual-syndrome">ACOG. Premenstrual Syndrome (PMS).</a></li>
 <li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
-                </ul>
+                      </ul>
+                    </section>
+                  </div>
+                  <aside class="article-sidebar">
+                    <nav class="article-toc" aria-label="On this page">
+                      <p class="toc-title">On this page</p>
+                      <ol>
+        <li><a href="#section-1">What PMS actually is</a></li>
+<li><a href="#section-2">The timing is the real tell</a></li>
+<li><a href="#section-3">Common symptoms, and how many to expect</a></li>
+<li><a href="#section-4">When it is more than PMS</a></li>
+<li><a href="#section-5">What can make PMS feel worse</a></li>
+<li><a href="#section-6">When is it worth seeing a doctor?</a></li>
+<li><a href="#section-7">What tracking can and can&#x27;t tell you</a></li>
+<li><a href="#section-8">Seeing the pattern across a few cycles</a></li>
+<li><a href="#section-9">Frequently asked questions</a></li>
+<li><a href="#section-10">The one-line version</a></li>
+                      </ol>
+                    </nav>
+                  </aside>
+                </div>
               </article>
+              <section class="related-section" aria-labelledby="related-title">
+                <div class="section-heading">
+                  <div>
+                    <p class="eyebrow">Keep exploring</p>
+                    <h2 id="related-title">More guides you may like</h2>
+                  </div>
+                  <a class="text-link section-link" href="../">All guides<span aria-hidden="true">&nbsp;&rarr;</span></a>
+                </div>
+                <div class="post-grid related-grid">
+        <article class="post-card related-card" data-guide-card data-search-value="cycle health ovulation pain (mittelschmerz): what that mid-cycle twinge is ovulation pain, or mittelschmerz, is a one-sided mid-cycle twinge that affects up to 40% of people who ovulate. what it feels like, why it happens, and when it isn&#x27;t ordinary.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle health</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../ovulation-pain-mittelschmerz-what-it-is/">Ovulation pain (mittelschmerz): what that mid-cycle twinge is</a></h3>
+  <p class="post-description">Ovulation pain, or mittelschmerz, is a one-sided mid-cycle twinge that affects up to 40% of people who ovulate. What it feels like, why it happens, and when it isn&#x27;t ordinary.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-03">2026.07.03</time><span aria-hidden="true">&middot;</span>4 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="cycle health can you get pregnant on your period? what&#x27;s actually possible getting pregnant on your period is unlikely but not impossible, mostly on short cycles with long periods. here is why it happens and why a calendar is not contraception.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle health</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../can-you-get-pregnant-on-your-period/">Can you get pregnant on your period? What&#x27;s actually possible</a></h3>
+  <p class="post-description">Getting pregnant on your period is unlikely but not impossible, mostly on short cycles with long periods. Here is why it happens and why a calendar is not contraception.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-24">2026.06.24</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="cycle health period blood color: what brown, dark, and bright red mean period blood color usually just reflects how long blood took to leave: pink, red, and brown are all normal. here is what the color means and what actually matters.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle health</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../period-blood-color-what-it-means/">Period blood color: what brown, dark, and bright red mean</a></h3>
+  <p class="post-description">Period blood color usually just reflects how long blood took to leave: pink, red, and brown are all normal. Here is what the color means and what actually matters.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-21">2026.06.21</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+                </div>
+              </section>
             </main>
+        <footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="../../">
+        <img class="brand-icon" src="../../assets/minicycle-app-icon.png" alt="" width="34" height="34" loading="lazy">
+        <span>MiniCycle</span>
+      </a>
+      <p>A quieter, more private way to understand your cycle.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="../../blog/">Blog</a>
+      <a href="../../support/">Support</a>
+      <a href="../../privacy/">Privacy</a>
+    </nav>
+    <p class="copyright">&copy; 2026 MiniCycle. Built thoughtfully for iPhone.</p>
+  </div>
+</footer>
           </body>
         </html>

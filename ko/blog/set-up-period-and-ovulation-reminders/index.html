@@ -3,6 +3,8 @@
                 <head>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1">
+          <meta name="color-scheme" content="light dark">
+          <meta name="theme-color" content="#fbf8fa" data-theme-color>
           <title>MiniCycle에서 생리 예정일 알림을 설정하는 방법</title>
           <meta name="description" content="생리 예정일, 가임기, 배란일 알림을 0–3일 전 원하는 시간에 받도록 설정하는 방법을 안내합니다. MiniCycle 알림은 서버 없이 기기 안에서 예약됩니다.">
           <link rel="canonical" href="https://minicycle.net/ko/blog/set-up-period-and-ovulation-reminders/">
@@ -19,7 +21,75 @@
             <link rel="icon" href="../../../favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32x32.png">
     <link rel="apple-touch-icon" href="../../../apple-touch-icon.png">
-          <link rel="stylesheet" href="../../../styles.css">
+        <script>
+  (() => {
+    const storageKey = 'minicycle-theme';
+    const root = document.documentElement;
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+    root.classList.add('js');
+
+    function storedTheme() {
+      try {
+        const value = window.localStorage.getItem(storageKey);
+        return value === 'light' || value === 'dark' ? value : null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function currentTheme() {
+      return root.dataset.theme || (systemTheme.matches ? 'dark' : 'light');
+    }
+
+    function updateThemeUI() {
+      const dark = currentTheme() === 'dark';
+      const themeColor = document.querySelector('[data-theme-color]');
+      if (themeColor) themeColor.setAttribute('content', dark ? '#121014' : '#fbf8fa');
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      const label = dark
+        ? toggle.dataset.lightLabel
+        : toggle.dataset.darkLabel;
+      toggle.setAttribute('aria-label', label);
+      toggle.setAttribute('title', label);
+    }
+
+    const savedTheme = storedTheme();
+    if (savedTheme) root.dataset.theme = savedTheme;
+    updateThemeUI();
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      updateThemeUI();
+      toggle.addEventListener('click', () => {
+        const nextTheme = currentTheme() === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = nextTheme;
+        try {
+          window.localStorage.setItem(storageKey, nextTheme);
+        } catch (_) {
+          // The selected theme still applies for this page when storage is unavailable.
+        }
+        updateThemeUI();
+      });
+      if (typeof systemTheme.addEventListener === 'function') {
+        systemTheme.addEventListener('change', () => {
+          if (!root.dataset.theme) updateThemeUI();
+        });
+      }
+      window.addEventListener('storage', (event) => {
+        if (event.key !== storageKey) return;
+        if (event.newValue === 'light' || event.newValue === 'dark') {
+          root.dataset.theme = event.newValue;
+        } else {
+          delete root.dataset.theme;
+        }
+        updateThemeUI();
+      });
+    });
+  })();
+</script>
+          <link rel="stylesheet" href="../../../styles.css?v=20260711-4">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -109,62 +179,196 @@
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"MiniCycle에서 생리 예정일 알림을 설정하는 방법","description":"생리 예정일, 가임기, 배란일 알림을 0–3일 전 원하는 시간에 받도록 설정하는 방법을 안내합니다. MiniCycle 알림은 서버 없이 기기 안에서 예약됩니다.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg","datePublished":"2026-06-05","dateModified":"2026-06-05","inLanguage":"ko","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/ko/blog/set-up-period-and-ovulation-reminders/"}}</script>
         </head>
-          <body>
-        <header class="site-header">
-  <a class="brand" href="../../">MiniCycle</a>
-  <nav aria-label="Primary navigation">
-    <a href="../../blog/">블로그</a>
-    <a href="../../support/">지원</a>
-    <a href="../../privacy/">개인정보</a>
-    <a href="../../../blog/set-up-period-and-ovulation-reminders/">English</a>
-  </nav>
+          <body class="article-page">
+        <a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="../../">
+      <img class="brand-icon" src="../../../assets/minicycle-app-icon.png" alt="" width="34" height="34">
+      <span>MiniCycle</span>
+    </a>
+    <nav class="site-nav" aria-label="주요 탐색">
+      <a href="../../blog/">블로그</a>
+      <a href="../../support/">지원</a>
+      <a href="../../privacy/">개인정보</a>
+    </nav>
+    <div class="header-controls">
+      <button class="theme-toggle" type="button" data-theme-toggle data-light-label="라이트 모드로 전환" data-dark-label="다크 모드로 전환" aria-label="화면 모드 전환">
+        <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
+        <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.1 15.4A8.2 8.2 0 0 1 8.6 3.9 8.2 8.2 0 1 0 20.1 15.4Z"></path></svg>
+      </button>
+      <a class="language-link" href="../../../blog/set-up-period-and-ovulation-reminders/" lang="en" hreflang="en" aria-label="English">English</a>
+    </div>
+  </div>
 </header>
-            <main class="page">
+            <main class="page article-page-main" id="main-content">
               <article class="article" data-language="ko" data-content-group="set-up-period-and-ovulation-reminders" data-min-read-ms="77000">
-                <p class="eyebrow">알림</p>
-                <h1>MiniCycle에서 생리 예정일 알림을 설정하는 방법</h1>
-                <p class="article-meta">2026년 6월 5일 MiniCycle 작성</p>
-                <p class="lead">알림을 잘 설정해 두면 날짜를 확인하려고 앱을 여는 횟수가 눈에 띄게 줄어듭니다. MiniCycle은 생리 예정일, 가임기 시작, 가임기 종료, 배란일 네 가지 알림을 지원하고, 각각 끄거나 0–3일 전에 받도록 정할 수 있습니다. 받는 시간도 직접 고를 수 있습니다. 설정 방법과 알림 날짜가 정해지는 원리를 함께 정리했습니다.</p>
-                <img class="article-hero" src="../../../assets/home-capture-iphone17-1118-ko-20260518.jpg" alt="MiniCycle 아이폰 실제 캡처 화면: 생리 캘린더와 위젯 경험" width="552" height="1200" loading="eager">
-        <h2>받을 수 있는 알림은 네 가지입니다</h2>
+                <a class="back-link" href="../"><span aria-hidden="true">&larr;</span> 전체 글</a>
+                <header class="article-header">
+                  <div class="article-heading">
+                    <p class="category-pill">알림</p>
+                    <h1>MiniCycle에서 생리 예정일 알림을 설정하는 방법</h1>
+                    <p class="article-meta"><time datetime="2026-06-05">2026년 6월 5일 MiniCycle 작성</time><span aria-hidden="true">&middot;</span><span>약 3분 읽기</span></p>
+                    <p class="lead">알림을 잘 설정해 두면 날짜를 확인하려고 앱을 여는 횟수가 눈에 띄게 줄어듭니다. MiniCycle은 생리 예정일, 가임기 시작, 가임기 종료, 배란일 네 가지 알림을 지원하고, 각각 끄거나 0–3일 전에 받도록 정할 수 있습니다. 받는 시간도 직접 고를 수 있습니다. 설정 방법과 알림 날짜가 정해지는 원리를 함께 정리했습니다.</p>
+                  </div>
+                  <figure class="article-visual">
+                    <div class="article-visual-frame">
+                      <span class="visual-orbit visual-orbit-one" aria-hidden="true"></span>
+                      <span class="visual-orbit visual-orbit-two" aria-hidden="true"></span>
+                      <img class="article-hero" src="../../../assets/home-capture-iphone17-1118-ko-20260518.jpg" alt="MiniCycle 아이폰 실제 캡처 화면: 생리 캘린더와 위젯 경험" width="552" height="1200" loading="eager">
+                    </div>
+                    <figcaption>iPhone에서 보는 MiniCycle 캘린더</figcaption>
+                  </figure>
+                </header>
+                <div class="article-layout">
+                  <div class="article-body">
+        <section class="article-section" aria-labelledby="section-1">
+  <h2 id="section-1">받을 수 있는 알림은 네 가지입니다</h2>
 <p>MiniCycle의 알림은 생리 예정일, 가임기 시작, 가임기 종료, 배란일 네 가지입니다. 서로 독립적이라서 생리 예정일 알림만 켜고 나머지를 모두 꺼도 되고, 네 가지를 다 받아도 됩니다.</p>
 <p>각 알림은 당일 또는 1–3일 전에 받을 수 있고, 받는 시간은 공통으로 하나를 정합니다. 써 보다가 도움보다 방해가 된다 싶은 알림은 꺼 두세요. 알림을 꺼도 캘린더의 날짜 표시는 그대로 남습니다.</p>
-<h2>처음 설정하는 순서</h2>
+</section>
+<section class="article-section" aria-labelledby="section-2">
+  <h2 id="section-2">처음 설정하는 순서</h2>
 <p>MiniCycle 설정에서 알림 항목을 열면 됩니다. 알림을 처음 켤 때 iOS가 알림 권한을 물어보는데, 이 권한은 MiniCycle이 자기 알림을 예약하는 데만 쓰입니다.</p>
 <p>권한을 허용한 뒤에는 알림별로 며칠 전에 받을지 0–3일 사이에서 고르고, 받는 시간을 정하면 끝입니다. 자정 같은 기본값보다는 실제로 휴대폰을 보는 시간대, 예를 들어 오전 늦게나 저녁 무렵이 낫습니다.</p>
-<h2>며칠 전에 받는 게 좋을까요</h2>
+</section>
+<section class="article-section" aria-labelledby="section-3">
+  <h2 id="section-3">며칠 전에 받는 게 좋을까요</h2>
 <p>정답은 없지만 선택지가 좁아서 고르기는 어렵지 않습니다. 당일 알림은 오늘이 그 날이라는 확인용입니다. 하루 전이면 준비물을 챙길 여유가 생기고, 2–3일 전은 여행처럼 일정을 미리 조정하고 싶은 사람에게 맞습니다.</p>
 <p>가임기와 배란일 알림도 같은 0–3일 규칙을 따릅니다. 다음 생리가 언제 오는지만 알면 충분하다면 생리 예정일 알림 하나로도 족합니다.</p>
-<h2>알림 날짜는 어떻게 정해지나요</h2>
+</section>
+<section class="article-section" aria-labelledby="section-4">
+  <h2 id="section-4">알림 날짜는 어떻게 정해지나요</h2>
 <p>알림은 결국 예측 날짜를 따라갑니다. MiniCycle은 저장된 생리 시작일을 최대 12개까지 보고 다음 예정일을 계산합니다. 측정된 주기 간격이 10개 이상 모이면 가장 짧은 값과 가장 긴 값을 하나씩 뺀 중앙값을 쓰고, 기록이 아직 적을 때는 29일을 기본값으로 시작합니다.</p>
 <p>배란일은 다음 예정일에서 9–14일 범위로 조정되는 황체기 추정치를 거꾸로 빼서 잡고, 가임기는 추정 배란일 5일 전부터 다음 날까지입니다. 새 생리 시작일을 기록하면 예측이 다시 계산되고, 예약된 알림도 같이 옮겨집니다.</p>
-<h2>알림은 휴대폰 안에서 예약됩니다</h2>
+</section>
+<section class="article-section" aria-labelledby="section-5">
+  <h2 id="section-5">알림은 휴대폰 안에서 예약됩니다</h2>
 <p>MiniCycle의 알림은 로컬 알림입니다. Apple의 알림 프레임워크는 서버에서 보내는 푸시 외에 앱이 기기 안에서 직접 알림을 만드는 방식을 지원하는데, MiniCycle은 이 방식을 사용합니다. MiniCycle 계정이 없으니 알림 일정이 MiniCycle 서버로 올라가지도 않습니다.</p>
 <p>앱의 다른 부분과 같은 원칙입니다. 생리 기록은 기본적으로 기기 안에 저장되고, 알림을 켠다고 해서 이 점이 달라지지 않습니다.</p>
-<h2>알림이 안 올 때 확인할 것</h2>
+</section>
+<section class="article-section" aria-labelledby="section-6">
+  <h2 id="section-6">알림이 안 올 때 확인할 것</h2>
 <p>순서대로 세 가지를 확인해 보세요. 먼저 MiniCycle 안에서 해당 알림이 켜져 있는지, 그리고 iOS 설정에서 MiniCycle의 알림 권한이 허용되어 있는지 봅니다. 다음으로 집중 모드나 알림 요약이 알림을 붙잡고 있지 않은지 확인합니다. 마지막으로 알림이 붙을 예측 날짜가 있는지 봐야 합니다. 저장된 생리 기록이 없으면 예약할 날짜 자체가 없습니다.</p>
 <p>잠금 화면 표시 방식, 집중 모드, 앱별 알림 옵션 같은 시스템 쪽 설정은 Apple의 iPhone 알림 지원 문서에 정리되어 있습니다.</p>
-<h2>주기가 바뀌면 알림 날짜도 바뀌나요</h2>
+</section>
+<section class="article-section" aria-labelledby="section-7">
+  <h2 id="section-7">주기가 바뀌면 알림 날짜도 바뀌나요</h2>
 <p>바뀝니다. 알림은 현재 예측을 기준으로 다시 예약되기 때문에, 알림 날짜를 고치는 가장 확실한 방법은 실제 생리 시작일을 기록하는 것입니다. 주기가 길어져서 알림이 먼저 와 버렸더라도 따로 손볼 필요는 없습니다. 실제 시작일을 기록하면 다음 예측과 알림이 그 날짜에 맞춰 다시 잡힙니다.</p>
 <p>알림이 시간이 지날수록 안정되는 이유도 여기에 있습니다. 수십만 건의 주기를 분석한 연구에서도 주기 길이는 달마다 달라지는 게 보통이었습니다. 그래서 MiniCycle은 숫자 하나를 고정해 두지 않고 최근 기록으로 계속 다시 계산합니다. 시작일 기록이 쌓일수록 중앙값 기반 추정이 단단해지고, 유난히 달랐던 한 달이 일정 전체를 흔드는 일도 줄어듭니다.</p>
-<h2>자주 묻는 질문</h2>
+</section>
+<section class="article-section" aria-labelledby="section-8">
+  <h2 id="section-8">자주 묻는 질문</h2>
 <p>기록을 안 해도 알림이 계속 오나요? 오기는 하지만 날짜가 점점 어긋납니다. 예측은 마지막으로 저장된 생리 시작일을 기준으로 삼기 때문에, 기록이 오래 비면 알림 날짜도 현실과 멀어집니다. 다음 생리가 시작될 때 기록하면 다시 맞춰집니다.</p>
 <p>가임기·배란일 알림을 피임에 써도 되나요? 안 됩니다. 이 알림은 달력 위의 추정치를 알려줄 뿐이고, 추정은 그 달의 실제 몸 상태와 다를 수 있습니다. 임신을 피하거나 계획하는 방법이 아니라 일정 참고용으로만 보셔야 합니다.</p>
-<h2>설정을 마치기 전 체크리스트</h2>
+</section>
+<section class="article-section" aria-labelledby="section-9">
+  <h2 id="section-9">설정을 마치기 전 체크리스트</h2>
 <p>iOS가 물어볼 때 알림을 허용하고, 필요한 알림만 남기고 나머지는 끕니다. 실제로 휴대폰을 보는 시간으로 받는 시간을 정하고, 알림별로 0–3일의 여유를 고릅니다. 그리고 생리 시작일을 꾸준히 기록하세요. 알림 날짜를 현실에 붙잡아 두는 건 결국 저장된 시작일들입니다.</p>
 <p>한 가지 기대치만 분명히 하면 됩니다. 알림은 예정된 시간에 도착하는 달력 추정치이지, 몸 상태를 측정한 결과가 아닙니다. 알림과 몸이 다르게 말하면 맞는 쪽은 몸이고, 그 차이를 앱에 알려주는 방법이 기록입니다.</p>
-                <div class="callout">
-                  <p>MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다.</p>
-                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="ko" data-placement="blog_article_callout" data-content-group="set-up-period-and-ovulation-reminders" onclick="trackAppStoreClick(this)">App Store에서 받기</a>
+</section>
+                    <section class="callout" aria-labelledby="try-minicycle">
+                      <img class="callout-mark" src="../../../assets/minicycle-app-icon.png" alt="" width="42" height="42" loading="lazy">
+                      <div class="callout-copy">
+                        <p class="eyebrow">MiniCycle for iPhone</p>
+                        <h2 id="try-minicycle">MiniCycle 사용하기</h2>
+                        <p>MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다.</p>
+                      </div>
+                      <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="ko" data-placement="blog_article_callout" data-content-group="set-up-period-and-ovulation-reminders" onclick="trackAppStoreClick(this)">App Store에서 받기</a>
+                    </section>
+                    <section class="references-section" aria-labelledby="references-title">
+                      <p class="eyebrow">MiniCycle editorial</p>
+                      <h2 id="references-title">참고 자료</h2>
+                      <ul class="references">
+        <li><a href="https://support.apple.com/en-us/108781" lang="en">Apple Support. Use notifications on your iPhone or iPad.</a></li>
+<li><a href="https://developer.apple.com/documentation/usernotifications" lang="en">Apple Developer Documentation. User Notifications.</a></li>
+<li><a href="https://www.nature.com/articles/s41746-019-0152-7" lang="en">Bull JR, Rowland SP, Scherwitzl EB, et al. Real-world menstrual cycle characteristics of more than 600,000 menstrual cycles. npj Digital Medicine. 2019.</a></li>
+<li><a href="https://minicycle.net/privacy/" lang="en">MiniCycle Privacy Policy.</a></li>
+                      </ul>
+                    </section>
+                  </div>
+                  <aside class="article-sidebar">
+                    <nav class="article-toc" aria-label="이 글에서 다루는 내용">
+                      <p class="toc-title">이 글에서 다루는 내용</p>
+                      <ol>
+        <li><a href="#section-1">받을 수 있는 알림은 네 가지입니다</a></li>
+<li><a href="#section-2">처음 설정하는 순서</a></li>
+<li><a href="#section-3">며칠 전에 받는 게 좋을까요</a></li>
+<li><a href="#section-4">알림 날짜는 어떻게 정해지나요</a></li>
+<li><a href="#section-5">알림은 휴대폰 안에서 예약됩니다</a></li>
+<li><a href="#section-6">알림이 안 올 때 확인할 것</a></li>
+<li><a href="#section-7">주기가 바뀌면 알림 날짜도 바뀌나요</a></li>
+<li><a href="#section-8">자주 묻는 질문</a></li>
+<li><a href="#section-9">설정을 마치기 전 체크리스트</a></li>
+                      </ol>
+                    </nav>
+                  </aside>
                 </div>
-                <h2>참고 자료</h2>
-                <ul class="references">
-        <li><a href="https://support.apple.com/en-us/108781">Apple Support. Use notifications on your iPhone or iPad.</a></li>
-<li><a href="https://developer.apple.com/documentation/usernotifications">Apple Developer Documentation. User Notifications.</a></li>
-<li><a href="https://www.nature.com/articles/s41746-019-0152-7">Bull JR, Rowland SP, Scherwitzl EB, et al. Real-world menstrual cycle characteristics of more than 600,000 menstrual cycles. npj Digital Medicine. 2019.</a></li>
-<li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
-                </ul>
               </article>
+              <section class="related-section" aria-labelledby="related-title">
+                <div class="section-heading">
+                  <div>
+                    <p class="eyebrow">이어서 읽기</p>
+                    <h2 id="related-title">함께 읽으면 좋은 글</h2>
+                  </div>
+                  <a class="text-link section-link" href="../">전체 글<span aria-hidden="true">&nbsp;&rarr;</span></a>
+                </div>
+                <div class="post-grid related-grid">
+        <article class="post-card related-card" data-guide-card data-search-value="위젯 minicycle 위젯이 안 바뀔 때, 새로 고침은 어떻게 되나요 minicycle 홈 화면 위젯은 실시간이 아니라 ios가 정한 시점에 갱신됩니다. 위젯이 어떻게 새로 고쳐지는지, 오래된 상태로 보일 때 무엇을 확인하면 되는지 정리했습니다.">
+  <div class="post-card-topline">
+    <p class="category-pill">위젯</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../minicycle-widget-not-updating-refresh/">MiniCycle 위젯이 안 바뀔 때, 새로 고침은 어떻게 되나요</a></h3>
+  <p class="post-description">MiniCycle 홈 화면 위젯은 실시간이 아니라 iOS가 정한 시점에 갱신됩니다. 위젯이 어떻게 새로 고쳐지는지, 오래된 상태로 보일 때 무엇을 확인하면 되는지 정리했습니다.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-04">2026.07.04</time><span aria-hidden="true">&middot;</span>약 3분</p>
+    <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="주기 건강 배란통이 뭘까요? 배란기에 아랫배가 아픈 이유 배란 무렵 한쪽 아랫배가 콕콕 쑤시는 배란통은 배란하는 사람의 40%까지 겪습니다. 어떤 느낌인지, 왜 생기는지, 그리고 배란통이 아닐 때는 언제인지 정리했습니다.">
+  <div class="post-card-topline">
+    <p class="category-pill">주기 건강</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../ovulation-pain-mittelschmerz-what-it-is/">배란통이 뭘까요? 배란기에 아랫배가 아픈 이유</a></h3>
+  <p class="post-description">배란 무렵 한쪽 아랫배가 콕콕 쑤시는 배란통은 배란하는 사람의 40%까지 겪습니다. 어떤 느낌인지, 왜 생기는지, 그리고 배란통이 아닐 때는 언제인지 정리했습니다.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-03">2026.07.03</time><span aria-hidden="true">&middot;</span>약 3분</p>
+    <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="예측 minicycle 생리 예정일이 자꾸 바뀌는 이유 생리를 새로 기록할 때마다 minicycle이 다음 예정일을 다시 계산해 날짜가 옮겨갑니다. 예정일이 바뀌는 건 오류가 아니라 최신 기록에 맞춰 정확해지는 과정이라는 점을 계산 방식과 함께 정리했습니다.">
+  <div class="post-card-topline">
+    <p class="category-pill">예측</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../why-minicycle-predicted-period-date-changes/">MiniCycle 생리 예정일이 자꾸 바뀌는 이유</a></h3>
+  <p class="post-description">생리를 새로 기록할 때마다 MiniCycle이 다음 예정일을 다시 계산해 날짜가 옮겨갑니다. 예정일이 바뀌는 건 오류가 아니라 최신 기록에 맞춰 정확해지는 과정이라는 점을 계산 방식과 함께 정리했습니다.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-02">2026.07.02</time><span aria-hidden="true">&middot;</span>약 3분</p>
+    <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+                </div>
+              </section>
             </main>
+        <footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="../../">
+        <img class="brand-icon" src="../../../assets/minicycle-app-icon.png" alt="" width="34" height="34" loading="lazy">
+        <span>MiniCycle</span>
+      </a>
+      <p>내 주기를 이해하는 더 조용하고 사적인 방법.</p>
+    </div>
+    <nav class="footer-nav" aria-label="하단 탐색">
+      <a href="../../blog/">블로그</a>
+      <a href="../../support/">지원</a>
+      <a href="../../privacy/">개인정보</a>
+    </nav>
+    <p class="copyright">&copy; 2026 MiniCycle. iPhone을 위해 세심하게 만들었습니다.</p>
+  </div>
+</footer>
           </body>
         </html>

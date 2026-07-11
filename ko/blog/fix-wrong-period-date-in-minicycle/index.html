@@ -3,6 +3,8 @@
                 <head>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1">
+          <meta name="color-scheme" content="light dark">
+          <meta name="theme-color" content="#fbf8fa" data-theme-color>
           <title>생리 날짜를 잘못 기록했을 때 고치는 방법</title>
           <meta name="description" content="생리 시작일을 잘못 눌렀거나 종료일을 깜빡했을 때 MiniCycle에서 기록을 고치는 방법을 정리했습니다. 시작일 교체 규칙, 종료일 조정 범위, 기록 삭제, 수정 후 예측이 바뀌는 방식까지 다룹니다.">
           <link rel="canonical" href="https://minicycle.net/ko/blog/fix-wrong-period-date-in-minicycle/">
@@ -19,7 +21,75 @@
             <link rel="icon" href="../../../favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32x32.png">
     <link rel="apple-touch-icon" href="../../../apple-touch-icon.png">
-          <link rel="stylesheet" href="../../../styles.css">
+        <script>
+  (() => {
+    const storageKey = 'minicycle-theme';
+    const root = document.documentElement;
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+    root.classList.add('js');
+
+    function storedTheme() {
+      try {
+        const value = window.localStorage.getItem(storageKey);
+        return value === 'light' || value === 'dark' ? value : null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function currentTheme() {
+      return root.dataset.theme || (systemTheme.matches ? 'dark' : 'light');
+    }
+
+    function updateThemeUI() {
+      const dark = currentTheme() === 'dark';
+      const themeColor = document.querySelector('[data-theme-color]');
+      if (themeColor) themeColor.setAttribute('content', dark ? '#121014' : '#fbf8fa');
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      const label = dark
+        ? toggle.dataset.lightLabel
+        : toggle.dataset.darkLabel;
+      toggle.setAttribute('aria-label', label);
+      toggle.setAttribute('title', label);
+    }
+
+    const savedTheme = storedTheme();
+    if (savedTheme) root.dataset.theme = savedTheme;
+    updateThemeUI();
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (!toggle) return;
+      updateThemeUI();
+      toggle.addEventListener('click', () => {
+        const nextTheme = currentTheme() === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = nextTheme;
+        try {
+          window.localStorage.setItem(storageKey, nextTheme);
+        } catch (_) {
+          // The selected theme still applies for this page when storage is unavailable.
+        }
+        updateThemeUI();
+      });
+      if (typeof systemTheme.addEventListener === 'function') {
+        systemTheme.addEventListener('change', () => {
+          if (!root.dataset.theme) updateThemeUI();
+        });
+      }
+      window.addEventListener('storage', (event) => {
+        if (event.key !== storageKey) return;
+        if (event.newValue === 'light' || event.newValue === 'dark') {
+          root.dataset.theme = event.newValue;
+        } else {
+          delete root.dataset.theme;
+        }
+        updateThemeUI();
+      });
+    });
+  })();
+</script>
+          <link rel="stylesheet" href="../../../styles.css?v=20260711-4">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -109,63 +179,197 @@
 </script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"생리 날짜를 잘못 기록했을 때 고치는 방법","description":"생리 시작일을 잘못 눌렀거나 종료일을 깜빡했을 때 MiniCycle에서 기록을 고치는 방법을 정리했습니다. 시작일 교체 규칙, 종료일 조정 범위, 기록 삭제, 수정 후 예측이 바뀌는 방식까지 다룹니다.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg","datePublished":"2026-06-07","dateModified":"2026-06-07","inLanguage":"ko","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/ko/blog/fix-wrong-period-date-in-minicycle/"}}</script>
         </head>
-          <body>
-        <header class="site-header">
-  <a class="brand" href="../../">MiniCycle</a>
-  <nav aria-label="Primary navigation">
-    <a href="../../blog/">블로그</a>
-    <a href="../../support/">지원</a>
-    <a href="../../privacy/">개인정보</a>
-    <a href="../../../blog/fix-wrong-period-date-in-minicycle/">English</a>
-  </nav>
+          <body class="article-page">
+        <a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="../../">
+      <img class="brand-icon" src="../../../assets/minicycle-app-icon.png" alt="" width="34" height="34">
+      <span>MiniCycle</span>
+    </a>
+    <nav class="site-nav" aria-label="주요 탐색">
+      <a href="../../blog/">블로그</a>
+      <a href="../../support/">지원</a>
+      <a href="../../privacy/">개인정보</a>
+    </nav>
+    <div class="header-controls">
+      <button class="theme-toggle" type="button" data-theme-toggle data-light-label="라이트 모드로 전환" data-dark-label="다크 모드로 전환" aria-label="화면 모드 전환">
+        <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
+        <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.1 15.4A8.2 8.2 0 0 1 8.6 3.9 8.2 8.2 0 1 0 20.1 15.4Z"></path></svg>
+      </button>
+      <a class="language-link" href="../../../blog/fix-wrong-period-date-in-minicycle/" lang="en" hreflang="en" aria-label="English">English</a>
+    </div>
+  </div>
 </header>
-            <main class="page">
+            <main class="page article-page-main" id="main-content">
               <article class="article" data-language="ko" data-content-group="fix-wrong-period-date-in-minicycle" data-min-read-ms="90000">
-                <p class="eyebrow">기록</p>
-                <h1>생리 날짜를 잘못 기록했을 때 고치는 방법</h1>
-                <p class="article-meta">2026년 6월 7일 MiniCycle 작성</p>
-                <p class="lead">기록하다 보면 손이 미끄러지는 날이 있습니다. 시작일을 하루 일찍 눌렀거나, 종료일을 깜빡했거나, 두 달 전 날짜가 알고 보니 틀렸을 수도 있습니다. MiniCycle의 예측은 전부 저장된 날짜에서 나오기 때문에, 틀린 기록은 2분만 들여서 고쳐 둘 만합니다. 기록을 교체하고, 조정하고, 삭제하는 규칙을 하나씩 정리했습니다.</p>
-                <img class="article-hero" src="../../../assets/home-capture-iphone17-1118-ko-20260518.jpg" alt="MiniCycle 아이폰 실제 캡처 화면: 생리 캘린더와 위젯 경험" width="552" height="1200" loading="eager">
-        <h2>날짜 하나가 어디까지 영향을 주나요</h2>
+                <a class="back-link" href="../"><span aria-hidden="true">&larr;</span> 전체 글</a>
+                <header class="article-header">
+                  <div class="article-heading">
+                    <p class="category-pill">기록</p>
+                    <h1>생리 날짜를 잘못 기록했을 때 고치는 방법</h1>
+                    <p class="article-meta"><time datetime="2026-06-07">2026년 6월 7일 MiniCycle 작성</time><span aria-hidden="true">&middot;</span><span>약 3분 읽기</span></p>
+                    <p class="lead">기록하다 보면 손이 미끄러지는 날이 있습니다. 시작일을 하루 일찍 눌렀거나, 종료일을 깜빡했거나, 두 달 전 날짜가 알고 보니 틀렸을 수도 있습니다. MiniCycle의 예측은 전부 저장된 날짜에서 나오기 때문에, 틀린 기록은 2분만 들여서 고쳐 둘 만합니다. 기록을 교체하고, 조정하고, 삭제하는 규칙을 하나씩 정리했습니다.</p>
+                  </div>
+                  <figure class="article-visual">
+                    <div class="article-visual-frame">
+                      <span class="visual-orbit visual-orbit-one" aria-hidden="true"></span>
+                      <span class="visual-orbit visual-orbit-two" aria-hidden="true"></span>
+                      <img class="article-hero" src="../../../assets/home-capture-iphone17-1118-ko-20260518.jpg" alt="MiniCycle 아이폰 실제 캡처 화면: 생리 캘린더와 위젯 경험" width="552" height="1200" loading="eager">
+                    </div>
+                    <figcaption>iPhone에서 보는 MiniCycle 캘린더</figcaption>
+                  </figure>
+                </header>
+                <div class="article-layout">
+                  <div class="article-body">
+        <section class="article-section" aria-labelledby="section-1">
+  <h2 id="section-1">날짜 하나가 어디까지 영향을 주나요</h2>
 <p>MiniCycle은 저장된 생리 시작일을 최대 12개까지 보고 주기를 추정합니다. 측정된 간격이 10개 이상 모이면 가장 짧은 값과 가장 긴 값을 하나씩 뺀 중앙값을 쓰고, 기록이 적을 때는 29일을 기본값으로 시작합니다. 중앙값은 튀는 값 하나에 잘 흔들리지 않아서, 오래된 기록 하나가 틀려도 주기 추정은 크게 움직이지 않습니다.</p>
 <p>마지막 시작일은 사정이 다릅니다. 미래 예측 전체가 이 날짜를 기준점으로 삼습니다. 다음 예정일은 마지막 시작일에 주기 길이를 더해 잡고, 배란일은 그 예정일에서 9–14일 범위의 황체기 추정치를 거꾸로 빼며, 가임기는 추정 배란일 5일 전부터 다음 날까지입니다. 그래서 마지막 시작일이 이틀 틀리면 예측 날짜 전부가 이틀씩 밀립니다.</p>
-<h2>시작일을 잘못 눌렀을 때</h2>
+</section>
+<section class="article-section" aria-labelledby="section-2">
+  <h2 id="section-2">시작일을 잘못 눌렀을 때</h2>
 <p>달력에서 맞는 날짜를 탭하고 생리 시작을 누르면 됩니다. 새로 고른 날짜가 이미 기록된 시작일과 7일 이내면 MiniCycle은 새 기록을 하나 더 만드는 대신 기존 기록을 교체합니다. 잘못 누른 기록을 따로 지울 필요 없이, 맞는 날짜에 다시 기록하는 것으로 수정이 끝나는 구조입니다.</p>
 <p>새 기록의 종료일은 자동으로 채워집니다. 생리 기간을 직접 설정해 두었다면 그 값을 먼저 쓰고, 아니면 최근에 종료된 생리 기록으로 추정하되 데이터가 모일 때까지는 5일을 기본값으로 씁니다. 자동으로 채워진 종료일이 실제와 다르면 이어서 종료일을 고치면 됩니다.</p>
-<h2>종료일을 고칠 때</h2>
+</section>
+<section class="article-section" aria-labelledby="section-3">
+  <h2 id="section-3">종료일을 고칠 때</h2>
 <p>실제로 끝난 날을 달력에서 탭하고 생리 종료를 누릅니다. 규칙은 두 가지입니다. 종료일은 시작일보다 앞설 수 없고, 한 기록의 길이는 시작일을 포함해 최대 14일까지입니다. 이 범위를 벗어나면 저장 대신 짧은 안내 메시지가 표시됩니다.</p>
 <p>목록에서 기록을 고르는 방식이 아니라 날짜를 고르는 방식입니다. 종료일은 그 날짜가 속한 기록에 붙고, 속한 기록이 없으면 앞쪽 14일 안에 시작일이 있는 기록에 붙습니다. 해당하는 기록이 둘 이상이면 시작일이 가장 최근인 기록이 우선합니다.</p>
-<h2>기록 자체를 지워야 할 때</h2>
+</section>
+<section class="article-section" aria-labelledby="section-4">
+  <h2 id="section-4">기록 자체를 지워야 할 때</h2>
 <p>수정이 아니라 삭제가 답일 때도 있습니다. 며칠 비친 것을 생리로 기록했거나, 기록이 중복됐거나, 앱을 처음 써 보며 남긴 연습 기록 같은 경우입니다. 달력에서 그 생리 기간 안의 날짜를 선택한 뒤 생리 시작 버튼을 길게 누르면, 확인을 거쳐 그 기록 하나가 삭제됩니다.</p>
 <p>설정에는 기록 초기화도 있지만, 이건 모든 생리 기록과 메모를 영구히 지우는 기능입니다. 처음부터 다시 시작할 때 쓰는 것이지 날짜 하나를 고치는 도구가 아닙니다. 잘못된 기록 하나에는 길게 눌러 삭제하는 쪽이 맞습니다.</p>
-<h2>고치고 나면 어떻게 되나요</h2>
+</section>
+<section class="article-section" aria-labelledby="section-5">
+  <h2 id="section-5">고치고 나면 어떻게 되나요</h2>
 <p>수정된 기록을 기준으로 추정이 바로 다시 계산됩니다. 예상 생리일, 배란일 추정, 가임기 표시가 함께 움직이고, 홈 화면 위젯도 앱에 저장된 상태를 따라가며, 알림도 새 날짜에 맞춰 다시 예약됩니다. 따로 새로고침할 것은 없습니다.</p>
 <p>기본 설정에서는 기록이 기기 안에만 저장되므로 동기화 충돌을 걱정할 일도 없습니다. iCloud 저장을 켜 두었다면 고쳐진 기록이 저장됩니다. 어느 쪽이든 남겨 둘 기록은 앱이 예측한 날짜가 아니라 실제로 있었던 날짜입니다.</p>
-<h2>수정으로 할 수 있는 것과 없는 것</h2>
+</section>
+<section class="article-section" aria-labelledby="section-6">
+  <h2 id="section-6">수정으로 할 수 있는 것과 없는 것</h2>
 <p>수정은 기록을 몸에서 일어난 일과 맞추는 작업입니다. 예측을 정확하게 만들어 주지는 않습니다. 60만 건이 넘는 실제 주기를 분석한 연구에서 대부분의 사람은 주기 길이가 달마다 달랐습니다. MiniCycle이 한 달 치 기록을 믿는 대신 최근 기록으로 계속 다시 추정하는 이유입니다. 고쳐진 데이터는 추정에 더 나은 재료를 줄 뿐, 확실성을 주지는 않습니다.</p>
 <p>달력의 날짜는 계획에 참고하는 정보입니다. 의료 조언이나 피임이 아니고, 임신 여부를 판단하는 수단도 아닙니다. 출혈 양상 자체가 신경 쓰인다면 그건 병원에서 상담할 일이고, 그때 정확하게 정리된 날짜 기록이 가져가기 좋은 자료가 됩니다.</p>
-<h2>오래된 날짜를 고치면 예측이 많이 바뀌나요</h2>
+</section>
+<section class="article-section" aria-labelledby="section-7">
+  <h2 id="section-7">오래된 날짜를 고치면 예측이 많이 바뀌나요</h2>
 <p>생각보다 적게 바뀝니다. 시작일 하나를 하루 옮기면 그 앞 간격과 뒤 간격이 하루씩 반대 방향으로 변하는데, 최근 간격들의 중앙값은 이 정도로는 움직이지 않는 경우가 많습니다. 간격이 10개 이상 모인 뒤에는 가장 짧은 값과 가장 긴 값을 하나씩 빼는 손질까지 더해져 튀는 값의 영향이 한 번 더 줄어듭니다.</p>
 <p>틀린 날짜가 오늘에 가까울수록 고치는 보람이 커집니다. 마지막 시작일은 모든 예측 날짜의 기준점이라서, 여기를 고치면 다음 달 예정일이 바로 눈에 띄게 달라집니다. 반년 전 날짜를 고치는 건 주로 통계 쪽을 좋게 만드는 일입니다.</p>
-<h2>자주 묻는 질문</h2>
+</section>
+<section class="article-section" aria-labelledby="section-8">
+  <h2 id="section-8">자주 묻는 질문</h2>
 <p>몇 주 전에 시작한 생리를 지금 기록해도 되나요? 됩니다. 달력에서 그 과거 날짜를 탭하고 생리 시작을 누르면 됩니다. 교체 규칙은 탭한 날짜에서 7일 이내에 다른 시작일 기록이 있을 때만 적용되고, 없으면 그냥 새 기록이 추가됩니다.</p>
 <p>생리가 14일을 넘겼는데 종료일이 저장되지 않아요. MiniCycle은 기록 하나를 최대 14일로 제한합니다. 일반적인 생리 기간보다 이미 넉넉하게 잡은 값입니다. 부인과에서 쓰는 FIGO 분류는 8일을 넘겨 이어지는 출혈을 연장된 출혈로 분류하니, 앱이 기록하지 못하는 길이라면 그 자체가 진료를 생각해 볼 신호일 수 있습니다.</p>
 <p>빗나간 예측 날짜도 고쳐야 하나요? 아니요. 예측은 기록이 아닙니다. 생리가 실제로 시작된 날에 기록하면 달력이 알아서 그 날짜를 새 기준점으로 삼습니다.</p>
-<h2>2분이면 끝나는 수정 순서</h2>
+</section>
+<section class="article-section" aria-labelledby="section-9">
+  <h2 id="section-9">2분이면 끝나는 수정 순서</h2>
 <p>달력에서 틀린 기록을 찾습니다. 시작일이 틀렸다면 맞는 날짜를 탭해 생리 시작을 누릅니다. 7일 이내라면 기존 기록이 알아서 교체됩니다. 종료일만 틀렸다면 실제 마지막 날을 탭해 생리 종료를 누릅니다. 기록 자체가 없어야 한다면 그 기간 안의 날짜를 선택하고 생리 시작 버튼을 길게 눌러 삭제를 확인합니다.</p>
 <p>마지막으로 다음 달 예측을 한 번 훑어봅니다. 지금까지의 기록과 견줘 그럴듯한 날짜가 보이면 수정이 잘 반영된 것이고, 나머지는 추정이 알아서 합니다. 수정할 일을 줄이는 습관과 예측을 쓸 만하게 유지하는 습관은 결국 같습니다. 시작한 날 바로 기록하는 것입니다.</p>
-                <div class="callout">
-                  <p>MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다.</p>
-                  <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="ko" data-placement="blog_article_callout" data-content-group="fix-wrong-period-date-in-minicycle" onclick="trackAppStoreClick(this)">App Store에서 받기</a>
+</section>
+                    <section class="callout" aria-labelledby="try-minicycle">
+                      <img class="callout-mark" src="../../../assets/minicycle-app-icon.png" alt="" width="42" height="42" loading="lazy">
+                      <div class="callout-copy">
+                        <p class="eyebrow">MiniCycle for iPhone</p>
+                        <h2 id="try-minicycle">MiniCycle 사용하기</h2>
+                        <p>MiniCycle은 깔끔한 아이폰 생리 캘린더, 로컬 기록, 간단한 통계, 홈 화면 위젯을 위해 만들었습니다.</p>
+                      </div>
+                      <a class="button" href="https://apps.apple.com/us/app/mini-cycle/id6760011450?pt=117277509&amp;ct=web-download-link&amp;mt=8" data-language="ko" data-placement="blog_article_callout" data-content-group="fix-wrong-period-date-in-minicycle" onclick="trackAppStoreClick(this)">App Store에서 받기</a>
+                    </section>
+                    <section class="references-section" aria-labelledby="references-title">
+                      <p class="eyebrow">MiniCycle editorial</p>
+                      <h2 id="references-title">참고 자료</h2>
+                      <ul class="references">
+        <li><a href="https://www.mayoclinic.org/healthy-lifestyle/womens-health/in-depth/menstrual-cycle/art-20047186" lang="en">Mayo Clinic. Menstrual cycle: What&#x27;s normal, what&#x27;s not.</a></li>
+<li><a href="https://www.nature.com/articles/s41746-019-0152-7" lang="en">Bull JR, Rowland SP, Scherwitzl EB, et al. Real-world menstrual cycle characteristics of more than 600,000 menstrual cycles. npj Digital Medicine. 2019.</a></li>
+<li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10952771/" lang="en">Jain V, Munro MG, Critchley HOD. Contemporary evaluation of women and girls with abnormal uterine bleeding: FIGO Systems 1 and 2. Int J Gynecol Obstet. 2023.</a></li>
+<li><a href="https://minicycle.net/privacy/" lang="en">MiniCycle Privacy Policy.</a></li>
+                      </ul>
+                    </section>
+                  </div>
+                  <aside class="article-sidebar">
+                    <nav class="article-toc" aria-label="이 글에서 다루는 내용">
+                      <p class="toc-title">이 글에서 다루는 내용</p>
+                      <ol>
+        <li><a href="#section-1">날짜 하나가 어디까지 영향을 주나요</a></li>
+<li><a href="#section-2">시작일을 잘못 눌렀을 때</a></li>
+<li><a href="#section-3">종료일을 고칠 때</a></li>
+<li><a href="#section-4">기록 자체를 지워야 할 때</a></li>
+<li><a href="#section-5">고치고 나면 어떻게 되나요</a></li>
+<li><a href="#section-6">수정으로 할 수 있는 것과 없는 것</a></li>
+<li><a href="#section-7">오래된 날짜를 고치면 예측이 많이 바뀌나요</a></li>
+<li><a href="#section-8">자주 묻는 질문</a></li>
+<li><a href="#section-9">2분이면 끝나는 수정 순서</a></li>
+                      </ol>
+                    </nav>
+                  </aside>
                 </div>
-                <h2>참고 자료</h2>
-                <ul class="references">
-        <li><a href="https://www.mayoclinic.org/healthy-lifestyle/womens-health/in-depth/menstrual-cycle/art-20047186">Mayo Clinic. Menstrual cycle: What&#x27;s normal, what&#x27;s not.</a></li>
-<li><a href="https://www.nature.com/articles/s41746-019-0152-7">Bull JR, Rowland SP, Scherwitzl EB, et al. Real-world menstrual cycle characteristics of more than 600,000 menstrual cycles. npj Digital Medicine. 2019.</a></li>
-<li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10952771/">Jain V, Munro MG, Critchley HOD. Contemporary evaluation of women and girls with abnormal uterine bleeding: FIGO Systems 1 and 2. Int J Gynecol Obstet. 2023.</a></li>
-<li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
-                </ul>
               </article>
+              <section class="related-section" aria-labelledby="related-title">
+                <div class="section-heading">
+                  <div>
+                    <p class="eyebrow">이어서 읽기</p>
+                    <h2 id="related-title">함께 읽으면 좋은 글</h2>
+                  </div>
+                  <a class="text-link section-link" href="../">전체 글<span aria-hidden="true">&nbsp;&rarr;</span></a>
+                </div>
+                <div class="post-grid related-grid">
+        <article class="post-card related-card" data-guide-card data-search-value="위젯 minicycle 위젯이 안 바뀔 때, 새로 고침은 어떻게 되나요 minicycle 홈 화면 위젯은 실시간이 아니라 ios가 정한 시점에 갱신됩니다. 위젯이 어떻게 새로 고쳐지는지, 오래된 상태로 보일 때 무엇을 확인하면 되는지 정리했습니다.">
+  <div class="post-card-topline">
+    <p class="category-pill">위젯</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../minicycle-widget-not-updating-refresh/">MiniCycle 위젯이 안 바뀔 때, 새로 고침은 어떻게 되나요</a></h3>
+  <p class="post-description">MiniCycle 홈 화면 위젯은 실시간이 아니라 iOS가 정한 시점에 갱신됩니다. 위젯이 어떻게 새로 고쳐지는지, 오래된 상태로 보일 때 무엇을 확인하면 되는지 정리했습니다.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-04">2026.07.04</time><span aria-hidden="true">&middot;</span>약 3분</p>
+    <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="주기 건강 배란통이 뭘까요? 배란기에 아랫배가 아픈 이유 배란 무렵 한쪽 아랫배가 콕콕 쑤시는 배란통은 배란하는 사람의 40%까지 겪습니다. 어떤 느낌인지, 왜 생기는지, 그리고 배란통이 아닐 때는 언제인지 정리했습니다.">
+  <div class="post-card-topline">
+    <p class="category-pill">주기 건강</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../ovulation-pain-mittelschmerz-what-it-is/">배란통이 뭘까요? 배란기에 아랫배가 아픈 이유</a></h3>
+  <p class="post-description">배란 무렵 한쪽 아랫배가 콕콕 쑤시는 배란통은 배란하는 사람의 40%까지 겪습니다. 어떤 느낌인지, 왜 생기는지, 그리고 배란통이 아닐 때는 언제인지 정리했습니다.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-03">2026.07.03</time><span aria-hidden="true">&middot;</span>약 3분</p>
+    <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="예측 minicycle 생리 예정일이 자꾸 바뀌는 이유 생리를 새로 기록할 때마다 minicycle이 다음 예정일을 다시 계산해 날짜가 옮겨갑니다. 예정일이 바뀌는 건 오류가 아니라 최신 기록에 맞춰 정확해지는 과정이라는 점을 계산 방식과 함께 정리했습니다.">
+  <div class="post-card-topline">
+    <p class="category-pill">예측</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../why-minicycle-predicted-period-date-changes/">MiniCycle 생리 예정일이 자꾸 바뀌는 이유</a></h3>
+  <p class="post-description">생리를 새로 기록할 때마다 MiniCycle이 다음 예정일을 다시 계산해 날짜가 옮겨갑니다. 예정일이 바뀌는 건 오류가 아니라 최신 기록에 맞춰 정확해지는 과정이라는 점을 계산 방식과 함께 정리했습니다.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-02">2026.07.02</time><span aria-hidden="true">&middot;</span>약 3분</p>
+    <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+                </div>
+              </section>
             </main>
+        <footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="../../">
+        <img class="brand-icon" src="../../../assets/minicycle-app-icon.png" alt="" width="34" height="34" loading="lazy">
+        <span>MiniCycle</span>
+      </a>
+      <p>내 주기를 이해하는 더 조용하고 사적인 방법.</p>
+    </div>
+    <nav class="footer-nav" aria-label="하단 탐색">
+      <a href="../../blog/">블로그</a>
+      <a href="../../support/">지원</a>
+      <a href="../../privacy/">개인정보</a>
+    </nav>
+    <p class="copyright">&copy; 2026 MiniCycle. iPhone을 위해 세심하게 만들었습니다.</p>
+  </div>
+</footer>
           </body>
         </html>
