@@ -6,7 +6,7 @@
           <meta name="color-scheme" content="light dark">
           <meta name="theme-color" content="#fbf8fa" data-theme-color>
           <title>MiniCycle 생리 예정일이 자꾸 바뀌는 이유</title>
-          <meta name="description" content="생리를 새로 기록할 때마다 MiniCycle이 다음 예정일을 다시 계산해 날짜가 옮겨갑니다. 예정일이 바뀌는 건 오류가 아니라 최신 기록에 맞춰 정확해지는 과정이라는 점을 계산 방식과 함께 정리했습니다.">
+          <meta name="description" content="MiniCycle은 저장된 생리 시작일, 주기 길이 설정, 현재 날짜로 예측을 다시 계산합니다. 무엇이 다음 예정일을 바꾸고 어떤 한계가 남는지 설명합니다.">
           <link rel="canonical" href="https://minicycle.net/ko/blog/why-minicycle-predicted-period-date-changes/">
             <link rel="alternate" hreflang="en" href="https://minicycle.net/blog/why-minicycle-predicted-period-date-changes/">
     <link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/why-minicycle-predicted-period-date-changes/">
@@ -14,7 +14,7 @@
           <link rel="alternate" type="application/rss+xml" title="MiniCycle Blog" href="https://minicycle.net/feed.xml">
           <meta property="og:type" content="article">
           <meta property="og:title" content="MiniCycle 생리 예정일이 자꾸 바뀌는 이유">
-          <meta property="og:description" content="생리를 새로 기록할 때마다 MiniCycle이 다음 예정일을 다시 계산해 날짜가 옮겨갑니다. 예정일이 바뀌는 건 오류가 아니라 최신 기록에 맞춰 정확해지는 과정이라는 점을 계산 방식과 함께 정리했습니다.">
+          <meta property="og:description" content="MiniCycle은 저장된 생리 시작일, 주기 길이 설정, 현재 날짜로 예측을 다시 계산합니다. 무엇이 다음 예정일을 바꾸고 어떤 한계가 남는지 설명합니다.">
           <meta property="og:url" content="https://minicycle.net/ko/blog/why-minicycle-predicted-period-date-changes/">
           <meta property="og:image" content="https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg">
           <meta name="twitter:card" content="summary_large_image">
@@ -177,7 +177,7 @@
   }
   window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
 </script>
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"MiniCycle 생리 예정일이 자꾸 바뀌는 이유","description":"생리를 새로 기록할 때마다 MiniCycle이 다음 예정일을 다시 계산해 날짜가 옮겨갑니다. 예정일이 바뀌는 건 오류가 아니라 최신 기록에 맞춰 정확해지는 과정이라는 점을 계산 방식과 함께 정리했습니다.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg","datePublished":"2026-07-02","dateModified":"2026-07-02","inLanguage":"ko","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/ko/blog/why-minicycle-predicted-period-date-changes/"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"MiniCycle 생리 예정일이 자꾸 바뀌는 이유","description":"MiniCycle은 저장된 생리 시작일, 주기 길이 설정, 현재 날짜로 예측을 다시 계산합니다. 무엇이 다음 예정일을 바꾸고 어떤 한계가 남는지 설명합니다.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg","datePublished":"2026-07-02","dateModified":"2026-07-02","inLanguage":"ko","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/ko/blog/why-minicycle-predicted-period-date-changes/"}}</script>
         </head>
           <body class="article-page">
         <a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
@@ -202,14 +202,14 @@
   </div>
 </header>
             <main class="page article-page-main" id="main-content">
-              <article class="article" data-language="ko" data-content-group="why-minicycle-predicted-period-date-changes" data-min-read-ms="90000">
+              <article class="article" data-language="ko" data-content-group="why-minicycle-predicted-period-date-changes" data-min-read-ms="51000">
                 <a class="back-link" href="../"><span aria-hidden="true">&larr;</span> 전체 글</a>
                 <header class="article-header">
                   <div class="article-heading">
                     <p class="category-pill">예측</p>
                     <h1>MiniCycle 생리 예정일이 자꾸 바뀌는 이유</h1>
                     <p class="article-meta"><time datetime="2026-07-02">2026년 7월 2일 MiniCycle 작성</time><span aria-hidden="true">&middot;</span><span>약 3분 읽기</span></p>
-                    <p class="lead">지난주에 볼 때는 12일이라더니, 오늘 열어 보니 14일로 바뀌어 있습니다. 고장이 아닙니다. 그사이 생리를 한 번 기록했고, 앱은 하기로 되어 있는 일을 했을 뿐입니다. 다시 계산한 거죠. 예정일이 움직인다는 건 오류가 아니라 앱이 가장 최근 기록을 따라잡고 있다는 신호입니다. 무엇이 언제 바뀌는지, 그리고 예정일이 흔들리는 게 왜 대개 예측이 나빠지는 쪽이 아니라 좋아지는 쪽인지 짚어 보겠습니다.</p>
+                    <p class="lead">생리 예정일은 기록을 새로 만들거나 수정·삭제했을 때, 주기 길이 설정을 바꿨을 때, 기록 없이 예상 주기가 지난 뒤에 달라질 수 있습니다. 바뀐 날짜는 현재 입력을 반영한 최신 계산값이지만, 날짜가 움직였다는 사실만으로 예측이 더 정확해졌다고 보장할 수는 없습니다.</p>
                   </div>
                   <figure class="article-visual">
                     <div class="article-visual-frame">
@@ -223,52 +223,34 @@
                 <div class="article-layout">
                   <div class="article-body">
         <section class="article-section" aria-labelledby="section-1">
-  <h2 id="section-1">예정일은 왜 움직일까요</h2>
-<p>MiniCycle은 예정일을 하나 정해 저장해 두지 않습니다. 날짜가 바뀔 때마다 저장된 기록에서 다시 계산합니다. 새 값을 부르는 조건은 셋입니다. 생리 시작일을 새로 기록할 때, 기록을 고치거나 지울 때, 주기 길이나 생리 기간 설정을 바꿀 때. 이 중 하나를 하고 앱을 열면 예상 생리일도, 배란일도, 가임기도 전과 다른 날에 놓일 수 있습니다.</p>
-<p>셋 중 아무것도 건드리지 않았다면 예정일은 그대로입니다. 같은 입력이면 계산도 같은 결과를 내니까요. 그러니 날짜가 바뀌었다면 앱이 두 번 다르게 찍은 게 아니라 입력이 바뀐 겁니다.</p>
+  <h2 id="section-1">예정일이 바뀌는 경우</h2>
+<p>새 생리 시작일 기록, 기록 수정·삭제, 주기 길이 설정 변경은 다음 예정일과 그에 따른 배란일·가임기 추정을 바꿀 수 있습니다. 생리 기간 설정은 예상 출혈 구간의 길이를 바꾸지만 다음 시작일 자체를 바꾸지는 않습니다.</p>
+<p>현재 날짜도 계산에 쓰입니다. 예상 주기가 기록 없이 지나가면 저장된 기록이 같아도 앱은 더 뒤의 예상 주기를 다음 일정으로 표시할 수 있습니다.</p>
 </section>
 <section class="article-section" aria-labelledby="section-2">
-  <h2 id="section-2">기준점은 마지막 시작일입니다</h2>
-<p>미래 예측은 전부 한 날짜에서 앞으로 세어 나갑니다. 가장 최근에 기록한 생리 시작일이죠. MiniCycle은 그 날짜에 주기 길이를 더해 다음 예정일을 잡고, 그 주변에 배란일과 가임기를 그립니다. 새 시작일을 찍으면 기준점이 그날로 옮겨가고, 예측 전체가 그에 맞춰 미끄러집니다.</p>
-<p>그래서 마지막으로 넣은 날짜가 오래된 어떤 날짜보다 중요합니다. 지난달 시작일을 이틀 고치면 다음 달 예정일도 이틀쯤 움직입니다. 기록 깊숙이 묻힌 옛 날짜는 거의 아무것도 바꾸지 않지만, 가장 최근 날짜는 전부를 움직입니다.</p>
+  <h2 id="section-2">가장 최근 시작일이 기준점입니다</h2>
+<p>미래 주기는 가장 최근에 기록한 생리 시작일에서 앞으로 계산합니다. 이 날짜를 새로 기록하거나 고치면 기준점이 바뀌므로 예정일과 배란일·가임기 추정도 대체로 함께 이동합니다.</p>
+<p>과거 시작일도 최근 간격의 계산에 포함될 수 있어 수정 결과에 따라 예정일이 달라집니다. 가장 최근 시작일은 기준점과 주기 길이 추정에 모두 영향을 줄 수 있어 대체로 영향이 큽니다.</p>
 </section>
 <section class="article-section" aria-labelledby="section-3">
-  <h2 id="section-3">주기 길이는 고정값이 아니라 움직이는 중앙값</h2>
-<p>기준점에 더하는 간격도 상수가 아닙니다. MiniCycle은 최근 생리 시작일을 최대 12개까지 보고 주기 길이를 추정하고, 하나 기록할 때마다 다시 추정합니다. 평균이 아니라 최근 간격들의 중앙값을 쓰기 때문에, 유난한 한 달이 숫자를 덜 끌어당깁니다. 측정된 간격이 10개 이상 모이면 가장 짧은 값과 가장 긴 값을 하나씩 뺀 뒤 중앙값을 잡아 양 끝을 다듬습니다.</p>
-<p>참고할 기록이 적을 때는 29일을 기본값으로 시작해 내 날짜가 쌓일 때까지 그 값에 기댑니다. 초반에는 새 생리 하나가 앱이 아는 전부에서 큰 비중을 차지해 추정이 더 흔들립니다. 기록이 늘수록 새 주기 하나가 중앙값을 조금씩만 움직이고, 예정일도 차분해집니다.</p>
+  <h2 id="section-3">최근 간격으로 주기 길이를 다시 계산합니다</h2>
+<p>MiniCycle은 최근 생리 시작일을 최대 12개까지 사용합니다. 유효한 시작일이 두 개 이상이면 그 사이 간격을 구해 중앙값 방식의 대표값을 사용하고, 간격이 10개 이상이면 가장 짧은 값과 가장 긴 값을 하나씩 제외합니다.</p>
+<p>유효한 간격이 없으면 자동 모드에서 29일을 기본값으로 사용합니다. 간격이 적을 때는 기록 하나의 영향이 클 수 있으며, 기록이 많아도 다음 주기가 규칙적이라고 보장할 수는 없습니다.</p>
 </section>
 <section class="article-section" aria-labelledby="section-4">
-  <h2 id="section-4">배란일과 가임기도 함께 움직입니다</h2>
-<p>배란일은 14일째로 못 박혀 있지 않습니다. MiniCycle은 주기 길이에 따라 9–14일 사이에서 달라지는 황체기를 다음 예정일에서 거꾸로 세어 배란일을 잡습니다. 가임기는 그 추정 배란일 5일 전부터 다음 날까지고요. 모두 다음 예정일에 매달려 있습니다.</p>
-<p>그러니 예정일이 움직이면 배란일과 하늘색 가임기 띠도 같은 방향으로 함께 옮겨갑니다. 따로 맞출 필요가 없습니다. 앱이 실제로 추정하는 건 그 한 날짜이고, 나머지는 거기서 딸려 나옵니다.</p>
+  <h2 id="section-4">배란일과 가임기 추정도 함께 달라집니다</h2>
+<p>MiniCycle은 다음 예정일에서 내부 규칙에 따른 9–14일 값을 거꾸로 세어 배란일을 추정하고, 그 5일 전부터 다음 날까지 달력 날짜 7개를 가임기로 표시합니다.</p>
+<p>예정일이나 주기 길이가 바뀌면 이 날짜들도 다시 계산됩니다. 어느 표시도 실제 배란이나 가임 상태를 측정한 결과는 아닙니다.</p>
 </section>
 <section class="article-section" aria-labelledby="section-5">
-  <h2 id="section-5">알림과 위젯은 알아서 따라옵니다</h2>
-<p>알림을 다시 맞출 일은 없습니다. MiniCycle 알림은 서버가 보내는 게 아니라 기기 안에서 만들어지는 로컬 알림이고, 예측이 바뀔 때마다 새 날짜에 맞춰 다시 예약됩니다. 이틀 전으로 맞춘 생리 알림은 바뀐 예정일 기준으로 계속 이틀 전을 가리킵니다.</p>
-<p>홈 화면 위젯도 같은 저장 상태를 따릅니다. 앱을 열면 위젯 타임라인이 새로 고쳐지기 때문에, 방금 기록한 생리가 iOS의 느린 자동 갱신을 기다리지 않고 곧 위젯에도 반영됩니다. 위젯이 하루 뒤처져 보이면 앱을 한 번 여는 게 해결의 전부입니다.</p>
+  <h2 id="section-5">알림과 위젯 반영</h2>
+<p>관련 기록이나 설정이 바뀌면 MiniCycle은 로컬 알림을 다시 예약합니다. 지원되는 날짜 여유는 새 추정일을 기준으로 적용됩니다.</p>
+<p>앱은 위젯 공유 데이터를 저장하고 새로 고침을 요청합니다. 실제 위젯 반영 시점은 iOS가 정하므로 앱이 다시 계산한 뒤에도 이전 날짜가 잠시 보일 수 있습니다.</p>
 </section>
 <section class="article-section" aria-labelledby="section-6">
   <h2 id="section-6">바뀌는 날짜로 알 수 있는 것과 없는 것</h2>
 <p>예정일이 흔들린다는 건 내 건강이 아니라 내 데이터를 비추는 일입니다. 주기는 원래 달라집니다. 60만 건이 넘는 주기를 분석한 연구에서도 주기 길이는 사람마다, 또 같은 사람이라도 달마다 달랐습니다. MiniCycle이 하나의 숫자를 믿는 대신 계속 다시 추정하는 이유죠. 예측이 며칠 빗나가는 건 앱의 잘못도 내 잘못도 아닌 평범한 일입니다.</p>
 <p>다만 바뀌는 날짜가 할 수 없는 일은 진단입니다. 이건 내 날짜에서 뽑은 참고 정보일 뿐, 피임 수단도 임신 여부 판정도 아닙니다. Mayo Clinic은 생리 간격이 24일보다 짧거나 38일보다 길 때, 임신이 아닌데 90일 넘게 없을 때, 규칙적이다가 불규칙해질 때 의료진과 상의하라고 안내합니다. 예정일이 나를 최대한 가깝게 따라오길 바란다면, 가장 도움이 되는 습관 하나는 생리 시작일을 그날그날 바로 찍어 두는 것입니다. 앱이 재는 기준점이 늘 정확하도록요.</p>
-</section>
-<section class="article-section" aria-labelledby="section-7">
-  <h2 id="section-7">세 번 기록한 예시로</h2>
-<p>생리 시작일을 세 번 찍었다고 해 봅시다. 3월 3일, 4월 1일, 4월 30일. 간격이 29일, 29일이라 MiniCycle은 다음 생리를 5월 29일쯤으로 잡고, 29일 주기에서 배란일을 약 13일 거꾸로 세어 5월 16일 근처로 봅니다. 그런데 이번 주기가 길어져 실제 시작일을 6월 2일에 찍습니다. 예측보다 사흘 늦었죠. 두 가지가 동시에 바뀝니다. 기준점이 4월 30일에서 6월 2일로 옮겨가고, 33일이라는 새 간격이 기록에 더해져 중앙값을 살짝 위로 밀어 올립니다. 다음 예정일은 이제 6월 2일에서부터 다시 재고, 29일을 곧이곧대로 더했을 때보다 조금 더 뒤로 갑니다.</p>
-<p>여기에 설정을 바꾸거나 손으로 고친 건 없습니다. 실제 날짜 하나를 찍었더니 예측이 그 위로 다시 중심을 잡은 것뿐입니다. 만약 6월이 29일 주기로 왔다면 기준점은 옮겨가도 예정일은 거의 그대로였을 겁니다. 간격이 앱이 이미 예상하던 값과 같으니까요.</p>
-</section>
-<section class="article-section" aria-labelledby="section-8">
-  <h2 id="section-8">예정일 변화에 관한 질문들</h2>
-<p>예정일이 저절로 바뀌었어요. 왜죠? 저절로 바뀌진 않습니다. 입력이 달라진 겁니다. 새로 기록한 시작일, 고치거나 지운 기록, 바뀐 길이 설정 중 하나죠. 저장된 날짜가 그대로면 예정일도 그대로입니다.</p>
-<p>앱이 자꾸 날짜를 바꿔서 못 믿겠어요. 예정일이 움직이는 건 앱이 최신 주기를 따라가는 것이지 틀리는 게 아닙니다. 실제 주기는 달마다 달라서, 한 번 정하고 안 바꾸는 예측이라면 현실에서 점점 멀어집니다.</p>
-<p>생리를 기록했더니 앞으로의 날짜가 전부 밀렸어요. 정상인가요? 정상입니다. 가장 최근 시작일이 모든 미래 예측의 기준점이라, 새 시작일 하나가 배란일과 가임기까지 예측 전체를 한 번에 옮깁니다.</p>
-<p>옛날 날짜를 고치면 예측이 많이 바뀌나요? 대개 조금만 바뀝니다. 주기 추정이 튀는 값에 덜 흔들리는 중앙값을 쓰고, 옛 날짜는 기준점도 아니니까요. 가장 최근 시작일을 고칠 때 영향이 가장 큽니다.</p>
-<p>위젯이 아직 옛날 날짜를 보여줘요. 앱을 한 번 열어 보세요. iOS의 자동 갱신을 기다리는 대신, 앱에 저장된 상태로 위젯 타임라인이 새로 고쳐집니다.</p>
-</section>
-<section class="article-section" aria-labelledby="section-9">
-  <h2 id="section-9">한 줄로</h2>
-<p>MiniCycle은 예정일을 정해 저장하지 않고, 저장된 날짜가 바뀔 때마다 다시 계산합니다. 그 계기는 새 생리 시작일 기록, 기록 수정·삭제, 길이 설정 변경입니다. 미래 날짜는 가장 최근 시작일(기준점)에서 재고, 주기 길이는 최근 12개까지의 중앙값을 씁니다. 간격이 10개 이상이면 가장 짧은 값과 긴 값을 하나씩 빼며, 기록이 적으면 29일이 기본값입니다. 그래서 새 시작일은 기준점과 간격을 함께 바꿔 예정일을 옮깁니다.</p>
-<p>배란일은 9–14일 가변 황체기로 거꾸로 세어 따라오고, 가임기는 그 5일 전부터 다음 날까지입니다. 알림은 다시 예약되고 위젯은 앱을 열면 갱신됩니다. 날짜가 바뀌는 건 오류가 아니라 데이터를 반영하는 것이며, 주기 길이가 달마다 다르기 때문입니다. 이는 기기 안에 있는 참고 정보일 뿐 진단이나 피임이 아닙니다. 생리 간격이 24일 미만이거나 38일 초과, 임신이 아닌데 90일 넘게 없음, 규칙적이다 불규칙해짐이면 의료진과 상의하세요.</p>
 </section>
                     <section class="callout" aria-labelledby="try-minicycle">
                       <img class="callout-mark" src="../../../assets/minicycle-app-icon.png" alt="" width="42" height="42" loading="lazy">
@@ -294,15 +276,12 @@
                     <nav class="article-toc" aria-label="이 글에서 다루는 내용">
                       <p class="toc-title">이 글에서 다루는 내용</p>
                       <ol>
-        <li><a href="#section-1">예정일은 왜 움직일까요</a></li>
-<li><a href="#section-2">기준점은 마지막 시작일입니다</a></li>
-<li><a href="#section-3">주기 길이는 고정값이 아니라 움직이는 중앙값</a></li>
-<li><a href="#section-4">배란일과 가임기도 함께 움직입니다</a></li>
-<li><a href="#section-5">알림과 위젯은 알아서 따라옵니다</a></li>
+        <li><a href="#section-1">예정일이 바뀌는 경우</a></li>
+<li><a href="#section-2">가장 최근 시작일이 기준점입니다</a></li>
+<li><a href="#section-3">최근 간격으로 주기 길이를 다시 계산합니다</a></li>
+<li><a href="#section-4">배란일과 가임기 추정도 함께 달라집니다</a></li>
+<li><a href="#section-5">알림과 위젯 반영</a></li>
 <li><a href="#section-6">바뀌는 날짜로 알 수 있는 것과 없는 것</a></li>
-<li><a href="#section-7">세 번 기록한 예시로</a></li>
-<li><a href="#section-8">예정일 변화에 관한 질문들</a></li>
-<li><a href="#section-9">한 줄로</a></li>
                       </ol>
                     </nav>
                   </aside>
@@ -317,37 +296,37 @@
                   <a class="text-link section-link" href="../">전체 글<span aria-hidden="true">&nbsp;&rarr;</span></a>
                 </div>
                 <div class="post-grid related-grid">
-        <article class="post-card related-card" data-guide-card data-search-value="위젯 minicycle 위젯이 안 바뀔 때, 새로 고침은 어떻게 되나요 minicycle 홈 화면 위젯은 실시간이 아니라 ios가 정한 시점에 갱신됩니다. 위젯이 어떻게 새로 고쳐지는지, 오래된 상태로 보일 때 무엇을 확인하면 되는지 정리했습니다.">
+        <article class="post-card related-card" data-guide-card data-search-value="위젯 minicycle 위젯이 업데이트되지 않을 때 확인할 것 minicycle 홈 화면 위젯은 실시간이 아니라 ios가 정한 시점에 갱신됩니다. 위젯이 어떻게 새로 고쳐지는지, 오래된 상태로 보일 때 무엇을 확인하면 되는지 정리했습니다.">
   <div class="post-card-topline">
     <p class="category-pill">위젯</p>
     <span class="card-accent" aria-hidden="true"></span>
   </div>
-  <h3><a href="../minicycle-widget-not-updating-refresh/">MiniCycle 위젯이 안 바뀔 때, 새로 고침은 어떻게 되나요</a></h3>
+  <h3><a href="../minicycle-widget-not-updating-refresh/">MiniCycle 위젯이 업데이트되지 않을 때 확인할 것</a></h3>
   <p class="post-description">MiniCycle 홈 화면 위젯은 실시간이 아니라 iOS가 정한 시점에 갱신됩니다. 위젯이 어떻게 새로 고쳐지는지, 오래된 상태로 보일 때 무엇을 확인하면 되는지 정리했습니다.</p>
   <div class="post-card-footer">
     <p class="post-meta"><time datetime="2026-07-04">2026.07.04</time><span aria-hidden="true">&middot;</span>약 3분</p>
     <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
   </div>
 </article>
-<article class="post-card related-card" data-guide-card data-search-value="주기 건강 배란통이 뭘까요? 배란기에 아랫배가 아픈 이유 배란 무렵 한쪽 아랫배가 콕콕 쑤시는 배란통은 배란하는 사람의 40%까지 겪습니다. 어떤 느낌인지, 왜 생기는지, 그리고 배란통이 아닐 때는 언제인지 정리했습니다.">
+<article class="post-card related-card" data-guide-card data-search-value="주기 건강 배란통: 배란 무렵 한쪽 아랫배가 아픈 이유 배란 무렵 한쪽 아랫배에 통증이 나타날 수 있지만 시기와 느낌만으로 원인을 확정할 수는 없습니다. 배란통의 흔한 양상과 진료가 필요한 신호를 정리했습니다.">
   <div class="post-card-topline">
     <p class="category-pill">주기 건강</p>
     <span class="card-accent" aria-hidden="true"></span>
   </div>
-  <h3><a href="../ovulation-pain-mittelschmerz-what-it-is/">배란통이 뭘까요? 배란기에 아랫배가 아픈 이유</a></h3>
-  <p class="post-description">배란 무렵 한쪽 아랫배가 콕콕 쑤시는 배란통은 배란하는 사람의 40%까지 겪습니다. 어떤 느낌인지, 왜 생기는지, 그리고 배란통이 아닐 때는 언제인지 정리했습니다.</p>
+  <h3><a href="../ovulation-pain-mittelschmerz-what-it-is/">배란통: 배란 무렵 한쪽 아랫배가 아픈 이유</a></h3>
+  <p class="post-description">배란 무렵 한쪽 아랫배에 통증이 나타날 수 있지만 시기와 느낌만으로 원인을 확정할 수는 없습니다. 배란통의 흔한 양상과 진료가 필요한 신호를 정리했습니다.</p>
   <div class="post-card-footer">
     <p class="post-meta"><time datetime="2026-07-03">2026.07.03</time><span aria-hidden="true">&middot;</span>약 3분</p>
     <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
   </div>
 </article>
-<article class="post-card related-card" data-guide-card data-search-value="주기 기초 생리는 며칠 하는 게 정상일까요 생리 기간은 보통 2–7일, 대개 5일쯤입니다. 정해진 정답 일수가 아니라 내 몸의 꾸준한 패턴이 기준입니다. 정상 범위와, 변화가 병원 신호가 되는 때를 정리했습니다.">
+<article class="post-card related-card" data-guide-card data-search-value="주기 기초 생리는 며칠 하는 게 정상일까요 여러 의료기관은 일반적인 생리 기간을 대체로 2–7일 정도로 설명합니다. 개인차와 주기별 변화, 진료가 필요한 출혈 양상을 정리했습니다.">
   <div class="post-card-topline">
     <p class="category-pill">주기 기초</p>
     <span class="card-accent" aria-hidden="true"></span>
   </div>
   <h3><a href="../how-long-does-a-normal-period-last/">생리는 며칠 하는 게 정상일까요</a></h3>
-  <p class="post-description">생리 기간은 보통 2–7일, 대개 5일쯤입니다. 정해진 정답 일수가 아니라 내 몸의 꾸준한 패턴이 기준입니다. 정상 범위와, 변화가 병원 신호가 되는 때를 정리했습니다.</p>
+  <p class="post-description">여러 의료기관은 일반적인 생리 기간을 대체로 2–7일 정도로 설명합니다. 개인차와 주기별 변화, 진료가 필요한 출혈 양상을 정리했습니다.</p>
   <div class="post-card-footer">
     <p class="post-meta"><time datetime="2026-07-02">2026.07.02</time><span aria-hidden="true">&middot;</span>약 3분</p>
     <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>

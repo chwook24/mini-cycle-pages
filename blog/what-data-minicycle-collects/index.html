@@ -6,7 +6,7 @@
           <meta name="color-scheme" content="light dark">
           <meta name="theme-color" content="#fbf8fa" data-theme-color>
           <title>What data MiniCycle collects, and what stays on your phone</title>
-          <meta name="description" content="MiniCycle keeps your period dates and notes on the device, while its Firebase Analytics logs only usage events like screen views, never your cycle data. Here is the exact split.">
+          <meta name="description" content="MiniCycle stores cycle records on the device by default, offers optional iCloud Sync, and uses Firebase Analytics for product-interaction measurement. Here is the current split.">
           <link rel="canonical" href="https://minicycle.net/blog/what-data-minicycle-collects/">
             <link rel="alternate" hreflang="en" href="https://minicycle.net/blog/what-data-minicycle-collects/">
     <link rel="alternate" hreflang="ko" href="https://minicycle.net/ko/blog/what-data-minicycle-collects/">
@@ -14,7 +14,7 @@
           <link rel="alternate" type="application/rss+xml" title="MiniCycle Blog" href="https://minicycle.net/feed.xml">
           <meta property="og:type" content="article">
           <meta property="og:title" content="What data MiniCycle collects, and what stays on your phone">
-          <meta property="og:description" content="MiniCycle keeps your period dates and notes on the device, while its Firebase Analytics logs only usage events like screen views, never your cycle data. Here is the exact split.">
+          <meta property="og:description" content="MiniCycle stores cycle records on the device by default, offers optional iCloud Sync, and uses Firebase Analytics for product-interaction measurement. Here is the current split.">
           <meta property="og:url" content="https://minicycle.net/blog/what-data-minicycle-collects/">
           <meta property="og:image" content="https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg">
           <meta name="twitter:card" content="summary_large_image">
@@ -177,7 +177,7 @@
   }
   window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
 </script>
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"What data MiniCycle collects, and what stays on your phone","description":"MiniCycle keeps your period dates and notes on the device, while its Firebase Analytics logs only usage events like screen views, never your cycle data. Here is the exact split.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-06-18","dateModified":"2026-06-18","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/what-data-minicycle-collects/"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"What data MiniCycle collects, and what stays on your phone","description":"MiniCycle stores cycle records on the device by default, offers optional iCloud Sync, and uses Firebase Analytics for product-interaction measurement. Here is the current split.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-06-18","dateModified":"2026-06-18","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/what-data-minicycle-collects/"}}</script>
         </head>
           <body class="article-page">
         <a class="skip-link" href="#main-content">Skip to content</a>
@@ -202,14 +202,14 @@
   </div>
 </header>
             <main class="page article-page-main" id="main-content">
-              <article class="article" data-language="en" data-content-group="what-data-minicycle-collects" data-min-read-ms="90000">
+              <article class="article" data-language="en" data-content-group="what-data-minicycle-collects" data-min-read-ms="70000">
                 <a class="back-link" href="../"><span aria-hidden="true">&larr;</span> All guides</a>
                 <header class="article-header">
                   <div class="article-heading">
                     <p class="category-pill">Privacy</p>
                     <h1>What data MiniCycle collects, and what stays on your phone</h1>
-                    <p class="article-meta"><time datetime="2026-06-18">Published June 18, 2026 by MiniCycle</time><span aria-hidden="true">&middot;</span><span>6 min read</span></p>
-                    <p class="lead">A period app sits on a sensitive subject, so it is fair to ask where the data goes. MiniCycle&#x27;s answer comes in two parts that people often fold into one. Your cycle data, meaning the dates, the notes, the activity markers, and the settings, stays on your phone. Separately, the app includes Firebase Analytics, which logs how the app is used: that a screen opened, that a tab was tapped, that a record was saved. Those are two different streams, and the second one is built to carry none of the first. Here is the whole split in plain terms, including the parts an honest answer has to admit it cannot promise.</p>
+                    <p class="article-meta"><time datetime="2026-06-18">Published June 18, 2026 by MiniCycle</time><span aria-hidden="true">&middot;</span><span>3 min read</span></p>
+                    <p class="lead">MiniCycle handles app records and analytics as different data flows. Period dates, notes, sexual-activity markers, and settings are stored on the iPhone by default, with an optional CloudKit copy when iCloud Sync is enabled. Separately, Firebase Analytics sends product-interaction and SDK-generated analytics data. MiniCycle&#x27;s custom events are designed not to contain cycle dates or note text, but that statement should not be mistaken for a claim that the SDK sends nothing else.</p>
                   </div>
                   <figure class="article-visual">
                     <div class="article-visual-frame">
@@ -223,56 +223,28 @@
                 <div class="article-layout">
                   <div class="article-body">
         <section class="article-section" aria-labelledby="section-1">
-  <h2 id="section-1">Two streams that get confused for one</h2>
-<p>The mix-up is understandable. Stored on your device and nothing leaves the app sound like the same claim, but they are not. MiniCycle keeps your cycle records local, and it also sends usage analytics. Both are true at the same time.</p>
-<p>So the honest summary is not that MiniCycle collects nothing. It is that the thing most people worry about, their period dates and their notes, is not what the analytics carry. The events describe how you move through the app, not what you wrote down in it.</p>
+  <h2 id="section-1">App records</h2>
+<p>Period dates, daily notes, sexual-activity markers, and cycle and app settings are stored on the device by default. MiniCycle does not require a MiniCycle account and does not operate its own server that stores your cycle history.</p>
+<p>If you enable iCloud Sync, the app stores a copy in the CloudKit private database associated with your Apple ID. That copy supports restoration on another iPhone after you enable iCloud Sync there as well.</p>
 </section>
 <section class="article-section" aria-labelledby="section-2">
-  <h2 id="section-2">What stays on your phone</h2>
-<p>Period dates, daily notes, sexual-activity markers, and your cycle settings are stored locally on the device by default. There is no MiniCycle account to create, and no MiniCycle server holding your history.</p>
-<p>If you turn on iCloud Sync, a copy goes to your own private iCloud account through Apple CloudKit, so you can restore it on a new iPhone signed in to the same Apple ID. That copy lives in your iCloud, not on a MiniCycle server. MiniCycle does not run a sync service of its own.</p>
+  <h2 id="section-2">Firebase Analytics</h2>
+<p>The app includes Google&#x27;s Firebase Analytics SDK. MiniCycle defines events for app opens, screens and tabs, calendar interaction, broad record actions, settings, notification permission, and iCloud Sync status. Firebase can also collect automatically generated events and technical metadata described in Google&#x27;s documentation.</p>
+<p>The App Store privacy manifest classifies the declared analytics data as product interaction that is not linked to the user and is not used for tracking. This is an analytics SDK, not a promise that no data leaves the device.</p>
 </section>
 <section class="article-section" aria-labelledby="section-3">
-  <h2 id="section-3">What the app&#x27;s analytics actually log</h2>
-<p>The app includes Firebase Analytics, Google&#x27;s free app-measurement SDK. Google&#x27;s own documentation describes how it works: add the SDK and data collection begins automatically, capturing a set of standard events while letting the developer define custom ones. In MiniCycle those events cover app opens, screen and tab navigation, calendar interaction, broad record-action categories, settings changes, notification-permission results, and whether optional iCloud Sync is on.</p>
-<p>The purpose of that data is usage patterns. Which screens get opened, where people tap, whether a setting gets changed. It is the same shape of product-interaction data that Apple&#x27;s privacy framework lists as app launches, taps, and clicks.</p>
+  <h2 id="section-3">What MiniCycle&#x27;s custom events omit</h2>
+<p>MiniCycle&#x27;s custom event parameters are designed not to include period dates, memo text, sexual-activity markers, exact cycle settings, exact notification times, or cycle history. A record-action event can distinguish a broad record type and whether it was created, updated, deleted, or cleared, but it does not send the record&#x27;s date or memo content.</p>
+<p>This description covers MiniCycle&#x27;s event design. For the SDK&#x27;s automatically collected events and metadata, Google&#x27;s current Firebase documentation is the authoritative source.</p>
 </section>
 <section class="article-section" aria-labelledby="section-4">
-  <h2 id="section-4">What those events are built to leave out</h2>
-<p>This is the part that matters for a cycle app. The analytics events are designed not to include your period dates, the text of your notes, your sexual-activity markers, your exact cycle settings, exact notification times, or your cycle history. A record-action event records that a record was created or edited. It does not carry the date you logged or what the record was.</p>
-<p>So a period was saved on some day is the shape of the signal, not your period started on the 12th. The line is drawn on purpose. It is what lets the app see that a feature gets used without seeing your cycle.</p>
+  <h2 id="section-4">Website analytics</h2>
+<p>The MiniCycle website separately uses Google Analytics for page measurement. Website page views and in-app record events are sent as separate data streams. The website does not read the period dates, notes, or cycle history stored by the app.</p>
 </section>
 <section class="article-section" aria-labelledby="section-5">
-  <h2 id="section-5">Why on-device and collected are not the same word</h2>
-<p>Apple draws a specific line here, and it is worth borrowing. In Apple&#x27;s terms, data processed only on the device is not collected at all. Collect means transmitting data off the device and keeping it in readable form for longer than it takes to handle the request. Your cycle records sit on the on-device side of that line.</p>
-<p>The analytics events sit on the other side. They do leave the phone, bound for Google&#x27;s Firebase. That is the whole reason this post pulls them apart rather than waving at the word privacy. The useful question is never whether anything leaves the phone, but which thing, and carrying what.</p>
-</section>
-<section class="article-section" aria-labelledby="section-6">
-  <h2 id="section-6">The website is a separate system</h2>
-<p>The site you are reading this on uses Google Analytics to count page views and see where visitors arrive from. That is the website, not the app, and the two are not joined. Website analytics do not include any in-app period dates, notes, or cycle history.</p>
-<p>It is easy to blur because both involve Google. But a blog page view and an app record are different data sitting in different places, and neither reaches into the other.</p>
-</section>
-<section class="article-section" aria-labelledby="section-7">
-  <h2 id="section-7">What this can and cannot promise</h2>
-<p>An honest version has limits. Firebase Analytics is a third-party SDK, so the usage events go to Google under Google&#x27;s terms, not to MiniCycle alone. The design keeps cycle content out of those events, but it is still analytics, and designed not to include describes the intent and the implementation, not a courtroom guarantee.</p>
-<p>Local storage is also not the same as airtight medical privacy. Device backups, your iCloud settings, screenshots, and a shared or unlocked phone all still matter, and none of those are settled by where the records sit. The app&#x27;s stance is narrow, and meant to be plain: keep the cycle data on the device, send only usage signals built to carry none of it, and say out loud that a third-party SDK and the website analytics are part of the picture. The full wording is in MiniCycle&#x27;s privacy policy.</p>
-</section>
-<section class="article-section" aria-labelledby="section-8">
-  <h2 id="section-8">A worked example of one analytics event</h2>
-<p>Picture logging a period start on a Tuesday. On your phone, MiniCycle saves the actual date, and that date is what the calendar and the predictions read from. To Firebase Analytics, the app reports something far thinner: a record-action event, the broad category that a record was created. The Tuesday is not in that event. Neither is the note you might attach to it, nor whether it replaced an earlier entry.</p>
-<p>Run the same thing through Apple&#x27;s definitions and the split is clean. The saved date is processed on the device, so by Apple&#x27;s wording it is not collected. The record-action event leaves the phone, so it is, and it shows up as the kind of product-interaction data Apple lists as taps and launches. Same tap, two very different traces.</p>
-</section>
-<section class="article-section" aria-labelledby="section-9">
-  <h2 id="section-9">Frequently asked questions</h2>
-<p>Does MiniCycle upload my period dates? No. Period dates, notes, activity markers, and settings are stored on the device by default, and the analytics events are designed not to include them. If you turn on iCloud Sync, a copy goes to your own private iCloud, not to a MiniCycle server.</p>
-<p>So MiniCycle has no analytics at all? It does. The app includes Firebase Analytics for usage events, and the website uses Google Analytics. The accurate claim is not no analytics, but that the analytics are built to carry usage signals rather than your cycle data.</p>
-<p>Can I turn the analytics off? The events are usage analytics rather than account data, and the cycle content is kept out of them by design. For what each data type is and how it is used, the MiniCycle privacy policy is the reference, and Apple&#x27;s App Store privacy details explain the data categories.</p>
-<p>Is local storage the same as private? It helps, but it is not a full guarantee. Device backups, iCloud settings, screenshots, and a shared phone all still matter regardless of where the records sit.</p>
-</section>
-<section class="article-section" aria-labelledby="section-10">
-  <h2 id="section-10">The one-line version</h2>
-<p>MiniCycle keeps your period dates, notes, sexual-activity markers, and cycle settings on the device by default, with no MiniCycle account; optional iCloud Sync stores a copy in your own private iCloud through Apple CloudKit, not on a MiniCycle server. Separately, the app includes Firebase Analytics, which logs usage events such as app opens, screen and tab navigation, calendar interaction, broad record-action categories, settings changes, and notification-permission results.</p>
-<p>Those analytics events are designed not to include your period dates, note text, activity markers, exact settings, exact notification times, or cycle history. In Apple&#x27;s terms, on-device data is not collected, while events sent to Firebase are. The website separately uses Google Analytics for page views. It is still analytics through a third-party SDK, not a no-data guarantee, and the full wording is in MiniCycle&#x27;s privacy policy.</p>
+  <h2 id="section-5">Limits of local storage</h2>
+<p>Local-by-default storage reduces the need for a MiniCycle account or cycle-history server, but it is not a complete privacy guarantee. Device backups, optional iCloud Sync, screenshots, shared devices, and access to an unlocked phone still matter.</p>
+<p>For the current formal description, read the MiniCycle privacy policy and the App Store privacy details. Firebase is a third-party SDK governed by Google&#x27;s terms and documentation.</p>
 </section>
                     <section class="callout" aria-labelledby="try-minicycle">
                       <img class="callout-mark" src="../../assets/minicycle-app-icon.png" alt="" width="42" height="42" loading="lazy">
@@ -297,16 +269,11 @@
                     <nav class="article-toc" aria-label="On this page">
                       <p class="toc-title">On this page</p>
                       <ol>
-        <li><a href="#section-1">Two streams that get confused for one</a></li>
-<li><a href="#section-2">What stays on your phone</a></li>
-<li><a href="#section-3">What the app&#x27;s analytics actually log</a></li>
-<li><a href="#section-4">What those events are built to leave out</a></li>
-<li><a href="#section-5">Why on-device and collected are not the same word</a></li>
-<li><a href="#section-6">The website is a separate system</a></li>
-<li><a href="#section-7">What this can and cannot promise</a></li>
-<li><a href="#section-8">A worked example of one analytics event</a></li>
-<li><a href="#section-9">Frequently asked questions</a></li>
-<li><a href="#section-10">The one-line version</a></li>
+        <li><a href="#section-1">App records</a></li>
+<li><a href="#section-2">Firebase Analytics</a></li>
+<li><a href="#section-3">What MiniCycle&#x27;s custom events omit</a></li>
+<li><a href="#section-4">Website analytics</a></li>
+<li><a href="#section-5">Limits of local storage</a></li>
                       </ol>
                     </nav>
                   </aside>
@@ -321,27 +288,15 @@
                   <a class="text-link section-link" href="../">All guides<span aria-hidden="true">&nbsp;&rarr;</span></a>
                 </div>
                 <div class="post-grid related-grid">
-        <article class="post-card related-card" data-guide-card data-search-value="privacy hide sexual activity in your period tracker with face id minicycle logs sexual activity as a purple dot on the calendar. one switch hides every trace, and showing it again takes face id. what hiding does and doesn&#x27;t do.">
+        <article class="post-card related-card" data-guide-card data-search-value="privacy hide sexual activity in your period tracker with face id minicycle can hide sexual-activity marks from its calendar. learn what the switch hides, why face id is required to show them again, and what the feature does not protect.">
   <div class="post-card-topline">
     <p class="category-pill">Privacy</p>
     <span class="card-accent" aria-hidden="true"></span>
   </div>
   <h3><a href="../hide-sexual-activity-period-tracker-face-id/">Hide sexual activity in your period tracker with Face ID</a></h3>
-  <p class="post-description">MiniCycle logs sexual activity as a purple dot on the calendar. One switch hides every trace, and showing it again takes Face ID. What hiding does and doesn&#x27;t do.</p>
+  <p class="post-description">MiniCycle can hide sexual-activity marks from its calendar. Learn what the switch hides, why Face ID is required to show them again, and what the feature does not protect.</p>
   <div class="post-card-footer">
-    <p class="post-meta"><time datetime="2026-06-11">2026.06.11</time><span aria-hidden="true">&middot;</span>5 min read</p>
-    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
-  </div>
-</article>
-<article class="post-card related-card" data-guide-card data-search-value="privacy private period tracking without an account: why minicycle stores records locally minicycle keeps records local by default, offers optional icloud sync, and does not require a minicycle account.">
-  <div class="post-card-topline">
-    <p class="category-pill">Privacy</p>
-    <span class="card-accent" aria-hidden="true"></span>
-  </div>
-  <h3><a href="../private-period-tracking-without-account/">Private period tracking without an account: why MiniCycle stores records locally</a></h3>
-  <p class="post-description">MiniCycle keeps records local by default, offers optional iCloud Sync, and does not require a MiniCycle account.</p>
-  <div class="post-card-footer">
-    <p class="post-meta"><time datetime="2026-05-16">2026.05.16</time><span aria-hidden="true">&middot;</span>3 min read</p>
+    <p class="post-meta"><time datetime="2026-06-11">2026.06.11</time><span aria-hidden="true">&middot;</span>3 min read</p>
     <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
   </div>
 </article>
@@ -353,7 +308,19 @@
   <h3><a href="../minicycle-widget-not-updating-refresh/">Why the MiniCycle widget isn&#x27;t updating, and how it refreshes</a></h3>
   <p class="post-description">The MiniCycle home-screen widget updates on iOS&#x27;s schedule, not the instant you log a period. Here is how WidgetKit refreshes it and what to check when it looks stale.</p>
   <div class="post-card-footer">
-    <p class="post-meta"><time datetime="2026-07-04">2026.07.04</time><span aria-hidden="true">&middot;</span>5 min read</p>
+    <p class="post-meta"><time datetime="2026-07-04">2026.07.04</time><span aria-hidden="true">&middot;</span>3 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="cycle health ovulation pain (mittelschmerz): what that mid-cycle twinge is one-sided pelvic pain can occur around ovulation, but timing and sensation cannot confirm the cause. learn common features and signs that need medical assessment.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle health</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../ovulation-pain-mittelschmerz-what-it-is/">Ovulation pain (mittelschmerz): what that mid-cycle twinge is</a></h3>
+  <p class="post-description">One-sided pelvic pain can occur around ovulation, but timing and sensation cannot confirm the cause. Learn common features and signs that need medical assessment.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-03">2026.07.03</time><span aria-hidden="true">&middot;</span>3 min read</p>
     <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
   </div>
 </article>

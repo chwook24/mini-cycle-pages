@@ -208,8 +208,8 @@
                   <div class="article-heading">
                     <p class="category-pill">Settings</p>
                     <h1>Auto vs manual cycle and period length in MiniCycle</h1>
-                    <p class="article-meta"><time datetime="2026-06-10">Published June 10, 2026 by MiniCycle</time><span aria-hidden="true">&middot;</span><span>5 min read</span></p>
-                    <p class="lead">Open MiniCycle&#x27;s settings and you will find two numbers you can leave alone or take over: cycle length and period length. Left alone, the app works them out from your records. Set them by hand and your value wins instead. The defaults are 29 days for a cycle and 5 days for a period, and most people never touch either. The question worth answering is when taking over actually helps, and when it quietly makes the predictions worse.</p>
+                    <p class="article-meta"><time datetime="2026-06-10">Published June 10, 2026 by MiniCycle</time><span aria-hidden="true">&middot;</span><span>3 min read</span></p>
+                    <p class="lead">MiniCycle can estimate cycle and period length from saved records or use a fixed value that you choose. Automatic mode changes as records accumulate; manual mode stays fixed until you change it. Neither mode measures ovulation or predicts an individual cycle with certainty. The useful choice is simply the one that best represents the dates you have available.</p>
                   </div>
                   <figure class="article-visual">
                     <div class="article-visual-frame">
@@ -225,7 +225,7 @@
         <section class="article-section" aria-labelledby="section-1">
   <h2 id="section-1">Two settings, and what they start at</h2>
 <p>Both settings live in Settings, and both offer the same choice: let MiniCycle estimate, or fix a value yourself. Cycle length is the gap from one period start to the next, and by hand you can set it anywhere from 21 to 42 days. Period length is how many days the bleeding lasts, with a manual range of 1 to 10 days.</p>
-<p>Left on automatic, the app fills in its own estimate and falls back to a default only when it has too little to go on. That default is 29 days for the cycle and 5 days for the period. The 29 is deliberate. The textbook figure is 28, but large real-world datasets put the typical cycle a little higher, so a fresh install starts closer to what the data shows than to the number on the poster.</p>
+<p>In automatic mode, the app uses 29 days for cycle length and 5 days for period length only when there are no usable records yet. Those are starting values, not claims about what your cycle should be.</p>
 </section>
 <section class="article-section" aria-labelledby="section-2">
   <h2 id="section-2">How does the automatic estimate work?</h2>
@@ -233,14 +233,14 @@
 <p>There is one more step once history builds up. When at least 10 measured intervals exist, the app drops the single shortest and the single longest before taking the median. A cycle thrown off by illness, travel, or a missed log stops dragging the estimate around. Period length runs on the same idea: it reads your recent closed period ranges and estimates a typical length, using 5 days only when there is not enough to measure.</p>
 </section>
 <section class="article-section" aria-labelledby="section-3">
-  <h2 id="section-3">When automatic is the right setting</h2>
-<p>For most people, leave both on automatic. If your cycles land in a familiar range and you log starts as they happen, the estimate keeps pace with your real pattern better than a number you picked once and forgot. It updates quietly as the months accumulate.</p>
-<p>This is also the honest answer to a common assumption: that setting the numbers by hand is somehow more accurate. It usually is not. A manual value is frozen. The automatic estimate is built from your last dozen cycles and trims its own outliers, so for a body whose rhythm shifts even a little, the moving estimate tends to track reality more closely than a fixed guess.</p>
+  <h2 id="section-3">Choosing automatic mode</h2>
+<p>Automatic mode is useful when you regularly log period starts and want the estimate to update from those dates. It uses only the saved history, so a missing or incorrect record can affect the result until you correct it.</p>
+<p>Automatic does not mean medically more accurate. It is a median-based summary of recent records, not a measurement of hormones or ovulation.</p>
 </section>
 <section class="article-section" aria-labelledby="section-4">
-  <h2 id="section-4">When setting it by hand makes sense</h2>
-<p>A few situations are the exception. If you have just installed the app and have no history yet but already know your cycle runs, say, 31 days, entering that beats waiting for the default 29 to be corrected. If a clinician has given you a specific figure, use it.</p>
-<p>Manual also helps when the automatic estimate is being misled. After a recent change such as a new birth control method or the months following a pregnancy, your last dozen cycles may not describe the next one, and a hand-set value you trust stays steadier until fresh records build up. Period length is the same. If yours is reliably 3 days, setting it spares you waiting for the estimate to settle and keeps one unusually long-recorded period from stretching the prediction.</p>
+  <h2 id="section-4">Choosing a manual value</h2>
+<p>Manual mode is useful when you have little history in the app but already have a typical value you want the calendar to use. The value remains fixed until you change it, regardless of later records.</p>
+<p>A manual number is a preference for the prediction calculation, not a diagnosis or a guarantee. If your pattern is changing or you are unsure which value represents it, keep recording the actual dates and discuss health concerns with a clinician.</p>
 </section>
 <section class="article-section" aria-labelledby="section-5">
   <h2 id="section-5">What the number changes, and what it leaves alone</h2>
@@ -249,24 +249,8 @@
 </section>
 <section class="article-section" aria-labelledby="section-6">
   <h2 id="section-6">What neither setting can promise</h2>
-<p>Both numbers produce estimates, and an estimate is not a measurement. ACOG describes a normal adult cycle as roughly 21 to 45 days with an average near 28, and a normal period as about 2 to 7 days, wider than any single setting suggests. Your own number can sit anywhere in that span and still be ordinary, and it can drift from month to month.</p>
-<p>So treat the prediction as reference for planning, not as medical advice, contraception, or a way to judge pregnancy. If your cycles run shorter than 21 days or longer than 45, or turn suddenly irregular, that is a conversation for a clinician rather than a setting to adjust. MiniCycle keeps your records on your device by default, as the privacy policy describes, so the number you choose stays yours to change.</p>
-</section>
-<section class="article-section" aria-labelledby="section-7">
-  <h2 id="section-7">Choosing in one minute</h2>
-<p>Default to automatic. Leave both settings alone unless you have a specific reason to override, and let a few months of logged starts do the work. The estimate trims its own outliers, so it handles the occasional odd cycle without help.</p>
-<p>Reach for manual in three cases: you are brand new with no history but know your usual length, a clinician gave you a number, or a recent change has made your recent cycles a poor guide to the next one. Outside those, a hand-set value tends to age worse than the moving estimate.</p>
-</section>
-<section class="article-section" aria-labelledby="section-8">
-  <h2 id="section-8">Frequently asked questions</h2>
-<p>Does setting cycle length by hand make predictions more accurate? Not usually. A manual value stays fixed, while the automatic estimate updates from your latest cycles and drops the shortest and longest once at least 10 intervals exist. For most people the moving estimate tracks reality better than a number set once.</p>
-<p>What can I set, and what are the defaults? Cycle length is 21 to 42 days by hand, period length 1 to 10. Left on automatic with too little history, the app uses 29 days for the cycle and 5 for the period.</p>
-<p>If I change cycle length, do my recorded periods move? No. Recorded dates stay put. The cycle length only changes the forward estimates: the next expected period, the ovulation day, and the fertile window.</p>
-</section>
-<section class="article-section" aria-labelledby="section-9">
-  <h2 id="section-9">The one-line version</h2>
-<p>Automatic for almost everyone, manual for the few cases where you know something the last twelve cycles do not. The defaults, 29 days and 5 days, are starting points, not targets to match.</p>
-<p>The habit that makes either setting work is the same one everything in the app runs on: log the period start on the day it happens.</p>
+<p>Both modes produce calendar estimates from a chosen or calculated number. They do not detect whether or when ovulation happened, and they cannot explain why a cycle changed.</p>
+<p>Treat predicted dates as planning references, not medical advice, contraception, or a way to judge pregnancy. MiniCycle stores records on the device by default; if you enable iCloud Sync, it also stores a copy in your iCloud through Apple CloudKit.</p>
 </section>
                     <section class="callout" aria-labelledby="try-minicycle">
                       <img class="callout-mark" src="../../assets/minicycle-app-icon.png" alt="" width="42" height="42" loading="lazy">
@@ -281,9 +265,7 @@
                       <p class="eyebrow">MiniCycle editorial</p>
                       <h2 id="references-title">References</h2>
                       <ul class="references">
-        <li><a href="https://www.acog.org/womens-health/faqs/your-first-period">ACOG. Your First Period.</a></li>
-<li><a href="https://www.nature.com/articles/s41746-019-0152-7">Bull JR, Rowland SP, Scherwitzl EB, et al. Real-world menstrual cycle characteristics of more than 600,000 menstrual cycles. npj Digital Medicine. 2019.</a></li>
-<li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
+        <li><a href="https://minicycle.net/privacy/">MiniCycle Privacy Policy.</a></li>
                       </ul>
                     </section>
                   </div>
@@ -293,13 +275,10 @@
                       <ol>
         <li><a href="#section-1">Two settings, and what they start at</a></li>
 <li><a href="#section-2">How does the automatic estimate work?</a></li>
-<li><a href="#section-3">When automatic is the right setting</a></li>
-<li><a href="#section-4">When setting it by hand makes sense</a></li>
+<li><a href="#section-3">Choosing automatic mode</a></li>
+<li><a href="#section-4">Choosing a manual value</a></li>
 <li><a href="#section-5">What the number changes, and what it leaves alone</a></li>
 <li><a href="#section-6">What neither setting can promise</a></li>
-<li><a href="#section-7">Choosing in one minute</a></li>
-<li><a href="#section-8">Frequently asked questions</a></li>
-<li><a href="#section-9">The one-line version</a></li>
                       </ol>
                     </nav>
                   </aside>
@@ -314,15 +293,15 @@
                   <a class="text-link section-link" href="../">All guides<span aria-hidden="true">&nbsp;&rarr;</span></a>
                 </div>
                 <div class="post-grid related-grid">
-        <article class="post-card related-card" data-guide-card data-search-value="settings how to reset minicycle and erase all your period records reset records wipes every period date, note, and activity mark in minicycle, and it cannot be undone. what it clears, what it keeps, and how to back up first.">
+        <article class="post-card related-card" data-guide-card data-search-value="settings how to reset minicycle and erase all your period records reset records erases all period ranges, daily notes, and sexual-activity marks in minicycle. learn what remains, how icloud sync reacts, and why it is not a backup.">
   <div class="post-card-topline">
     <p class="category-pill">Settings</p>
     <span class="card-accent" aria-hidden="true"></span>
   </div>
   <h3><a href="../reset-all-data-in-minicycle/">How to reset MiniCycle and erase all your period records</a></h3>
-  <p class="post-description">Reset records wipes every period date, note, and activity mark in MiniCycle, and it cannot be undone. What it clears, what it keeps, and how to back up first.</p>
+  <p class="post-description">Reset records erases all period ranges, daily notes, and sexual-activity marks in MiniCycle. Learn what remains, how iCloud Sync reacts, and why it is not a backup.</p>
   <div class="post-card-footer">
-    <p class="post-meta"><time datetime="2026-06-14">2026.06.14</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <p class="post-meta"><time datetime="2026-06-14">2026.06.14</time><span aria-hidden="true">&middot;</span>3 min read</p>
     <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
   </div>
 </article>
@@ -334,7 +313,7 @@
   <h3><a href="../minicycle-dark-mode-app-language-settings/">MiniCycle in English: change the app language and dark mode</a></h3>
   <p class="post-description">MiniCycle defaults to Korean. How to switch the app to English in two taps, choose System, Light, or Dark appearance, and what the home-screen widget follows.</p>
   <div class="post-card-footer">
-    <p class="post-meta"><time datetime="2026-06-12">2026.06.12</time><span aria-hidden="true">&middot;</span>5 min read</p>
+    <p class="post-meta"><time datetime="2026-06-12">2026.06.12</time><span aria-hidden="true">&middot;</span>3 min read</p>
     <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
   </div>
 </article>
@@ -346,7 +325,7 @@
   <h3><a href="../week-start-sunday-monday-period-calendar/">Should a period calendar start on Sunday or Monday?</a></h3>
   <p class="post-description">MiniCycle&#x27;s calendar can start the week on Sunday or Monday. Why calendars disagree, why the choice changes only the layout, and how the widget stays in sync.</p>
   <div class="post-card-footer">
-    <p class="post-meta"><time datetime="2026-06-09">2026.06.09</time><span aria-hidden="true">&middot;</span>4 min read</p>
+    <p class="post-meta"><time datetime="2026-06-09">2026.06.09</time><span aria-hidden="true">&middot;</span>3 min read</p>
     <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
   </div>
 </article>

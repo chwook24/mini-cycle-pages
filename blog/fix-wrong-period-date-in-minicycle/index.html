@@ -208,7 +208,7 @@
                   <div class="article-heading">
                     <p class="category-pill">Recording</p>
                     <h1>How to edit or fix a wrong period date in MiniCycle</h1>
-                    <p class="article-meta"><time datetime="2026-06-07">Published June 7, 2026 by MiniCycle</time><span aria-hidden="true">&middot;</span><span>5 min read</span></p>
+                    <p class="article-meta"><time datetime="2026-06-07">Published June 7, 2026 by MiniCycle</time><span aria-hidden="true">&middot;</span><span>3 min read</span></p>
                     <p class="lead">A wrong tap happens. A period gets logged a day early, an end date never gets set, or a date from two months ago turns out to be off. In MiniCycle every prediction is built from the dates you saved, so a correction is worth two minutes of your time. The app has specific rules for replacing, adjusting, and deleting records. Here is how each one works.</p>
                   </div>
                   <figure class="article-visual">
@@ -224,13 +224,13 @@
                   <div class="article-body">
         <section class="article-section" aria-labelledby="section-1">
   <h2 id="section-1">Why a wrong date is worth fixing</h2>
-<p>MiniCycle estimates your cycle from saved period start dates, using up to the latest 12 records. Once there are at least 10 measured intervals, it drops one shortest and one longest and takes the median. With little history it starts from a 29-day default. A median resists a single odd value, so one wrong date deep in your history usually moves the cycle estimate only a little.</p>
-<p>The most recent start date is different. All future predictions anchor on it. The next period is placed one cycle length after it, ovulation is counted backward from that expected period using a 9–14 day luteal phase estimate, and the fertile window runs from 5 days before estimated ovulation through 1 day after it. If the last recorded start is off by two days, every predicted date is off by two days.</p>
+<p>MiniCycle estimates cycle length from saved period starts, using up to the latest 12 starts and a median-style calculation. That reduces the influence of one unusual interval, but a correction can still change the result depending on how many records you have and which value changed.</p>
+<p>The most recent start also anchors future dates. Correcting it generally moves the next-period, ovulation, and fertile-window estimates, but the shift is not guaranteed to equal the same number of days because the cycle-length estimate may change too.</p>
 </section>
 <section class="article-section" aria-labelledby="section-2">
   <h2 id="section-2">Moving a period start to the right day</h2>
-<p>Tap the correct day on the calendar and mark a period start. If the day you picked is within 7 days of an already recorded start, MiniCycle replaces that record instead of adding a second one. This is the correction path: log the day you meant, and the wrong entry goes away in the same step.</p>
-<p>The end date of the new record fills in automatically. A manual period length setting takes priority; otherwise the app estimates from your recent closed period records, with a 5-day default until there is enough data. If the automatic end does not match what happened, adjust it next.</p>
+<p>Tap the correct day on the calendar and mark a period start. If it is within 7 days of an existing start, MiniCycle offers to change that period rather than adding a second one. Confirm the Period change alert to apply the correction.</p>
+<p>The end date is filled from the current period-length setting or automatic estimate. If it does not match what happened, select the actual last day and update the end next.</p>
 </section>
 <section class="article-section" aria-labelledby="section-3">
   <h2 id="section-3">Adjusting an end date</h2>
@@ -239,34 +239,18 @@
 </section>
 <section class="article-section" aria-labelledby="section-4">
   <h2 id="section-4">Deleting a record that should not exist</h2>
-<p>Sometimes the fix is removal: a day of spotting logged as a full period, a duplicate entry, or a test record from when you first tried the app. Select a day inside that period on the calendar, then press and hold the period start button. The app asks for confirmation before deleting the record.</p>
-<p>Settings also has a full data reset, which permanently deletes every period record and note. That is for starting over, not for fixing one date. For a single wrong record, the press-and-hold deletion is the right size of tool.</p>
+<p>Select any date inside the period you want to remove. In the detail card for that period, tap the trash button and confirm the deletion. MiniCycle does not use a press-and-hold gesture for this action.</p>
+<p>Reset records in Settings clears every period and daily log. Use the trash button for one incorrect period; use the full reset only when you intend to erase all records.</p>
 </section>
 <section class="article-section" aria-labelledby="section-5">
   <h2 id="section-5">What happens after you fix a date</h2>
-<p>Estimates recalculate from the corrected records right away. The predicted period days, the ovulation estimate, and the fertile window all move to match, the home-screen widget follows the app&#x27;s saved state, and reminders are rebuilt around the new dates. There is nothing to refresh by hand.</p>
-<p>There is also no sync conflict to think about by default, because records are stored on your device. If you turned on iCloud Sync, the corrected records are what gets stored. Either way, the record to keep is the one that matches what actually happened, not what the app predicted.</p>
+<p>The app recalculates estimates and reschedules local notifications from the corrected records. It also writes the shared data and requests a widget reload. iOS decides when the widget redraws, so the home-screen change can take a little longer.</p>
+<p>Records are stored on the device by default. If iCloud Sync is enabled, MiniCycle also attempts to synchronize the corrected state through CloudKit.</p>
 </section>
 <section class="article-section" aria-labelledby="section-6">
   <h2 id="section-6">What corrections can and cannot do</h2>
 <p>A correction makes your record match your body. It cannot make predictions exact. An analysis of more than 600,000 real-world cycles found that cycle length varies from month to month for most people, which is why MiniCycle keeps re-estimating from recent records instead of trusting any single month. Corrected data gives the estimate better inputs, not certainty.</p>
 <p>The dates on the calendar remain reference information for planning. They are not medical advice, contraception, or a way to confirm or rule out pregnancy. If the bleeding pattern itself is what concerns you, that is a conversation for a clinician, and an accurate record of dates is a useful thing to bring along.</p>
-</section>
-<section class="article-section" aria-labelledby="section-7">
-  <h2 id="section-7">Does fixing an old date change the predictions much?</h2>
-<p>Usually less than people expect. A start date moved by one day changes the interval before it and the interval after it by one day each, in opposite directions, and the median of your recent intervals often does not move at all. Once there are at least 10 measured intervals, the trimming of one shortest and one longest value absorbs outliers on top of that.</p>
-<p>The closer the wrong date is to today, the more the fix matters. The last saved start is the anchor for every predicted date, so correcting it has an immediate, visible effect on next month. Correcting a date from half a year ago mostly improves the statistics.</p>
-</section>
-<section class="article-section" aria-labelledby="section-8">
-  <h2 id="section-8">Frequently asked questions</h2>
-<p>Can I log a period that started weeks ago? Yes. Tap the past date on the calendar and mark the start. The replacement rule only applies when another recorded start sits within 7 days of the day you tap; otherwise the app simply adds the record.</p>
-<p>My period ran longer than 14 days and the app will not save the end date. MiniCycle caps a single record at 14 days, which already sits well above typical period lengths. The FIGO classification used in gynecology counts bleeding that continues past 8 consecutive days as prolonged, so a span the app cannot record is a reasonable prompt for a conversation with a clinician.</p>
-<p>Do I need to fix a predicted date that turned out wrong? No. Predictions are not records. Log the period on the day it actually starts, and the calendar re-anchors on the real date by itself.</p>
-</section>
-<section class="article-section" aria-labelledby="section-9">
-  <h2 id="section-9">A two-minute correction checklist</h2>
-<p>Find the wrong record on the calendar. If the start day is wrong, tap the right day and mark the start; within 7 days, the old record is replaced for you. If only the end is wrong, tap the real last day and mark the end. If the record should not exist at all, select a day inside it, press and hold the period start button, and confirm the deletion.</p>
-<p>Then glance at next month once. If the predicted dates look reasonable against your history, the fix landed, and the estimates take it from there. The habit that keeps corrections rare is the same one that keeps predictions useful: log the start on the day it happens.</p>
 </section>
                     <section class="callout" aria-labelledby="try-minicycle">
                       <img class="callout-mark" src="../../assets/minicycle-app-icon.png" alt="" width="42" height="42" loading="lazy">
@@ -298,9 +282,6 @@
 <li><a href="#section-4">Deleting a record that should not exist</a></li>
 <li><a href="#section-5">What happens after you fix a date</a></li>
 <li><a href="#section-6">What corrections can and cannot do</a></li>
-<li><a href="#section-7">Does fixing an old date change the predictions much?</a></li>
-<li><a href="#section-8">Frequently asked questions</a></li>
-<li><a href="#section-9">A two-minute correction checklist</a></li>
                       </ol>
                     </nav>
                   </aside>
@@ -323,31 +304,31 @@
   <h3><a href="../minicycle-widget-not-updating-refresh/">Why the MiniCycle widget isn&#x27;t updating, and how it refreshes</a></h3>
   <p class="post-description">The MiniCycle home-screen widget updates on iOS&#x27;s schedule, not the instant you log a period. Here is how WidgetKit refreshes it and what to check when it looks stale.</p>
   <div class="post-card-footer">
-    <p class="post-meta"><time datetime="2026-07-04">2026.07.04</time><span aria-hidden="true">&middot;</span>5 min read</p>
+    <p class="post-meta"><time datetime="2026-07-04">2026.07.04</time><span aria-hidden="true">&middot;</span>3 min read</p>
     <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
   </div>
 </article>
-<article class="post-card related-card" data-guide-card data-search-value="cycle health ovulation pain (mittelschmerz): what that mid-cycle twinge is ovulation pain, or mittelschmerz, is a one-sided mid-cycle twinge that affects up to 40% of people who ovulate. what it feels like, why it happens, and when it isn&#x27;t ordinary.">
+<article class="post-card related-card" data-guide-card data-search-value="cycle health ovulation pain (mittelschmerz): what that mid-cycle twinge is one-sided pelvic pain can occur around ovulation, but timing and sensation cannot confirm the cause. learn common features and signs that need medical assessment.">
   <div class="post-card-topline">
     <p class="category-pill">Cycle health</p>
     <span class="card-accent" aria-hidden="true"></span>
   </div>
   <h3><a href="../ovulation-pain-mittelschmerz-what-it-is/">Ovulation pain (mittelschmerz): what that mid-cycle twinge is</a></h3>
-  <p class="post-description">Ovulation pain, or mittelschmerz, is a one-sided mid-cycle twinge that affects up to 40% of people who ovulate. What it feels like, why it happens, and when it isn&#x27;t ordinary.</p>
+  <p class="post-description">One-sided pelvic pain can occur around ovulation, but timing and sensation cannot confirm the cause. Learn common features and signs that need medical assessment.</p>
   <div class="post-card-footer">
-    <p class="post-meta"><time datetime="2026-07-03">2026.07.03</time><span aria-hidden="true">&middot;</span>4 min read</p>
+    <p class="post-meta"><time datetime="2026-07-03">2026.07.03</time><span aria-hidden="true">&middot;</span>3 min read</p>
     <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
   </div>
 </article>
-<article class="post-card related-card" data-guide-card data-search-value="predictions why minicycle&#x27;s predicted period date keeps changing minicycle re-estimates your next period every time your saved dates change, so the predicted date can move. here is what shifts, when, and why a moving estimate is the app working.">
+<article class="post-card related-card" data-guide-card data-search-value="predictions why minicycle&#x27;s predicted period date keeps changing minicycle recalculates predictions from saved period starts, the cycle-length setting, and the current date. learn which changes move the next expected period and what remains uncertain.">
   <div class="post-card-topline">
     <p class="category-pill">Predictions</p>
     <span class="card-accent" aria-hidden="true"></span>
   </div>
   <h3><a href="../why-minicycle-predicted-period-date-changes/">Why MiniCycle&#x27;s predicted period date keeps changing</a></h3>
-  <p class="post-description">MiniCycle re-estimates your next period every time your saved dates change, so the predicted date can move. Here is what shifts, when, and why a moving estimate is the app working.</p>
+  <p class="post-description">MiniCycle recalculates predictions from saved period starts, the cycle-length setting, and the current date. Learn which changes move the next expected period and what remains uncertain.</p>
   <div class="post-card-footer">
-    <p class="post-meta"><time datetime="2026-07-02">2026.07.02</time><span aria-hidden="true">&middot;</span>6 min read</p>
+    <p class="post-meta"><time datetime="2026-07-02">2026.07.02</time><span aria-hidden="true">&middot;</span>3 min read</p>
     <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
   </div>
 </article>

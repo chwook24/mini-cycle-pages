@@ -5,7 +5,7 @@
           <meta name="viewport" content="width=device-width, initial-scale=1">
           <meta name="color-scheme" content="light dark">
           <meta name="theme-color" content="#fbf8fa" data-theme-color>
-          <title>MiniCycle 위젯이 안 바뀔 때, 새로 고침은 어떻게 되나요</title>
+          <title>MiniCycle 위젯이 업데이트되지 않을 때 확인할 것</title>
           <meta name="description" content="MiniCycle 홈 화면 위젯은 실시간이 아니라 iOS가 정한 시점에 갱신됩니다. 위젯이 어떻게 새로 고쳐지는지, 오래된 상태로 보일 때 무엇을 확인하면 되는지 정리했습니다.">
           <link rel="canonical" href="https://minicycle.net/ko/blog/minicycle-widget-not-updating-refresh/">
             <link rel="alternate" hreflang="en" href="https://minicycle.net/blog/minicycle-widget-not-updating-refresh/">
@@ -13,7 +13,7 @@
     <link rel="alternate" hreflang="x-default" href="https://minicycle.net/blog/minicycle-widget-not-updating-refresh/">
           <link rel="alternate" type="application/rss+xml" title="MiniCycle Blog" href="https://minicycle.net/feed.xml">
           <meta property="og:type" content="article">
-          <meta property="og:title" content="MiniCycle 위젯이 안 바뀔 때, 새로 고침은 어떻게 되나요">
+          <meta property="og:title" content="MiniCycle 위젯이 업데이트되지 않을 때 확인할 것">
           <meta property="og:description" content="MiniCycle 홈 화면 위젯은 실시간이 아니라 iOS가 정한 시점에 갱신됩니다. 위젯이 어떻게 새로 고쳐지는지, 오래된 상태로 보일 때 무엇을 확인하면 되는지 정리했습니다.">
           <meta property="og:url" content="https://minicycle.net/ko/blog/minicycle-widget-not-updating-refresh/">
           <meta property="og:image" content="https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg">
@@ -177,7 +177,7 @@
   }
   window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
 </script>
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"MiniCycle 위젯이 안 바뀔 때, 새로 고침은 어떻게 되나요","description":"MiniCycle 홈 화면 위젯은 실시간이 아니라 iOS가 정한 시점에 갱신됩니다. 위젯이 어떻게 새로 고쳐지는지, 오래된 상태로 보일 때 무엇을 확인하면 되는지 정리했습니다.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg","datePublished":"2026-07-04","dateModified":"2026-07-04","inLanguage":"ko","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/ko/blog/minicycle-widget-not-updating-refresh/"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"MiniCycle 위젯이 업데이트되지 않을 때 확인할 것","description":"MiniCycle 홈 화면 위젯은 실시간이 아니라 iOS가 정한 시점에 갱신됩니다. 위젯이 어떻게 새로 고쳐지는지, 오래된 상태로 보일 때 무엇을 확인하면 되는지 정리했습니다.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg","datePublished":"2026-07-04","dateModified":"2026-07-04","inLanguage":"ko","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/ko/blog/minicycle-widget-not-updating-refresh/"}}</script>
         </head>
           <body class="article-page">
         <a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
@@ -202,14 +202,14 @@
   </div>
 </header>
             <main class="page article-page-main" id="main-content">
-              <article class="article" data-language="ko" data-content-group="minicycle-widget-not-updating-refresh" data-min-read-ms="88000">
+              <article class="article" data-language="ko" data-content-group="minicycle-widget-not-updating-refresh" data-min-read-ms="36000">
                 <a class="back-link" href="../"><span aria-hidden="true">&larr;</span> 전체 글</a>
                 <header class="article-header">
                   <div class="article-heading">
                     <p class="category-pill">위젯</p>
-                    <h1>MiniCycle 위젯이 안 바뀔 때, 새로 고침은 어떻게 되나요</h1>
+                    <h1>MiniCycle 위젯이 업데이트되지 않을 때 확인할 것</h1>
                     <p class="article-meta"><time datetime="2026-07-04">2026년 7월 4일 MiniCycle 작성</time><span aria-hidden="true">&middot;</span><span>약 3분 읽기</span></p>
-                    <p class="lead">홈 화면 위젯은 방금 앱에서 한 일보다 한 박자 늦을 때가 있습니다. 대개 앱이 고장 난 게 아니라 iOS가 원래 그렇게 동작하는 거예요. MiniCycle 위젯은 앱이 건네준 타임라인을 시스템이 정한 시점에 다시 그립니다. 무엇이 위젯을 실제로 움직이는지 알고 나면, 오래돼 보이는 위젯이 더는 수수께끼가 아니고 해결도 대개 탭 한 번입니다.</p>
+                    <p class="lead">MiniCycle에서 기록을 바꾼 직후에도 홈 화면 위젯에는 이전 내용이 잠시 남아 있을 수 있습니다. 기록이 사라진 것은 아닐 수 있습니다. MiniCycle은 WidgetKit에 새 타임라인을 요청하지만, 실제로 위젯을 다시 그리는 시점은 iOS가 결정합니다. 앱이 요청하는 것과 iOS가 결정하는 것, 위젯이 계속 오래된 상태로 보일 때 확인할 순서를 정리했습니다.</p>
                   </div>
                   <figure class="article-visual">
                     <div class="article-visual-frame">
@@ -223,50 +223,24 @@
                 <div class="article-layout">
                   <div class="article-body">
         <section class="article-section" aria-labelledby="section-1">
-  <h2 id="section-1">위젯은 실시간이 아니라 iOS 일정에 맞춰 바뀝니다</h2>
-<p>홈 화면 위젯은 무언가 바뀔 때마다 그 자리에서 다시 그려지는 화면이 아닙니다. 앱이 iOS에 건네준 타임라인을 iOS가 정한 시점에 다시 그리는 방식이에요. 배터리를 아끼려고 시스템이 갱신 횟수를 제한하기 때문에, 방금 바꾼 내용이 몇 분, 때로는 그보다 늦게 반영됩니다. WidgetKit이 원래 이렇게 동작합니다.</p>
-<p>흔한 오해는 그 반대입니다. 생리를 기록하면 위젯이 곧바로 새 상태로 뒤집힐 거라고 생각하기 쉬워요. 대개 그 자리에서 뒤집히지 않습니다. 기록은 저장됐고, 홈 화면 그림은 시스템이 다음번 갱신할 때 따라옵니다.</p>
+  <h2 id="section-1">실제 갱신 시점은 iOS가 결정합니다</h2>
+<p>위젯은 앱 화면을 실시간으로 복사하지 않습니다. MiniCycle은 WidgetKit에 타임라인을 전달하고 새로 고침을 요청할 수 있지만, 실제 반영 시점은 iOS의 리소스 관리 정책에 따라 정해집니다. 저전력 모드이거나 기기가 바쁠 때는 더 늦어질 수 있습니다.</p>
+<p>위젯은 날짜 표시가 바뀌도록 다음 날이 시작된 이후의 타임라인도 요청합니다. 다만 이는 가장 이른 요청 시점일 뿐, 자정에 정확히 갱신된다는 보장은 아닙니다.</p>
 </section>
 <section class="article-section" aria-labelledby="section-2">
-  <h2 id="section-2">MiniCycle 위젯을 움직이는 두 가지</h2>
-<p>하나는 앱 열기입니다. MiniCycle은 앱을 열 때마다 위젯을 새로 고쳐 달라고 iOS에 요청합니다. 그래서 방금 기록한 생리는 홈 화면으로 돌아오면 곧 위젯에 나타나요. 지금 바로 최신 상태로 보고 싶을 때는 앱을 다시 여는 게 가장 확실합니다.</p>
-<p>다른 하나는 하루 한 번 갱신입니다. 위젯은 다음 날이 시작되는 시점에 스스로 다시 그리도록 예약돼 있어서, 앱을 열지 않는 날에도 아침이면 빨간 오늘 표시와 D-숫자가 저절로 하루 넘어갑니다.</p>
+  <h2 id="section-2">MiniCycle을 열면 일어나는 일</h2>
+<p>MiniCycle을 열면 최신 기록과 설정을 위젯이 사용하는 App Group 공유 저장소에 반영하고, WidgetKit에 타임라인 갱신을 요청합니다. 생리를 새로 기록하거나 수정한 뒤에는 먼저 앱에서 기록이 맞는지 확인하고 홈 화면으로 돌아가 잠시 기다려 보세요.</p>
+<p>앱을 열어도 iOS가 즉시 위젯을 다시 그린다고 보장할 수는 없습니다. 앱 기록이 정상인데 위젯만 다르다면, 위젯이 이전 타임라인을 표시하고 있을 가능성이 있습니다.</p>
 </section>
 <section class="article-section" aria-labelledby="section-3">
-  <h2 id="section-3">한 박자 늦어 보이는 이유</h2>
-<p>시스템이 위젯 갱신을 모아서 처리하다 보니, 바꾼 내용이 그 즉시 보이지 않을 수 있습니다. 시작일을 기록하고 반초 뒤 위젯을 봤는데 어제 상태 그대로여도, 기록이 사라진 게 아니라 아직 안 그려진 것뿐이에요. 날짜는 앱에 있고, MiniCycle을 다시 열면 밖으로 밀려 나갑니다.</p>
-<p>위젯은 앱이 써 둔 작은 공유 저장소를 읽습니다. 그래서 앱이 마지막에 저장한 상태까지만 보여줄 수 있어요. 앱 캘린더와 위젯이 다르면 위젯이 예전 상태를 보여주는 중이고, 앱을 한 번 거치면 다시 맞춰집니다.</p>
+  <h2 id="section-3">비어 있거나 오래된 상태로 보일 때</h2>
+<p>먼저 MiniCycle을 열어 기록이 정상인지 확인합니다. 생리 시작일을 한 번도 기록하지 않았다면 위젯에는 기록을 시작하라는 기본 화면이 표시됩니다. MiniCycle은 현재 작은 정사각형 위젯만 제공하므로 중간이나 큰 크기는 목록에 나오지 않습니다.</p>
+<p>잠시 기다려도 작은 위젯이 바뀌지 않으면 위젯을 삭제한 뒤 다시 추가해 보세요. 새로 추가한 위젯은 새 타임라인을 요청합니다. 그래도 앱과 계속 다르다면 iPhone 모델과 iOS 버전을 적어 지원 메일로 알려 주세요.</p>
 </section>
 <section class="article-section" aria-labelledby="section-4">
-  <h2 id="section-4">비어 있거나 오래돼 보일 때, 확인 순서</h2>
-<p>순서대로 봅니다. 먼저 MiniCycle을 한 번 열었다 홈 화면으로 나오세요. 위젯 타임라인이 새로 밀려 나갑니다. 다음으로 생리 시작일을 한 번이라도 기록했는지 확인합니다. 시작일이 없으면 예측할 게 없어 기록을 시작하라는 화면이 뜨는데, 이 빈 모습은 오류가 아니라 정상이에요.</p>
-<p>크기도 봅니다. MiniCycle 위젯은 작은 사각형 하나만 제공해서, 중간이나 큰 위젯을 찾고 있었다면 목록에 없는 게 당연합니다. 위젯이 멈춘 것 같으면 지웠다가 다시 추가해 보세요. 새로 얹은 위젯은 타임라인을 새로 받아 옵니다. 저전력 모드이거나 폰이 바쁠 때도 갱신이 밀릴 수 있는데, 대개 스스로 따라잡습니다.</p>
-</section>
-<section class="article-section" aria-labelledby="section-5">
-  <h2 id="section-5">하루 어긋나 보이면 대개 설정 문제입니다</h2>
-<p>위젯의 요일 줄이나 강조된 날짜가 앱과 어긋나 보이면 두 가지 설정을 확인하세요. 주 시작 요일(일요일 또는 월요일)과 앱 언어입니다. 위젯은 이 둘을 앱과 같은 곳에서 읽어 오기 때문에, 저장해 두면 두 화면이 맞습니다.</p>
-<p>날짜 계산 자체도 앱과 위젯이 같은 방식을 씁니다. 최근 시작일로 낸 중앙값 기반 예정일, 기록이 적을 때의 29일 기본값, 추정 배란일 5일 전부터 다음 날까지의 가임기까지 똑같아요. 그래서 위젯이 앱과 다른 예측을 내놓는 일은 없습니다.</p>
-</section>
-<section class="article-section" aria-labelledby="section-6">
-  <h2 id="section-6">위젯이 백그라운드에서도 갱신되나요</h2>
-<p>네, 다만 실시간이 아니라 정해진 일정으로요. 자정을 지나면서 날짜가 넘어가기 때문에 오늘 표시와 D-숫자는 밤사이 저절로 이동합니다. 그 밖에는 iOS가 배터리 예산 안에서 위젯을 다시 불러오고, 앱을 마지막으로 열었을 때 MiniCycle이 요청해 둔 새로 고침을 함께 반영하기도 합니다.</p>
-<p>매분 확인하는 방식은 아닙니다. 다른 날 기록한 생리나 앱이 닫힌 사이 생긴 변화는 앱을 한 번 열거나 다음 예약 갱신을 기다려야 보입니다. 저전력 모드이거나 폰이 바쁠 때는 이 시점이 더 늦어질 수 있고, 상황이 풀리면 대개 따라잡습니다.</p>
-</section>
-<section class="article-section" aria-labelledby="section-7">
-  <h2 id="section-7">앱과 위젯은 같은 곳을 읽습니다</h2>
-<p>위젯은 자기만의 데이터 사본을 따로 굴리지 않습니다. 앱이 기기 안 공유 저장 공간에 저장한 기록과 설정을 그대로 읽어서 지금 상태를 다시 계산해요. 두 화면이 어긋나지 않는 이유이고, 위젯이 앱이 마지막에 써 둔 것 이상을 보여줄 수 없는 이유이기도 합니다. 필요한 기록이 이미 폰 안에 있으니 계정도, 인터넷도 없이 동작합니다.</p>
-</section>
-<section class="article-section" aria-labelledby="section-8">
-  <h2 id="section-8">자주 묻는 것</h2>
-<p>생리를 기록했는데 위젯이 예전 상태예요. 기록은 앱에 저장됐고 위젯이 아직 안 그려진 것뿐입니다. 시스템의 다음 예약 갱신을 기다리기보다, MiniCycle을 열었다 홈 화면으로 나오면 새 상태가 밀려 나갑니다.</p>
-<p>위젯이 비어 있고 기록을 시작하라고 나와요. 생리 시작일을 한 번이라도 넣기 전까지 나오는 기본 화면입니다. 앱에서 시작일을 기록하면 다음 갱신 때 채워집니다.</p>
-<p>큰 MiniCycle 위젯이 안 보여요. MiniCycle은 작은 사각형만 제공해서 중간·큰 크기는 목록에 나오지 않습니다. 추가할 때 작은 크기를 고르세요.</p>
-<p>위젯 날짜가 하루 어긋나 보여요. 주 시작 요일과 앱 언어 설정을 확인하세요. 위젯이 앱과 공유하는 값이라 저장하면 맞춰집니다. 예측 자체는 두 화면이 같습니다.</p>
-<p>위젯에 계정이나 인터넷이 필요한가요. 아니요. 기기에 저장된 기록을 읽어서 인터넷 없이, 계정 없이 동작합니다.</p>
-</section>
-<section class="article-section" aria-labelledby="section-9">
-  <h2 id="section-9">위젯은 무엇을 위한 화면인가</h2>
-<p>위젯은 예측을 빠르게 확인하는 화면이지 실시간 의료 모니터가 아닙니다. 여기 뜨는 날짜는 내 기록으로 계산한 참고 정보예요. 일정을 짜는 데는 쓸모 있지만 피임이나 임신 테스트, 진단이 아닙니다. 날짜를 기록하거나 고칠 일, 메모나 성생활 표시처럼 민감한 부분은 앱을 열어서 하고, 홈 화면은 흘깃 보는 자리로 두면 됩니다.</p>
+  <h2 id="section-4">설정과 예측 확인</h2>
+<p>위젯은 앱과 같은 주 시작 요일과 언어 설정을 읽습니다. 요일 열이 다르게 보이면 앱에서 주 시작 요일을 확인하세요. 언어 설정은 표시 문구를 바꾸지만 날짜 계산을 바꾸지는 않습니다.</p>
+<p>앱과 위젯은 같은 예측 엔진을 사용합니다. 추정 배란일 5일 전부터 다음 날까지 달력상 7일을 가임기로 표시하는 방식도 같습니다. 다만 위젯에 이전 타임라인이 남아 있으면 두 화면이 잠시 다르게 보일 수 있습니다.</p>
 </section>
                     <section class="callout" aria-labelledby="try-minicycle">
                       <img class="callout-mark" src="../../../assets/minicycle-app-icon.png" alt="" width="42" height="42" loading="lazy">
@@ -292,15 +266,10 @@
                     <nav class="article-toc" aria-label="이 글에서 다루는 내용">
                       <p class="toc-title">이 글에서 다루는 내용</p>
                       <ol>
-        <li><a href="#section-1">위젯은 실시간이 아니라 iOS 일정에 맞춰 바뀝니다</a></li>
-<li><a href="#section-2">MiniCycle 위젯을 움직이는 두 가지</a></li>
-<li><a href="#section-3">한 박자 늦어 보이는 이유</a></li>
-<li><a href="#section-4">비어 있거나 오래돼 보일 때, 확인 순서</a></li>
-<li><a href="#section-5">하루 어긋나 보이면 대개 설정 문제입니다</a></li>
-<li><a href="#section-6">위젯이 백그라운드에서도 갱신되나요</a></li>
-<li><a href="#section-7">앱과 위젯은 같은 곳을 읽습니다</a></li>
-<li><a href="#section-8">자주 묻는 것</a></li>
-<li><a href="#section-9">위젯은 무엇을 위한 화면인가</a></li>
+        <li><a href="#section-1">실제 갱신 시점은 iOS가 결정합니다</a></li>
+<li><a href="#section-2">MiniCycle을 열면 일어나는 일</a></li>
+<li><a href="#section-3">비어 있거나 오래된 상태로 보일 때</a></li>
+<li><a href="#section-4">설정과 예측 확인</a></li>
                       </ol>
                     </nav>
                   </aside>
@@ -315,39 +284,39 @@
                   <a class="text-link section-link" href="../">전체 글<span aria-hidden="true">&nbsp;&rarr;</span></a>
                 </div>
                 <div class="post-grid related-grid">
-        <article class="post-card related-card" data-guide-card data-search-value="위젯 minicycle 위젯을 아이폰 홈 화면에 추가하는 방법 아이폰 홈 화면에 minicycle 생리 위젯을 추가하는 방법을 단계별로 정리했습니다. 위젯에 무엇이 보이는지, 앱과 어떻게 같은 예측을 쓰는지, 날짜가 비어 보일 때 무엇을 확인하면 되는지 함께 설명합니다.">
+        <article class="post-card related-card" data-guide-card data-search-value="위젯 minicycle 위젯을 아이폰 홈 화면에 추가하는 방법 iphone 홈 화면에 minicycle의 작은 위젯을 추가하는 방법을 설명합니다. 위젯은 오늘을 포함한 4주 달력을 보여 줍니다.">
   <div class="post-card-topline">
     <p class="category-pill">위젯</p>
     <span class="card-accent" aria-hidden="true"></span>
   </div>
   <h3><a href="../add-minicycle-widget-iphone-home-screen/">MiniCycle 위젯을 아이폰 홈 화면에 추가하는 방법</a></h3>
-  <p class="post-description">아이폰 홈 화면에 MiniCycle 생리 위젯을 추가하는 방법을 단계별로 정리했습니다. 위젯에 무엇이 보이는지, 앱과 어떻게 같은 예측을 쓰는지, 날짜가 비어 보일 때 무엇을 확인하면 되는지 함께 설명합니다.</p>
+  <p class="post-description">iPhone 홈 화면에 MiniCycle의 작은 위젯을 추가하는 방법을 설명합니다. 위젯은 오늘을 포함한 4주 달력을 보여 줍니다.</p>
   <div class="post-card-footer">
     <p class="post-meta"><time datetime="2026-06-15">2026.06.15</time><span aria-hidden="true">&middot;</span>약 3분</p>
     <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
   </div>
 </article>
-<article class="post-card related-card" data-guide-card data-search-value="위젯 아이폰 홈 화면 생리 캘린더 위젯에는 무엇이 보여야 할까요 생리 캘린더 위젯이 현재 주기 상태, 예정일, 가임기 정보를 어떻게 빠르게 보여줘야 하는지와 minicycle 위젯 설계 이유를 설명합니다.">
-  <div class="post-card-topline">
-    <p class="category-pill">위젯</p>
-    <span class="card-accent" aria-hidden="true"></span>
-  </div>
-  <h3><a href="../period-calendar-widget-iphone-home-screen/">아이폰 홈 화면 생리 캘린더 위젯에는 무엇이 보여야 할까요</a></h3>
-  <p class="post-description">생리 캘린더 위젯이 현재 주기 상태, 예정일, 가임기 정보를 어떻게 빠르게 보여줘야 하는지와 MiniCycle 위젯 설계 이유를 설명합니다.</p>
-  <div class="post-card-footer">
-    <p class="post-meta"><time datetime="2026-05-16">2026.05.16</time><span aria-hidden="true">&middot;</span>약 3분</p>
-    <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
-  </div>
-</article>
-<article class="post-card related-card" data-guide-card data-search-value="주기 건강 배란통이 뭘까요? 배란기에 아랫배가 아픈 이유 배란 무렵 한쪽 아랫배가 콕콕 쑤시는 배란통은 배란하는 사람의 40%까지 겪습니다. 어떤 느낌인지, 왜 생기는지, 그리고 배란통이 아닐 때는 언제인지 정리했습니다.">
+<article class="post-card related-card" data-guide-card data-search-value="주기 건강 배란통: 배란 무렵 한쪽 아랫배가 아픈 이유 배란 무렵 한쪽 아랫배에 통증이 나타날 수 있지만 시기와 느낌만으로 원인을 확정할 수는 없습니다. 배란통의 흔한 양상과 진료가 필요한 신호를 정리했습니다.">
   <div class="post-card-topline">
     <p class="category-pill">주기 건강</p>
     <span class="card-accent" aria-hidden="true"></span>
   </div>
-  <h3><a href="../ovulation-pain-mittelschmerz-what-it-is/">배란통이 뭘까요? 배란기에 아랫배가 아픈 이유</a></h3>
-  <p class="post-description">배란 무렵 한쪽 아랫배가 콕콕 쑤시는 배란통은 배란하는 사람의 40%까지 겪습니다. 어떤 느낌인지, 왜 생기는지, 그리고 배란통이 아닐 때는 언제인지 정리했습니다.</p>
+  <h3><a href="../ovulation-pain-mittelschmerz-what-it-is/">배란통: 배란 무렵 한쪽 아랫배가 아픈 이유</a></h3>
+  <p class="post-description">배란 무렵 한쪽 아랫배에 통증이 나타날 수 있지만 시기와 느낌만으로 원인을 확정할 수는 없습니다. 배란통의 흔한 양상과 진료가 필요한 신호를 정리했습니다.</p>
   <div class="post-card-footer">
     <p class="post-meta"><time datetime="2026-07-03">2026.07.03</time><span aria-hidden="true">&middot;</span>약 3분</p>
+    <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="예측 minicycle 생리 예정일이 자꾸 바뀌는 이유 minicycle은 저장된 생리 시작일, 주기 길이 설정, 현재 날짜로 예측을 다시 계산합니다. 무엇이 다음 예정일을 바꾸고 어떤 한계가 남는지 설명합니다.">
+  <div class="post-card-topline">
+    <p class="category-pill">예측</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../why-minicycle-predicted-period-date-changes/">MiniCycle 생리 예정일이 자꾸 바뀌는 이유</a></h3>
+  <p class="post-description">MiniCycle은 저장된 생리 시작일, 주기 길이 설정, 현재 날짜로 예측을 다시 계산합니다. 무엇이 다음 예정일을 바꾸고 어떤 한계가 남는지 설명합니다.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-07-02">2026.07.02</time><span aria-hidden="true">&middot;</span>약 3분</p>
     <span class="text-link" aria-hidden="true">글 읽기<span>&nbsp;&rarr;</span></span>
   </div>
 </article>

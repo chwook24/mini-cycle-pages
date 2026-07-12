@@ -15,79 +15,67 @@
   <link>https://minicycle.net/blog/ovulation-pain-mittelschmerz-what-it-is/</link>
   <guid>https://minicycle.net/blog/ovulation-pain-mittelschmerz-what-it-is/</guid>
   <pubDate>Fri, 03 Jul 2026 00:00:00 +0900</pubDate>
-  <description>Ovulation pain, or mittelschmerz, is a one-sided mid-cycle twinge that affects up to 40% of people who ovulate. What it feels like, why it happens, and when it isn&#x27;t ordinary.</description>
+  <description>One-sided pelvic pain can occur around ovulation, but timing and sensation cannot confirm the cause. Learn common features and signs that need medical assessment.</description>
 </item><item>
   <title>Why MiniCycle&#x27;s predicted period date keeps changing</title>
   <link>https://minicycle.net/blog/why-minicycle-predicted-period-date-changes/</link>
   <guid>https://minicycle.net/blog/why-minicycle-predicted-period-date-changes/</guid>
   <pubDate>Thu, 02 Jul 2026 00:00:00 +0900</pubDate>
-  <description>MiniCycle re-estimates your next period every time your saved dates change, so the predicted date can move. Here is what shifts, when, and why a moving estimate is the app working.</description>
+  <description>MiniCycle recalculates predictions from saved period starts, the cycle-length setting, and the current date. Learn which changes move the next expected period and what remains uncertain.</description>
 </item><item>
   <title>How long should a period last? What&#x27;s a normal length</title>
   <link>https://minicycle.net/blog/how-long-does-a-normal-period-last/</link>
   <guid>https://minicycle.net/blog/how-long-does-a-normal-period-last/</guid>
   <pubDate>Thu, 02 Jul 2026 00:00:00 +0900</pubDate>
-  <description>A normal period lasts about 2 to 7 days, usually around 5. What counts as normal is your own steady pattern. Here is the range, and when a change is worth a check.</description>
+  <description>Several medical sources describe a typical period as lasting about 2 to 7 days. Learn about individual variation and bleeding changes that deserve medical advice.</description>
 </item><item>
   <title>Using MiniCycle&#x27;s fertile window when trying to conceive</title>
   <link>https://minicycle.net/blog/trying-to-conceive-fertile-window-minicycle/</link>
   <guid>https://minicycle.net/blog/trying-to-conceive-fertile-window-minicycle/</guid>
   <pubDate>Sun, 28 Jun 2026 00:00:00 +0900</pubDate>
-  <description>MiniCycle marks a six-day fertile window and estimated ovulation from your logged periods. How to use them when trying to conceive, and where the estimate stops.</description>
+  <description>MiniCycle highlights seven dates from five days before estimated ovulation through the following day. Learn what that range means and why it cannot confirm fertility or ovulation.</description>
 </item><item>
   <title>Can you get pregnant on your period? What&#x27;s actually possible</title>
   <link>https://minicycle.net/blog/can-you-get-pregnant-on-your-period/</link>
   <guid>https://minicycle.net/blog/can-you-get-pregnant-on-your-period/</guid>
   <pubDate>Wed, 24 Jun 2026 00:00:00 +0900</pubDate>
-  <description>Getting pregnant on your period is unlikely but not impossible, mostly on short cycles with long periods. Here is why it happens and why a calendar is not contraception.</description>
+  <description>Pregnancy can result from sex during a period. Learn why ovulation timing is not fixed and why a calendar estimate should not be used as contraception.</description>
 </item><item>
   <title>What the MiniCycle statistics tab shows about your cycles</title>
   <link>https://minicycle.net/blog/minicycle-statistics-tab-recent-cycles/</link>
   <guid>https://minicycle.net/blog/minicycle-statistics-tab-recent-cycles/</guid>
   <pubDate>Mon, 22 Jun 2026 00:00:00 +0900</pubDate>
-  <description>MiniCycle&#x27;s statistics tab summarizes your recent cycle length and period length from saved dates, and shows up to 24 recent data points. Here is how to read it.</description>
+  <description>MiniCycle&#x27;s statistics tab shows three summaries and recent cycle and period-length charts from the dates you recorded. Here is what the numbers actually use.</description>
 </item><item>
   <title>Period blood color: what brown, dark, and bright red mean</title>
   <link>https://minicycle.net/blog/period-blood-color-what-it-means/</link>
   <guid>https://minicycle.net/blog/period-blood-color-what-it-means/</guid>
   <pubDate>Sun, 21 Jun 2026 00:00:00 +0900</pubDate>
-  <description>Period blood color usually just reflects how long blood took to leave: pink, red, and brown are all normal. Here is what the color means and what actually matters.</description>
+  <description>Period blood can appear bright red, dark red, or brown as flow and oxidation change. Learn why amount, duration, timing, and accompanying symptoms matter more than color alone.</description>
 </item><item>
   <title>Does MiniCycle work offline? Period tracking with no signal</title>
   <link>https://minicycle.net/blog/use-minicycle-period-tracker-offline/</link>
   <guid>https://minicycle.net/blog/use-minicycle-period-tracker-offline/</guid>
   <pubDate>Sun, 21 Jun 2026 00:00:00 +0900</pubDate>
-  <description>MiniCycle logs periods, predicts ovulation, and sends reminders entirely on your phone, so it works offline. Here is what needs a connection and what doesn&#x27;t.</description>
+  <description>MiniCycle&#x27;s recording, prediction, and local-reminder features work offline. Firebase Analytics and optional iCloud Sync still require a connection.</description>
 </item><item>
   <title>PMS symptoms and timing: what&#x27;s normal before a period</title>
   <link>https://minicycle.net/blog/pms-symptoms-timing-what-is-normal/</link>
   <guid>https://minicycle.net/blog/pms-symptoms-timing-what-is-normal/</guid>
   <pubDate>Thu, 18 Jun 2026 00:00:00 +0900</pubDate>
-  <description>PMS shows up after ovulation and fades within a few days of your period. Here is what counts as normal premenstrual change, what doesn&#x27;t, and when to see a doctor.</description>
+  <description>PMS involves physical or emotional symptoms that recur before menstruation and improve after it begins. Timing, severity, and effect on daily life all matter.</description>
 </item><item>
   <title>What data MiniCycle collects, and what stays on your phone</title>
   <link>https://minicycle.net/blog/what-data-minicycle-collects/</link>
   <guid>https://minicycle.net/blog/what-data-minicycle-collects/</guid>
   <pubDate>Thu, 18 Jun 2026 00:00:00 +0900</pubDate>
-  <description>MiniCycle keeps your period dates and notes on the device, while its Firebase Analytics logs only usage events like screen views, never your cycle data. Here is the exact split.</description>
+  <description>MiniCycle stores cycle records on the device by default, offers optional iCloud Sync, and uses Firebase Analytics for product-interaction measurement. Here is the current split.</description>
 </item><item>
   <title>What counts as a heavy period, and what&#x27;s normal flow</title>
   <link>https://minicycle.net/blog/what-counts-as-a-heavy-period/</link>
   <guid>https://minicycle.net/blog/what-counts-as-a-heavy-period/</guid>
   <pubDate>Wed, 17 Jun 2026 00:00:00 +0900</pubDate>
-  <description>Most periods lose only about two to three tablespoons of blood over several days. Here is what counts as a heavy period, the practical signs to watch for, and when to see a doctor.</description>
-</item><item>
-  <title>Past cycles vs future predictions in MiniCycle&#x27;s calendar</title>
-  <link>https://minicycle.net/blog/minicycle-past-cycles-vs-future-predictions/</link>
-  <guid>https://minicycle.net/blog/minicycle-past-cycles-vs-future-predictions/</guid>
-  <pubDate>Wed, 17 Jun 2026 00:00:00 +0900</pubDate>
-  <description>MiniCycle places past fertile windows from the real gaps you logged and the next one from a forward estimate. Why the two differ, and how each is worked out.</description>
-</item><item>
-  <title>How sleep, stress, and travel can shift your cycle</title>
-  <link>https://minicycle.net/blog/how-sleep-stress-travel-shift-your-cycle/</link>
-  <guid>https://minicycle.net/blog/how-sleep-stress-travel-shift-your-cycle/</guid>
-  <pubDate>Tue, 16 Jun 2026 00:00:00 +0900</pubDate>
-  <description>A stressful month or a long trip can move your period. How stress, sleep, and travel shift the cycle, why a delay usually means ovulation moved, and what&#x27;s normal.</description>
+  <description>Heavy menstrual bleeding is judged by duration, product changes, clots, disruption, and anemia symptoms rather than a home estimate of blood volume.</description>
 </item><item>
   <title>How to log a period start and end date in MiniCycle</title>
   <link>https://minicycle.net/blog/log-period-start-end-minicycle/</link>
@@ -105,19 +93,19 @@
   <link>https://minicycle.net/blog/add-minicycle-widget-iphone-home-screen/</link>
   <guid>https://minicycle.net/blog/add-minicycle-widget-iphone-home-screen/</guid>
   <pubDate>Mon, 15 Jun 2026 00:00:00 +0900</pubDate>
-  <description>Add the MiniCycle period widget to your iPhone home screen in about five taps. What the widget shows, why it matches the app, and what to check if it looks empty.</description>
+  <description>Add MiniCycle&#x27;s small widget to your iPhone home screen. It shows a four-week calendar around today using records and settings shared with the app.</description>
 </item><item>
   <title>Menstrual cramps: what&#x27;s normal period pain, and what&#x27;s not</title>
   <link>https://minicycle.net/blog/menstrual-cramps-whats-normal-period-pain/</link>
   <guid>https://minicycle.net/blog/menstrual-cramps-whats-normal-period-pain/</guid>
   <pubDate>Sun, 14 Jun 2026 00:00:00 +0900</pubDate>
-  <description>More than half of people who menstruate get period pain. What normal menstrual cramps feel like, what eases them, and when cramps are worth a doctor&#x27;s visit.</description>
+  <description>Period pain is common, but pain that disrupts daily life or suddenly worsens should not be dismissed. Learn common patterns, relief options, and warning signs.</description>
 </item><item>
   <title>How to reset MiniCycle and erase all your period records</title>
   <link>https://minicycle.net/blog/reset-all-data-in-minicycle/</link>
   <guid>https://minicycle.net/blog/reset-all-data-in-minicycle/</guid>
   <pubDate>Sun, 14 Jun 2026 00:00:00 +0900</pubDate>
-  <description>Reset records wipes every period date, note, and activity mark in MiniCycle, and it cannot be undone. What it clears, what it keeps, and how to back up first.</description>
+  <description>Reset records erases all period ranges, daily notes, and sexual-activity marks in MiniCycle. Learn what remains, how iCloud Sync reacts, and why it is not a backup.</description>
 </item><item>
   <title>How to start tracking your period: a beginner&#x27;s guide</title>
   <link>https://minicycle.net/blog/how-to-start-tracking-your-cycle/</link>
@@ -131,12 +119,6 @@
   <pubDate>Sat, 13 Jun 2026 00:00:00 +0900</pubDate>
   <description>Tap any date in MiniCycle to add a daily note: symptoms, flow, pain, mood, up to 999 characters. Notes stay on your device by default and never appear on the widget.</description>
 </item><item>
-  <title>The fertile window: six days, and why apps estimate it</title>
-  <link>https://minicycle.net/blog/fertile-window-explained-why-calendar-estimates-approximate/</link>
-  <guid>https://minicycle.net/blog/fertile-window-explained-why-calendar-estimates-approximate/</guid>
-  <pubDate>Sat, 13 Jun 2026 00:00:00 +0900</pubDate>
-  <description>The fertile window is about six days: five before ovulation, one after. Why the window exists, and why any calendar estimate of it stays approximate.</description>
-</item><item>
   <title>MiniCycle in English: change the app language and dark mode</title>
   <link>https://minicycle.net/blog/minicycle-dark-mode-app-language-settings/</link>
   <guid>https://minicycle.net/blog/minicycle-dark-mode-app-language-settings/</guid>
@@ -147,31 +129,25 @@
   <link>https://minicycle.net/blog/perimenopause-period-changes-what-to-expect/</link>
   <guid>https://minicycle.net/blog/perimenopause-period-changes-what-to-expect/</guid>
   <pubDate>Thu, 11 Jun 2026 00:00:00 +0900</pubDate>
-  <description>Cycles in perimenopause can shift by a week, skip months, or run heavier. Which period changes are expected before menopause, and which ones need a doctor.</description>
+  <description>Cycle intervals and bleeding can change during perimenopause. Learn what to record and which changes should be assessed by a clinician.</description>
 </item><item>
   <title>Hide sexual activity in your period tracker with Face ID</title>
   <link>https://minicycle.net/blog/hide-sexual-activity-period-tracker-face-id/</link>
   <guid>https://minicycle.net/blog/hide-sexual-activity-period-tracker-face-id/</guid>
   <pubDate>Thu, 11 Jun 2026 00:00:00 +0900</pubDate>
-  <description>MiniCycle logs sexual activity as a purple dot on the calendar. One switch hides every trace, and showing it again takes Face ID. What hiding does and doesn&#x27;t do.</description>
+  <description>MiniCycle can hide sexual-activity marks from its calendar. Learn what the switch hides, why Face ID is required to show them again, and what the feature does not protect.</description>
 </item><item>
   <title>What counts as an irregular period, and when to see a doctor</title>
   <link>https://minicycle.net/blog/irregular-periods-what-counts-when-to-see-doctor/</link>
   <guid>https://minicycle.net/blog/irregular-periods-what-counts-when-to-see-doctor/</guid>
   <pubDate>Wed, 10 Jun 2026 00:00:00 +0900</pubDate>
-  <description>Irregular periods usually have ordinary causes, but some patterns deserve a clinician. What counts as irregular, when to see a doctor, and how tracking actually helps.</description>
+  <description>Clinical sources use slightly different ranges for irregular cycles. Learn how to count cycle length, which changes deserve medical advice, and what a tracking app can document.</description>
 </item><item>
   <title>Auto vs manual cycle and period length in MiniCycle</title>
   <link>https://minicycle.net/blog/auto-vs-manual-cycle-length-period-length/</link>
   <guid>https://minicycle.net/blog/auto-vs-manual-cycle-length-period-length/</guid>
   <pubDate>Wed, 10 Jun 2026 00:00:00 +0900</pubDate>
   <description>MiniCycle can estimate your cycle and period length, or let you set them by hand (21–42 and 1–10 days). When auto fits, when manual fits, and why the estimate uses a median.</description>
-</item><item>
-  <title>What causes spotting between periods? Common reasons</title>
-  <link>https://minicycle.net/blog/spotting-between-periods-common-causes/</link>
-  <guid>https://minicycle.net/blog/spotting-between-periods-common-causes/</guid>
-  <pubDate>Tue, 09 Jun 2026 00:00:00 +0900</pubDate>
-  <description>Spotting between periods has many ordinary explanations, from ovulation to new birth control. Learn what is common, when to see a clinician, and how to track it.</description>
 </item><item>
   <title>Should a period calendar start on Sunday or Monday?</title>
   <link>https://minicycle.net/blog/week-start-sunday-monday-period-calendar/</link>
@@ -195,7 +171,7 @@
   <link>https://minicycle.net/blog/normal-menstrual-cycle-length-variation/</link>
   <guid>https://minicycle.net/blog/normal-menstrual-cycle-length-variation/</guid>
   <pubDate>Sun, 07 Jun 2026 00:00:00 +0900</pubDate>
-  <description>A normal menstrual cycle length is a range, not a single number. See the 24–38 day guideline, how much variation is common, and when to ask a clinician.</description>
+  <description>A 28-day cycle is a reference point, not a rule. Learn how major health sources describe typical ranges, variation, and changes worth discussing with a clinician.</description>
 </item><item>
   <title>How to edit or fix a wrong period date in MiniCycle</title>
   <link>https://minicycle.net/blog/fix-wrong-period-date-in-minicycle/</link>
@@ -207,55 +183,25 @@
   <link>https://minicycle.net/blog/menstrual-cycle-phases-explained/</link>
   <guid>https://minicycle.net/blog/menstrual-cycle-phases-explained/</guid>
   <pubDate>Sat, 06 Jun 2026 00:00:00 +0900</pubDate>
-  <description>Learn the menstrual cycle phases: menstruation, the follicular phase, ovulation, and the luteal phase, what each one does, and why their lengths vary.</description>
+  <description>The cycle is often described with menstruation, the follicular phase, ovulation, and the luteal phase, but menstruation overlaps the start of the follicular phase.</description>
 </item><item>
-  <title>How to set up period and ovulation reminders in MiniCycle</title>
+  <title>How to set up period, fertile-window, and ovulation reminders</title>
   <link>https://minicycle.net/blog/set-up-period-and-ovulation-reminders/</link>
   <guid>https://minicycle.net/blog/set-up-period-and-ovulation-reminders/</guid>
   <pubDate>Fri, 05 Jun 2026 00:00:00 +0900</pubDate>
-  <description>MiniCycle can remind you 0–3 days before an expected period, the fertile window, or ovulation day. Learn how to set up period reminders and pick a time.</description>
+  <description>Set local reminders for the expected period, fertile-window start and end, and estimated ovulation day. Most support 0–3 days of lead time; fertile-window end currently arrives on the estimated end date.</description>
 </item><item>
-  <title>Why is my period late? Common non-pregnancy reasons</title>
+  <title>Why is my period late? What to check first</title>
   <link>https://minicycle.net/blog/why-is-my-period-late-common-reasons/</link>
   <guid>https://minicycle.net/blog/why-is-my-period-late-common-reasons/</guid>
   <pubDate>Thu, 04 Jun 2026 00:00:00 +0900</pubDate>
-  <description>A late period has many non-pregnancy explanations, from stress to travel and illness. Learn common reasons a period can be late and when to ask a clinician.</description>
+  <description>A late period can be related to pregnancy, stress, weight or exercise changes, illness, medication, or a health condition. Learn what to check and when to seek care.</description>
 </item><item>
   <title>How to keep your period tracker records when moving to a new iPhone</title>
   <link>https://minicycle.net/blog/move-period-tracker-records-to-new-iphone/</link>
   <guid>https://minicycle.net/blog/move-period-tracker-records-to-new-iphone/</guid>
   <pubDate>Sat, 23 May 2026 00:00:00 +0900</pubDate>
   <description>MiniCycle stores records locally by default and offers optional iCloud Sync. Learn what to check before moving to a new iPhone.</description>
-</item><item>
-  <title>How MiniCycle estimates periods, ovulation, and the fertile window</title>
-  <link>https://minicycle.net/blog/how-minicycle-estimates-periods-ovulation-fertile-window/</link>
-  <guid>https://minicycle.net/blog/how-minicycle-estimates-periods-ovulation-fertile-window/</guid>
-  <pubDate>Sat, 16 May 2026 00:00:00 +0900</pubDate>
-  <description>Learn how MiniCycle estimates period dates, ovulation, and the fertile window using recent cycle records, median-based calculations, and published menstrual cycle research.</description>
-</item><item>
-  <title>What a period calendar widget should show on the iPhone home screen</title>
-  <link>https://minicycle.net/blog/period-calendar-widget-iphone-home-screen/</link>
-  <guid>https://minicycle.net/blog/period-calendar-widget-iphone-home-screen/</guid>
-  <pubDate>Sat, 16 May 2026 00:00:00 +0900</pubDate>
-  <description>A practical guide to period calendar widgets, including glanceable cycle status, prediction labels, and why MiniCycle keeps its iPhone widget simple.</description>
-</item><item>
-  <title>Private period tracking without an account: why MiniCycle stores records locally</title>
-  <link>https://minicycle.net/blog/private-period-tracking-without-account/</link>
-  <guid>https://minicycle.net/blog/private-period-tracking-without-account/</guid>
-  <pubDate>Sat, 16 May 2026 00:00:00 +0900</pubDate>
-  <description>MiniCycle keeps records local by default, offers optional iCloud Sync, and does not require a MiniCycle account.</description>
-</item><item>
-  <title>Cycle length and period length: how to read simple period statistics</title>
-  <link>https://minicycle.net/blog/cycle-length-period-length-statistics/</link>
-  <guid>https://minicycle.net/blog/cycle-length-period-length-statistics/</guid>
-  <pubDate>Sat, 16 May 2026 00:00:00 +0900</pubDate>
-  <description>Understand cycle length, period length, recent averages, and why MiniCycle shows simple statistics instead of turning every cycle into a score.</description>
-</item><item>
-  <title>When period tracker predictions are useful, and when they are not</title>
-  <link>https://minicycle.net/blog/period-tracker-prediction-limits/</link>
-  <guid>https://minicycle.net/blog/period-tracker-prediction-limits/</guid>
-  <pubDate>Sat, 16 May 2026 00:00:00 +0900</pubDate>
-  <description>Period tracker predictions can help with planning, but they are not medical advice, contraception, or a pregnancy test. Learn the limits MiniCycle makes explicit.</description>
 </item>
           </channel>
         </rss>
