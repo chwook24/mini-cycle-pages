@@ -177,7 +177,7 @@
   }
   window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
 </script>
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"MiniCycle은 어떤 데이터를 수집하나요: 앱 분석과 기록 저장","description":"MiniCycle은 주기 기록을 기본적으로 기기에 저장하고 선택형 iCloud 저장을 제공하며, 제품 상호작용 측정에 Firebase Analytics를 사용합니다.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg","datePublished":"2026-06-18","dateModified":"2026-06-18","inLanguage":"ko","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/ko/blog/what-data-minicycle-collects/"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"MiniCycle은 어떤 데이터를 수집하나요: 앱 분석과 기록 저장","description":"MiniCycle은 주기 기록을 기본적으로 기기에 저장하고 선택형 iCloud 저장을 제공하며, 제품 상호작용 측정에 Firebase Analytics를 사용합니다.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-ko-20260518.jpg","datePublished":"2026-06-18","dateModified":"2026-08-23","inLanguage":"ko","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/ko/blog/what-data-minicycle-collects/"}}</script>
         </head>
           <body class="article-page">
         <a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
@@ -202,7 +202,7 @@
   </div>
 </header>
             <main class="page article-page-main" id="main-content">
-              <article class="article" data-language="ko" data-content-group="what-data-minicycle-collects" data-min-read-ms="41000">
+              <article class="article" data-language="ko" data-content-group="what-data-minicycle-collects" data-min-read-ms="42000">
                 <a class="back-link" href="../"><span aria-hidden="true">&larr;</span> 전체 글</a>
                 <header class="article-header">
                   <div class="article-heading">
@@ -229,12 +229,12 @@
 </section>
 <section class="article-section" aria-labelledby="section-2">
   <h2 id="section-2">Firebase Analytics</h2>
-<p>MiniCycle은 Google의 Firebase Analytics SDK를 사용합니다. 앱이 직접 정의한 이벤트에는 앱 열기, 화면과 탭 이동, 달력 조작, 큰 범주의 기록 동작, 설정 변경, 알림 권한 결과, iCloud 저장 상태가 포함됩니다. Firebase는 이와 별도로 자동 이벤트와 기술 메타데이터를 수집할 수 있으며, 구체적인 범위는 Google 문서를 확인해야 합니다.</p>
-<p>App Store 개인정보 선언에서는 분석 목적의 제품 상호작용 데이터로 분류하고, 사용자와 연결하지 않으며 추적에 사용하지 않는 것으로 표시합니다. 그래도 제3자 분석 SDK를 사용한다는 사실은 변하지 않습니다.</p>
+<p>MiniCycle은 Google의 Firebase Analytics SDK를 사용합니다. 앱이 직접 정의한 이벤트에는 앱 열기, 화면과 탭 이동, 달력 조작, 일반화된 핵심 동작, 위젯 설치 상태와 탭 유입, 일반 설정, 알림 권한, 온보딩, iCloud 저장 상태가 포함됩니다. Firebase는 이와 별도로 자동 이벤트, 앱 인스턴스 식별자, 기술 메타데이터를 수집할 수 있으며 구체적인 범위는 Google 문서를 확인해야 합니다.</p>
+<p>App Store 개인정보 세부 정보에는 분석 목적의 제품 상호작용 데이터를 공개해야 합니다. MiniCycle은 이를 추적에 사용하지 않지만, Firebase가 제3자 분석 SDK라는 사실과 일부 데이터가 기기 밖으로 전송된다는 점은 변하지 않습니다.</p>
 </section>
 <section class="article-section" aria-labelledby="section-3">
   <h2 id="section-3">MiniCycle 사용자 정의 이벤트에 넣지 않는 정보</h2>
-<p>MiniCycle이 직접 정의한 이벤트 매개변수에는 생리 날짜, 메모 본문, 성생활 표시, 정확한 주기 설정값, 정확한 알림 시간, 주기 이력을 넣지 않도록 설계했습니다. 기록 동작 이벤트는 큰 기록 유형과 생성·수정·삭제·초기화 여부를 구분할 수 있지만, 해당 기록의 날짜나 메모 내용은 보내지 않습니다.</p>
+<p>MiniCycle이 직접 정의한 이벤트 매개변수에는 생리 날짜, 메모 본문, 성생활 표시, 기록 유형, 기록 입력 위치, 건강 관련 검증 실패 사유, 정확한 주기 설정값, 정확한 알림 시간, 주기 이력을 넣지 않도록 설계했습니다. 일반화된 핵심 동작 이벤트는 생성·수정·삭제·초기화와 성공·차단 여부만 구분합니다.</p>
 <p>이 설명은 MiniCycle이 정의한 이벤트에 관한 것입니다. Firebase SDK가 자동으로 수집하는 이벤트와 메타데이터는 Google의 최신 문서를 기준으로 확인해야 합니다.</p>
 </section>
 <section class="article-section" aria-labelledby="section-4">

@@ -177,7 +177,7 @@
   }
   window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
 </script>
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"What data MiniCycle collects, and what stays on your phone","description":"MiniCycle stores cycle records on the device by default, offers optional iCloud Sync, and uses Firebase Analytics for product-interaction measurement. Here is the current split.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-06-18","dateModified":"2026-06-18","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/what-data-minicycle-collects/"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"What data MiniCycle collects, and what stays on your phone","description":"MiniCycle stores cycle records on the device by default, offers optional iCloud Sync, and uses Firebase Analytics for product-interaction measurement. Here is the current split.","image":"https://minicycle.net/assets/home-capture-iphone17-1118-en-20260518.jpg","datePublished":"2026-06-18","dateModified":"2026-08-23","inLanguage":"en","author":{"@type":"Person","name":"Chanwook Kim"},"publisher":{"@type":"Organization","name":"MiniCycle"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/what-data-minicycle-collects/"}}</script>
         </head>
           <body class="article-page">
         <a class="skip-link" href="#main-content">Skip to content</a>
@@ -202,7 +202,7 @@
   </div>
 </header>
             <main class="page article-page-main" id="main-content">
-              <article class="article" data-language="en" data-content-group="what-data-minicycle-collects" data-min-read-ms="70000">
+              <article class="article" data-language="en" data-content-group="what-data-minicycle-collects" data-min-read-ms="71000">
                 <a class="back-link" href="../"><span aria-hidden="true">&larr;</span> All guides</a>
                 <header class="article-header">
                   <div class="article-heading">
@@ -229,12 +229,12 @@
 </section>
 <section class="article-section" aria-labelledby="section-2">
   <h2 id="section-2">Firebase Analytics</h2>
-<p>The app includes Google&#x27;s Firebase Analytics SDK. MiniCycle defines events for app opens, screens and tabs, calendar interaction, broad record actions, settings, notification permission, and iCloud Sync status. Firebase can also collect automatically generated events and technical metadata described in Google&#x27;s documentation.</p>
-<p>The App Store privacy manifest classifies the declared analytics data as product interaction that is not linked to the user and is not used for tracking. This is an analytics SDK, not a promise that no data leaves the device.</p>
+<p>The app includes Google&#x27;s Firebase Analytics SDK. MiniCycle defines events for app opens, screens and tabs, calendar interaction, generic core actions, widget configuration and opens, general settings, notification permission, onboarding, and iCloud Sync status. Firebase can also collect automatically generated events, an app-instance identifier, and technical metadata described in Google&#x27;s documentation.</p>
+<p>App Store privacy details should disclose product-interaction data used for analytics. MiniCycle does not use this data for tracking, but Firebase remains a third-party analytics SDK and this is not a promise that no data leaves the device.</p>
 </section>
 <section class="article-section" aria-labelledby="section-3">
   <h2 id="section-3">What MiniCycle&#x27;s custom events omit</h2>
-<p>MiniCycle&#x27;s custom event parameters are designed not to include period dates, memo text, sexual-activity markers, exact cycle settings, exact notification times, or cycle history. A record-action event can distinguish a broad record type and whether it was created, updated, deleted, or cleared, but it does not send the record&#x27;s date or memo content.</p>
+<p>MiniCycle&#x27;s custom event parameters are designed not to include period dates, memo text, sexual-activity markers, record types, record-entry locations, health-related validation reasons, exact cycle settings, exact notification times, or cycle history. The generic core-action event only distinguishes created, updated, deleted, or cleared actions and whether the action succeeded or was blocked.</p>
 <p>This description covers MiniCycle&#x27;s event design. For the SDK&#x27;s automatically collected events and metadata, Google&#x27;s current Firebase documentation is the authoritative source.</p>
 </section>
 <section class="article-section" aria-labelledby="section-4">
