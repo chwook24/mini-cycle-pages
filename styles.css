@@ -1382,6 +1382,7 @@ h3 {
 }
 
 html[lang="ko"] body {
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, "Apple SD Gothic Neo", "Segoe UI", sans-serif;
   word-break: keep-all;
   overflow-wrap: break-word;
 }
