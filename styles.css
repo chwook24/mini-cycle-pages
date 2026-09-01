@@ -1132,6 +1132,28 @@ h3 {
   margin-top: 1.2em;
 }
 
+.article-inline-figure {
+  margin: 46px 0;
+}
+
+.article-inline-figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  background: var(--surface);
+  box-shadow: var(--shadow-md);
+}
+
+.article-inline-figure figcaption {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.55;
+  text-align: center;
+}
+
 .article-sidebar {
   min-width: 0;
 }

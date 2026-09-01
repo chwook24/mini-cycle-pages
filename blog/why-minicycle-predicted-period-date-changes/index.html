@@ -89,7 +89,7 @@
     });
   })();
 </script>
-          <link rel="stylesheet" href="../../styles.css?v=20260711-4">
+          <link rel="stylesheet" href="../../styles.css?v=20260901-1">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-339Q79533S"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -209,7 +209,7 @@
                     <p class="category-pill">Predictions</p>
                     <h1>Why MiniCycle&#x27;s predicted period date keeps changing</h1>
                     <p class="article-meta"><time datetime="2026-07-02">Published July 2, 2026 by MiniCycle</time><span aria-hidden="true">&middot;</span><span>3 min read</span></p>
-                    <p class="lead">MiniCycle does not treat a predicted period date as fixed. Add or correct a period, change the cycle-length setting, or let an expected cycle pass without recording one, and the app may calculate a different date. That new date reflects the information available now. It is still only an estimate.</p>
+                    <p class="lead">A predicted period date can change after you record, edit, or delete a period, change the cycle-length setting, or move beyond an unrecorded predicted cycle. The new date reflects the app&#x27;s current inputs, but it is still an estimate and is not guaranteed to be more accurate simply because it changed.</p>
                   </div>
                   <figure class="article-visual">
                     <div class="article-visual-frame">
@@ -224,33 +224,33 @@
                   <div class="article-body">
         <section class="article-section" aria-labelledby="section-1">
   <h2 id="section-1">Why the date moves</h2>
-<p>Adding, editing, or deleting a period start can change the next expected period. So can changing the cycle-length setting. Ovulation and fertile-window estimates are then recalculated from that date. The period-length setting only changes how many predicted bleeding days appear; it does not change the next start date.</p>
-<p>Time matters too. If an expected cycle passes and no new start is recorded, the app can move on to a later predicted cycle even though your saved records are unchanged.</p>
+<p>Logging a new period start, editing or deleting a period, or changing the cycle-length setting can move the next expected period and the dependent ovulation and fertile-window estimates. The period-length setting changes how many predicted bleeding days are shown, not the next start date itself.</p>
+<p>The current day is also an input. If an expected cycle passes without a new recorded start, the app can advance to a later predicted cycle even though the saved records did not change.</p>
 </section>
 <section class="article-section" aria-labelledby="section-2">
   <h2 id="section-2">Your most recent start is the anchor</h2>
-<p>The most recent recorded start is the date MiniCycle counts forward from. If you add or correct it, the next-period, ovulation, and fertile-window estimates usually move as well.</p>
-<p>Older starts still affect the calculation because they determine the recent intervals. The newest start often has the largest effect: it can change both the starting point and the estimated cycle length.</p>
+<p>Future cycles are projected forward from the latest recorded period start. Recording or correcting that date changes the anchor, so the next-period, ovulation, and fertile-window estimates generally move with it.</p>
+<p>Older starts still matter because they can change the recent interval calculation. The latest start usually has the largest effect because it can change both the anchor and the estimated cycle length.</p>
 </section>
 <section class="article-section" aria-labelledby="section-3">
   <h2 id="section-3">Cycle length is recalculated from recent intervals</h2>
-<p>MiniCycle uses up to 12 recent period starts. Once there are at least two valid dates, it calculates the intervals and uses their median. With 10 or more intervals, it removes one shortest and one longest interval before calculating.</p>
-<p>If there is no valid interval, automatic mode starts with a 29-day default. When there are only a few intervals, correcting one date can noticeably change the result. A longer history gives the app more information, but it cannot make future cycles regular.</p>
+<p>MiniCycle uses up to 12 recent period starts. With at least two valid starts it calculates the intervals between them and uses a median-style representative value. When there are at least 10 intervals, it removes one shortest and one longest first.</p>
+<p>If there is no valid interval, automatic mode uses a 29-day default. With few intervals, one correction can change the result noticeably; more records do not guarantee that the future cycle itself will be regular.</p>
 </section>
 <section class="article-section" aria-labelledby="section-4">
   <h2 id="section-4">Ovulation and the fertile window shift with it</h2>
-<p>MiniCycle does not place ovulation on a fixed cycle day 14. It counts backward from the next expected period using a value between 9 and 14 days, depending on cycle length. The fertile window runs from five days before the estimated ovulation date through the following day.</p>
-<p>Because both displays are calculated from the next expected period, they move when that period date changes. The app recalculates them together; they are not separate predictions.</p>
+<p>Ovulation is not pinned to a fixed day 14. MiniCycle counts it backward from the next expected period using a luteal phase that flexes between 9 and 14 days depending on your cycle length. The fertile window then runs from five days before that estimated ovulation through the day after it. All of it hangs off the next-period estimate.</p>
+<p>So when the period date moves, ovulation and the sky-blue fertile band move with it, in the same direction. You do not adjust them separately. They sit downstream of the one date the app is really estimating.</p>
 </section>
 <section class="article-section" aria-labelledby="section-5">
   <h2 id="section-5">Reminders and the widget</h2>
-<p>After a relevant record or setting changes, MiniCycle schedules its local notifications again using the new estimated dates.</p>
-<p>It also updates the shared widget data and asks iOS to reload the widget. iOS decides when the widget is redrawn, so an older date may remain visible for a while after the app has recalculated.</p>
+<p>MiniCycle rebuilds local notifications after relevant records or settings change. Supported lead times remain relative to the new estimated dates.</p>
+<p>The app also writes shared data and requests a widget reload. iOS controls the actual redraw time, so the widget can temporarily show an older prediction even after the app has recalculated.</p>
 </section>
 <section class="article-section" aria-labelledby="section-6">
   <h2 id="section-6">What a moving date can and cannot tell you</h2>
-<p>A changed estimate tells you that the inputs or the point in time have changed. It does not say anything by itself about your health. An analysis of more than 600,000 cycles found differences between people and from month to month, which is why MiniCycle recalculates instead of relying on one fixed number.</p>
-<p>The date is reference information based on your records. It cannot diagnose a condition, confirm pregnancy, or serve as contraception. Mayo Clinic advises talking with a clinician if periods come less than 24 or more than 38 days apart, stop for more than 90 days without pregnancy, or become irregular after being regular. For a useful estimate, the most practical step is simple: record each period start on the day it happens.</p>
+<p>A shifting estimate reflects your data, not your health. Cycles vary. An analysis of more than 600,000 cycles found that cycle length differs from person to person and from month to month for most people, which is the reason MiniCycle keeps re-estimating instead of trusting a single figure. A prediction that lands a few days off is ordinary, not a fault in the app or in you.</p>
+<p>What the moving date cannot do is diagnose anything. It is reference information drawn from your own dates, not contraception and not a verdict on pregnancy. Mayo Clinic suggests checking with a clinician if your periods come less than 24 or more than 38 days apart, stop for more than 90 days without pregnancy, or turn irregular after being regular. If you want the predicted date to track you as closely as possible, the habit that helps most is logging each period start on the day it happens, so the anchor the app measures from is always right.</p>
 </section>
                     <section class="callout" aria-labelledby="try-minicycle">
                       <img class="callout-mark" src="../../assets/minicycle-app-icon.png" alt="" width="42" height="42" loading="lazy">
@@ -296,7 +296,31 @@
                   <a class="text-link section-link" href="../">All guides<span aria-hidden="true">&nbsp;&rarr;</span></a>
                 </div>
                 <div class="post-grid related-grid">
-        <article class="post-card related-card" data-guide-card data-search-value="cycle health spotting between periods: what to note and when to get checked a little blood outside your expected period can have many causes. here is what spotting means, what to write down, and when to seek medical care.">
+        <article class="post-card related-card" data-guide-card data-search-value="cycle health your menstrual cycle is a pattern, not a score: a cycle health check-in cycle health is not about hitting one perfect number. learn which period patterns are useful to track, what changes can mean, and when to seek medical care.">
+  <div class="post-card-topline">
+    <p class="category-pill">Cycle health</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../menstrual-cycle-health-patterns-to-track/">Your menstrual cycle is a pattern, not a score: a cycle health check-in</a></h3>
+  <p class="post-description">Cycle health is not about hitting one perfect number. Learn which period patterns are useful to track, what changes can mean, and when to seek medical care.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-09-01">2026.09.01</time><span aria-hidden="true">&middot;</span>3 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="app guide forgot to log a period? how to repair the record in minicycle missed recording a period start in minicycle? learn what happens to predictions, how to add the date later, and when not to guess.">
+  <div class="post-card-topline">
+    <p class="category-pill">App guide</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../forgot-to-log-period-minicycle-missing-cycle/">Forgot to log a period? How to repair the record in MiniCycle</a></h3>
+  <p class="post-description">Missed recording a period start in MiniCycle? Learn what happens to predictions, how to add the date later, and when not to guess.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-08-23">2026.08.23</time><span aria-hidden="true">&middot;</span>3 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-search-value="cycle health spotting between periods: what to note and when to get checked a little blood outside your expected period can have many causes. here is what spotting means, what to write down, and when to seek medical care.">
   <div class="post-card-topline">
     <p class="category-pill">Cycle health</p>
     <span class="card-accent" aria-hidden="true"></span>
@@ -305,30 +329,6 @@
   <p class="post-description">A little blood outside your expected period can have many causes. Here is what spotting means, what to write down, and when to seek medical care.</p>
   <div class="post-card-footer">
     <p class="post-meta"><time datetime="2026-07-12">2026.07.12</time><span aria-hidden="true">&middot;</span>3 min read</p>
-    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
-  </div>
-</article>
-<article class="post-card related-card" data-guide-card data-search-value="widget why the minicycle widget isn&#x27;t updating, and how it refreshes the minicycle home-screen widget updates on ios&#x27;s schedule, not the instant you log a period. here is how widgetkit refreshes it and what to check when it looks stale.">
-  <div class="post-card-topline">
-    <p class="category-pill">Widget</p>
-    <span class="card-accent" aria-hidden="true"></span>
-  </div>
-  <h3><a href="../minicycle-widget-not-updating-refresh/">Why the MiniCycle widget isn&#x27;t updating, and how it refreshes</a></h3>
-  <p class="post-description">The MiniCycle home-screen widget updates on iOS&#x27;s schedule, not the instant you log a period. Here is how WidgetKit refreshes it and what to check when it looks stale.</p>
-  <div class="post-card-footer">
-    <p class="post-meta"><time datetime="2026-07-04">2026.07.04</time><span aria-hidden="true">&middot;</span>3 min read</p>
-    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
-  </div>
-</article>
-<article class="post-card related-card" data-guide-card data-search-value="cycle health ovulation pain (mittelschmerz): what that mid-cycle twinge is one-sided pelvic pain can occur around ovulation, but timing and sensation cannot confirm the cause. learn common features and signs that need medical assessment.">
-  <div class="post-card-topline">
-    <p class="category-pill">Cycle health</p>
-    <span class="card-accent" aria-hidden="true"></span>
-  </div>
-  <h3><a href="../ovulation-pain-mittelschmerz-what-it-is/">Ovulation pain (mittelschmerz): what that mid-cycle twinge is</a></h3>
-  <p class="post-description">One-sided pelvic pain can occur around ovulation, but timing and sensation cannot confirm the cause. Learn common features and signs that need medical assessment.</p>
-  <div class="post-card-footer">
-    <p class="post-meta"><time datetime="2026-07-03">2026.07.03</time><span aria-hidden="true">&middot;</span>3 min read</p>
     <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
   </div>
 </article>
