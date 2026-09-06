@@ -189,7 +189,7 @@
   }
   window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
 </script>
-    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","@id":"https://minicycle.net/blog/minicycle-widget-not-updating-refresh/#article","headline":"Why the MiniCycle widget isn't updating, and how it refreshes","description":"The MiniCycle home-screen widget updates on iOS's schedule, not the instant you log a period. Here is how WidgetKit refreshes it and what to check when it looks stale.","image":{"@type":"ImageObject","url":"https://minicycle.net/assets/blog-widget-reminders-editorial-20260906.jpg","width":1200,"height":675,"caption":"AI-generated gouache illustration. A woman checking a phone on a stand at a breakfast table."},"datePublished":"2026-07-04","dateModified":"2026-09-02","inLanguage":"en","author":{"@type":"Person","@id":"https://minicycle.net/about/#chanwook-kim","name":"Chanwook Kim","alternateName":"김찬욱","url":"https://minicycle.net/about/","jobTitle":"MiniCycle developer","worksFor":{"@id":"https://minicycle.net/#organization"}},"publisher":{"@type":"Organization","@id":"https://minicycle.net/#organization","name":"MiniCycle","url":"https://minicycle.net/","logo":{"@type":"ImageObject","url":"https://minicycle.net/assets/minicycle-app-icon.png","width":1024,"height":1024}},"isPartOf":{"@id":"https://minicycle.net/#website"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/minicycle-widget-not-updating-refresh/#webpage"}},{"@type":"BreadcrumbList","@id":"https://minicycle.net/blog/minicycle-widget-not-updating-refresh/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"MiniCycle","item":"https://minicycle.net/"},{"@type":"ListItem","position":2,"name":"MiniCycle Blog","item":"https://minicycle.net/blog/"},{"@type":"ListItem","position":3,"name":"Why the MiniCycle widget isn't updating, and how it refreshes","item":"https://minicycle.net/blog/minicycle-widget-not-updating-refresh/"}]}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","@id":"https://minicycle.net/blog/minicycle-widget-not-updating-refresh/#article","headline":"Why the MiniCycle widget isn't updating, and how it refreshes","description":"The MiniCycle home-screen widget updates on iOS's schedule, not the instant you log a period. Here is how WidgetKit refreshes it and what to check when it looks stale.","image":{"@type":"ImageObject","url":"https://minicycle.net/assets/blog-widget-reminders-editorial-20260906.jpg","width":1200,"height":675,"caption":"AI-generated gouache illustration. A woman checking a phone on a stand at a breakfast table."},"datePublished":"2026-07-04","dateModified":"2026-09-06","inLanguage":"en","author":{"@type":"Person","@id":"https://minicycle.net/about/#chanwook-kim","name":"Chanwook Kim","alternateName":"김찬욱","url":"https://minicycle.net/about/","jobTitle":"MiniCycle developer","worksFor":{"@id":"https://minicycle.net/#organization"}},"publisher":{"@type":"Organization","@id":"https://minicycle.net/#organization","name":"MiniCycle","url":"https://minicycle.net/","logo":{"@type":"ImageObject","url":"https://minicycle.net/assets/minicycle-app-icon.png","width":1024,"height":1024}},"isPartOf":{"@id":"https://minicycle.net/#website"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/minicycle-widget-not-updating-refresh/#webpage"}},{"@type":"BreadcrumbList","@id":"https://minicycle.net/blog/minicycle-widget-not-updating-refresh/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"MiniCycle","item":"https://minicycle.net/"},{"@type":"ListItem","position":2,"name":"MiniCycle Blog","item":"https://minicycle.net/blog/"},{"@type":"ListItem","position":3,"name":"Why the MiniCycle widget isn't updating, and how it refreshes","item":"https://minicycle.net/blog/minicycle-widget-not-updating-refresh/"}]}]}</script>
         </head>
           <body class="article-page">
         <a class="skip-link" href="#main-content">Skip to content</a>
@@ -227,7 +227,7 @@
                   <div class="article-heading">
                     <p class="category-pill">Widget</p>
                     <h1>Why the MiniCycle widget isn&#x27;t updating, and how it refreshes</h1>
-                    <p class="article-meta"><span>Published <time datetime="2026-07-04">July 4, 2026</time></span><span aria-hidden="true">&middot;</span><span>by <a href="../../about/">Chanwook Kim</a>, MiniCycle developer</span><span aria-hidden="true">&middot;</span><span>Updated <time datetime="2026-09-02">September 2, 2026</time></span><span aria-hidden="true">&middot;</span><span>3 min read</span></p>
+                    <p class="article-meta"><span>Published <time datetime="2026-07-04">July 4, 2026</time></span><span aria-hidden="true">&middot;</span><span>by <a href="../../about/">Chanwook Kim</a>, MiniCycle developer</span><span aria-hidden="true">&middot;</span><span>Updated <time datetime="2026-09-06">September 6, 2026</time></span><span aria-hidden="true">&middot;</span><span>3 min read</span></p>
                     <section class="answer-summary" aria-label="At a glance">
                       <p class="eyebrow">At a glance</p>
                       <p>The MiniCycle widget can lag behind a change you just made in the app. That does not necessarily mean the record was lost. MiniCycle asks WidgetKit to reload a timeline, but iOS decides when the widget is actually redrawn. Here is what the app requests, what iOS controls, and what to check when the widget still looks stale.</p>
@@ -256,6 +256,7 @@
   <h2 id="section-3">If the widget is blank or stale</h2>
 <p>First, open MiniCycle and check that the record is correct in the app. Confirm that at least one period start is logged; without one, the widget intentionally shows its start-tracking state. MiniCycle currently offers only the small square widget, so medium and large sizes do not appear in the gallery.</p>
 <p>If the small widget remains stale after waiting, remove it and add it again. A new widget instance requests a fresh timeline. A delayed refresh is usually a WidgetKit scheduling issue, but persistent disagreement is worth reporting with your iPhone model and iOS version.</p>
+<p class="article-next-reading">If you need to add the widget again, follow <a class="source-link" href="https://minicycle.net/blog/add-minicycle-widget-iphone-home-screen/">How to add the MiniCycle widget to your iPhone home screen</a>.</p>
 </section>
 <section class="article-section" aria-labelledby="section-4">
   <h2 id="section-4">Settings and estimates</h2>
@@ -329,29 +330,29 @@
     <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
   </div>
 </article>
-<article class="post-card related-card" data-guide-card data-topic="cycle" data-search-value="cycle health diarrhea or constipation around your period: what can help? bowel habits can change before or during a period. learn how to manage mild diarrhea or constipation and recognize symptoms that need medical attention.">
-  <img class="post-card-image" src="../../assets/blog-period-digestive-illustration-20260906.jpg" alt="Gouache illustration of a woman resting on a sofa with a hand on her lower abdomen" width="1200" height="675" loading="lazy">
+<article class="post-card related-card" data-guide-card data-topic="widgets" data-search-value="reminders how to set up period, fertile-window, and ovulation reminders set local reminders for the expected period, fertile-window start and end, and estimated ovulation day. most support 0–3 days of lead time; fertile-window end currently arrives on the estimated end date.">
+  <img class="post-card-image" src="../../assets/blog-widget-reminders-editorial-20260906.jpg" alt="A woman checking a phone on a stand at a breakfast table, gouache illustration" width="1200" height="675" loading="lazy">
   <div class="post-card-topline">
-    <p class="category-pill">Cycle health</p>
+    <p class="category-pill">Reminders</p>
     <span class="card-accent" aria-hidden="true"></span>
   </div>
-  <h3><a href="../diarrhea-constipation-around-period/">Diarrhea or constipation around your period: what can help?</a></h3>
-  <p class="post-description">Bowel habits can change before or during a period. Learn how to manage mild diarrhea or constipation and recognize symptoms that need medical attention.</p>
+  <h3><a href="../set-up-period-and-ovulation-reminders/">How to set up period, fertile-window, and ovulation reminders</a></h3>
+  <p class="post-description">Set local reminders for the expected period, fertile-window start and end, and estimated ovulation day. Most support 0–3 days of lead time; fertile-window end currently arrives on the estimated end date.</p>
   <div class="post-card-footer">
-    <p class="post-meta"><time datetime="2026-09-06">2026.09.06</time><span aria-hidden="true">&middot;</span>3 min read</p>
+    <p class="post-meta"><time datetime="2026-06-05">2026.06.05</time><span aria-hidden="true">&middot;</span>3 min read</p>
     <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
   </div>
 </article>
-<article class="post-card related-card" data-guide-card data-topic="cycle" data-search-value="cycle health can you exercise on your period? let how you feel guide you gentle movement may ease period discomfort, but you do not have to push through pain. learn when to adjust a workout, rest, or seek medical advice.">
-  <img class="post-card-image" src="../../assets/blog-period-exercise-illustration-20260906.jpg" alt="Gouache illustration of a woman taking a seated break on a yoga mat" width="1200" height="675" loading="lazy">
+<article class="post-card related-card" data-guide-card data-topic="app" data-search-value="predictions why minicycle&#x27;s predicted period date keeps changing minicycle recalculates predictions from saved period starts, the cycle-length setting, and the current date. learn which changes move the next expected period and what remains uncertain.">
+  <img class="post-card-image" src="../../assets/blog-predictions-editorial-20260906.jpg" alt="A woman holding a journal and moving a note on a calendar, gouache illustration" width="1200" height="675" loading="lazy">
   <div class="post-card-topline">
-    <p class="category-pill">Cycle health</p>
+    <p class="category-pill">Predictions</p>
     <span class="card-accent" aria-hidden="true"></span>
   </div>
-  <h3><a href="../exercise-during-period-when-to-rest/">Can you exercise on your period? Let how you feel guide you</a></h3>
-  <p class="post-description">Gentle movement may ease period discomfort, but you do not have to push through pain. Learn when to adjust a workout, rest, or seek medical advice.</p>
+  <h3><a href="../why-minicycle-predicted-period-date-changes/">Why MiniCycle&#x27;s predicted period date keeps changing</a></h3>
+  <p class="post-description">MiniCycle recalculates predictions from saved period starts, the cycle-length setting, and the current date. Learn which changes move the next expected period and what remains uncertain.</p>
   <div class="post-card-footer">
-    <p class="post-meta"><time datetime="2026-09-05">2026.09.05</time><span aria-hidden="true">&middot;</span>3 min read</p>
+    <p class="post-meta"><time datetime="2026-07-02">2026.07.02</time><span aria-hidden="true">&middot;</span>3 min read</p>
     <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
   </div>
 </article>

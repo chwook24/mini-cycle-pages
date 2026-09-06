@@ -189,7 +189,7 @@
   }
   window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
 </script>
-    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","@id":"https://minicycle.net/blog/what-data-minicycle-collects/#article","headline":"What data MiniCycle collects, and what stays on your phone","description":"MiniCycle stores cycle records on the device by default, offers optional iCloud Sync, and uses Firebase Analytics for product-interaction measurement. Here is the current split.","image":{"@type":"ImageObject","url":"https://minicycle.net/assets/blog-privacy-lock-editorial-20260906.jpg","width":1200,"height":675,"caption":"AI-generated gouache illustration. A woman closing a notebook and holding a phone with its screen facing her."},"datePublished":"2026-06-18","dateModified":"2026-09-02","inLanguage":"en","author":{"@type":"Person","@id":"https://minicycle.net/about/#chanwook-kim","name":"Chanwook Kim","alternateName":"김찬욱","url":"https://minicycle.net/about/","jobTitle":"MiniCycle developer","worksFor":{"@id":"https://minicycle.net/#organization"}},"publisher":{"@type":"Organization","@id":"https://minicycle.net/#organization","name":"MiniCycle","url":"https://minicycle.net/","logo":{"@type":"ImageObject","url":"https://minicycle.net/assets/minicycle-app-icon.png","width":1024,"height":1024}},"isPartOf":{"@id":"https://minicycle.net/#website"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/what-data-minicycle-collects/#webpage"}},{"@type":"BreadcrumbList","@id":"https://minicycle.net/blog/what-data-minicycle-collects/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"MiniCycle","item":"https://minicycle.net/"},{"@type":"ListItem","position":2,"name":"MiniCycle Blog","item":"https://minicycle.net/blog/"},{"@type":"ListItem","position":3,"name":"What data MiniCycle collects, and what stays on your phone","item":"https://minicycle.net/blog/what-data-minicycle-collects/"}]}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","@id":"https://minicycle.net/blog/what-data-minicycle-collects/#article","headline":"What data MiniCycle collects, and what stays on your phone","description":"MiniCycle stores cycle records on the device by default, offers optional iCloud Sync, and uses Firebase Analytics for product-interaction measurement. Here is the current split.","image":{"@type":"ImageObject","url":"https://minicycle.net/assets/blog-privacy-lock-editorial-20260906.jpg","width":1200,"height":675,"caption":"AI-generated gouache illustration. A woman closing a notebook and holding a phone with its screen facing her."},"datePublished":"2026-06-18","dateModified":"2026-09-06","inLanguage":"en","author":{"@type":"Person","@id":"https://minicycle.net/about/#chanwook-kim","name":"Chanwook Kim","alternateName":"김찬욱","url":"https://minicycle.net/about/","jobTitle":"MiniCycle developer","worksFor":{"@id":"https://minicycle.net/#organization"}},"publisher":{"@type":"Organization","@id":"https://minicycle.net/#organization","name":"MiniCycle","url":"https://minicycle.net/","logo":{"@type":"ImageObject","url":"https://minicycle.net/assets/minicycle-app-icon.png","width":1024,"height":1024}},"isPartOf":{"@id":"https://minicycle.net/#website"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/what-data-minicycle-collects/#webpage"}},{"@type":"BreadcrumbList","@id":"https://minicycle.net/blog/what-data-minicycle-collects/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"MiniCycle","item":"https://minicycle.net/"},{"@type":"ListItem","position":2,"name":"MiniCycle Blog","item":"https://minicycle.net/blog/"},{"@type":"ListItem","position":3,"name":"What data MiniCycle collects, and what stays on your phone","item":"https://minicycle.net/blog/what-data-minicycle-collects/"}]}]}</script>
         </head>
           <body class="article-page">
         <a class="skip-link" href="#main-content">Skip to content</a>
@@ -227,7 +227,7 @@
                   <div class="article-heading">
                     <p class="category-pill">Privacy</p>
                     <h1>What data MiniCycle collects, and what stays on your phone</h1>
-                    <p class="article-meta"><span>Published <time datetime="2026-06-18">June 18, 2026</time></span><span aria-hidden="true">&middot;</span><span>by <a href="../../about/">Chanwook Kim</a>, MiniCycle developer</span><span aria-hidden="true">&middot;</span><span>Updated <time datetime="2026-09-02">September 2, 2026</time></span><span aria-hidden="true">&middot;</span><span>3 min read</span></p>
+                    <p class="article-meta"><span>Published <time datetime="2026-06-18">June 18, 2026</time></span><span aria-hidden="true">&middot;</span><span>by <a href="../../about/">Chanwook Kim</a>, MiniCycle developer</span><span aria-hidden="true">&middot;</span><span>Updated <time datetime="2026-09-06">September 6, 2026</time></span><span aria-hidden="true">&middot;</span><span>3 min read</span></p>
                     <section class="answer-summary" aria-label="At a glance">
                       <p class="eyebrow">At a glance</p>
                       <p>MiniCycle handles app records and analytics as different data flows. Period dates, notes, sexual-activity markers, and settings are stored on the iPhone by default, with an optional CloudKit copy when iCloud Sync is enabled. Separately, Firebase Analytics sends product-interaction and SDK-generated analytics data. MiniCycle&#x27;s custom events are designed not to contain cycle dates or note text, but that statement should not be mistaken for a claim that the SDK sends nothing else.</p>
@@ -265,6 +265,7 @@
   <h2 id="section-5">Limits of local storage</h2>
 <p>Local-by-default storage reduces the need for a MiniCycle account or cycle-history server, but it is not a complete privacy guarantee. Device backups, optional iCloud Sync, screenshots, shared devices, and access to an unlocked phone still matter.</p>
 <p>For the current formal description, read the MiniCycle privacy policy and the App Store privacy details. Firebase is a third-party SDK governed by Google&#x27;s terms and documentation.</p>
+<p class="article-next-reading">For the specific visibility control, see <a class="source-link" href="https://minicycle.net/blog/hide-sexual-activity-period-tracker-face-id/">Hide sexual activity in your period tracker with Face ID</a>.</p>
 </section>
                     <section class="callout" aria-labelledby="try-minicycle">
                       <img class="callout-mark" src="../../assets/minicycle-app-icon.png" alt="" width="42" height="42" loading="lazy">
@@ -320,7 +321,20 @@
                   <a class="text-link section-link" href="../">All guides<span aria-hidden="true">&nbsp;&rarr;</span></a>
                 </div>
                 <div class="post-grid related-grid">
-        <article class="post-card related-card" data-guide-card data-topic="privacy" data-search-value="privacy hide sexual activity in your period tracker with face id minicycle can hide sexual-activity marks from its calendar. learn what the switch hides, why face id is required to show them again, and what the feature does not protect.">
+        <article class="post-card related-card" data-guide-card data-topic="privacy" data-search-value="how it works does minicycle work offline? period tracking with no signal minicycle&#x27;s recording, prediction, and local-reminder features work offline. firebase analytics and optional icloud sync still require a connection.">
+  <img class="post-card-image" src="../../assets/blog-privacy-lock-editorial-20260906.jpg" alt="A woman closing a notebook and holding a phone with its screen facing her, gouache illustration" width="1200" height="675" loading="lazy">
+  <div class="post-card-topline">
+    <p class="category-pill">How it works</p>
+    <span class="card-accent" aria-hidden="true"></span>
+  </div>
+  <h3><a href="../use-minicycle-period-tracker-offline/">Does MiniCycle work offline? Period tracking with no signal</a></h3>
+  <p class="post-description">MiniCycle&#x27;s recording, prediction, and local-reminder features work offline. Firebase Analytics and optional iCloud Sync still require a connection.</p>
+  <div class="post-card-footer">
+    <p class="post-meta"><time datetime="2026-06-21">2026.06.21</time><span aria-hidden="true">&middot;</span>3 min read</p>
+    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
+  </div>
+</article>
+<article class="post-card related-card" data-guide-card data-topic="privacy" data-search-value="privacy hide sexual activity in your period tracker with face id minicycle can hide sexual-activity marks from its calendar. learn what the switch hides, why face id is required to show them again, and what the feature does not protect.">
   <img class="post-card-image" src="../../assets/blog-privacy-lock-editorial-20260906.jpg" alt="A woman closing a notebook and holding a phone with its screen facing her, gouache illustration" width="1200" height="675" loading="lazy">
   <div class="post-card-topline">
     <p class="category-pill">Privacy</p>
@@ -333,29 +347,16 @@
     <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
   </div>
 </article>
-<article class="post-card related-card" data-guide-card data-topic="cycle" data-search-value="cycle health diarrhea or constipation around your period: what can help? bowel habits can change before or during a period. learn how to manage mild diarrhea or constipation and recognize symptoms that need medical attention.">
-  <img class="post-card-image" src="../../assets/blog-period-digestive-illustration-20260906.jpg" alt="Gouache illustration of a woman resting on a sofa with a hand on her lower abdomen" width="1200" height="675" loading="lazy">
+<article class="post-card related-card" data-guide-card data-topic="app" data-search-value="settings how to reset minicycle and erase all your period records reset records erases all period ranges, daily notes, and sexual-activity marks in minicycle. learn what remains, how icloud sync reacts, and why it is not a backup.">
+  <img class="post-card-image" src="../../assets/blog-privacy-lock-editorial-20260906.jpg" alt="A woman closing a notebook and holding a phone with its screen facing her, gouache illustration" width="1200" height="675" loading="lazy">
   <div class="post-card-topline">
-    <p class="category-pill">Cycle health</p>
+    <p class="category-pill">Settings</p>
     <span class="card-accent" aria-hidden="true"></span>
   </div>
-  <h3><a href="../diarrhea-constipation-around-period/">Diarrhea or constipation around your period: what can help?</a></h3>
-  <p class="post-description">Bowel habits can change before or during a period. Learn how to manage mild diarrhea or constipation and recognize symptoms that need medical attention.</p>
+  <h3><a href="../reset-all-data-in-minicycle/">How to reset MiniCycle and erase all your period records</a></h3>
+  <p class="post-description">Reset records erases all period ranges, daily notes, and sexual-activity marks in MiniCycle. Learn what remains, how iCloud Sync reacts, and why it is not a backup.</p>
   <div class="post-card-footer">
-    <p class="post-meta"><time datetime="2026-09-06">2026.09.06</time><span aria-hidden="true">&middot;</span>3 min read</p>
-    <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
-  </div>
-</article>
-<article class="post-card related-card" data-guide-card data-topic="cycle" data-search-value="cycle health can you exercise on your period? let how you feel guide you gentle movement may ease period discomfort, but you do not have to push through pain. learn when to adjust a workout, rest, or seek medical advice.">
-  <img class="post-card-image" src="../../assets/blog-period-exercise-illustration-20260906.jpg" alt="Gouache illustration of a woman taking a seated break on a yoga mat" width="1200" height="675" loading="lazy">
-  <div class="post-card-topline">
-    <p class="category-pill">Cycle health</p>
-    <span class="card-accent" aria-hidden="true"></span>
-  </div>
-  <h3><a href="../exercise-during-period-when-to-rest/">Can you exercise on your period? Let how you feel guide you</a></h3>
-  <p class="post-description">Gentle movement may ease period discomfort, but you do not have to push through pain. Learn when to adjust a workout, rest, or seek medical advice.</p>
-  <div class="post-card-footer">
-    <p class="post-meta"><time datetime="2026-09-05">2026.09.05</time><span aria-hidden="true">&middot;</span>3 min read</p>
+    <p class="post-meta"><time datetime="2026-06-14">2026.06.14</time><span aria-hidden="true">&middot;</span>3 min read</p>
     <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
   </div>
 </article>

@@ -189,7 +189,7 @@
   }
   window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
 </script>
-    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","@id":"https://minicycle.net/blog/why-minicycle-predicted-period-date-changes/#article","headline":"Why MiniCycle's predicted period date keeps changing","description":"MiniCycle recalculates predictions from saved period starts, the cycle-length setting, and the current date. Learn which changes move the next expected period and what remains uncertain.","image":{"@type":"ImageObject","url":"https://minicycle.net/assets/blog-predictions-editorial-20260906.jpg","width":1200,"height":675,"caption":"AI-generated gouache illustration. A woman holding a journal and moving a note on a calendar."},"datePublished":"2026-07-02","dateModified":"2026-09-02","inLanguage":"en","author":{"@type":"Person","@id":"https://minicycle.net/about/#chanwook-kim","name":"Chanwook Kim","alternateName":"김찬욱","url":"https://minicycle.net/about/","jobTitle":"MiniCycle developer","worksFor":{"@id":"https://minicycle.net/#organization"}},"publisher":{"@type":"Organization","@id":"https://minicycle.net/#organization","name":"MiniCycle","url":"https://minicycle.net/","logo":{"@type":"ImageObject","url":"https://minicycle.net/assets/minicycle-app-icon.png","width":1024,"height":1024}},"isPartOf":{"@id":"https://minicycle.net/#website"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/why-minicycle-predicted-period-date-changes/#webpage"}},{"@type":"BreadcrumbList","@id":"https://minicycle.net/blog/why-minicycle-predicted-period-date-changes/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"MiniCycle","item":"https://minicycle.net/"},{"@type":"ListItem","position":2,"name":"MiniCycle Blog","item":"https://minicycle.net/blog/"},{"@type":"ListItem","position":3,"name":"Why MiniCycle's predicted period date keeps changing","item":"https://minicycle.net/blog/why-minicycle-predicted-period-date-changes/"}]}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","@id":"https://minicycle.net/blog/why-minicycle-predicted-period-date-changes/#article","headline":"Why MiniCycle's predicted period date keeps changing","description":"MiniCycle recalculates predictions from saved period starts, the cycle-length setting, and the current date. Learn which changes move the next expected period and what remains uncertain.","image":{"@type":"ImageObject","url":"https://minicycle.net/assets/blog-predictions-editorial-20260906.jpg","width":1200,"height":675,"caption":"AI-generated gouache illustration. A woman holding a journal and moving a note on a calendar."},"datePublished":"2026-07-02","dateModified":"2026-09-06","inLanguage":"en","author":{"@type":"Person","@id":"https://minicycle.net/about/#chanwook-kim","name":"Chanwook Kim","alternateName":"김찬욱","url":"https://minicycle.net/about/","jobTitle":"MiniCycle developer","worksFor":{"@id":"https://minicycle.net/#organization"}},"publisher":{"@type":"Organization","@id":"https://minicycle.net/#organization","name":"MiniCycle","url":"https://minicycle.net/","logo":{"@type":"ImageObject","url":"https://minicycle.net/assets/minicycle-app-icon.png","width":1024,"height":1024}},"isPartOf":{"@id":"https://minicycle.net/#website"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/why-minicycle-predicted-period-date-changes/#webpage"}},{"@type":"BreadcrumbList","@id":"https://minicycle.net/blog/why-minicycle-predicted-period-date-changes/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"MiniCycle","item":"https://minicycle.net/"},{"@type":"ListItem","position":2,"name":"MiniCycle Blog","item":"https://minicycle.net/blog/"},{"@type":"ListItem","position":3,"name":"Why MiniCycle's predicted period date keeps changing","item":"https://minicycle.net/blog/why-minicycle-predicted-period-date-changes/"}]}]}</script>
         </head>
           <body class="article-page">
         <a class="skip-link" href="#main-content">Skip to content</a>
@@ -227,7 +227,7 @@
                   <div class="article-heading">
                     <p class="category-pill">Predictions</p>
                     <h1>Why MiniCycle&#x27;s predicted period date keeps changing</h1>
-                    <p class="article-meta"><span>Published <time datetime="2026-07-02">July 2, 2026</time></span><span aria-hidden="true">&middot;</span><span>by <a href="../../about/">Chanwook Kim</a>, MiniCycle developer</span><span aria-hidden="true">&middot;</span><span>Updated <time datetime="2026-09-02">September 2, 2026</time></span><span aria-hidden="true">&middot;</span><span>3 min read</span></p>
+                    <p class="article-meta"><span>Published <time datetime="2026-07-02">July 2, 2026</time></span><span aria-hidden="true">&middot;</span><span>by <a href="../../about/">Chanwook Kim</a>, MiniCycle developer</span><span aria-hidden="true">&middot;</span><span>Updated <time datetime="2026-09-06">September 6, 2026</time></span><span aria-hidden="true">&middot;</span><span>3 min read</span></p>
                     <section class="answer-summary" aria-label="At a glance">
                       <p class="eyebrow">At a glance</p>
                       <p>A predicted period date can change after you record, edit, or delete a period, change the cycle-length setting, or move beyond an unrecorded predicted cycle. The new date reflects the app&#x27;s current inputs, but it is still an estimate and is not guaranteed to be more accurate simply because it changed.</p>
@@ -256,6 +256,7 @@
   <h2 id="section-3">Cycle length is recalculated from recent intervals</h2>
 <p>MiniCycle uses up to 12 recent period starts. With at least two valid starts it calculates the intervals between them and uses a median-style representative value. When there are at least 10 intervals, it removes one shortest and one longest first.</p>
 <p>If there is no valid interval, automatic mode uses a 29-day default. With few intervals, one correction can change the result noticeably; more records do not guarantee that the future cycle itself will be regular.</p>
+<p class="article-next-reading">To compare the two settings, see <a class="source-link" href="https://minicycle.net/blog/auto-vs-manual-cycle-length-period-length/">Auto vs manual cycle and period length in MiniCycle</a>.</p>
 </section>
 <section class="article-section" aria-labelledby="section-4">
   <h2 id="section-4">Ovulation and the fertile window shift with it</h2>
@@ -328,42 +329,42 @@
                   <a class="text-link section-link" href="../">All guides<span aria-hidden="true">&nbsp;&rarr;</span></a>
                 </div>
                 <div class="post-grid related-grid">
-        <article class="post-card related-card" data-guide-card data-topic="cycle" data-search-value="cycle health diarrhea or constipation around your period: what can help? bowel habits can change before or during a period. learn how to manage mild diarrhea or constipation and recognize symptoms that need medical attention.">
-  <img class="post-card-image" src="../../assets/blog-period-digestive-illustration-20260906.jpg" alt="Gouache illustration of a woman resting on a sofa with a hand on her lower abdomen" width="1200" height="675" loading="lazy">
+        <article class="post-card related-card" data-guide-card data-topic="app" data-search-value="settings auto vs manual cycle and period length in minicycle minicycle can estimate your cycle and period length, or let you set them by hand (21–42 and 1–10 days). when auto fits, when manual fits, and why the estimate uses a median.">
+  <img class="post-card-image" src="../../assets/blog-predictions-editorial-20260906.jpg" alt="A woman holding a journal and moving a note on a calendar, gouache illustration" width="1200" height="675" loading="lazy">
   <div class="post-card-topline">
-    <p class="category-pill">Cycle health</p>
+    <p class="category-pill">Settings</p>
     <span class="card-accent" aria-hidden="true"></span>
   </div>
-  <h3><a href="../diarrhea-constipation-around-period/">Diarrhea or constipation around your period: what can help?</a></h3>
-  <p class="post-description">Bowel habits can change before or during a period. Learn how to manage mild diarrhea or constipation and recognize symptoms that need medical attention.</p>
+  <h3><a href="../auto-vs-manual-cycle-length-period-length/">Auto vs manual cycle and period length in MiniCycle</a></h3>
+  <p class="post-description">MiniCycle can estimate your cycle and period length, or let you set them by hand (21–42 and 1–10 days). When auto fits, when manual fits, and why the estimate uses a median.</p>
   <div class="post-card-footer">
-    <p class="post-meta"><time datetime="2026-09-06">2026.09.06</time><span aria-hidden="true">&middot;</span>3 min read</p>
+    <p class="post-meta"><time datetime="2026-06-10">2026.06.10</time><span aria-hidden="true">&middot;</span>3 min read</p>
     <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
   </div>
 </article>
-<article class="post-card related-card" data-guide-card data-topic="cycle" data-search-value="cycle health can you exercise on your period? let how you feel guide you gentle movement may ease period discomfort, but you do not have to push through pain. learn when to adjust a workout, rest, or seek medical advice.">
-  <img class="post-card-image" src="../../assets/blog-period-exercise-illustration-20260906.jpg" alt="Gouache illustration of a woman taking a seated break on a yoga mat" width="1200" height="675" loading="lazy">
+<article class="post-card related-card" data-guide-card data-topic="app" data-search-value="recording how to edit or fix a wrong period date in minicycle logged a period on the wrong day? learn how to edit period dates in minicycle: move a start, adjust an end, delete a record, and what happens to predictions.">
+  <img class="post-card-image" src="../../assets/blog-calendar-edit-editorial-20260906.jpg" alt="A woman using a pencil to correct a paper calendar, gouache illustration" width="1200" height="675" loading="lazy">
   <div class="post-card-topline">
-    <p class="category-pill">Cycle health</p>
+    <p class="category-pill">Recording</p>
     <span class="card-accent" aria-hidden="true"></span>
   </div>
-  <h3><a href="../exercise-during-period-when-to-rest/">Can you exercise on your period? Let how you feel guide you</a></h3>
-  <p class="post-description">Gentle movement may ease period discomfort, but you do not have to push through pain. Learn when to adjust a workout, rest, or seek medical advice.</p>
+  <h3><a href="../fix-wrong-period-date-in-minicycle/">How to edit or fix a wrong period date in MiniCycle</a></h3>
+  <p class="post-description">Logged a period on the wrong day? Learn how to edit period dates in MiniCycle: move a start, adjust an end, delete a record, and what happens to predictions.</p>
   <div class="post-card-footer">
-    <p class="post-meta"><time datetime="2026-09-05">2026.09.05</time><span aria-hidden="true">&middot;</span>3 min read</p>
+    <p class="post-meta"><time datetime="2026-06-07">2026.06.07</time><span aria-hidden="true">&middot;</span>3 min read</p>
     <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
   </div>
 </article>
-<article class="post-card related-card" data-guide-card data-topic="cycle" data-search-value="cycle health your menstrual cycle is a pattern, not a score: a cycle health check-in cycle health is not about hitting one perfect number. learn which period patterns are useful to track, what changes can mean, and when to seek medical care.">
-  <img class="post-card-image" src="../../assets/blog-cycle-patterns-illustration-20260906.jpg" alt="Gouache illustration of a woman writing in a notebook at a desk by a window" width="1200" height="675" loading="lazy">
+<article class="post-card related-card" data-guide-card data-topic="app" data-search-value="calendar what each color means on the minicycle period calendar what the minicycle calendar colors mean: solid pink records, striped expected periods, the sky-blue fertile window, and the small marks under each date.">
+  <img class="post-card-image" src="../../assets/blog-calendar-colors-editorial-20260906.jpg" alt="A woman arranging colored pencils beside an open planner, gouache illustration" width="1200" height="675" loading="lazy">
   <div class="post-card-topline">
-    <p class="category-pill">Cycle health</p>
+    <p class="category-pill">Calendar</p>
     <span class="card-accent" aria-hidden="true"></span>
   </div>
-  <h3><a href="../menstrual-cycle-health-patterns-to-track/">Your menstrual cycle is a pattern, not a score: a cycle health check-in</a></h3>
-  <p class="post-description">Cycle health is not about hitting one perfect number. Learn which period patterns are useful to track, what changes can mean, and when to seek medical care.</p>
+  <h3><a href="../minicycle-calendar-colors-legend/">What each color means on the MiniCycle period calendar</a></h3>
+  <p class="post-description">What the MiniCycle calendar colors mean: solid pink records, striped expected periods, the sky-blue fertile window, and the small marks under each date.</p>
   <div class="post-card-footer">
-    <p class="post-meta"><time datetime="2026-09-01">2026.09.01</time><span aria-hidden="true">&middot;</span>3 min read</p>
+    <p class="post-meta"><time datetime="2026-06-08">2026.06.08</time><span aria-hidden="true">&middot;</span>3 min read</p>
     <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
   </div>
 </article>

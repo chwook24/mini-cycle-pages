@@ -189,7 +189,7 @@
   }
   window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
 </script>
-    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","@id":"https://minicycle.net/blog/set-up-period-and-ovulation-reminders/#article","headline":"How to set up period, fertile-window, and ovulation reminders","description":"Set local reminders for the expected period, fertile-window start and end, and estimated ovulation day. Most support 0–3 days of lead time; fertile-window end currently arrives on the estimated end date.","image":{"@type":"ImageObject","url":"https://minicycle.net/assets/blog-widget-reminders-editorial-20260906.jpg","width":1200,"height":675,"caption":"AI-generated gouache illustration. A woman checking a phone on a stand at a breakfast table."},"datePublished":"2026-06-05","dateModified":"2026-09-02","inLanguage":"en","author":{"@type":"Person","@id":"https://minicycle.net/about/#chanwook-kim","name":"Chanwook Kim","alternateName":"김찬욱","url":"https://minicycle.net/about/","jobTitle":"MiniCycle developer","worksFor":{"@id":"https://minicycle.net/#organization"}},"publisher":{"@type":"Organization","@id":"https://minicycle.net/#organization","name":"MiniCycle","url":"https://minicycle.net/","logo":{"@type":"ImageObject","url":"https://minicycle.net/assets/minicycle-app-icon.png","width":1024,"height":1024}},"isPartOf":{"@id":"https://minicycle.net/#website"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/set-up-period-and-ovulation-reminders/#webpage"}},{"@type":"BreadcrumbList","@id":"https://minicycle.net/blog/set-up-period-and-ovulation-reminders/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"MiniCycle","item":"https://minicycle.net/"},{"@type":"ListItem","position":2,"name":"MiniCycle Blog","item":"https://minicycle.net/blog/"},{"@type":"ListItem","position":3,"name":"How to set up period, fertile-window, and ovulation reminders","item":"https://minicycle.net/blog/set-up-period-and-ovulation-reminders/"}]}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","@id":"https://minicycle.net/blog/set-up-period-and-ovulation-reminders/#article","headline":"How to set up period, fertile-window, and ovulation reminders","description":"Set local reminders for the expected period, fertile-window start and end, and estimated ovulation day. Most support 0–3 days of lead time; fertile-window end currently arrives on the estimated end date.","image":{"@type":"ImageObject","url":"https://minicycle.net/assets/blog-widget-reminders-editorial-20260906.jpg","width":1200,"height":675,"caption":"AI-generated gouache illustration. A woman checking a phone on a stand at a breakfast table."},"datePublished":"2026-06-05","dateModified":"2026-09-06","inLanguage":"en","author":{"@type":"Person","@id":"https://minicycle.net/about/#chanwook-kim","name":"Chanwook Kim","alternateName":"김찬욱","url":"https://minicycle.net/about/","jobTitle":"MiniCycle developer","worksFor":{"@id":"https://minicycle.net/#organization"}},"publisher":{"@type":"Organization","@id":"https://minicycle.net/#organization","name":"MiniCycle","url":"https://minicycle.net/","logo":{"@type":"ImageObject","url":"https://minicycle.net/assets/minicycle-app-icon.png","width":1024,"height":1024}},"isPartOf":{"@id":"https://minicycle.net/#website"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/set-up-period-and-ovulation-reminders/#webpage"}},{"@type":"BreadcrumbList","@id":"https://minicycle.net/blog/set-up-period-and-ovulation-reminders/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"MiniCycle","item":"https://minicycle.net/"},{"@type":"ListItem","position":2,"name":"MiniCycle Blog","item":"https://minicycle.net/blog/"},{"@type":"ListItem","position":3,"name":"How to set up period, fertile-window, and ovulation reminders","item":"https://minicycle.net/blog/set-up-period-and-ovulation-reminders/"}]}]}</script>
         </head>
           <body class="article-page">
         <a class="skip-link" href="#main-content">Skip to content</a>
@@ -227,7 +227,7 @@
                   <div class="article-heading">
                     <p class="category-pill">Reminders</p>
                     <h1>How to set up period, fertile-window, and ovulation reminders</h1>
-                    <p class="article-meta"><span>Published <time datetime="2026-06-05">June 5, 2026</time></span><span aria-hidden="true">&middot;</span><span>by <a href="../../about/">Chanwook Kim</a>, MiniCycle developer</span><span aria-hidden="true">&middot;</span><span>Updated <time datetime="2026-09-02">September 2, 2026</time></span><span aria-hidden="true">&middot;</span><span>3 min read</span></p>
+                    <p class="article-meta"><span>Published <time datetime="2026-06-05">June 5, 2026</time></span><span aria-hidden="true">&middot;</span><span>by <a href="../../about/">Chanwook Kim</a>, MiniCycle developer</span><span aria-hidden="true">&middot;</span><span>Updated <time datetime="2026-09-06">September 6, 2026</time></span><span aria-hidden="true">&middot;</span><span>3 min read</span></p>
                     <section class="answer-summary" aria-label="At a glance">
                       <p class="eyebrow">At a glance</p>
                       <p>MiniCycle supports four local reminders: expected period, estimated fertile-window start, estimated fertile-window end, and estimated ovulation. Period, fertile-start, and ovulation reminders can be scheduled on the estimated date or 1–3 days earlier. In the current implementation, the fertile-window end reminder is scheduled on the estimated end date when enabled, even if a different lead value appears selected in Settings.</p>
@@ -271,6 +271,7 @@
   <h2 id="section-6">If a reminder does not arrive</h2>
 <p>Check three things in order. First, that the reminder is enabled inside MiniCycle and the app has notification permission in iOS Settings. Second, that a Focus mode or scheduled notification summary is not holding the alert back. Third, that there is a predicted date for the reminder to attach to. With no saved period records, there is nothing to schedule.</p>
 <p>Apple&#x27;s support page on iPhone notifications covers the system-side settings, including alert styles, Focus, and per-app notification options.</p>
+<p class="article-next-reading">If the home-screen display is also stale, see <a class="source-link" href="https://minicycle.net/blog/minicycle-widget-not-updating-refresh/">Why the MiniCycle widget isn&#x27;t updating, and how it refreshes</a>.</p>
 </section>
                     <section class="callout" aria-labelledby="try-minicycle">
                       <img class="callout-mark" src="../../assets/minicycle-app-icon.png" alt="" width="42" height="42" loading="lazy">
@@ -328,42 +329,42 @@
                   <a class="text-link section-link" href="../">All guides<span aria-hidden="true">&nbsp;&rarr;</span></a>
                 </div>
                 <div class="post-grid related-grid">
-        <article class="post-card related-card" data-guide-card data-topic="cycle" data-search-value="cycle health diarrhea or constipation around your period: what can help? bowel habits can change before or during a period. learn how to manage mild diarrhea or constipation and recognize symptoms that need medical attention.">
-  <img class="post-card-image" src="../../assets/blog-period-digestive-illustration-20260906.jpg" alt="Gouache illustration of a woman resting on a sofa with a hand on her lower abdomen" width="1200" height="675" loading="lazy">
+        <article class="post-card related-card" data-guide-card data-topic="widgets" data-search-value="widget how to add the minicycle widget to your iphone home screen add minicycle&#x27;s small widget to your iphone home screen. it shows a four-week calendar around today using records and settings shared with the app.">
+  <img class="post-card-image" src="../../assets/blog-widget-reminders-editorial-20260906.jpg" alt="A woman checking a phone on a stand at a breakfast table, gouache illustration" width="1200" height="675" loading="lazy">
   <div class="post-card-topline">
-    <p class="category-pill">Cycle health</p>
+    <p class="category-pill">Widget</p>
     <span class="card-accent" aria-hidden="true"></span>
   </div>
-  <h3><a href="../diarrhea-constipation-around-period/">Diarrhea or constipation around your period: what can help?</a></h3>
-  <p class="post-description">Bowel habits can change before or during a period. Learn how to manage mild diarrhea or constipation and recognize symptoms that need medical attention.</p>
+  <h3><a href="../add-minicycle-widget-iphone-home-screen/">How to add the MiniCycle widget to your iPhone home screen</a></h3>
+  <p class="post-description">Add MiniCycle&#x27;s small widget to your iPhone home screen. It shows a four-week calendar around today using records and settings shared with the app.</p>
   <div class="post-card-footer">
-    <p class="post-meta"><time datetime="2026-09-06">2026.09.06</time><span aria-hidden="true">&middot;</span>3 min read</p>
+    <p class="post-meta"><time datetime="2026-06-15">2026.06.15</time><span aria-hidden="true">&middot;</span>3 min read</p>
     <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
   </div>
 </article>
-<article class="post-card related-card" data-guide-card data-topic="cycle" data-search-value="cycle health can you exercise on your period? let how you feel guide you gentle movement may ease period discomfort, but you do not have to push through pain. learn when to adjust a workout, rest, or seek medical advice.">
-  <img class="post-card-image" src="../../assets/blog-period-exercise-illustration-20260906.jpg" alt="Gouache illustration of a woman taking a seated break on a yoga mat" width="1200" height="675" loading="lazy">
+<article class="post-card related-card" data-guide-card data-topic="widgets" data-search-value="widget why the minicycle widget isn&#x27;t updating, and how it refreshes the minicycle home-screen widget updates on ios&#x27;s schedule, not the instant you log a period. here is how widgetkit refreshes it and what to check when it looks stale.">
+  <img class="post-card-image" src="../../assets/blog-widget-reminders-editorial-20260906.jpg" alt="A woman checking a phone on a stand at a breakfast table, gouache illustration" width="1200" height="675" loading="lazy">
   <div class="post-card-topline">
-    <p class="category-pill">Cycle health</p>
+    <p class="category-pill">Widget</p>
     <span class="card-accent" aria-hidden="true"></span>
   </div>
-  <h3><a href="../exercise-during-period-when-to-rest/">Can you exercise on your period? Let how you feel guide you</a></h3>
-  <p class="post-description">Gentle movement may ease period discomfort, but you do not have to push through pain. Learn when to adjust a workout, rest, or seek medical advice.</p>
+  <h3><a href="../minicycle-widget-not-updating-refresh/">Why the MiniCycle widget isn&#x27;t updating, and how it refreshes</a></h3>
+  <p class="post-description">The MiniCycle home-screen widget updates on iOS&#x27;s schedule, not the instant you log a period. Here is how WidgetKit refreshes it and what to check when it looks stale.</p>
   <div class="post-card-footer">
-    <p class="post-meta"><time datetime="2026-09-05">2026.09.05</time><span aria-hidden="true">&middot;</span>3 min read</p>
+    <p class="post-meta"><time datetime="2026-07-04">2026.07.04</time><span aria-hidden="true">&middot;</span>3 min read</p>
     <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
   </div>
 </article>
-<article class="post-card related-card" data-guide-card data-topic="cycle" data-search-value="cycle health your menstrual cycle is a pattern, not a score: a cycle health check-in cycle health is not about hitting one perfect number. learn which period patterns are useful to track, what changes can mean, and when to seek medical care.">
-  <img class="post-card-image" src="../../assets/blog-cycle-patterns-illustration-20260906.jpg" alt="Gouache illustration of a woman writing in a notebook at a desk by a window" width="1200" height="675" loading="lazy">
+<article class="post-card related-card" data-guide-card data-topic="app" data-search-value="predictions why minicycle&#x27;s predicted period date keeps changing minicycle recalculates predictions from saved period starts, the cycle-length setting, and the current date. learn which changes move the next expected period and what remains uncertain.">
+  <img class="post-card-image" src="../../assets/blog-predictions-editorial-20260906.jpg" alt="A woman holding a journal and moving a note on a calendar, gouache illustration" width="1200" height="675" loading="lazy">
   <div class="post-card-topline">
-    <p class="category-pill">Cycle health</p>
+    <p class="category-pill">Predictions</p>
     <span class="card-accent" aria-hidden="true"></span>
   </div>
-  <h3><a href="../menstrual-cycle-health-patterns-to-track/">Your menstrual cycle is a pattern, not a score: a cycle health check-in</a></h3>
-  <p class="post-description">Cycle health is not about hitting one perfect number. Learn which period patterns are useful to track, what changes can mean, and when to seek medical care.</p>
+  <h3><a href="../why-minicycle-predicted-period-date-changes/">Why MiniCycle&#x27;s predicted period date keeps changing</a></h3>
+  <p class="post-description">MiniCycle recalculates predictions from saved period starts, the cycle-length setting, and the current date. Learn which changes move the next expected period and what remains uncertain.</p>
   <div class="post-card-footer">
-    <p class="post-meta"><time datetime="2026-09-01">2026.09.01</time><span aria-hidden="true">&middot;</span>3 min read</p>
+    <p class="post-meta"><time datetime="2026-07-02">2026.07.02</time><span aria-hidden="true">&middot;</span>3 min read</p>
     <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
   </div>
 </article>

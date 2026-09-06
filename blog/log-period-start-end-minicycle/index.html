@@ -189,7 +189,7 @@
   }
   window.addEventListener('DOMContentLoaded', trackBlogArticleEngagement);
 </script>
-    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","@id":"https://minicycle.net/blog/log-period-start-end-minicycle/#article","headline":"How to log a period start and end date in MiniCycle","description":"Tap a date, pick period start, and MiniCycle fills the end with your period length. How logging start and end works, the seven-day replace rule, and the 14-day cap.","image":{"@type":"ImageObject","url":"https://minicycle.net/assets/blog-calendar-edit-editorial-20260906.jpg","width":1200,"height":675,"caption":"AI-generated gouache illustration. A woman using a pencil to correct a paper calendar."},"datePublished":"2026-06-16","dateModified":"2026-09-02","inLanguage":"en","author":{"@type":"Person","@id":"https://minicycle.net/about/#chanwook-kim","name":"Chanwook Kim","alternateName":"김찬욱","url":"https://minicycle.net/about/","jobTitle":"MiniCycle developer","worksFor":{"@id":"https://minicycle.net/#organization"}},"publisher":{"@type":"Organization","@id":"https://minicycle.net/#organization","name":"MiniCycle","url":"https://minicycle.net/","logo":{"@type":"ImageObject","url":"https://minicycle.net/assets/minicycle-app-icon.png","width":1024,"height":1024}},"isPartOf":{"@id":"https://minicycle.net/#website"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/log-period-start-end-minicycle/#webpage"}},{"@type":"BreadcrumbList","@id":"https://minicycle.net/blog/log-period-start-end-minicycle/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"MiniCycle","item":"https://minicycle.net/"},{"@type":"ListItem","position":2,"name":"MiniCycle Blog","item":"https://minicycle.net/blog/"},{"@type":"ListItem","position":3,"name":"How to log a period start and end date in MiniCycle","item":"https://minicycle.net/blog/log-period-start-end-minicycle/"}]}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","@id":"https://minicycle.net/blog/log-period-start-end-minicycle/#article","headline":"How to log a period start and end date in MiniCycle","description":"Tap a date, pick period start, and MiniCycle fills the end with your period length. How logging start and end works, the seven-day replace rule, and the 14-day cap.","image":{"@type":"ImageObject","url":"https://minicycle.net/assets/blog-calendar-edit-editorial-20260906.jpg","width":1200,"height":675,"caption":"AI-generated gouache illustration. A woman using a pencil to correct a paper calendar."},"datePublished":"2026-06-16","dateModified":"2026-09-06","inLanguage":"en","author":{"@type":"Person","@id":"https://minicycle.net/about/#chanwook-kim","name":"Chanwook Kim","alternateName":"김찬욱","url":"https://minicycle.net/about/","jobTitle":"MiniCycle developer","worksFor":{"@id":"https://minicycle.net/#organization"}},"publisher":{"@type":"Organization","@id":"https://minicycle.net/#organization","name":"MiniCycle","url":"https://minicycle.net/","logo":{"@type":"ImageObject","url":"https://minicycle.net/assets/minicycle-app-icon.png","width":1024,"height":1024}},"isPartOf":{"@id":"https://minicycle.net/#website"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://minicycle.net/blog/log-period-start-end-minicycle/#webpage"}},{"@type":"BreadcrumbList","@id":"https://minicycle.net/blog/log-period-start-end-minicycle/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"MiniCycle","item":"https://minicycle.net/"},{"@type":"ListItem","position":2,"name":"MiniCycle Blog","item":"https://minicycle.net/blog/"},{"@type":"ListItem","position":3,"name":"How to log a period start and end date in MiniCycle","item":"https://minicycle.net/blog/log-period-start-end-minicycle/"}]}]}</script>
         </head>
           <body class="article-page">
         <a class="skip-link" href="#main-content">Skip to content</a>
@@ -227,7 +227,7 @@
                   <div class="article-heading">
                     <p class="category-pill">Logging</p>
                     <h1>How to log a period start and end date in MiniCycle</h1>
-                    <p class="article-meta"><span>Published <time datetime="2026-06-16">June 16, 2026</time></span><span aria-hidden="true">&middot;</span><span>by <a href="../../about/">Chanwook Kim</a>, MiniCycle developer</span><span aria-hidden="true">&middot;</span><span>Updated <time datetime="2026-09-02">September 2, 2026</time></span><span aria-hidden="true">&middot;</span><span>3 min read</span></p>
+                    <p class="article-meta"><span>Published <time datetime="2026-06-16">June 16, 2026</time></span><span aria-hidden="true">&middot;</span><span>by <a href="../../about/">Chanwook Kim</a>, MiniCycle developer</span><span aria-hidden="true">&middot;</span><span>Updated <time datetime="2026-09-06">September 6, 2026</time></span><span aria-hidden="true">&middot;</span><span>3 min read</span></p>
                     <section class="answer-summary" aria-label="At a glance">
                       <p class="eyebrow">At a glance</p>
                       <p>It is the first day of a period and you open MiniCycle to mark it. There is a calendar, a date, and a choice: period start or period end. Pick start and the app does more than drop a dot on that day. It builds a span, fills in an end date, and quietly decides whether this is a new period or a correction to one already there. None of that is obvious from the single tap, so here is what each choice does, what limits it has, and how to fix it when the dates come out wrong.</p>
@@ -266,6 +266,7 @@
   <h2 id="section-5">What these dates feed, and what they can&#x27;t</h2>
 <p>Your start dates are the engine for everything the app predicts. The next period is estimated from the start dates you have saved. Ovulation is counted back from that estimate using a luteal phase that flexes between 9 and 14 days with your cycle length, not a fixed two weeks, and the fertile window runs from five days before that estimated ovulation through the day after. Better start dates mean better predictions, which is the whole reason the logging is worth getting right.</p>
 <p>What the dates can&#x27;t do is diagnose or decide anything medical. The predictions are reference information drawn from your own pattern, not contraception and not a verdict on pregnancy. They stay on your device, since MiniCycle keeps records locally with no account, so the cost of fixing a wrong date is one tap and the benefit is a calendar that matches what actually happened.</p>
+<p class="article-next-reading">If an existing date is wrong, follow <a class="source-link" href="https://minicycle.net/blog/fix-wrong-period-date-in-minicycle/">How to edit or fix a wrong period date in MiniCycle</a>.</p>
 </section>
                     <section class="callout" aria-labelledby="try-minicycle">
                       <img class="callout-mark" src="../../assets/minicycle-app-icon.png" alt="" width="42" height="42" loading="lazy">
@@ -321,42 +322,42 @@
                   <a class="text-link section-link" href="../">All guides<span aria-hidden="true">&nbsp;&rarr;</span></a>
                 </div>
                 <div class="post-grid related-grid">
-        <article class="post-card related-card" data-guide-card data-topic="cycle" data-search-value="cycle health diarrhea or constipation around your period: what can help? bowel habits can change before or during a period. learn how to manage mild diarrhea or constipation and recognize symptoms that need medical attention.">
-  <img class="post-card-image" src="../../assets/blog-period-digestive-illustration-20260906.jpg" alt="Gouache illustration of a woman resting on a sofa with a hand on her lower abdomen" width="1200" height="675" loading="lazy">
+        <article class="post-card related-card" data-guide-card data-topic="app" data-search-value="recording how to edit or fix a wrong period date in minicycle logged a period on the wrong day? learn how to edit period dates in minicycle: move a start, adjust an end, delete a record, and what happens to predictions.">
+  <img class="post-card-image" src="../../assets/blog-calendar-edit-editorial-20260906.jpg" alt="A woman using a pencil to correct a paper calendar, gouache illustration" width="1200" height="675" loading="lazy">
   <div class="post-card-topline">
-    <p class="category-pill">Cycle health</p>
+    <p class="category-pill">Recording</p>
     <span class="card-accent" aria-hidden="true"></span>
   </div>
-  <h3><a href="../diarrhea-constipation-around-period/">Diarrhea or constipation around your period: what can help?</a></h3>
-  <p class="post-description">Bowel habits can change before or during a period. Learn how to manage mild diarrhea or constipation and recognize symptoms that need medical attention.</p>
+  <h3><a href="../fix-wrong-period-date-in-minicycle/">How to edit or fix a wrong period date in MiniCycle</a></h3>
+  <p class="post-description">Logged a period on the wrong day? Learn how to edit period dates in MiniCycle: move a start, adjust an end, delete a record, and what happens to predictions.</p>
   <div class="post-card-footer">
-    <p class="post-meta"><time datetime="2026-09-06">2026.09.06</time><span aria-hidden="true">&middot;</span>3 min read</p>
+    <p class="post-meta"><time datetime="2026-06-07">2026.06.07</time><span aria-hidden="true">&middot;</span>3 min read</p>
     <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
   </div>
 </article>
-<article class="post-card related-card" data-guide-card data-topic="cycle" data-search-value="cycle health can you exercise on your period? let how you feel guide you gentle movement may ease period discomfort, but you do not have to push through pain. learn when to adjust a workout, rest, or seek medical advice.">
-  <img class="post-card-image" src="../../assets/blog-period-exercise-illustration-20260906.jpg" alt="Gouache illustration of a woman taking a seated break on a yoga mat" width="1200" height="675" loading="lazy">
+<article class="post-card related-card" data-guide-card data-topic="app" data-search-value="app guide forgot to log a period? how to repair the record in minicycle missed recording a period start in minicycle? learn what happens to predictions, how to add the date later, and when not to guess.">
+  <img class="post-card-image" src="../../assets/blog-calendar-edit-editorial-20260906.jpg" alt="A woman using a pencil to correct a paper calendar, gouache illustration" width="1200" height="675" loading="lazy">
   <div class="post-card-topline">
-    <p class="category-pill">Cycle health</p>
+    <p class="category-pill">App guide</p>
     <span class="card-accent" aria-hidden="true"></span>
   </div>
-  <h3><a href="../exercise-during-period-when-to-rest/">Can you exercise on your period? Let how you feel guide you</a></h3>
-  <p class="post-description">Gentle movement may ease period discomfort, but you do not have to push through pain. Learn when to adjust a workout, rest, or seek medical advice.</p>
+  <h3><a href="../forgot-to-log-period-minicycle-missing-cycle/">Forgot to log a period? How to repair the record in MiniCycle</a></h3>
+  <p class="post-description">Missed recording a period start in MiniCycle? Learn what happens to predictions, how to add the date later, and when not to guess.</p>
   <div class="post-card-footer">
-    <p class="post-meta"><time datetime="2026-09-05">2026.09.05</time><span aria-hidden="true">&middot;</span>3 min read</p>
+    <p class="post-meta"><time datetime="2026-08-23">2026.08.23</time><span aria-hidden="true">&middot;</span>3 min read</p>
     <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
   </div>
 </article>
-<article class="post-card related-card" data-guide-card data-topic="cycle" data-search-value="cycle health your menstrual cycle is a pattern, not a score: a cycle health check-in cycle health is not about hitting one perfect number. learn which period patterns are useful to track, what changes can mean, and when to seek medical care.">
-  <img class="post-card-image" src="../../assets/blog-cycle-patterns-illustration-20260906.jpg" alt="Gouache illustration of a woman writing in a notebook at a desk by a window" width="1200" height="675" loading="lazy">
+<article class="post-card related-card" data-guide-card data-topic="app" data-search-value="calendar what each color means on the minicycle period calendar what the minicycle calendar colors mean: solid pink records, striped expected periods, the sky-blue fertile window, and the small marks under each date.">
+  <img class="post-card-image" src="../../assets/blog-calendar-colors-editorial-20260906.jpg" alt="A woman arranging colored pencils beside an open planner, gouache illustration" width="1200" height="675" loading="lazy">
   <div class="post-card-topline">
-    <p class="category-pill">Cycle health</p>
+    <p class="category-pill">Calendar</p>
     <span class="card-accent" aria-hidden="true"></span>
   </div>
-  <h3><a href="../menstrual-cycle-health-patterns-to-track/">Your menstrual cycle is a pattern, not a score: a cycle health check-in</a></h3>
-  <p class="post-description">Cycle health is not about hitting one perfect number. Learn which period patterns are useful to track, what changes can mean, and when to seek medical care.</p>
+  <h3><a href="../minicycle-calendar-colors-legend/">What each color means on the MiniCycle period calendar</a></h3>
+  <p class="post-description">What the MiniCycle calendar colors mean: solid pink records, striped expected periods, the sky-blue fertile window, and the small marks under each date.</p>
   <div class="post-card-footer">
-    <p class="post-meta"><time datetime="2026-09-01">2026.09.01</time><span aria-hidden="true">&middot;</span>3 min read</p>
+    <p class="post-meta"><time datetime="2026-06-08">2026.06.08</time><span aria-hidden="true">&middot;</span>3 min read</p>
     <span class="text-link" aria-hidden="true">Read guide<span>&nbsp;&rarr;</span></span>
   </div>
 </article>
